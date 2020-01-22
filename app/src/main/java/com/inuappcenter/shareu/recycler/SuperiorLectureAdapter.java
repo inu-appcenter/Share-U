@@ -20,7 +20,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.core.app.ComponentActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class SuperiorLectureAdapter extends RecyclerView.Adapter<SuperiorLectureAdapter.ViewHolder> {
 
@@ -48,6 +48,7 @@ public class SuperiorLectureAdapter extends RecyclerView.Adapter<SuperiorLecture
 
         holder.item_default_superior.setBackground(drawable);
         holder.tv_superior_name.setText(item.getTitle());
+        holder.ratingBar.setRating(item.getRating());
     }
 
     @Override
@@ -59,12 +60,13 @@ public class SuperiorLectureAdapter extends RecyclerView.Adapter<SuperiorLecture
 
         ImageView item_default_superior;
         TextView tv_superior_name;
+        RatingBar ratingBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             item_default_superior = itemView.findViewById(R.id.item_default_superior);
             tv_superior_name = itemView.findViewById(R.id.tv_superior_name);
-
+            ratingBar = (RatingBar)itemView.findViewById(R.id.ratingBar);
 
         }
 
