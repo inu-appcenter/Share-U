@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        app:cardCornerRadius="100dp"
+        app:cardMaxElevation="2dp"
+        android:layout_margin="3dp"
+        >
+
+        <ImageView
+            android:id="@+id/item_default_superior"
+            android:layout_width="48dp"
+            android:layout_height="58dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"/>
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/tv_superior_name"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="문테기 족보"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@id/item_default_superior"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:layout_gravity="center"
+
+        ></TextView>
+
+
+
+
+</LinearLayout>

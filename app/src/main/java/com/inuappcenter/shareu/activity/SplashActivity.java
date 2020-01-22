@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.drm.DrmStore;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.WindowManager;
 
 import com.inuappcenter.shareu.R;
 
@@ -16,6 +17,8 @@ public class SplashActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         startLoading();
     }
     private void startLoading() {
