@@ -40,89 +40,63 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0">
-
-        <EditText
-            android:id="@+id/etv_main"
-            android:layout_width="330dp"
-            android:layout_height="37dp"
-            android:layout_marginLeft="34dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginRight="60dp"
-            android:layout_weight="0"
-            android:background="@drawable/edit_text_shadow"
-            android:ems="10"
-            android:hint=" 검색"
-            android:inputType="textPersonName"
-            android:textColor="@color/cardview_dark_background"
-            android:textColorHint="#57000000"
-            android:textSize="13sp" />
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="bottom|center|right"
-            android:layout_marginRight="50dp"
-
-            android:background="#00000000"
-            app:srcCompat="@drawable/group181" />
-    </FrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_height="match_parent"
         android:layout_weight="0"
-        android:orientation="horizontal">
+        >
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|bottom"
-            android:layout_marginLeft="16dp"
-            android:text="우수자료"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            android:orientation="vertical">
+            <include
+                android:id="@+id/include_search_main"
+                layout="@layout/layout_search_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <include
+                android:id="@+id/include_superior_title_main"
+                layout="@layout/layout_superior_title_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                />
+            <include
+                android:id="@+id/include_recyclerview_main"
+                layout="@layout/layout_recyclerview_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                />
+            <include
+                android:id="@+id/include_ad_main"
+                layout="@layout/layout_ad_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                />
+            <include
+                android:id="@+id/include_notice_set_title_main"
+                layout="@layout/layout_notice_set_title_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                />
+            <include
+                android:id="@+id/include_recyclerview2_main"
+                layout="@layout/layout_recyclerview2_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|bottom"
-            android:layout_marginLeft="8dp"
-            android:text="별점순"
-            android:textColor="#57000000"
-            android:textSize="12sp" />
 
-        <com.kingfisher.easyviewindicator.RecyclerViewIndicator
-            android:id="@+id/recyclerViewIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginLeft="186dp"
-            android:layout_marginRight="15dp"
+        </LinearLayout>
 
 
-            app:avi_animation_enable="true"
-            app:avi_drawable="@drawable/blue_radius"
-            app:avi_drawable_unselected="@drawable/gray_radius">
 
-        </com.kingfisher.easyviewindicator.RecyclerViewIndicator>
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:scrollbars="none">
-
-    </androidx.recyclerview.widget.RecyclerView>
+    </ScrollView>
 
 
 </LinearLayout>

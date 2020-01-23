@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="240dp"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#FFFFFF"
+    android:layout_gravity="center"
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
@@ -13,20 +14,18 @@
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_centerInParent="true"
-        app:cardBackgroundColor="@color/cardview_light_background"
-        android:orientation="horizontal"
         android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="@color/cardview_light_background"
         app:cardCornerRadius="100dp"
-        app:cardMaxElevation="2dp"
-        android:layout_margin="3dp"
-        >
+        app:cardMaxElevation="2dp">
 
         <ImageView
             android:id="@+id/item_default_superior"
             android:layout_width="48dp"
             android:layout_height="58dp"
-            android:scaleType="centerCrop"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:scaleType="centerCrop" />
 
     </androidx.cardview.widget.CardView>
     <TextView
@@ -44,12 +43,12 @@
 
     <RatingBar
         android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        style="?android:attr/ratingBarStyleSmall"
-
-        android:layout_marginTop="6.5dp"/>
+        android:layout_marginTop="6.6dp"
+        android:progressTint="@color/colorIris" />
 
 
 </LinearLayout>
