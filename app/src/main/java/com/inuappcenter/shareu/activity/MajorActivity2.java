@@ -1,7 +1,9 @@
 package com.inuappcenter.shareu.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,14 +27,17 @@ public class MajorActivity2 extends AppCompatActivity {
     private ArrayList<Major> dataList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_major);
-       /* //this.initializeData();
+        this.initializeData();
         TextView tv_major = (TextView) findViewById(R.id.tv_major) ;
         TextView tv_my_major = (TextView) findViewById(R.id.tv_my_major) ;
         tv_major.setTextColor(Color.parseColor("#574FBA"));
         tv_my_major.setVisibility(VISIBLE);
-
+        Intent intent =getIntent();
+        String name = intent.getExtras().getString("select_major"); /*String형*/
+        tv_my_major.setText(name);
         initializeData();
         RecyclerView recyclerView = findViewById(R.id.recyclerview_select_major);
         LinearLayoutManager manager
@@ -52,7 +57,7 @@ public class MajorActivity2 extends AppCompatActivity {
                 }
             }
         };
-        btn_left_bar_major.setOnClickListener(onClickListener2);*/
+        btn_left_bar_major.setOnClickListener(onClickListener2);
 
     }
     public void initializeData()

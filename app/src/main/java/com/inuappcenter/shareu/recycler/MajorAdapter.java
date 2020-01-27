@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.MainActivity;
 import com.inuappcenter.shareu.activity.MajorActivity;
 import com.inuappcenter.shareu.activity.MajorActivity2;
 import com.inuappcenter.shareu.model.Code;
@@ -63,14 +64,18 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ((MajorViewHolder) viewHolder).first.setText(mitems.get(position).getFirst());
             ((MajorViewHolder) viewHolder).second.setText(mitems.get(position).getSecond());
 
-            String text =  mitems.get(position).getFirst();
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
+           viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                 //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
+                   Intent intent = new Intent(mContext,MajorActivity2.class);
+                   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   intent.putExtra("select_major",mitems.get(position).getFirst());
+                   mContext.startActivity(intent);
+               }
+           });
         }
+
     }
 
     @Override

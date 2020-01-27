@@ -22,6 +22,8 @@
         <activity android:name=".activity.MajorActivity">
 
         </activity>
+        <activity android:name=".activity.MajorActivity2">
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
