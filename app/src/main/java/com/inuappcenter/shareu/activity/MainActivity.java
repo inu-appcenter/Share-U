@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //recycler 처리
         RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclerview_main);
         RecyclerViewIndicator horizontalIndicator = (RecyclerViewIndicator)findViewById(R.id.recyclerViewIndicator);
 
@@ -71,5 +74,25 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0;i<10;i++) items2.add(item2[i]);
 
         recyclerView2.setAdapter(new NoticeAdapter(getApplicationContext(),items2));
+
+
+        Button.OnClickListener onClickListener = new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.btn_left_bar_main :
+                        Intent intent = new Intent(getApplicationContext(),MajorActivity.class);
+                        startActivity(intent);
+                        break ;
+
+                }
+            }
+        } ;
+        Button btn_left_bar_main = (Button) findViewById(R.id.btn_left_bar_main) ;
+        btn_left_bar_main.setOnClickListener(onClickListener) ;
+
     }
+        
 }
+
+
