@@ -1,6 +1,8 @@
 package com.inuappcenter.shareu.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +26,8 @@ import static java.lang.Boolean.FALSE;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Drawer 처리
+    DrawerLayout drawer_my_page;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView2.setAdapter(new NoticeAdapter(getApplicationContext(),items2));
 
 
+        drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,13 +89,35 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(),MajorActivity.class);
                         startActivity(intent);
                         break ;
+                    case R.id.btn_my_page_main :
+                        if(drawer_my_page.isDrawerOpen(GravityCompat.END))
+                            drawer_my_page.closeDrawer(GravityCompat.END);
+                        else
+                            drawer_my_page.openDrawer(GravityCompat.END);
+                        break ;
 
                 }
+
             }
         } ;
+        //과목 선택 처리
         Button btn_left_bar_main = (Button) findViewById(R.id.btn_left_bar_main) ;
         btn_left_bar_main.setOnClickListener(onClickListener) ;
 
+        //drawer 처리
+        Button btn_my_page_main = (Button)findViewById(R.id.btn_my_page_main);
+        btn_my_page_main.setOnClickListener(onClickListener) ;
+
+
+    }
+    @Override
+    public void onBackPressed() {
+        if (drawer_my_page.isDrawerOpen(GravityCompat.END)) {
+            drawer_my_page.closeDrawer(GravityCompat.END);
+        }
+        else {
+            super.onBackPressed();
+        }
     }
         
 }

@@ -8,11 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.activity.MainActivity;
-import com.inuappcenter.shareu.activity.MajorActivity;
+import com.inuappcenter.shareu.activity.GyoyangActivity2;
 import com.inuappcenter.shareu.activity.MajorActivity2;
 import com.inuappcenter.shareu.model.Code;
 import com.inuappcenter.shareu.model.Major;
@@ -22,13 +20,13 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class GyoyangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
     private ArrayList<Major> mitems;
 
 
-    public MajorAdapter(Context mContext, ArrayList<Major> mitems) {
+    public GyoyangAdapter(Context mContext, ArrayList<Major> mitems) {
         this.mContext = mContext;
 
         this.mitems = mitems;
@@ -65,17 +63,17 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             ((MajorViewHolder) viewHolder).first.setText(mitems.get(position).getFirst());
             ((MajorViewHolder) viewHolder).second.setText(mitems.get(position).getSecond());
 
-           viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View view) {
-                 //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
-                   Intent intent = new Intent(mContext,MajorActivity2.class);
-                   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                   intent.putExtra("select_major",mitems.get(position).getFirst());
-                   mContext.startActivity(intent);
-                   ((Activity) mContext).finish();
-               }
-           });
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(mContext, GyoyangActivity2.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("select_gyoyang",mitems.get(position).getFirst());
+                    mContext.startActivity(intent);
+                    ((Activity) mContext).finish();
+                }
+            });
         }
 
     }

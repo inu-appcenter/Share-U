@@ -2,6 +2,7 @@ package com.inuappcenter.shareu.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.model.Code;
 import com.inuappcenter.shareu.model.Major;
 import com.inuappcenter.shareu.recycler.MajorAdapter;
+import com.inuappcenter.shareu.recycler.MajorAdapter2;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,7 @@ public class MajorActivity2 extends AppCompatActivity {
         TextView tv_major = (TextView) findViewById(R.id.tv_major) ;
         TextView tv_my_major = (TextView) findViewById(R.id.tv_my_major) ;
         tv_major.setTextColor(Color.parseColor("#574FBA"));
+        tv_major.setTypeface(Typeface.DEFAULT_BOLD);
         tv_my_major.setVisibility(VISIBLE);
         Intent intent =getIntent();
         String name = intent.getExtras().getString("select_major"); /*String형*/
@@ -43,7 +46,7 @@ public class MajorActivity2 extends AppCompatActivity {
         LinearLayoutManager manager
                 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager); // LayoutManager 등록
-        recyclerView.setAdapter(new MajorAdapter(getApplicationContext(),dataList));  // Adapter 등록
+        recyclerView.setAdapter(new MajorAdapter2(MajorActivity2.this,dataList));  // Adapter 등록
 
         Button btn_left_bar_major = (Button)findViewById(R.id.btn_left_bar_major);
         Button.OnClickListener onClickListener2 = new Button.OnClickListener()
