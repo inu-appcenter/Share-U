@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         View view = (View)findViewById(R.id.drawer_logout);
         view.setVisibility(View.GONE);
         drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
-        Button.OnClickListener onClickListener = new Button.OnClickListener() {
+        View.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
@@ -93,10 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break ;
                     case R.id.btn_my_page_main :
-                        if(drawer_my_page.isDrawerOpen(GravityCompat.END))
-                            drawer_my_page.closeDrawer(GravityCompat.END);
-                        else
-                            drawer_my_page.openDrawer(GravityCompat.END);
+                        drawer_my_page.openDrawer(GravityCompat.END);
                         break ;
 
                 }
@@ -106,25 +103,11 @@ public class MainActivity extends AppCompatActivity {
         //과목 선택 처리
         Button btn_left_bar_main = (Button) findViewById(R.id.btn_left_bar_main) ;
         btn_left_bar_main.setOnClickListener(onClickListener) ;
-
         //drawer 처리
         Button btn_my_page_main = (Button)findViewById(R.id.btn_my_page_main);
         btn_my_page_main.setOnClickListener(onClickListener) ;
 
-        TextView.OnClickListener onClickListener2 = new TextView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.tv_my_update_my_page:
-                        Toast.makeText(getApplicationContext(),"시발",Toast.LENGTH_SHORT).show();
-                        break;
 
-                }
-
-            }
-        } ;
-        TextView tv_my_update_my_page = (TextView) findViewById(R.id.tv_my_update_my_page) ;
-        tv_my_update_my_page.setOnClickListener(onClickListener2) ;
 
     }
     @Override
