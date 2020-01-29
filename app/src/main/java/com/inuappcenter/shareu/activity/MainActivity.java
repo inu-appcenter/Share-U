@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.model.Notice;
@@ -79,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView2.setAdapter(new NoticeAdapter(getApplicationContext(),items2));
 
-
+        View view = (View)findViewById(R.id.drawer_logout);
+        view.setVisibility(View.GONE);
         drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -108,6 +111,20 @@ public class MainActivity extends AppCompatActivity {
         Button btn_my_page_main = (Button)findViewById(R.id.btn_my_page_main);
         btn_my_page_main.setOnClickListener(onClickListener) ;
 
+        TextView.OnClickListener onClickListener2 = new TextView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.tv_my_update_my_page:
+                        Toast.makeText(getApplicationContext(),"시발",Toast.LENGTH_SHORT).show();
+                        break;
+
+                }
+
+            }
+        } ;
+        TextView tv_my_update_my_page = (TextView) findViewById(R.id.tv_my_update_my_page) ;
+        tv_my_update_my_page.setOnClickListener(onClickListener2) ;
 
     }
     @Override

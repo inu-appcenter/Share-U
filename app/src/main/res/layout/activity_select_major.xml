@@ -22,7 +22,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="22dp"
         android:text="국어국문학과"
-        android:textColor="@color/colorIris"
+        android:textColor="@color/Iris"
         android:textSize="17sp"
         android:textStyle="bold"
         android:visibility="gone" />

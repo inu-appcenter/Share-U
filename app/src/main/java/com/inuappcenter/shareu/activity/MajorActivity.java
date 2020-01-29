@@ -32,7 +32,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MajorActivity extends AppCompatActivity {
-
+    RecyclerView recyclerView;
+    LinearLayoutManager manager;
     private ArrayList<Major> dataList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,65 +49,96 @@ public class MajorActivity extends AppCompatActivity {
             public void onClick(View view) {
                 switch (view.getId()) {
                     case R.id.tv_major :
-                        initializeData();
+                        //initializeData();
                         tv_gyoyang.setTextColor(Color.parseColor("#000000"));
                         tv_major.setTextColor(Color.parseColor("#574FBA"));
                         tv_major.setTypeface(Typeface.DEFAULT_BOLD);
-                        /*
                         RetrofitService networkService = RetrofitHelper.create();
-                        networkService.getList().enqueue(new Callback<List<Major>>(){
+                        networkService.getMajorList().enqueue(new Callback<List<Major>>(){
                             @Override
-                            public void onResponse(Call<List<Major>> call, Response<List<Major>> response) {
+                            public void onResponse(Call<List<Major> > call, Response<List<Major>> response) {
                                 if(response.isSuccessful())
                                 {
                                     dataList = new ArrayList<>();
                                     String flag ="?";
+                                    Log.e("ㄷㄷ",response.body().size()+"");
                                     for(int i=0;i<response.body().size();i++)
                                     {
+                                        Log.e("냥",response.body().get(i).third+"");
                                         if(flag.equals(response.body().get(i).third))
                                         {
+                                            Log.e("흠",flag+" "+response.body().get(i).third);
                                             dataList.add(new Major(response.body().get(i).first,null,null,Code.ViewType.MAJOR));
                                         }
                                         else
                                         {
+                                            Log.e("힝",flag+" "+response.body().get(i).third);
                                             flag=response.body().get(i).third;
-                                            dataList.add(new Major(response.body().get(i).third,null,null,Code.ViewType.INDEX));
+                                            dataList.add(new Major("  "+response.body().get(i).third,null,null,Code.ViewType.INDEX));
                                             dataList.add(new Major(response.body().get(i).first,null,null,Code.ViewType.MAJOR));
                                         }
                                     }
 
 
-                                }
-                                else
-                                {
 
                                 }
+                                recyclerView = findViewById(R.id.recyclerview_select_major);
+                                manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+                                recyclerView.setLayoutManager(manager); // LayoutManager 등록
+                                recyclerView.setAdapter(new MajorAdapter(MajorActivity.this,dataList));  // Adapter 등록
                             }
-
                             @Override
                             public void onFailure(Call<List<Major>> call, Throwable t) {
 
                             }
-                        });*/
-
-                        RecyclerView recyclerView = findViewById(R.id.recyclerview_select_major);
-                        LinearLayoutManager manager
-                                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
-                        recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                        recyclerView.setAdapter(new MajorAdapter(MajorActivity.this,dataList));  // Adapter 등록
-
-
+                        });
                         break;
                     case R.id.tv_gyoyang:
                         tv_major.setTextColor(Color.parseColor("#000000"));
                         tv_gyoyang.setTextColor(Color.parseColor("#574FBA"));
                         tv_gyoyang.setTypeface(Typeface.DEFAULT_BOLD);
-                        initializeData2();
-                        RecyclerView recyclerView2 = findViewById(R.id.recyclerview_select_major);
-                        LinearLayoutManager manager2
-                                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
-                        recyclerView2.setLayoutManager(manager2); // LayoutManager 등록
-                        recyclerView2.setAdapter(new GyoyangAdapter(MajorActivity.this,dataList));  // Adapter 등록
+                        //initializeData2();
+                        RetrofitService networkService2 = RetrofitHelper.create();
+                        networkService2.getGyoyangList().enqueue(new Callback<List<Major>>(){
+                            @Override
+                            public void onResponse(Call<List<Major> > call, Response<List<Major>> response) {
+                                if(response.isSuccessful())
+                                {
+                                    dataList = new ArrayList<>();
+                                    String flag ="?";
+                                    Log.e("ㄷㄷ",response.body().size()+"");
+                                    for(int i=0;i<response.body().size();i++)
+                                    {
+                                        Log.e("냥",response.body().get(i).third+"");
+                                        if(flag.equals(response.body().get(i).third))
+                                        {
+                                            Log.e("흠",flag+" "+response.body().get(i).third);
+                                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
+                                        }
+                                        else
+                                        {
+                                            Log.e("힝",flag+" "+response.body().get(i).third);
+                                            flag=response.body().get(i).third;
+                                            dataList.add(new Major("  "+response.body().get(i).third,null,null,Code.ViewType.INDEX));
+                                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
+                                        }
+                                    }
+
+
+
+                                }
+                                RecyclerView recyclerView2 = findViewById(R.id.recyclerview_select_major);
+                                LinearLayoutManager manager2
+                                        = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+                                recyclerView2.setLayoutManager(manager2); // LayoutManager 등록
+                                recyclerView2.setAdapter(new GyoyangAdapter(MajorActivity.this,dataList));  // Adapter 등록
+                            }
+                            @Override
+                            public void onFailure(Call<List<Major>> call, Throwable t) {
+
+                            }
+                        });
+
 
                 }
             }

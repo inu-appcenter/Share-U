@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="6.6dp"
-        android:progressTint="@color/colorIris" />
+        android:progressTint="@color/Iris" />
 
 
 </LinearLayout>

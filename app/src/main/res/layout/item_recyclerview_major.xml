@@ -47,7 +47,7 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginLeft="17.5dp"
-        android:layout_marginRight="13.5dp"
+        android:layout_marginRight="17.5dp"
 
         android:background="@color/gray" />
 </LinearLayout>
