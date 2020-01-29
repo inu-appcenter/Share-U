@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="108dp"
     android:layout_height="108dp"
+
     android:background="@color/white">
 
     <ImageView
@@ -12,22 +13,18 @@
         android:layout_gravity="center"
         app:srcCompat="@drawable/circle22" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp"
-            android:textColor="@color/Iris"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:text="5" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\?"
+        android:textColor="@color/Iris"
+        android:textSize="58sp"
+        android:layout_marginLeft="40.5dp"
+        android:layout_marginRight="40.5dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="13dp"
+ />
 
-       
-    </LinearLayout>
 </FrameLayout>

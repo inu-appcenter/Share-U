@@ -22,7 +22,7 @@ public class DrawerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.tv_my_update_my_page:
+                    case R.id.tv_my_update_my_page2:
                         Toast.makeText(getActivity(),"얍",Toast.LENGTH_SHORT).show();
                         break;
 
@@ -30,7 +30,7 @@ public class DrawerFragment extends Fragment {
 
             }
         } ;
-        TextView tv_my_update_my_page = (TextView) view.findViewById(R.id.tv_my_update_my_page) ;
+        TextView tv_my_update_my_page = (TextView) view.findViewById(R.id.tv_my_update_my_page2) ;
         tv_my_update_my_page.setOnClickListener(onClickListener) ;
         return view;
     }
