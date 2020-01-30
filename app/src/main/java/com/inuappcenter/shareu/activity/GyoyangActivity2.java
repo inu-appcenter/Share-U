@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,13 +13,19 @@ import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.model.Code;
 import com.inuappcenter.shareu.model.Major;
 import com.inuappcenter.shareu.recycler.MajorAdapter2;
+import com.inuappcenter.shareu.service.RetrofitHelper;
+import com.inuappcenter.shareu.service.RetrofitService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.view.View.VISIBLE;
 
@@ -31,7 +38,7 @@ public class GyoyangActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_major);
 
-        this.initializeData();
+        //this.initializeData();
 
         TextView tv_gyoyang = (TextView) findViewById(R.id.tv_gyoyang) ;
         TextView tv_my_gyoyang = (TextView) findViewById(R.id.tv_my_major) ;
@@ -42,12 +49,50 @@ public class GyoyangActivity2 extends AppCompatActivity {
         Intent intent =getIntent();
         String name = intent.getExtras().getString("select_gyoyang"); /*String형*/
         tv_my_gyoyang.setText(name);
-        initializeData();
-        RecyclerView recyclerView = findViewById(R.id.recyclerview_select_major);
-        LinearLayoutManager manager
-                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(manager); // LayoutManager 등록
-        recyclerView.setAdapter(new MajorAdapter2(GyoyangActivity2.this,dataList));  // Adapter 등록
+        //initializeData();
+
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.getDetailedGyoyangList(name).enqueue(new Callback<List<Major>>(){
+            @Override
+            public void onResponse(Call<List<Major> > call, Response<List<Major>> response) {
+                if(response.isSuccessful())
+                {
+                    dataList = new ArrayList<>();
+                    String flag ="?";
+                    Log.e("ㄷㄷ",response.body().size()+"");
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        Log.e("냥",response.body().get(i).third+"");
+                        if(flag.equals(response.body().get(i).third))
+                        {
+                            Log.e("흠",flag+" "+response.body().get(i).third);
+                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
+                        }
+                        else
+                        {
+                            Log.e("힝",flag+" "+response.body().get(i).third);
+                            flag=response.body().get(i).third;
+                            dataList.add(new Major("  "+response.body().get(i).third,null,null,Code.ViewType.INDEX));
+                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
+                        }
+                    }
+
+
+
+                }
+                RecyclerView recyclerView = findViewById(R.id.recyclerview_select_major);
+                LinearLayoutManager manager
+                        = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+                recyclerView.setLayoutManager(manager); // LayoutManager 등록
+                recyclerView.setAdapter(new MajorAdapter2(GyoyangActivity2.this,dataList));  // Adapter 등록
+            }
+            @Override
+            public void onFailure(Call<List<Major>> call, Throwable t) {
+
+            }
+        });
+
+
 
         Button btn_left_bar_major = (Button)findViewById(R.id.btn_left_bar_major);
         Button.OnClickListener onClickListener2 = new Button.OnClickListener()

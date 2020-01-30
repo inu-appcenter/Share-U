@@ -12,6 +12,8 @@ public class Major {
     public String third;
 
     public int viewType;
+    @SerializedName("majorProName")
+    @Expose
     public String second;
     //우선 전공에서는 second는 null, 전공 교양에서는 교수님 이름이 들어갈 것
 

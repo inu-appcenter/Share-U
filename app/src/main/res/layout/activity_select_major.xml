@@ -2,18 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    >
+
     <include
         android:id="@+id/include_select_major_bar"
         layout="@layout/layout_select_major_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="48dp"
+        android:layout_gravity="center" />
+
     <include
         android:id="@+id/include_select_tap"
         layout="@layout/layout_select_tap"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"/>
+        android:layout_gravity="center"
+        android:layout_marginLeft="19dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginTop="9dp"
+        android:layout_height="30dp" />
 
     <TextView
         android:id="@+id/tv_my_major"
@@ -22,7 +29,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="22dp"
         android:text="국어국문학과"
-        android:textColor="@color/colorIris"
+        android:textColor="@color/Iris"
         android:textSize="17sp"
         android:textStyle="bold"
         android:visibility="gone" />
