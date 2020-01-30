@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView2.setAdapter(new NoticeAdapter(getApplicationContext(),items2));
 
-        View view = (View)findViewById(R.id.drawer_logout);
+        View view = (View)findViewById(R.id.drawer_login);
         view.setVisibility(View.GONE);
         drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
         View.OnClickListener onClickListener = new Button.OnClickListener() {
