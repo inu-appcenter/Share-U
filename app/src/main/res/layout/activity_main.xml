@@ -59,12 +59,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <include
-                    android:id="@+id/include_search_main"
-                    layout="@layout/layout_search_main"
+                    android:id="@+id/include_search"
+                    layout="@layout/layout_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="33dp"
+                    android:layout_marginRight="34dp"
                     />
+
                 <include
                     android:id="@+id/include_superior_title_main"
                     layout="@layout/layout_superior_title_main"
