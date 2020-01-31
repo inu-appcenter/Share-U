@@ -1,5 +1,6 @@
 package com.inuappcenter.shareu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.DetailedNoticeActivity;
 import com.inuappcenter.shareu.activity.MainActivity;
+import com.inuappcenter.shareu.activity.OverallNoticeActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,8 +31,18 @@ public class DrawerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.tv_my_update_my_page2:
-                        Toast.makeText(getActivity(),"얍",Toast.LENGTH_SHORT).show();
+                    case R.id.tv_my_notice_my_page:
+                        Intent intent = new Intent(view.getContext(), OverallNoticeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        view.getContext().startActivity(intent);
+                        break;
+                    case R.id.btn_drawer_back:
+                        ((MainActivity)getActivity()).closeDrawer();
+                        break;
+                    case R.id.tv_my_notice_my_page2:
+                        Intent intent2 = new Intent(view.getContext(), OverallNoticeActivity.class);
+                        intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        view.getContext().startActivity(intent2);
                         break;
                     case R.id.btn_drawer_back2:
                         ((MainActivity)getActivity()).closeDrawer();
@@ -38,8 +51,14 @@ public class DrawerFragment extends Fragment {
 
             }
         } ;
-        TextView tv_my_update_my_page = (TextView) view.findViewById(R.id.tv_my_update_my_page2) ;
-        tv_my_update_my_page.setOnClickListener(onClickListener);
+
+        TextView tv_my_notice_my_page = (TextView) view.findViewById(R.id.tv_my_notice_my_page) ;
+        tv_my_notice_my_page.setOnClickListener(onClickListener);
+        ImageButton btn_drawer_back = (ImageButton) view.findViewById(R.id.btn_drawer_back) ;
+        btn_drawer_back.setOnClickListener(onClickListener) ;
+
+        TextView tv_my_notice_my_page2 = (TextView) view.findViewById(R.id.tv_my_notice_my_page2) ;
+        tv_my_notice_my_page2.setOnClickListener(onClickListener);
         ImageButton btn_drawer_back2 = (ImageButton) view.findViewById(R.id.btn_drawer_back2) ;
         btn_drawer_back2.setOnClickListener(onClickListener) ;
         return view;

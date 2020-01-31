@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
@@ -46,7 +47,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
         Drawable drawable = mContext.getResources().getDrawable(item.getImage());
 
         holder.tv_notice_title.setText(item.getTitle());
-        holder.btn_notice_right_arrow.setBackground(drawable);
+        holder.imv_notice_right_arrow.setBackground(drawable);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,11 +68,11 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView tv_notice_title;
-        Button btn_notice_right_arrow;
+        ImageView imv_notice_right_arrow;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_notice_title = itemView.findViewById(R.id.tv_notice_title);
-            btn_notice_right_arrow = itemView.findViewById(R.id.btn_notice_right_arrow);
+            imv_notice_right_arrow = itemView.findViewById(R.id.imv_notice_right_arrow);
         }
     }
 }

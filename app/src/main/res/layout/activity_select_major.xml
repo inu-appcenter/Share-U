@@ -16,11 +16,12 @@
         android:id="@+id/include_select_tap"
         layout="@layout/layout_select_tap"
         android:layout_width="match_parent"
+        android:layout_height="30dp"
         android:layout_gravity="center"
+        android:layout_marginTop="9dp"
         android:layout_marginLeft="19dp"
         android:layout_marginRight="17dp"
-        android:layout_marginTop="9dp"
-        android:layout_height="30dp" />
+        />
 
     <TextView
         android:id="@+id/tv_my_major"
@@ -34,15 +35,16 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
-    <ScrollView
+    <include
+        android:id="@+id/include_recyclerview_select_major"
+        layout="@layout/layout_recyclerview_select_major"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp" />
+
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/include_recyclerview_select_major_bar"
-            layout="@layout/layout_recyclerview_select_major"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"/>
-    </ScrollView>
+    </ScrollView>-->
 </LinearLayout>

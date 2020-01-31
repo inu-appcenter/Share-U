@@ -26,8 +26,8 @@
             android:textSize="14sp"
             android:text="공지입니당."/>
 
-        <Button
-            android:id="@+id/btn_notice_right_arrow"
+        <ImageView
+            android:id="@+id/imv_notice_right_arrow"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentRight="true"
