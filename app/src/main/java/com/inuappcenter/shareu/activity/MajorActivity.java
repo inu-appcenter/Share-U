@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.model.Code;
@@ -56,7 +57,9 @@ public class MajorActivity extends AppCompatActivity {
                         RetrofitService networkService = RetrofitHelper.create();
                         networkService.getMajorList().enqueue(new Callback<List<Major>>(){
                             @Override
-                            public void onResponse(Call<List<Major> > call, Response<List<Major>> response) {
+                            public void onResponse(Call<List<Major> > call, Response<List<Major>> response)
+                            {
+
                                 if(response.isSuccessful())
                                 {
                                     dataList = new ArrayList<>();
@@ -64,15 +67,12 @@ public class MajorActivity extends AppCompatActivity {
                                     Log.e("ㄷㄷ",response.body().size()+"");
                                     for(int i=0;i<response.body().size();i++)
                                     {
-                                        Log.e("냥",response.body().get(i).third+"");
                                         if(flag.equals(response.body().get(i).third))
                                         {
-                                            Log.e("흠",flag+" "+response.body().get(i).third);
                                             dataList.add(new Major(response.body().get(i).first,null,null,Code.ViewType.MAJOR));
                                         }
                                         else
                                         {
-                                            Log.e("힝",flag+" "+response.body().get(i).third);
                                             flag=response.body().get(i).third;
                                             dataList.add(new Major("  "+response.body().get(i).third,null,null,Code.ViewType.INDEX));
                                             dataList.add(new Major(response.body().get(i).first,null,null,Code.ViewType.MAJOR));
@@ -89,7 +89,8 @@ public class MajorActivity extends AppCompatActivity {
                             }
                             @Override
                             public void onFailure(Call<List<Major>> call, Throwable t) {
-
+                                Log.e("TAG", t.getMessage());
+                                Toast.makeText(MajorActivity.this, "실패", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -99,25 +100,21 @@ public class MajorActivity extends AppCompatActivity {
                         tv_gyoyang.setTypeface(Typeface.DEFAULT_BOLD);
                         //initializeData2();
                         RetrofitService networkService2 = RetrofitHelper.create();
-                        networkService2.getGyoyangList().enqueue(new Callback<List<Major>>(){
+                        networkService2.getDetailedGyoyangList().enqueue(new Callback<List<Major>>(){
                             @Override
                             public void onResponse(Call<List<Major> > call, Response<List<Major>> response) {
                                 if(response.isSuccessful())
                                 {
                                     dataList = new ArrayList<>();
                                     String flag ="?";
-                                    Log.e("ㄷㄷ",response.body().size()+"");
                                     for(int i=0;i<response.body().size();i++)
                                     {
-                                        Log.e("냥",response.body().get(i).third+"");
                                         if(flag.equals(response.body().get(i).third))
                                         {
-                                            Log.e("흠",flag+" "+response.body().get(i).third);
                                             dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
                                         }
                                         else
                                         {
-                                            Log.e("힝",flag+" "+response.body().get(i).third);
                                             flag=response.body().get(i).third;
                                             dataList.add(new Major("  "+response.body().get(i).third,null,null,Code.ViewType.INDEX));
                                             dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
@@ -168,94 +165,5 @@ public class MajorActivity extends AppCompatActivity {
         recyclerView.setAdapter(new MajorAdapter(getApplicationContext(),dataList));  // Adapter 등록*/
 
     }
-    public void initializeData()
-    {
-        dataList = new ArrayList<>();
 
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-    }
-    public void initializeData2()
-    {
-        dataList = new ArrayList<>();
-
-        dataList.add(new Major("사용자1님이 입장하셨습니다2.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요2", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자1님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자1", null, Code.ViewType.MAJOR));
-        dataList.add(new Major("사용자2님이 입장하셨습니다.", null, null, Code.ViewType.INDEX));
-        dataList.add(new Major("안녕하세요", "사용자2",null,  Code.ViewType.MAJOR));
-    }
 }

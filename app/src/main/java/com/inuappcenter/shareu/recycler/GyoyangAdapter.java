@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.activity.GyoyangActivity2;
-import com.inuappcenter.shareu.activity.MajorActivity2;
 import com.inuappcenter.shareu.model.Code;
 import com.inuappcenter.shareu.model.Major;
 
@@ -66,12 +64,12 @@ public class GyoyangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
+                 /*   //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(mContext, GyoyangActivity2.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("select_gyoyang",mitems.get(position).getFirst());
                     mContext.startActivity(intent);
-                    ((Activity) mContext).finish();
+                    ((Activity) mContext).finish();*/
                 }
             });
         }

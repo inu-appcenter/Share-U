@@ -5,31 +5,35 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.model.Notice;
 import com.inuappcenter.shareu.model.SuperiorLecture;
 import com.inuappcenter.shareu.recycler.NoticeAdapter;
 import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter;
+import com.inuappcenter.shareu.service.RetrofitHelper;
+import com.inuappcenter.shareu.service.RetrofitService;
 import com.kingfisher.easyviewindicator.RecyclerViewIndicator;
 
 import java.util.ArrayList;
-
-import static java.lang.Boolean.FALSE;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     //Drawer 처리
     DrawerLayout drawer_my_page;
+    private ArrayList<Notice> dataList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,28 +63,39 @@ public class MainActivity extends AppCompatActivity {
         horizontalIndicator.setRecyclerView(recyclerView);
 
 
-        RecyclerView recyclerView2=(RecyclerView)findViewById(R.id.recyclerview2_main);
-        LinearLayoutManager layoutManager2=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
-        recyclerView2.setHasFixedSize(true);
-        recyclerView2.setLayoutManager(layoutManager2);
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.getNotice().enqueue(new Callback<List<Notice> >(){
+            @Override
+            public void onResponse(Call<List<Notice> > call, Response<List<Notice>> response)
+            {
 
-        ArrayList<Notice> items2=new ArrayList<>();
-        Notice[] item2=new Notice[10];
-        item2[0]=new Notice("1번 공지",R.drawable.rightarrow);
-        item2[1]=new Notice("2번 공지",R.drawable.rightarrow);
-        item2[2]=new Notice("3번 공지",R.drawable.rightarrow);
-        item2[3]=new Notice("4번 공지",R.drawable.rightarrow);
-        item2[4]=new Notice("5번 공지",R.drawable.rightarrow);
-        item2[5]=new Notice("6번 공지",R.drawable.rightarrow);
-        item2[6]=new Notice("7번 공지",R.drawable.rightarrow);
-        item2[7]=new Notice("8번 공지",R.drawable.rightarrow);
-        item2[8]=new Notice("9번 공지",R.drawable.rightarrow);
-        item2[9]=new Notice("10번 공지",R.drawable.rightarrow);
+                Log.e("ㅎㅎ",response.body().get(0).getTitle());
+                if(response.isSuccessful())
+                {
+                    dataList = new ArrayList<>();
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        dataList.add(new Notice((i+1)+". "+response.body().get(i).getTitle(),
+                                response.body().get(i).getContent(),
+                                response.body().get(i).getNoticeDate(),
+                                response.body().get(i).getNoticeKey(),
+                                R.drawable.rightarrow));
+                    }
+                }
+                RecyclerView recyclerView2=(RecyclerView)findViewById(R.id.recyclerview2_main);
+                LinearLayoutManager layoutManager2=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+                recyclerView2.setHasFixedSize(true);
+                recyclerView2.setLayoutManager(layoutManager2);
+                recyclerView2.setAdapter(new NoticeAdapter(MainActivity.this,dataList));
+            }
+            @Override
+            public void onFailure(Call<List<Notice>> call, Throwable t) {
+                Log.e("TAG", t.getMessage());
+            }
+        });
 
-        for(int i=0;i<10;i++) items2.add(item2[i]);
 
-        recyclerView2.setAdapter(new NoticeAdapter(getApplicationContext(),items2));
-
+        //drawer 처리
         View view = (View)findViewById(R.id.drawer_login);
         view.setVisibility(View.GONE);
         drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
@@ -95,7 +110,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.btn_my_page_main :
                         drawer_my_page.openDrawer(GravityCompat.END);
                         break ;
-
+                    case R.id.tv_notice_set_title_more :
+                        Intent intent2 = new Intent(getApplicationContext(), OverallNoticeActivity.class);
+                        startActivity(intent2);
+                        break ;
                 }
 
             }
@@ -106,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
         //drawer 처리
         Button btn_my_page_main = (Button)findViewById(R.id.btn_my_page_main);
         btn_my_page_main.setOnClickListener(onClickListener) ;
+
+        TextView tv_notice_set_title_more = (TextView)findViewById(R.id.tv_notice_set_title_more);
+        tv_notice_set_title_more.setOnClickListener(onClickListener);
 
 
 
@@ -119,7 +140,11 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-        
+    public void closeDrawer()
+    {
+        drawer_my_page.closeDrawer(GravityCompat.END);
+    }
 }
+
 
 

@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"><![CDATA[
-
-
+    android:orientation="vertical"
+    android:layout_marginLeft="18dp"
+    android:layout_marginRight="16dp"><![CDATA[
     />
     ]]>
 
@@ -16,26 +16,21 @@
         <TextView
             android:id="@+id/tv_notice_title"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
             android:layout_marginTop="6.5dp"
             android:layout_marginBottom="4.5dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="16dp"
-            android:text="공지다"
+            android:gravity="center"
             android:textColor="@color/black"
-
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:text="공지입니당."/>
 
         <Button
             android:id="@+id/btn_notice_right_arrow"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="24.3dp"
             android:layout_marginTop="6.5dp"
             android:layout_marginBottom="4.5dp"
             android:background="@color/transparent" />
@@ -47,8 +42,6 @@
         android:layout_height="0.5dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="16dp"
 
         android:background="#000000" />
 </LinearLayout>

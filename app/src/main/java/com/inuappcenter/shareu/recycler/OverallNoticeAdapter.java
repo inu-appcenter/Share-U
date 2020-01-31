@@ -1,19 +1,14 @@
 package com.inuappcenter.shareu.recycler;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.DetailedNoticeActivity;
-import com.inuappcenter.shareu.activity.MajorActivity2;
 import com.inuappcenter.shareu.model.Notice;
 
 import java.util.ArrayList;
@@ -21,37 +16,31 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder> {
+public class OverallNoticeAdapter extends RecyclerView.Adapter<OverallNoticeAdapter.ViewHolder>{
 
     private ArrayList<Notice> mitems;
     private Context mContext;
 
-    public NoticeAdapter(Context context, ArrayList<Notice> items)
-    {
-        mitems= items;
-        mContext = context;
+    public OverallNoticeAdapter(ArrayList<Notice> items, Context Context) {
+        mitems = items;
+        mContext = Context;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_notice,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_overall_notice,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Notice item = mitems.get(position);
-        Drawable drawable = mContext.getResources().getDrawable(item.getImage());
-
-        holder.tv_notice_title.setText(item.getTitle());
-        holder.btn_notice_right_arrow.setBackground(drawable);
+        holder.tv_oveall_notice_title.setText(item.getTitle());
+        holder.tv_overall_notice_date.setText(item.getNoticeDate());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(mContext, DetailedNoticeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("key",mitems.get(position).getNoticeKey());
@@ -65,13 +54,16 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
         return mitems.size();
     }
 
+
+
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tv_notice_title;
-        Button btn_notice_right_arrow;
+
+        TextView tv_oveall_notice_title;
+        TextView tv_overall_notice_date;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_notice_title = itemView.findViewById(R.id.tv_notice_title);
-            btn_notice_right_arrow = itemView.findViewById(R.id.btn_notice_right_arrow);
+            tv_oveall_notice_title =itemView.findViewById(R.id.tv_overall_notice_title);
+            tv_overall_notice_date =itemView.findViewById(R.id.tv_overall_notice_date);
         }
     }
 }
