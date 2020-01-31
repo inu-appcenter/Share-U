@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,16 +19,17 @@ import com.inuappcenter.shareu.model.Code;
 import com.inuappcenter.shareu.model.Major;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
 
     private Context mContext;
     private ArrayList<Major> mitems;
 
-
+    private ArrayList<Integer> mSectionPositions;
     public MajorAdapter(Context mContext, ArrayList<Major> mitems) {
         this.mContext = mContext;
 
@@ -111,6 +113,31 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
 
         }
+    }
+
+    @Override
+    public int getSectionForPosition(int position) {
+        return 0;
+    }
+
+    @Override
+
+    public Object[] getSections() {
+        List<String> sections = new ArrayList<>(100);
+        mSectionPositions = new ArrayList<>(100);
+        for (int i = 0; i< mitems.size(); i++) {
+            String section = mitems.get(i).getThird();
+            if (!sections.contains(section)) {
+                sections.add(section);
+                mSectionPositions.add(i);
+            }
+        }
+        return sections.toArray(new String[0]);
+    }
+
+    @Override
+    public int getPositionForSection(int sectionIndex) {
+        return mSectionPositions.get(sectionIndex);
     }
 
 

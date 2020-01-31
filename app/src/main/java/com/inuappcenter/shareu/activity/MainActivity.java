@@ -50,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<SuperiorLecture> items=new ArrayList<>();
         SuperiorLecture[] item=new SuperiorLecture[5];
-        item[0]=new SuperiorLecture(R.drawable.excel,"#1",5);
-        item[1]=new SuperiorLecture(R.drawable.excel,"#2",4);
-        item[2]=new SuperiorLecture(R.drawable.excel,"#3",(float)4.5);
-        item[3]=new SuperiorLecture(R.drawable.excel,"#4",3);
-        item[4]=new SuperiorLecture(R.drawable.excel,"#5",2);
+        item[0]=new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5);
+        item[1]=new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",4);
+        item[2]=new SuperiorLecture(R.drawable.ppt,"생명과학 족보",(float)4.5);
+        item[3]=new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",3);
+        item[4]=new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",2);
 
         for(int i=0;i<5;i++) items.add(item[i]);
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //drawer 처리
-        View view = (View)findViewById(R.id.drawer_login);
+        View view = (View)findViewById(R.id.drawer_logout);
         view.setVisibility(View.GONE);
         drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
         View.OnClickListener onClickListener = new Button.OnClickListener() {

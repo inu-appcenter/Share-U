@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,22 +63,26 @@ public class MajorActivity2 extends AppCompatActivity {
                     {
                         if(flag.equals(response.body().get(i).third))
                         {
-                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
+                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR));
                         }
                         else
                         {
                             flag=response.body().get(i).third;
-                            dataList.add(new Major("  "+response.body().get(i).third,null,null,Code.ViewType.INDEX));
-                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
+                            dataList.add(new Major(response.body().get(i).third,null,response.body().get(i).third,Code.ViewType.INDEX));
+                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR));
                         }
                     }
 
 
 
                 }
-                RecyclerView recyclerView = findViewById(R.id.recyclerview_select_major);
+                IndexFastScrollRecyclerView recyclerView = findViewById(R.id.recyclerview_select_major);
                 LinearLayoutManager manager
                         = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+                recyclerView.setIndexTextSize(12);
+                recyclerView.setIndexBarColor("#FFFFFF");
+                recyclerView.setIndexBarTextColor("#000000");
+                recyclerView.setIndexBarStrokeVisibility(false);
                 recyclerView.setLayoutManager(manager); // LayoutManager 등록
                 recyclerView.setAdapter(new MajorAdapter2(MajorActivity2.this,dataList));  // Adapter 등록
             }

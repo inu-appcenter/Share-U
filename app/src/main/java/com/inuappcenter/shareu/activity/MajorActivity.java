@@ -27,13 +27,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MajorActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
+    IndexFastScrollRecyclerView recyclerView;
+    IndexFastScrollRecyclerView recyclerView2;
     LinearLayoutManager manager;
     private ArrayList<Major> dataList;
     @Override
@@ -69,13 +71,13 @@ public class MajorActivity extends AppCompatActivity {
                                     {
                                         if(flag.equals(response.body().get(i).third))
                                         {
-                                            dataList.add(new Major(response.body().get(i).first,null,null,Code.ViewType.MAJOR));
+                                            dataList.add(new Major(response.body().get(i).first,null,response.body().get(i).third,Code.ViewType.MAJOR));
                                         }
                                         else
                                         {
                                             flag=response.body().get(i).third;
-                                            dataList.add(new Major("  "+response.body().get(i).third,null,null,Code.ViewType.INDEX));
-                                            dataList.add(new Major(response.body().get(i).first,null,null,Code.ViewType.MAJOR));
+                                            dataList.add(new Major(response.body().get(i).third,null,response.body().get(i).third,Code.ViewType.INDEX));
+                                            dataList.add(new Major(response.body().get(i).first,null,response.body().get(i).third,Code.ViewType.MAJOR));
                                         }
                                     }
 
@@ -84,8 +86,13 @@ public class MajorActivity extends AppCompatActivity {
                                 }
                                 recyclerView = findViewById(R.id.recyclerview_select_major);
                                 manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+                                recyclerView.setIndexTextSize(12);
+                                recyclerView.setIndexBarColor("#FFFFFF");
+                                recyclerView.setIndexBarTextColor("#000000");
+                                recyclerView.setIndexBarStrokeVisibility(false);
                                 recyclerView.setLayoutManager(manager); // LayoutManager 등록
                                 recyclerView.setAdapter(new MajorAdapter(MajorActivity.this,dataList));  // Adapter 등록
+
                             }
                             @Override
                             public void onFailure(Call<List<Major>> call, Throwable t) {
@@ -116,19 +123,26 @@ public class MajorActivity extends AppCompatActivity {
                                         else
                                         {
                                             flag=response.body().get(i).third;
-                                            dataList.add(new Major("  "+response.body().get(i).third,null,null,Code.ViewType.INDEX));
-                                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
+                                            dataList.add(new Major(response.body().get(i).third,null,response.body().get(i).third,Code.ViewType.INDEX));
+                                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR));
                                         }
                                     }
 
 
 
                                 }
-                                RecyclerView recyclerView2 = findViewById(R.id.recyclerview_select_major);
+                                recyclerView2 = findViewById(R.id.recyclerview_select_major);
                                 LinearLayoutManager manager2
                                         = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+
+                                recyclerView2.setIndexTextSize(12);
+                                recyclerView2.setIndexBarColor("#FFFFFF");
+                                recyclerView2.setIndexBarTextColor("#000000");
+                                recyclerView2.setIndexBarStrokeVisibility(false);
                                 recyclerView2.setLayoutManager(manager2); // LayoutManager 등록
                                 recyclerView2.setAdapter(new GyoyangAdapter(MajorActivity.this,dataList));  // Adapter 등록
+
+
                             }
                             @Override
                             public void onFailure(Call<List<Major>> call, Throwable t) {

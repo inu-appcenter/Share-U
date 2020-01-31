@@ -16,7 +16,8 @@
         android:inputType="textPersonName"
         android:textColor="@color/cardview_dark_background"
         android:textColorHint="#57000000"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        android:paddingLeft="9dp"/>
 
     <ImageButton
         android:id="@+id/etv_search_click"
