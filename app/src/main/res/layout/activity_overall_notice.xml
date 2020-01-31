@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/include_notice_bar"
+        layout="@layout/layout_notice_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+
+        android:layout_marginTop="7dp" />
+    <View
+        android:id="@+id/line_notice"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="14.5dp"
+        android:layout_marginRight="14.5dp"
+        android:layout_marginTop="14.5dp"
+
+        android:background="@color/gray" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_overall_notice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="14.5dp"
+        android:layout_marginRight="14.5dp"/>
+
+</LinearLayout>

@@ -58,18 +58,14 @@ public class MajorActivity2 extends AppCompatActivity {
                 {
                     dataList = new ArrayList<>();
                     String flag ="?";
-                    Log.e("ㄷㄷ",response.body().size()+"");
                     for(int i=0;i<response.body().size();i++)
                     {
-                        Log.e("냥",response.body().get(i).third+"");
                         if(flag.equals(response.body().get(i).third))
                         {
-                            Log.e("흠",flag+" "+response.body().get(i).third);
                             dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
                         }
                         else
                         {
-                            Log.e("힝",flag+" "+response.body().get(i).third);
                             flag=response.body().get(i).third;
                             dataList.add(new Major("  "+response.body().get(i).third,null,null,Code.ViewType.INDEX));
                             dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
