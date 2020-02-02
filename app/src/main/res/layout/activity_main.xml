@@ -76,6 +76,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="22dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="15dp"
                     />
                 <include
                     android:id="@+id/include_recyclerview_main"
@@ -119,6 +121,7 @@
         layout="@layout/layout_drawer_my_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="end" />
+        android:layout_gravity="end"
+        tools:layout="@layout/layout_drawer_my_page" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

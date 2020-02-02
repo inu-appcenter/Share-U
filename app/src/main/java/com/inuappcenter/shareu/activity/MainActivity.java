@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.btn_left_bar_main :
                         Intent intent = new Intent(getApplicationContext(),MajorActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_right,R.anim.hold);
                         break ;
                     case R.id.btn_my_page_main :
                         drawer_my_page.openDrawer(GravityCompat.END);

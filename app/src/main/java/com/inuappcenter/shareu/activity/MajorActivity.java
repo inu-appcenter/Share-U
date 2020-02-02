@@ -166,7 +166,10 @@ public class MajorActivity extends AppCompatActivity {
                 switch(view.getId())
                 {
                     case R.id.btn_left_bar_major:
+                    {
                         finish();
+                        overridePendingTransition(R.anim.hold,R.anim.slide_left);
+                    }
                 }
             }
         };

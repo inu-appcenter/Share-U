@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="24dp"
@@ -11,8 +11,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|bottom"
-        android:layout_marginLeft="16dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:text="우수자료"
         android:textColor="#000000"
         android:textSize="16sp"
@@ -22,25 +22,25 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|bottom"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="8dp"
         android:text="별점순"
         android:textColor="#57000000"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/textView3"
+        />
 
     <com.kingfisher.easyviewindicator.RecyclerViewIndicator
         android:id="@+id/recyclerViewIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|right"
-        android:layout_marginLeft="186dp"
-        android:layout_marginRight="15dp"
-
-
+        android:layout_centerInParent="true"
         app:avi_animation_enable="true"
         app:avi_drawable="@drawable/blue_radius"
-        app:avi_drawable_unselected="@drawable/gray_radius">
+        app:avi_drawable_unselected="@drawable/gray_radius"
+        android:layout_alignParentRight="true"
+        >
 
     </com.kingfisher.easyviewindicator.RecyclerViewIndicator>
 
-</LinearLayout>
+</RelativeLayout>
