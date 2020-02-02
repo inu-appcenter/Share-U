@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         View view = (View)findViewById(R.id.drawer_logout);
         view.setVisibility(View.GONE);
         drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
+        drawer_my_page.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         View.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
