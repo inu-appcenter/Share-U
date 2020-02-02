@@ -25,6 +25,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
@@ -61,7 +62,6 @@ public class MajorActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<List<Major> > call, Response<List<Major>> response)
                             {
-
                                 if(response.isSuccessful())
                                 {
                                     dataList = new ArrayList<>();
@@ -80,9 +80,6 @@ public class MajorActivity extends AppCompatActivity {
                                             dataList.add(new Major(response.body().get(i).first,null,response.body().get(i).third,Code.ViewType.MAJOR));
                                         }
                                     }
-
-
-
                                 }
                                 recyclerView = findViewById(R.id.recyclerview_select_major);
                                 manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
@@ -174,13 +171,11 @@ public class MajorActivity extends AppCompatActivity {
             }
         };
         btn_left_bar_major.setOnClickListener(onClickListener2);
-        /*RecyclerView recyclerView = findViewById(R.id.recyclerview_select_major);
-
-        LinearLayoutManager manager
-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(manager); // LayoutManager 등록
-        recyclerView.setAdapter(new MajorAdapter(getApplicationContext(),dataList));  // Adapter 등록*/
 
     }
-
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.hold,R.anim.slide_left);
+    }
 }
