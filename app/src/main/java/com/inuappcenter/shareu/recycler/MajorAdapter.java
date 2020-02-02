@@ -76,6 +76,9 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                    intent.putExtra("select_major",mitems.get(position).getFirst());
                    mContext.startActivity(intent);
                    ((Activity) mContext).finish();
+
+
+
                }
            });
         }
