@@ -62,16 +62,12 @@ public class GyoyangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         {
             ((MajorViewHolder) viewHolder).first.setText(mitems.get(position).getFirst());
             ((MajorViewHolder) viewHolder).second.setText(mitems.get(position).getSecond());
+            ((MajorViewHolder) viewHolder).line_notice.setBackgroundColor(mContext.getResources().getColor(mitems.get(position).getLine()));
 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                 /*   //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(mContext, GyoyangActivity2.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("select_gyoyang",mitems.get(position).getFirst());
-                    mContext.startActivity(intent);
-                    ((Activity) mContext).finish();*/
+
                 }
             });
         }
@@ -100,12 +96,13 @@ public class GyoyangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public class MajorViewHolder extends RecyclerView.ViewHolder{
         TextView first;
         TextView second;
-
+        View line_notice;
         MajorViewHolder(View itemView)
         {
             super(itemView);
             first = itemView.findViewById(R.id.tv_major_first);
             second=itemView.findViewById(R.id.tv_major_second);
+            line_notice = itemView.findViewById(R.id.line_notice);
 
 
         }
