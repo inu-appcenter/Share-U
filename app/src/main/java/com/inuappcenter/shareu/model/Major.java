@@ -24,6 +24,7 @@ public class Major {
     //우선 전공에서는 second는 null, 전공 교양에서는 교수님 이름이 들어갈 것
 
 
+
     public Major(String first, String second,String third, int viewType,int line) {
         this.first = first;
         this.second = second;
