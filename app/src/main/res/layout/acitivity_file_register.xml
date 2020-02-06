@@ -56,9 +56,8 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="1dp"
             android:layout_weight="1"
-            android:gravity="top|start"
-            android:textColor="@color/black"
             android:background="@null"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <ImageButton
@@ -79,7 +78,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="15.5dp"
         android:layout_marginRight="15.5dp"
-        android:background="@color/gray" />
+        android:background="#57707070" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -136,7 +135,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="15.5dp"
         android:layout_marginRight="15.5dp"
-        android:background="@color/gray" />
+        android:background="#57707070" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -194,7 +193,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="15.5dp"
         android:layout_marginRight="15.5dp"
-        android:background="@color/gray" />
+        android:background="#57707070" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="27dp"
@@ -246,17 +245,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="39dp"
-        android:background="@color/gray">
+        android:layout_marginTop="39dp">
 
         <TextView
             android:id="@+id/tv_upload_file"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:gravity="center"
             android:text="자료 올리기"
-
+            android:textColor="@color/white"
+            android:background="@color/gray"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

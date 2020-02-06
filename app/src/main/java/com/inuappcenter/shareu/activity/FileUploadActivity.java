@@ -3,6 +3,7 @@ package com.inuappcenter.shareu.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -76,11 +77,11 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                check();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                check();
             }
         });
         edtv_select_prof.addTextChangedListener(new TextWatcher() {
@@ -91,11 +92,11 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                check();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                check();
             }
         });
         edtv_content.addTextChangedListener(new TextWatcher() {
@@ -106,36 +107,30 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                check();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                check();
             }
         });
         tv_upload_file.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                check();
                 if(one>=1 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true)
                 {
-                    tv_upload_file.setOnClickListener(new View.OnClickListener(){
+                    // 이제 올리기
+                    service.uploadImage(title,subjectName,profName,content,filePart).enqueue(new Callback<ResponseBody>() {
                         @Override
-                        public void onClick(View view) {
-                            // 이제 올리기
-                            service.uploadImage(title,subjectName,profName,content,filePart).enqueue(new Callback<ResponseBody>() {
-                                @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "등록에 성공하였습니다.", Snackbar.LENGTH_SHORT).show();
-                                }
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "등록에 성공하였습니다.", Snackbar.LENGTH_SHORT).show();
+                        }
 
-                                @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "등록에 실패하였습니다.", Snackbar.LENGTH_SHORT).show();
-                                    t.printStackTrace();
-                                }
-                            });
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "등록에 실패하였습니다.", Snackbar.LENGTH_SHORT).show();
+                            t.printStackTrace();
                         }
                     });
                 }
