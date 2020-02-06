@@ -51,7 +51,8 @@ public class DetailedNoticeActivity extends AppCompatActivity {
             {
                 if(response.isSuccessful())
                 {
-                   tv_detailed_notice_title.setText(response.body().get(0).getTitle());
+                    Log.e("엥",response.body().size()+"");
+                    tv_detailed_notice_title.setText(response.body().get(0).getTitle());
                     tv_detailed_notice_date.setText(response.body().get(0).getNoticeDate());
                     tv_detailed_notice_content.setText(response.body().get(0).getContent());
                 }

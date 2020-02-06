@@ -9,9 +9,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -20,6 +22,7 @@ import com.inuappcenter.shareu.model.Code;
 import com.inuappcenter.shareu.model.Major;
 import com.inuappcenter.shareu.model.Notice;
 import com.inuappcenter.shareu.model.SuperiorLecture;
+import com.inuappcenter.shareu.model.profName;
 import com.inuappcenter.shareu.model.subjectName;
 import com.inuappcenter.shareu.recycler.MajorAdapter;
 import com.inuappcenter.shareu.service.RetrofitHelper;
@@ -58,74 +61,88 @@ public class FileUploadActivity extends AppCompatActivity {
 
     private ArrayList<String> dataList;
     public String sibal;
+    public AutoCompleteTextView edtv_select_subject;
+    public AutoCompleteTextView edtv_select_prof;
+    public EditText edtv_content;
+    public TextView tv_upload_file;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_file_register);
-        final AutoCompleteTextView edtv_select_subject = (AutoCompleteTextView) findViewById(R.id.edtv_select_subject);
-
-        //도와주세요 병준몬.. 과목선택 옆에 어떤 키워드를 넣으면 AutoCompleteTextView가 자동으로 촤르륵 떠야하는데.. 텍스트가 변할 때 마다
-        //바뀐 텍스트를 쿼리에 넣어 리스트를 가져와야 하는데 리스트 인식까지 되는데 목록이 촤르륵 안떠여..ㅠㅠ
-        RetrofitService networkService = RetrofitHelper.create();
-        edtv_select_subject.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+        edtv_select_subject = (AutoCompleteTextView) findViewById(R.id.edtv_select_subject);
+        edtv_select_prof = (AutoCompleteTextView) findViewById(R.id.edtv_select_prof);
+        edtv_content = (EditText)findViewById(R.id.edtv_content);
+        tv_upload_file = (TextView)findViewById(R.id.tv_upload_file);
+        tv_upload_file.setOnClickListener(new View.OnClickListener(){
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                sibal = edtv_select_subject.getText().toString();
-                Log.e("응?",sibal+"");
-
-                networkService.getSubjectName(sibal).enqueue(new Callback<List<subjectName>>(){
-                    @Override
-                    public void onResponse(Call<List<subjectName> > call, Response<List<subjectName>> response)
-                    {
-                        if(response.isSuccessful())
-                        {
-                            dataList=new ArrayList<>();
-                            for(int i=0;i<response.body().size();i++)
-                            {
-                                Log.e("메시지",response.body().get(i).getSubjectName()+"");
-                                dataList.add(response.body().get(i).getSubjectName());
-
-                            }
-
-                        }
-                        edtv_select_subject.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
-                                android.R.layout.simple_dropdown_item_1line,  dataList ));
-                        Log.e("힝",dataList.size()+"");
-
-                    }
-                    @Override
-                    public void onFailure(Call<List<subjectName>> call, Throwable t) {
-
-                        Toast.makeText(getApplicationContext(), "실패지렁", Toast.LENGTH_SHORT).show();
-                        t.printStackTrace();
-                    }
-                });
+            public void onClick(View view) {
+                //Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "모든 내용을 채워주세요!", Snackbar.LENGTH_SHORT).show();
             }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-
 
         });
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.getSubjectName("").enqueue(new Callback<List<com.inuappcenter.shareu.model.File>>(){
+            @Override
+            public void onResponse(Call<List<com.inuappcenter.shareu.model.File> > call, Response<List<com.inuappcenter.shareu.model.File>> response)
+            {
+                if(response.isSuccessful())
+                {
+                    dataList=new ArrayList<>();
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        Log.e("메시지",response.body().get(i).getSubjectName()+"");
+                        dataList.add(response.body().get(i).getSubjectName());
 
-// AutoCompleteTextView 에 아답터를 연결한다.
+                    }
 
-       /* for(int i=0;i<dataList.size();i++)
-        {
-            Log.e("메시지",dataList.get(i)+"");
-        }*/
+                }
+                // AutoCompleteTextView 에 아답터를 연결한다.
+                edtv_select_subject.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
+                        android.R.layout.simple_dropdown_item_1line,  dataList ));
+                Log.e("힝",dataList.size()+"");
+
+            }
+            @Override
+            public void onFailure(Call<List<com.inuappcenter.shareu.model.File>> call, Throwable t) {
+
+                Toast.makeText(getApplicationContext(), "실패지렁", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
 
 
+        RetrofitService networkService2 = RetrofitHelper.create();
+        networkService2.getProfName("").enqueue(new Callback<List<com.inuappcenter.shareu.model.File>>(){
+            @Override
+            public void onResponse(Call<List<com.inuappcenter.shareu.model.File> > call, Response<List<com.inuappcenter.shareu.model.File>> response)
+            {
+                if(response.isSuccessful())
+                {
+                    dataList=new ArrayList<>();
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        Log.e("메시지",response.body().get(i).getProfName()+"");
+                        dataList.add(response.body().get(i).getProfName());
 
-      /*  // 권한내놔!
+                    }
+
+                }
+                // AutoCompleteTextView 에 아답터를 연결한다.
+                edtv_select_prof.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
+                        android.R.layout.simple_dropdown_item_1line,  dataList ));
+                Log.e("힝",dataList.size()+"");
+
+            }
+            @Override
+            public void onFailure(Call<List<com.inuappcenter.shareu.model.File>> call, Throwable t) {
+
+                Toast.makeText(getApplicationContext(), "실패지렁", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+
+        // 권한내놔!
         giveMePermissions();
 
         // 버튼 클릭 리스너 설정 부분
@@ -134,7 +151,7 @@ public class FileUploadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 pickFile();
             }
-        });*/
+        });
 
     }
     @Override
@@ -189,32 +206,55 @@ public class FileUploadActivity extends AppCompatActivity {
         RetrofitService service = RetrofitHelper.create();
         MediaType type = MediaType.parse("multipart/form-data");
 
-        EditText edtv_file_name = findViewById(R.id.edtv_file_name);
-        String edtv_get_file_name = edtv_file_name.getText()+"";
 
-        // POST의 description 부분 생성
-        RequestBody title = RequestBody.create(type, edtv_get_file_name);
-        RequestBody subjectName = RequestBody.create(type, "시벌");
-        RequestBody profName = RequestBody.create(type, "시부럴");
-        RequestBody content = RequestBody.create(type, "시벌탱");
+
         // POST의 file 부분 생성
         File imageFile = new File(UriHelper.getPath(this, uri));
         RequestBody reqFile = RequestBody.create(type, imageFile);
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("userfile", imageFile.getName(), reqFile);
 
-        // 이제 올리기
-        service.uploadImage(title,subjectName,profName,content,filePart).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "성공이라우", Snackbar.LENGTH_SHORT).show();
-            }
+        Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "파일 업로드가 완료되었습니다.", Snackbar.LENGTH_SHORT).show();
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "실패했다우!!!", Snackbar.LENGTH_SHORT).show();
-                t.printStackTrace();
-            }
-        });
+        // POST의 description 부분 생성
+        EditText edtv_file_name = findViewById(R.id.edtv_file_name);
+        RequestBody title = RequestBody.create(type, edtv_file_name.getText()+"");
+        RequestBody subjectName = RequestBody.create(type,edtv_select_subject.getText()+"" );
+        RequestBody profName = RequestBody.create(type,edtv_select_prof.getText()+"");
+        RequestBody content = RequestBody.create(type, edtv_content+"");
+
+        int one = edtv_file_name.getText().toString().length();
+        int two = edtv_select_subject.getText().toString().length();
+        int three = edtv_select_prof.getText().toString().length();
+        int four = edtv_content.getText().toString().length();
+        if(one>=1 && two>=1 &&three>=1 &&four>=1)
+        {
+            tv_upload_file.setBackgroundResource(R.color.Iris);
+            tv_upload_file.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View view) {
+                    // 이제 올리기
+                    service.uploadImage(title,subjectName,profName,content,filePart).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "등록에 성공하였습니다.", Snackbar.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "등록에 실패하였습니다.", Snackbar.LENGTH_SHORT).show();
+                            t.printStackTrace();
+                        }
+                    });
+                }
+            });
+        }
+        else
+        {
+            //Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "모든 내용을 채워주세요!", Snackbar.LENGTH_SHORT).show();
+        }
     }
+
+
 }
 

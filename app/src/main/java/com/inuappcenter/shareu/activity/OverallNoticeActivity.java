@@ -50,7 +50,7 @@ public class OverallNoticeActivity extends AppCompatActivity {
                         dataList.add(new Notice((i+1)+". "+response.body().get(i).getTitle(),
                                 response.body().get(i).getContent(),
                                 response.body().get(i).getNoticeDate(),
-                                response.body().get(i).getNoticeKey(),
+                                i+1,
                                 R.drawable.rightarrow));
                     }
                 }

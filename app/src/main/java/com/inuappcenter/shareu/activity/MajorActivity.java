@@ -183,7 +183,7 @@ public class MajorActivity extends AppCompatActivity {
                         });
                         break;
                     case R.id.tv_gyoyang:
-                        if(tv_major.getCurrentTextColor()==getResources().getColor(R.color.Iris))
+                        if(tv_gyoyang.getCurrentTextColor()==getResources().getColor(R.color.Iris))
                         {
                             break;
                         }

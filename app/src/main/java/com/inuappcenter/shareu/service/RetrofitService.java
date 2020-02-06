@@ -1,7 +1,9 @@
 package com.inuappcenter.shareu.service;
 
+import com.inuappcenter.shareu.model.File;
 import com.inuappcenter.shareu.model.Major;
 import com.inuappcenter.shareu.model.Notice;
+import com.inuappcenter.shareu.model.profName;
 import com.inuappcenter.shareu.model.subjectName;
 
 import java.util.List;
@@ -33,7 +35,11 @@ public interface RetrofitService {
     Call<List<Notice> > getDetailedNotice(@Query("noticeKey") int key);
 
     @GET("/document/send/subjectChoice")
-    Call<List<subjectName> > getSubjectName(@Query("subjectName") String prof);
+    Call<List<File> > getSubjectName(@Query("subjectName") String subj);
+
+    @GET("/document/send/profChoice")
+    Call<List<File> > getProfName(@Query("profName") String prof);
+
     @Multipart
     @POST("/document/store/upload")
     Call<ResponseBody> uploadImage(@Part("title") RequestBody title, @Part("subjectName") RequestBody subjectName,
