@@ -122,10 +122,10 @@
             android:id="@+id/fab_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom | end"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="#009688"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/Iris"
             app:borderWidth="0dp"
             app:fabSize="normal" />
     </FrameLayout>

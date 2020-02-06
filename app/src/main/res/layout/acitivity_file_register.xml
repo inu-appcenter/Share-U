@@ -58,6 +58,7 @@
             android:layout_weight="1"
             android:gravity="top|start"
             android:textColor="@color/black"
+            android:background="@null"
             android:textSize="16sp" />
 
         <ImageButton
@@ -107,17 +108,16 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        <EditText
             android:id="@+id/edtv_select_subject"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="24dp"
             android:layout_weight="1"
-            android:completionThreshold="2"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:layout_marginTop="1dp"
-            android:popupBackground="@color/white"/>
+            android:background="@null"
+            android:layout_marginTop="1dp" />
 
         <ImageButton
             android:id="@+id/img_btn_file_upload2"
@@ -165,16 +165,16 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        <EditText
             android:id="@+id/edtv_select_prof"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="24dp"
             android:layout_weight="1"
-            android:completionThreshold="2"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_marginTop="1dp"
+            android:background="@null"
             android:popupBackground="@color/white"/>
 
         <ImageButton
@@ -232,11 +232,12 @@
 
         <EditText
             android:id="@+id/edtv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginLeft="32.5dp"
             android:layout_marginTop="12.5dp"
             android:layout_marginRight="32.5dp"
+            android:background="@null"
             android:gravity="top|start"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -250,9 +251,12 @@
 
         <TextView
             android:id="@+id/tv_upload_file"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:gravity="center"
             android:text="자료 올리기"
+
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

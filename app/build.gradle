@@ -46,7 +46,9 @@ dependencies {
     //reclclerview indicator index
     implementation 'com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.95'
 
-
+    //floating button
     implementation 'com.google.android.material:material:1.0.0-rc01'
-    implementation 'com.getbase:floatingactionbutton:1.9.0'
+
+    //file upload library
+    implementation 'com.github.HBiSoft:PickiT:0.1.8'
 }
