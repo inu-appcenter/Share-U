@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="24dp"
+    android:layout_height="27dp"
     android:layout_gravity="center"
     android:layout_weight="0"
+    android:background="@color/white"
     android:orientation="horizontal">
 
     <TextView
@@ -13,9 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
+        android:gravity="center"
         android:text="우수자료"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -24,22 +26,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/textView3"
         android:text="별점순"
         android:textColor="#57000000"
-        android:textSize="12sp"
-        android:layout_toRightOf="@+id/textView3"
-        />
+        android:textSize="12sp" />
 
     <com.kingfisher.easyviewindicator.RecyclerViewIndicator
         android:id="@+id/recyclerViewIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
         app:avi_animation_enable="true"
         app:avi_drawable="@drawable/blue_radius"
-        app:avi_drawable_unselected="@drawable/gray_radius"
-        android:layout_alignParentRight="true"
-        >
+        app:avi_drawable_unselected="@drawable/gray_radius">
 
     </com.kingfisher.easyviewindicator.RecyclerViewIndicator>
 

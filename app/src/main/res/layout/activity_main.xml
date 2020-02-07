@@ -69,9 +69,9 @@
                         layout="@layout/layout_search"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="33dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginRight="34dp" />
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="16dp" />
 
                     <include
                         android:id="@+id/include_superior_title_main"
@@ -79,7 +79,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginTop="22dp"
+                        android:layout_marginTop="17dp"
                         android:layout_marginRight="15dp" />
 
                     <include
@@ -101,7 +101,9 @@
                         layout="@layout/layout_notice_set_title_main"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp" />
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="14dp" />
 
                     <include
                         android:id="@+id/include_recyclerview2_main"
