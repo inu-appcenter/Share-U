@@ -12,109 +12,124 @@
 
 
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_weight="0"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_left_bar_main"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginLeft="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/group62" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="100"
-
-                app:srcCompat="@drawable/group69" />
-
-            <Button
-                android:id="@+id/btn_my_page_main"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/group80" />
-
-        </LinearLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0"
-            >
+            android:background="#FFFFFF"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="48dp"
+                android:layout_weight="0"
+                android:orientation="horizontal">
 
-                <include
-                    android:id="@+id/include_search"
-                    layout="@layout/layout_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginLeft="33dp"
-                    android:layout_marginRight="34dp"
-                    />
+                <Button
+                    android:id="@+id/btn_left_bar_main"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/group62" />
 
-                <include
-                    android:id="@+id/include_superior_title_main"
-                    layout="@layout/layout_superior_title_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="15dp"
-                    />
-                <include
-                    android:id="@+id/include_recyclerview_main"
-                    layout="@layout/layout_recyclerview_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    />
-                <include
-                    android:id="@+id/include_ad_main"
-                    layout="@layout/layout_ad_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="27dp"
-                    />
-                <include
-                    android:id="@+id/include_notice_set_title_main"
-                    layout="@layout/layout_notice_set_title_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    />
-                <include
-                    android:id="@+id/include_recyclerview2_main"
-                    layout="@layout/layout_recyclerview2_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100"
 
+                    app:srcCompat="@drawable/group69" />
+
+                <Button
+                    android:id="@+id/btn_my_page_main"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/group80" />
 
             </LinearLayout>
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/include_search"
+                        layout="@layout/layout_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="34dp" />
+
+                    <include
+                        android:id="@+id/include_superior_title_main"
+                        layout="@layout/layout_superior_title_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginRight="15dp" />
+
+                    <include
+                        android:id="@+id/include_recyclerview_main"
+                        layout="@layout/layout_recyclerview_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp" />
+
+                    <include
+                        android:id="@+id/include_ad_main"
+                        layout="@layout/layout_ad_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="27dp" />
+
+                    <include
+                        android:id="@+id/include_notice_set_title_main"
+                        layout="@layout/layout_notice_set_title_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp" />
+
+                    <include
+                        android:id="@+id/include_recyclerview2_main"
+                        layout="@layout/layout_recyclerview2_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
 
-        </ScrollView>
+                </LinearLayout>
 
-    </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+            android:id="@+id/fab_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/Iris"
+            app:borderWidth="0dp"
+            app:fabSize="normal" />
+    </FrameLayout>
+
 
     <fragment
         android:name="com.inuappcenter.shareu.fragment.DrawerFragment"
@@ -123,5 +138,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         tools:layout="@layout/layout_drawer_my_page" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -25,6 +25,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
@@ -47,12 +48,80 @@ public class MajorActivity extends AppCompatActivity {
         TextView tv_major = (TextView) findViewById(R.id.tv_major) ;
         TextView tv_gyoyang = (TextView) findViewById(R.id.tv_gyoyang) ;
         Button btn_left_bar_major = (Button)findViewById(R.id.btn_left_bar_major);
+
+        tv_gyoyang.setTextColor(Color.parseColor("#000000"));
+        tv_major.setTextColor(Color.parseColor("#574FBA"));
+        tv_major.setTypeface(Typeface.DEFAULT_BOLD);
+
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.getMajorList().enqueue(new Callback<List<Major>>(){
+            @Override
+            public void onResponse(Call<List<Major> > call, Response<List<Major>> response)
+            {
+                if(response.isSuccessful())
+                {
+                    dataList = new ArrayList<>();
+                    String flag ="?";
+
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        if(flag.equals(response.body().get(i).third))
+                        {
+                            if(i==response.body().size()-1)
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                            }
+                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                            }
+                            else
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
+                            }
+                        }
+                        else
+                        {
+                            flag=response.body().get(i).third;
+                            dataList.add(new Major(response.body().get(i).third,response.body().get(i).second,response.body().get(i).third,Code.ViewType.INDEX,R.color.gray));
+                            if(!response.body().get(i+1).third.equals(response.body().get(i).third))
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                            }
+                            else
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
+                        }
+                    }
+                }
+                recyclerView = findViewById(R.id.recyclerview_select_major);
+                manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+                recyclerView.setIndexTextSize(12);
+                recyclerView.setIndexBarColor("#FFFFFF");
+                recyclerView.setIndexBarTextColor("#000000");
+                recyclerView.setIndexBarStrokeVisibility(false);
+                recyclerView.setLayoutManager(manager); // LayoutManager 등록
+                recyclerView.setAdapter(new MajorAdapter(MajorActivity.this,dataList));  // Adapter 등록
+
+            }
+            @Override
+            public void onFailure(Call<List<Major>> call, Throwable t) {
+                Log.e("TAG", t.getMessage());
+                Toast.makeText(MajorActivity.this, "실패", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
         TextView.OnClickListener onClickListener = new TextView.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
                     case R.id.tv_major :
                         //initializeData();
+                        if(tv_major.getCurrentTextColor()==getResources().getColor(R.color.Iris))
+                        {
+                            break;
+                        }
                         tv_gyoyang.setTextColor(Color.parseColor("#000000"));
                         tv_major.setTextColor(Color.parseColor("#574FBA"));
                         tv_major.setTypeface(Typeface.DEFAULT_BOLD);
@@ -61,28 +130,40 @@ public class MajorActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<List<Major> > call, Response<List<Major>> response)
                             {
-
                                 if(response.isSuccessful())
                                 {
                                     dataList = new ArrayList<>();
                                     String flag ="?";
-                                    Log.e("ㄷㄷ",response.body().size()+"");
+
                                     for(int i=0;i<response.body().size();i++)
                                     {
                                         if(flag.equals(response.body().get(i).third))
                                         {
-                                            dataList.add(new Major(response.body().get(i).first,null,response.body().get(i).third,Code.ViewType.MAJOR));
+                                            if(i==response.body().size()-1)
+                                            {
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                                            }
+                                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
+                                            {
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                                            }
+                                            else
+                                            {
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
+                                            }
                                         }
                                         else
                                         {
                                             flag=response.body().get(i).third;
-                                            dataList.add(new Major(response.body().get(i).third,null,response.body().get(i).third,Code.ViewType.INDEX));
-                                            dataList.add(new Major(response.body().get(i).first,null,response.body().get(i).third,Code.ViewType.MAJOR));
+                                            dataList.add(new Major(response.body().get(i).third,response.body().get(i).second,response.body().get(i).third,Code.ViewType.INDEX,R.color.gray));
+                                            if(!response.body().get(i+1).third.equals(response.body().get(i).third))
+                                            {
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                                            }
+                                            else
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
                                         }
                                     }
-
-
-
                                 }
                                 recyclerView = findViewById(R.id.recyclerview_select_major);
                                 manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
@@ -102,6 +183,10 @@ public class MajorActivity extends AppCompatActivity {
                         });
                         break;
                     case R.id.tv_gyoyang:
+                        if(tv_gyoyang.getCurrentTextColor()==getResources().getColor(R.color.Iris))
+                        {
+                            break;
+                        }
                         tv_major.setTextColor(Color.parseColor("#000000"));
                         tv_gyoyang.setTextColor(Color.parseColor("#574FBA"));
                         tv_gyoyang.setTypeface(Typeface.DEFAULT_BOLD);
@@ -118,13 +203,34 @@ public class MajorActivity extends AppCompatActivity {
                                     {
                                         if(flag.equals(response.body().get(i).third))
                                         {
-                                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,null,Code.ViewType.MAJOR));
+                                            if(i==response.body().size()-1)
+                                            {
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                                            }
+                                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
+                                            {
+
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                                            }
+                                            else
+                                            {
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
+                                            }
                                         }
                                         else
                                         {
                                             flag=response.body().get(i).third;
-                                            dataList.add(new Major(response.body().get(i).third,null,response.body().get(i).third,Code.ViewType.INDEX));
-                                            dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR));
+                                            dataList.add(new Major(response.body().get(i).third,null,response.body().get(i).third,Code.ViewType.INDEX,R.color.gray));
+                                            if(response.body().size()==1)
+                                            {
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
+                                            }
+                                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
+                                            {
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                                            }
+                                            else
+                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
                                         }
                                     }
 
@@ -174,13 +280,11 @@ public class MajorActivity extends AppCompatActivity {
             }
         };
         btn_left_bar_major.setOnClickListener(onClickListener2);
-        /*RecyclerView recyclerView = findViewById(R.id.recyclerview_select_major);
-
-        LinearLayoutManager manager
-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(manager); // LayoutManager 등록
-        recyclerView.setAdapter(new MajorAdapter(getApplicationContext(),dataList));  // Adapter 등록*/
 
     }
-
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.hold,R.anim.slide_left);
+    }
 }

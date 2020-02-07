@@ -61,7 +61,7 @@ public class MajorAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         {
             ((MajorViewHolder) viewHolder).first.setText(mitems.get(position).getFirst());
             ((MajorViewHolder) viewHolder).second.setText(mitems.get(position).getSecond());
-
+            ((MajorViewHolder) viewHolder).line_notice.setBackgroundColor(mContext.getResources().getColor(mitems.get(position).getLine()));
             String text =  mitems.get(position).getFirst();
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,13 +94,13 @@ public class MajorAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public class MajorViewHolder extends RecyclerView.ViewHolder{
         TextView first;
         TextView second;
-
+        View line_notice;
         MajorViewHolder(View itemView)
         {
             super(itemView);
             first = itemView.findViewById(R.id.tv_major_first);
             second=itemView.findViewById(R.id.tv_major_second);
-
+            line_notice = itemView.findViewById(R.id.line_notice);
 
         }
     }

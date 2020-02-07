@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.inuappcenter.shareu"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -45,4 +45,10 @@ dependencies {
     //implementation 'com.android.support:recyclerview-v7:28.0.0'
     //reclclerview indicator index
     implementation 'com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.95'
+
+    //floating button
+    implementation 'com.google.android.material:material:1.0.0-rc01'
+
+    //file upload library
+    implementation 'com.github.HBiSoft:PickiT:0.1.8'
 }

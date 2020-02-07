@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.model.Notice;
 import com.inuappcenter.shareu.model.SuperiorLecture;
@@ -76,10 +77,14 @@ public class MainActivity extends AppCompatActivity {
                     dataList = new ArrayList<>();
                     for(int i=0;i<response.body().size();i++)
                     {
+                        Log.e("휴",response.body().get(i).getTitle()+" "+
+                                response.body().get(i).getContent()+" "+
+                                response.body().get(i).getNoticeDate()+" "+
+                                response.body().get(i).getNoticeKey());
                         dataList.add(new Notice((i+1)+". "+response.body().get(i).getTitle(),
                                 response.body().get(i).getContent(),
                                 response.body().get(i).getNoticeDate(),
-                                response.body().get(i).getNoticeKey(),
+                                i+1,
                                 R.drawable.rightarrow));
                     }
                 }
@@ -101,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         view.setVisibility(View.GONE);
         drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
         drawer_my_page.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        View.OnClickListener onClickListener = new Button.OnClickListener() {
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
@@ -117,6 +122,11 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent2 = new Intent(getApplicationContext(), OverallNoticeActivity.class);
                         startActivity(intent2);
                         break ;
+                    case R.id.fab_main:
+                        Log.e("냥","냥");
+                        Intent intent3 = new Intent(getApplicationContext(), FileUploadActivity.class);
+                        startActivity(intent3);
+                        break ;
                 }
 
             }
@@ -131,7 +141,8 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_notice_set_title_more = (TextView)findViewById(R.id.tv_notice_set_title_more);
         tv_notice_set_title_more.setOnClickListener(onClickListener);
 
-
+        FloatingActionButton fab_main = (FloatingActionButton)findViewById(R.id.fab_main);
+        fab_main.setOnClickListener(onClickListener);
 
     }
     @Override
