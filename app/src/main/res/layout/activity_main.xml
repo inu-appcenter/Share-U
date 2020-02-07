@@ -83,11 +83,12 @@
                         android:layout_marginRight="15dp" />
 
                     <include
-                        android:id="@+id/include_recyclerview_main"
-                        layout="@layout/layout_recyclerview_main"
+                        android:id="@+id/include_viewpager_superior"
+                        layout="@layout/viewpager_superior"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp" />
+
 
                     <include
                         android:id="@+id/include_ad_main"

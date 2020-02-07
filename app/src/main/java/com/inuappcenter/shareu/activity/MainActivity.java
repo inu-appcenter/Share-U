@@ -5,11 +5,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +23,7 @@ import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.model.Notice;
 import com.inuappcenter.shareu.model.SuperiorLecture;
 import com.inuappcenter.shareu.recycler.NoticeAdapter;
-import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter;
+import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter2;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 import com.kingfisher.easyviewindicator.RecyclerViewIndicator;
@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     //Drawer 처리
     DrawerLayout drawer_my_page;
     private ArrayList<Notice> dataList;
+    private ViewPager viewPager ;
+    private SuperiorLectureAdapter2 pagerAdapter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,19 @@ public class MainActivity extends AppCompatActivity {
         RecyclerViewIndicator horizontalIndicator = (RecyclerViewIndicator)findViewById(R.id.recyclerViewIndicator);
 
         final EditText editText =(EditText)findViewById(R.id.etv_main);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        ArrayList<SuperiorLecture> items=new ArrayList<>();
+        SuperiorLecture[] item=new SuperiorLecture[5];
+        item[0]=new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5);
+        item[1]=new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",4);
+        item[2]=new SuperiorLecture(R.drawable.ppt,"생명과학 족보",(float)4.5);
+        item[3]=new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",3);
+        item[4]=new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",2);
+        for(int i=0;i<5;i++)
+            items.add(item[i]);
+        viewPager = (ViewPager) findViewById(R.id.viewpager_superior) ;
+        viewPager.setAdapter(new SuperiorLectureAdapter2(items,this)) ;
+
+        /*LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -62,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new SuperiorLectureAdapter(getApplicationContext(),items));
-        horizontalIndicator.setRecyclerView(recyclerView);
+        horizontalIndicator.setRecyclerView(recyclerView);*/
 
 
         RetrofitService networkService = RetrofitHelper.create();

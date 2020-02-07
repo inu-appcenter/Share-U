@@ -49,6 +49,7 @@ public class SuperiorLectureAdapter extends RecyclerView.Adapter<SuperiorLecture
         holder.item_default_superior.setBackground(drawable);
         holder.tv_superior_name.setText(item.getTitle());
         holder.ratingBar.setRating(item.getRating());
+
     }
 
     @Override
