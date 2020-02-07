@@ -29,7 +29,7 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = null ;
+        View view ;
 
         // LayoutInflater를 통해 "/res/layout/page.xml"을 뷰로 생성.
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -38,19 +38,16 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
 
             /*TextView textView = (TextView) view.findViewById(R.id.title) ;
             textView.setText("TEXT " + position) ;*/
-        final SuperiorLecture item = mitems.get(position);
         ImageView item_default_superior=view.findViewById(R.id.item_default_superior);
         TextView tv_superior_name=view.findViewById(R.id.tv_superior_name);
         RatingBar ratingBar=view.findViewById(R.id.ratingBar);
 
-        Drawable drawable = mContext.getResources().getDrawable(item.getImage());
-
-        item_default_superior.setBackground(drawable);
-        tv_superior_name.setText(item.getTitle());
-        ratingBar.setRating(item.getRating());
+        item_default_superior.setImageResource(mitems.get(position).getImage());
+        tv_superior_name.setText(mitems.get(position).getTitle());
+        ratingBar.setRating(mitems.get(position).getRating());
 
         // 뷰페이저에 추가.
-        container.addView(view) ;
+        container.addView(view,0) ;
 
         return view ;
     }
@@ -64,11 +61,11 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
     @Override
     public int getCount() {
         // 전체 페이지 수는 10개로 고정.
-        return 10;
+        return mitems.size();
     }
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return (view == (View)object);
+        return view.equals(object);
     }
 }

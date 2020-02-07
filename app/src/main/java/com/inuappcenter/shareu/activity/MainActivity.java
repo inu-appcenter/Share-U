@@ -6,6 +6,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+import me.relex.circleindicator.CircleIndicator;
+import me.relex.circleindicator.CircleIndicator3;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,21 +46,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //recycler 처리
-        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclerview_main);
-        RecyclerViewIndicator horizontalIndicator = (RecyclerViewIndicator)findViewById(R.id.recyclerViewIndicator);
+        //RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclerview_main);
+        //RecyclerViewIndicator horizontalIndicator = (RecyclerViewIndicator)findViewById(R.id.recyclerViewIndicator);
 
         final EditText editText =(EditText)findViewById(R.id.etv_main);
         ArrayList<SuperiorLecture> items=new ArrayList<>();
-        SuperiorLecture[] item=new SuperiorLecture[5];
-        item[0]=new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5);
-        item[1]=new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",4);
-        item[2]=new SuperiorLecture(R.drawable.ppt,"생명과학 족보",(float)4.5);
-        item[3]=new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",3);
-        item[4]=new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",2);
-        for(int i=0;i<5;i++)
-            items.add(item[i]);
+        items.add(new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5));
+        items.add(new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",4));
+        items.add(new SuperiorLecture(R.drawable.ppt,"생명과학 족보",(float)4.5));
+        items.add(new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",3));
+        items.add(new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",2));
         viewPager = (ViewPager) findViewById(R.id.viewpager_superior) ;
-        viewPager.setAdapter(new SuperiorLectureAdapter2(items,this)) ;
+
+        SuperiorLectureAdapter2 adapter = new SuperiorLectureAdapter2(items,this);
+        viewPager.setAdapter(adapter) ;
+        CircleIndicator indicator = (CircleIndicator)findViewById(R.id.indicator);
+        indicator.setViewPager(viewPager);
+        adapter.registerDataSetObserver(indicator.getDataSetObserver());
+        indicator.createIndicators(5,0);
 
         /*LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setHasFixedSize(true);

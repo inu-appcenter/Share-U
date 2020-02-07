@@ -51,4 +51,8 @@ dependencies {
 
     //file upload library
     implementation 'com.github.HBiSoft:PickiT:0.1.8'
+
+    //superior lecture indicator library
+    implementation 'me.relex:circleindicator:2.1.4'
+    implementation 'me.relex:circleindicator:1.3.2'
 }
