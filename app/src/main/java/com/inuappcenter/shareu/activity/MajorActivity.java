@@ -12,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.fragment.GyoyangFragment;
+import com.inuappcenter.shareu.fragment.MajorFragment;
+import com.inuappcenter.shareu.fragment.MajorFragment2;
 import com.inuappcenter.shareu.model.Code;
 import com.inuappcenter.shareu.model.Major;
 import com.inuappcenter.shareu.recycler.GyoyangAdapter;
@@ -25,7 +28,10 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
@@ -39,6 +45,10 @@ public class MajorActivity extends AppCompatActivity {
     IndexFastScrollRecyclerView recyclerView2;
     LinearLayoutManager manager;
     private ArrayList<Major> dataList;
+    private FragmentManager fragmentManager;
+    private MajorFragment fragmentMajor;
+    private GyoyangFragment fragmentGyoyang;
+    private FragmentTransaction transaction;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,216 +63,47 @@ public class MajorActivity extends AppCompatActivity {
         tv_major.setTextColor(Color.parseColor("#574FBA"));
         tv_major.setTypeface(Typeface.DEFAULT_BOLD);
 
-        RetrofitService networkService = RetrofitHelper.create();
-        networkService.getMajorList().enqueue(new Callback<List<Major>>(){
-            @Override
-            public void onResponse(Call<List<Major> > call, Response<List<Major>> response)
-            {
-                if(response.isSuccessful())
-                {
-                    dataList = new ArrayList<>();
-                    String flag ="?";
+        fragmentManager = getSupportFragmentManager();
 
-                    for(int i=0;i<response.body().size();i++)
-                    {
-                        if(flag.equals(response.body().get(i).third))
-                        {
-                            if(i==response.body().size()-1)
-                            {
-                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
-                            }
-                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
-                            {
-                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
-                            }
-                            else
-                            {
-                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
-                            }
-                        }
-                        else
-                        {
-                            flag=response.body().get(i).third;
-                            dataList.add(new Major(response.body().get(i).third,response.body().get(i).second,response.body().get(i).third,Code.ViewType.INDEX,R.color.gray));
-                            if(!response.body().get(i+1).third.equals(response.body().get(i).third))
-                            {
-                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
-                            }
-                            else
-                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
-                        }
-                    }
-                }
-                recyclerView = findViewById(R.id.recyclerview_select_major);
-                manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
-                recyclerView.setIndexTextSize(12);
-                recyclerView.setIndexBarColor("#FFFFFF");
-                recyclerView.setIndexBarTextColor("#000000");
-                recyclerView.setIndexBarStrokeVisibility(false);
-                recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                recyclerView.setAdapter(new MajorAdapter(MajorActivity.this,dataList));  // Adapter 등록
+        fragmentMajor = new MajorFragment();
 
-            }
-            @Override
-            public void onFailure(Call<List<Major>> call, Throwable t) {
-                Log.e("TAG", t.getMessage());
-                Toast.makeText(MajorActivity.this, "실패", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.layout_frame_category,fragmentMajor);
+        transaction.addToBackStack(null);
+        transaction.commit();
         TextView.OnClickListener onClickListener = new TextView.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
                     case R.id.tv_major :
-                        //initializeData();
-                        if(tv_major.getCurrentTextColor()==getResources().getColor(R.color.Iris))
-                        {
-                            break;
+                        if(tv_major.getCurrentTextColor()!=ContextCompat.getColor(getApplicationContext(), R.color.Iris)){
+                            tv_major.setTextColor(Color.parseColor("#574FBA"));
+                            tv_gyoyang.setTextColor(Color.parseColor("#000000"));
+                            tv_gyoyang.setTypeface(Typeface.DEFAULT_BOLD);
+                            fragmentManager = getSupportFragmentManager();
+                            fragmentMajor = new MajorFragment();
+                            transaction = fragmentManager.beginTransaction();
+                            transaction.replace(R.id.layout_frame_category,fragmentMajor);
+                            transaction.commit();
                         }
-                        tv_gyoyang.setTextColor(Color.parseColor("#000000"));
-                        tv_major.setTextColor(Color.parseColor("#574FBA"));
-                        tv_major.setTypeface(Typeface.DEFAULT_BOLD);
-                        RetrofitService networkService = RetrofitHelper.create();
-                        networkService.getMajorList().enqueue(new Callback<List<Major>>(){
-                            @Override
-                            public void onResponse(Call<List<Major> > call, Response<List<Major>> response)
-                            {
-                                if(response.isSuccessful())
-                                {
-                                    dataList = new ArrayList<>();
-                                    String flag ="?";
-
-                                    for(int i=0;i<response.body().size();i++)
-                                    {
-                                        if(flag.equals(response.body().get(i).third))
-                                        {
-                                            if(i==response.body().size()-1)
-                                            {
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
-                                            }
-                                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
-                                            {
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
-                                            }
-                                            else
-                                            {
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
-                                            }
-                                        }
-                                        else
-                                        {
-                                            flag=response.body().get(i).third;
-                                            dataList.add(new Major(response.body().get(i).third,response.body().get(i).second,response.body().get(i).third,Code.ViewType.INDEX,R.color.gray));
-                                            if(!response.body().get(i+1).third.equals(response.body().get(i).third))
-                                            {
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
-                                            }
-                                            else
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
-                                        }
-                                    }
-                                }
-                                recyclerView = findViewById(R.id.recyclerview_select_major);
-                                manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
-                                recyclerView.setIndexTextSize(12);
-                                recyclerView.setIndexBarColor("#FFFFFF");
-                                recyclerView.setIndexBarTextColor("#000000");
-                                recyclerView.setIndexBarStrokeVisibility(false);
-                                recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                                recyclerView.setAdapter(new MajorAdapter(MajorActivity.this,dataList));  // Adapter 등록
-
-                            }
-                            @Override
-                            public void onFailure(Call<List<Major>> call, Throwable t) {
-                                Log.e("TAG", t.getMessage());
-                                Toast.makeText(MajorActivity.this, "실패", Toast.LENGTH_SHORT).show();
-                            }
-                        });
                         break;
                     case R.id.tv_gyoyang:
-                        if(tv_gyoyang.getCurrentTextColor()==getResources().getColor(R.color.Iris))
+                        if(tv_gyoyang.getCurrentTextColor()!=ContextCompat.getColor(getApplicationContext(), R.color.Iris))
                         {
-                            break;
+                            tv_major.setTextColor(Color.parseColor("#000000"));
+                            tv_gyoyang.setTextColor(Color.parseColor("#574FBA"));
+                            tv_gyoyang.setTypeface(Typeface.DEFAULT_BOLD);
+                            fragmentManager = getSupportFragmentManager();
+                            fragmentGyoyang = new GyoyangFragment();
+                            transaction = fragmentManager.beginTransaction();
+                            transaction.replace(R.id.layout_frame_category,fragmentGyoyang).commitAllowingStateLoss();
                         }
-                        tv_major.setTextColor(Color.parseColor("#000000"));
-                        tv_gyoyang.setTextColor(Color.parseColor("#574FBA"));
-                        tv_gyoyang.setTypeface(Typeface.DEFAULT_BOLD);
-                        //initializeData2();
-                        RetrofitService networkService2 = RetrofitHelper.create();
-                        networkService2.getDetailedGyoyangList().enqueue(new Callback<List<Major>>(){
-                            @Override
-                            public void onResponse(Call<List<Major> > call, Response<List<Major>> response) {
-                                if(response.isSuccessful())
-                                {
-                                    dataList = new ArrayList<>();
-                                    String flag ="?";
-                                    for(int i=0;i<response.body().size();i++)
-                                    {
-                                        if(flag.equals(response.body().get(i).third))
-                                        {
-                                            if(i==response.body().size()-1)
-                                            {
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
-                                            }
-                                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
-                                            {
-
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
-                                            }
-                                            else
-                                            {
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
-                                            }
-                                        }
-                                        else
-                                        {
-                                            flag=response.body().get(i).third;
-                                            dataList.add(new Major(response.body().get(i).third,null,response.body().get(i).third,Code.ViewType.INDEX,R.color.gray));
-                                            if(response.body().size()==1)
-                                            {
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
-                                            }
-                                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
-                                            {
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
-                                            }
-                                            else
-                                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
-                                        }
-                                    }
-
-
-
-                                }
-                                recyclerView2 = findViewById(R.id.recyclerview_select_major);
-                                LinearLayoutManager manager2
-                                        = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
-
-                                recyclerView2.setIndexTextSize(12);
-                                recyclerView2.setIndexBarColor("#FFFFFF");
-                                recyclerView2.setIndexBarTextColor("#000000");
-                                recyclerView2.setIndexBarStrokeVisibility(false);
-                                recyclerView2.setLayoutManager(manager2); // LayoutManager 등록
-                                recyclerView2.setAdapter(new GyoyangAdapter(MajorActivity.this,dataList));  // Adapter 등록
-
-
-                            }
-                            @Override
-                            public void onFailure(Call<List<Major>> call, Throwable t) {
-
-                            }
-                        });
-
-
+                        break;
                 }
             }
         } ;
         tv_major.setOnClickListener(onClickListener) ;
         tv_gyoyang.setOnClickListener(onClickListener);
-
 
 
         Button.OnClickListener onClickListener2 = new Button.OnClickListener()
@@ -274,7 +115,6 @@ public class MajorActivity extends AppCompatActivity {
                     case R.id.btn_left_bar_major:
                     {
                         finish();
-                        overridePendingTransition(R.anim.hold,R.anim.slide_left);
                     }
                 }
             }
@@ -282,9 +122,6 @@ public class MajorActivity extends AppCompatActivity {
         btn_left_bar_major.setOnClickListener(onClickListener2);
 
     }
-    @Override
-    public void onBackPressed() {
-        finish();
-        overridePendingTransition(R.anim.hold,R.anim.slide_left);
-    }
+
+
 }

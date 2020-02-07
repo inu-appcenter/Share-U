@@ -132,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.btn_left_bar_main :
                         Intent intent = new Intent(getApplicationContext(),MajorActivity.class);
                         startActivity(intent);
-                        overridePendingTransition(R.anim.slide_right,R.anim.hold);
                         break ;
                     case R.id.btn_my_page_main :
                         drawer_my_page.openDrawer(GravityCompat.END);

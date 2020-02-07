@@ -35,15 +35,27 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
-    <include
-        android:id="@+id/include_recyclerview_select_major"
-        layout="@layout/layout_recyclerview_select_major"
+    <FrameLayout
+        android:id="@+id/layout_frame_category"
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        />
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="17.5dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16.5dp">
+
+    </FrameLayout>
+
+    <!-- <include
+         android:id="@+id/include_recyclerview_select_major"
+         layout="@layout/layout_recyclerview_select_major"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="19dp"
+         android:layout_marginLeft="14dp"
+         android:layout_marginRight="14dp"
+         />-->
 
     <!--<ScrollView
         android:layout_width="match_parent"
