@@ -1,15 +1,15 @@
-package com.inuappcenter.shareu.activity;
+package com.inuappcenter.shareu.fragment;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.MajorActivity2;
 import com.inuappcenter.shareu.model.Code;
 import com.inuappcenter.shareu.model.Major;
 import com.inuappcenter.shareu.recycler.MajorAdapter;
@@ -20,10 +20,10 @@ import com.inuappcenter.shareu.service.RetrofitService;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,29 +31,22 @@ import retrofit2.Response;
 
 import static android.view.View.VISIBLE;
 
-public class MajorActivity2 extends AppCompatActivity {
-
+public class MajorFragment2 extends Fragment {
+    private IndexFastScrollRecyclerView recyclerView;
+    private LinearLayoutManager manager;
     private ArrayList<Major> dataList;
-
+    TextView tv_my_major;
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.layout_recyclerview_select_major, container, false);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_major);
-        //this.initializeData();
-        TextView tv_major = (TextView) findViewById(R.id.tv_major);
-        TextView tv_gyoyang = (TextView)findViewById(R.id.tv_gyoyang);
-        TextView tv_my_major = (TextView) findViewById(R.id.tv_my_major);
+        Bundle args = getArguments();
+        String name = getArguments().getString("name");
 
-        tv_major.setTextColor(Color.parseColor("#574FBA"));
-        tv_major.setTypeface(Typeface.DEFAULT_BOLD);
+        tv_my_major = getActivity().findViewById(R.id.tv_my_major);
         tv_my_major.setVisibility(VISIBLE);
-        tv_gyoyang.setVisibility(View.INVISIBLE);
-        Intent intent = getIntent();
-        String name = intent.getExtras().getString("select_major"); /*String형*/
         tv_my_major.setText(name);
-        //initializeData();
-
 
         RetrofitService networkService = RetrofitHelper.create();
         networkService.getDetailedMajorList(name).enqueue(new Callback<List<Major>>() {
@@ -90,15 +83,15 @@ public class MajorActivity2 extends AppCompatActivity {
 
 
                 }
-                IndexFastScrollRecyclerView recyclerView = findViewById(R.id.recyclerview_select_major);
+                IndexFastScrollRecyclerView recyclerView = view.findViewById(R.id.recyclerview_select_major);
                 LinearLayoutManager manager
-                        = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                        = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                 recyclerView.setIndexTextSize(12);
                 recyclerView.setIndexBarColor("#FFFFFF");
                 recyclerView.setIndexBarTextColor("#000000");
                 recyclerView.setIndexBarStrokeVisibility(false);
                 recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                recyclerView.setAdapter(new MajorAdapter2(MajorActivity2.this, dataList));  // Adapter 등록
+                recyclerView.setAdapter(new MajorAdapter2(getActivity(), dataList));  // Adapter 등록
             }
 
             @Override
@@ -107,22 +100,7 @@ public class MajorActivity2 extends AppCompatActivity {
             }
         });
 
-
-        Button btn_left_bar_major = (Button) findViewById(R.id.btn_left_bar_major);
-        Button.OnClickListener onClickListener2 = new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.btn_left_bar_major:
-                        finish();
-                }
-            }
-        };
-        btn_left_bar_major.setOnClickListener(onClickListener2);
-
+        return view;
     }
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
+
 }

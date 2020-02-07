@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,9 @@ import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.MainActivity;
 import com.inuappcenter.shareu.activity.MajorActivity;
 import com.inuappcenter.shareu.activity.MajorActivity2;
+import com.inuappcenter.shareu.fragment.GyoyangFragment;
+import com.inuappcenter.shareu.fragment.MajorFragment;
+import com.inuappcenter.shareu.fragment.MajorFragment2;
 import com.inuappcenter.shareu.model.Code;
 import com.inuappcenter.shareu.model.Major;
 import com.inuappcenter.shareu.model.Notice;
@@ -25,12 +29,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
 
     private Context mContext;
     private ArrayList<Major> mitems;
+
+    private FragmentManager fragmentManager;
+    private MajorFragment2 fragmentMajor2;
+    private FragmentTransaction transaction;
 
     private ArrayList<Integer> mSectionPositions;
     public MajorAdapter(Context mContext, ArrayList<Major> mitems) {
@@ -75,12 +85,19 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                @Override
                public void onClick(View view) {
                  //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
-                   Intent intent = new Intent(mContext,MajorActivity2.class);
+                  /* Intent intent = new Intent(mContext,MajorActivity2.class);
                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                    intent.putExtra("select_major",mitems.get(position).getFirst());
                    mContext.startActivity(intent);
                    ((Activity)mContext).overridePendingTransition(R.anim.slide_right,R.anim.hold);
-
+*/
+                   fragmentMajor2 = new MajorFragment2();
+                   Bundle bundle = new Bundle();
+                   bundle.putString("name",((MajorViewHolder) viewHolder).first.getText().toString());
+                   fragmentMajor2.setArguments(bundle);
+                   fragmentManager =((MajorActivity)mContext).getSupportFragmentManager();
+                   transaction = fragmentManager.beginTransaction();
+                   transaction.replace(R.id.layout_frame_category,fragmentMajor2).commitAllowingStateLoss();
                }
            });
         }

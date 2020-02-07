@@ -23,7 +23,7 @@
         <ImageView
             android:id="@+id/item_default_superior"
             android:layout_width="48dp"
-            android:layout_height="58dp"
+            android:layout_height="65dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop" />
 

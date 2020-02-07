@@ -5,11 +5,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import me.relex.circleindicator.CircleIndicator;
+import me.relex.circleindicator.CircleIndicator3;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +25,7 @@ import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.model.Notice;
 import com.inuappcenter.shareu.model.SuperiorLecture;
 import com.inuappcenter.shareu.recycler.NoticeAdapter;
-import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter;
+import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter2;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 import com.kingfisher.easyviewindicator.RecyclerViewIndicator;
@@ -36,17 +38,34 @@ public class MainActivity extends AppCompatActivity {
     //Drawer 처리
     DrawerLayout drawer_my_page;
     private ArrayList<Notice> dataList;
+    private ViewPager viewPager ;
+    private SuperiorLectureAdapter2 pagerAdapter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //recycler 처리
-        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclerview_main);
-        RecyclerViewIndicator horizontalIndicator = (RecyclerViewIndicator)findViewById(R.id.recyclerViewIndicator);
+        //RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclerview_main);
+        //RecyclerViewIndicator horizontalIndicator = (RecyclerViewIndicator)findViewById(R.id.recyclerViewIndicator);
 
         final EditText editText =(EditText)findViewById(R.id.etv_main);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        ArrayList<SuperiorLecture> items=new ArrayList<>();
+        items.add(new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5));
+        items.add(new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",4));
+        items.add(new SuperiorLecture(R.drawable.ppt,"생명과학 족보",(float)4.5));
+        items.add(new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",3));
+        items.add(new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",2));
+        viewPager = (ViewPager) findViewById(R.id.viewpager_superior) ;
+
+        SuperiorLectureAdapter2 adapter = new SuperiorLectureAdapter2(items,this);
+        viewPager.setAdapter(adapter) ;
+        CircleIndicator indicator = (CircleIndicator)findViewById(R.id.indicator);
+        indicator.setViewPager(viewPager);
+        adapter.registerDataSetObserver(indicator.getDataSetObserver());
+        indicator.createIndicators(5,0);
+
+        /*LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -62,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new SuperiorLectureAdapter(getApplicationContext(),items));
-        horizontalIndicator.setRecyclerView(recyclerView);
+        horizontalIndicator.setRecyclerView(recyclerView);*/
 
 
         RetrofitService networkService = RetrofitHelper.create();
@@ -113,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.btn_left_bar_main :
                         Intent intent = new Intent(getApplicationContext(),MajorActivity.class);
                         startActivity(intent);
-                        overridePendingTransition(R.anim.slide_right,R.anim.hold);
                         break ;
                     case R.id.btn_my_page_main :
                         drawer_my_page.openDrawer(GravityCompat.END);

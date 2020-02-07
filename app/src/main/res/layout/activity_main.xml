@@ -69,9 +69,9 @@
                         layout="@layout/layout_search"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="33dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginRight="34dp" />
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="16dp" />
 
                     <include
                         android:id="@+id/include_superior_title_main"
@@ -79,15 +79,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginTop="22dp"
+                        android:layout_marginTop="17dp"
                         android:layout_marginRight="15dp" />
 
                     <include
-                        android:id="@+id/include_recyclerview_main"
-                        layout="@layout/layout_recyclerview_main"
+                        android:id="@+id/include_viewpager_superior"
+                        layout="@layout/viewpager_superior"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="220dp"
                         android:layout_marginTop="7dp" />
+
 
                     <include
                         android:id="@+id/include_ad_main"
@@ -101,7 +102,9 @@
                         layout="@layout/layout_notice_set_title_main"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp" />
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="14dp" />
 
                     <include
                         android:id="@+id/include_recyclerview2_main"
@@ -120,12 +123,14 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
 
             android:id="@+id/fab_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="bottom|end"
             android:layout_marginRight="35dp"
             android:layout_marginBottom="30dp"
+            android:clickable="true"
             android:backgroundTint="@color/Iris"
+            android:src="@drawable/fab"
             app:borderWidth="0dp"
             app:fabSize="normal" />
     </FrameLayout>
