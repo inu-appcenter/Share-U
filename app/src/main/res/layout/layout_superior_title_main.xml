@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="27dp"
     android:layout_gravity="center"
@@ -12,34 +13,40 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:text="우수자료"
         android:textColor="#000000"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/textView3"
+        android:layout_marginBottom="3dp"
         android:text="별점순"
         android:textColor="#57000000"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3" />
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/indicator"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_height="10dp"
         android:layout_centerHorizontal="true"
-        app:ci_drawable="@color/gray"
-        app:ci_drawable_unselected="@color/white">
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        app:ci_drawable="@drawable/circle5"
+        app:ci_drawable_unselected="@drawable/circle10"
+        app:ci_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
     </me.relex.circleindicator.CircleIndicator>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
