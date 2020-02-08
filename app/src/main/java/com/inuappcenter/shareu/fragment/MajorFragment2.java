@@ -44,7 +44,7 @@ public class MajorFragment2 extends Fragment {
         Bundle args = getArguments();
         String name = getArguments().getString("name");
 
-        tv_my_major = getActivity().findViewById(R.id.tv_my_major);
+        tv_my_major = view.findViewById(R.id.tv_my_major);
         tv_my_major.setVisibility(VISIBLE);
         tv_my_major.setText(name);
 

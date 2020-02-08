@@ -4,9 +4,21 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <TextView
+        android:id="@+id/tv_my_major"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="국어국문학과"
+        android:textColor="@color/Iris"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
     <in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
         android:id="@+id/recyclerview_select_major"
         />
 </LinearLayout>
