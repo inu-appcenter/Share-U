@@ -114,7 +114,11 @@ public class MajorActivity extends AppCompatActivity {
                 {
                     case R.id.btn_left_bar_major:
                     {
-                        finish();
+                        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                            getSupportFragmentManager().popBackStack();
+                        } else {
+                            finish();
+                        }
                     }
                 }
             }
@@ -123,5 +127,13 @@ public class MajorActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            finish();
+        }
+    }
 
 }
