@@ -70,6 +70,17 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_uploaded_file_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="119dp"
+        android:layout_marginRight="63dp"
+        android:layout_marginBottom="16.5dp"
+        android:textColor="@color/Iris"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
@@ -89,18 +100,18 @@
 
         <TextView
             android:id="@+id/textView16"
-            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="*"
             android:textColor="@color/Iris"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textView17"
-            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="4dp"
             android:layout_toRightOf="@+id/textView13"
             android:text="과목선택"
@@ -112,11 +123,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="24dp"
+            android:layout_marginTop="1dp"
             android:layout_weight="1"
-            android:textColor="@color/black"
-            android:textSize="16sp"
             android:background="@null"
-            android:layout_marginTop="1dp" />
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <ImageButton
             android:id="@+id/img_btn_file_upload2"

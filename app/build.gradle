@@ -55,4 +55,7 @@ dependencies {
     //superior lecture indicator library
     implementation 'me.relex:circleindicator:2.1.4'
     implementation 'me.relex:circleindicator:1.3.2'
+
+    implementation 'com.androidadvance:topsnackbar:0.0.9'
+
 }

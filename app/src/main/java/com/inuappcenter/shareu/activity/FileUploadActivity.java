@@ -10,13 +10,18 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidadvance.topsnackbar.TSnackbar;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.hbisoft.pickit.PickiT;
 import com.hbisoft.pickit.PickiTCallbacks;
@@ -31,7 +36,9 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -53,7 +60,7 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
     PickiT pickiT;
     // 사진 다이얼로그 요청 시에 사용됨.
     private static int PICK_FROM_FILE = 9999;
-
+    private TSnackbar snackbar;
     private ArrayList<String> dataList;
     public EditText edtv_select_subject,edtv_select_prof,edtv_content,edtv_file_name;
     public TextView tv_upload_file;
@@ -118,26 +125,62 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
 
             @Override
             public void onClick(View view) {
-                if(one>=1 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true)
+
+                if(one>=1 && two>=1 &&three>=1 &&four>=30 && file_upload_check==true)
                 {
+                    /*progressSnackbar.setText("자료 업로드 중...");
+                    progressSnackbar.show();*/
+                    tv_upload_file.setEnabled(false);
+                    snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 업로드 중...",TSnackbar.LENGTH_INDEFINITE);
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                    snackbar.show();
                     // 이제 올리기
                     service.uploadImage(title,subjectName,profName,content,filePart).enqueue(new Callback<ResponseBody>() {
+
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "등록에 성공하였습니다.", Snackbar.LENGTH_SHORT).show();
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 성공",TSnackbar.LENGTH_INDEFINITE);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            snackbar.show();
                         }
 
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "등록에 실패하였습니다.", Snackbar.LENGTH_SHORT).show();
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 실패",TSnackbar.LENGTH_INDEFINITE);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            snackbar.show();
                             t.printStackTrace();
                         }
                     });
                 }
+                else if(!(one>=1 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true))
+                {
+                    /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
+                    progressSnackbar2.show();*/
+                    snackbar = TSnackbar.make(findViewById(android.R.id.content),"모든 항목을 채워주세요!",TSnackbar.LENGTH_SHORT);
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                    snackbar.show();
+                }
                 else
                 {
-                    Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "모든 내용을 채워주세요!", Snackbar.LENGTH_SHORT).show();
+                    /*progressSnackbar2.setText("모든 내용을 채워주세요");
+                    progressSnackbar2.show();*/
+                    snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 30자 이상 채워주세요!",TSnackbar.LENGTH_SHORT);
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                    snackbar.show();
                 }
+            }
+        });
+
+        findViewById(R.id.imageButton4).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -227,7 +270,7 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 // good
             } else {
-                Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "권한내놔!!!!!!!!", Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "권한내놔!!!!!!!!", Snackbar.LENGTH_LONG).show();
             }
         }
     }
@@ -264,8 +307,11 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
         File imageFile = new File(path);
         RequestBody reqFile = RequestBody.create(type, imageFile);
         filePart = MultipartBody.Part.createFormData("userfile", imageFile.getName(), reqFile);
-
-        Snackbar.make(FileUploadActivity.this.findViewById(R.id.root), "파일 업로드가 완료되었습니다.", Snackbar.LENGTH_SHORT).show();
+        TextView tv_uploaded_file_name = findViewById(R.id.tv_uploaded_file_name);
+        tv_uploaded_file_name.setVisibility(View.VISIBLE);
+        tv_uploaded_file_name.setText(imageFile.getName()+"");
+/*        progressSnackbar.setText("자료 업로드 중...");
+        progressSnackbar.show();*/
         file_upload_check=true;
         check();
     }
@@ -277,6 +323,19 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
         edtv_select_prof = (EditText) findViewById(R.id.edtv_select_prof);
         edtv_content = (EditText)findViewById(R.id.edtv_content);
         tv_upload_file = (TextView)findViewById(R.id.tv_upload_file);
+
+
+        /*progressSnackbar = TSnackbar.make(findViewById(android.R.id.content),"스낵바다",TSnackbar.LENGTH_INDEFINITE);
+        progressSnackbar2 = TSnackbar.make(findViewById(android.R.id.content),"스낵바다2",TSnackbar.LENGTH_SHORT);
+        View snackView = progressSnackbar.getView();
+        View snackView2 = progressSnackbar2.getView();
+        snackView.setBackgroundColor(Color.parseColor("#574FBA"));
+        snackView2.setBackgroundColor(Color.parseColor("#574FBA"));
+        TextView textView = (TextView) snackView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        TextView textView2 = (TextView) snackView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+        textView2.setTextColor(Color.WHITE);*/
+
     }
     void check()
     {
@@ -312,7 +371,6 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
         {
             four = edtv_content.getText().toString().length();
         }
-        Log.e("변신!",one+" "+two+" "+three+" "+four);
         if(one>=1 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true)
         {
             tv_upload_file.setBackgroundResource(R.color.Iris);
@@ -339,6 +397,8 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
     @Override
     public void PickiTonProgressUpdate(int progress) {
         Log.d("UploadImageActivity", "Cache file generation in progress: " + progress);
+        /*progressSnackbar.setText("자료 업로드 중..."+progress+"%");
+        progressSnackbar.show();*/
     }
 
     /**
@@ -359,6 +419,7 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
         }
         else {
             Log.e("UploadImageActivity", "Path resolutuon failed: " + Reason);
+
         }
     }
 

@@ -126,11 +126,11 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom|end"
-            android:layout_marginRight="35dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="13dp"
             android:clickable="true"
             android:backgroundTint="@color/Iris"
-            android:src="@drawable/fab"
+            android:src="@drawable/plus"
             app:borderWidth="0dp"
             app:fabSize="normal" />
     </FrameLayout>

@@ -97,7 +97,10 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                    fragmentMajor2.setArguments(bundle);
                    fragmentManager =((MajorActivity)mContext).getSupportFragmentManager();
                    transaction = fragmentManager.beginTransaction();
-                   transaction.replace(R.id.layout_frame_category,fragmentMajor2).commitAllowingStateLoss();
+
+                   transaction.replace(R.id.layout_frame_category,fragmentMajor2);
+                   transaction.addToBackStack(null);
+                   transaction.commit();
                }
            });
         }
