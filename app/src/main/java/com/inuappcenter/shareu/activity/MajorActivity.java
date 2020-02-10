@@ -64,12 +64,9 @@ public class MajorActivity extends AppCompatActivity {
         tv_major.setTypeface(Typeface.DEFAULT_BOLD);
 
         fragmentManager = getSupportFragmentManager();
-
         fragmentMajor = new MajorFragment();
-
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.layout_frame_category,fragmentMajor);
-        transaction.addToBackStack(null);
         transaction.commit();
         TextView.OnClickListener onClickListener = new TextView.OnClickListener() {
             @Override
