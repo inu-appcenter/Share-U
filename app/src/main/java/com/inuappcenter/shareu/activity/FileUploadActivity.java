@@ -34,6 +34,7 @@ import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.fragment.BottomSheetFragement;
 import com.inuappcenter.shareu.model.Notice;
 import com.inuappcenter.shareu.model.subjectName;
+import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
 import com.inuappcenter.shareu.recycler.MajorAdapter2;
 import com.inuappcenter.shareu.service.RetrofitHelper;
@@ -49,6 +50,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
@@ -60,7 +62,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FileUploadActivity extends AppCompatActivity implements PickiTCallbacks {
+public class FileUploadActivity extends AppCompatActivity implements PickiTCallbacks, OnItemClick{
+
+
 
     // 권한 요청 시에 사용됨.
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -74,16 +78,18 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
     // 사진 다이얼로그 요청 시에 사용됨.
     private static int PICK_FROM_FILE = 9999;
     private TSnackbar snackbar;
-    public EditText edtv_select_subject,edtv_select_prof,edtv_content,edtv_file_name;
-    public TextView tv_upload_file;
-    public int one,two,three,four;
+    private EditText edtv_select_subject,edtv_select_prof,edtv_content,edtv_file_name;
+    private TextView tv_upload_file;
+    private int one,two,three,four;
     private ArrayList<com.inuappcenter.shareu.model.subjectName> dataList;
-    ArrayList<com.inuappcenter.shareu.model.profName> dataList2;
-    public RetrofitService service;
-    RequestBody title,subjectName,profName,content;
-    public MultipartBody.Part filePart;
-    Boolean file_upload_check=false;
-    MediaType type = MediaType.parse("multipart/form-data");
+    private ArrayList<com.inuappcenter.shareu.model.profName> dataList2;
+    private RetrofitService service;
+    private RequestBody title,subjectName,profName,content;
+    private MultipartBody.Part filePart;
+    private Boolean file_upload_check=false;
+    private MediaType type = MediaType.parse("multipart/form-data");
+    private BottomSheetFragement dialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,7 +204,7 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
                     case R.id.img_btn_file_upload2:
 
                         View view2 = getLayoutInflater().inflate(R.layout.layout_bottomsheet,null);
-                        BottomSheetFragement dialog = new BottomSheetFragement();
+                        dialog = new BottomSheetFragement();
                         dialog.show(getSupportFragmentManager(),"냐아옹");
 
                        /* RetrofitService networkService = RetrofitHelper.create();
@@ -355,19 +361,6 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
         edtv_select_prof = (EditText) findViewById(R.id.edtv_select_prof);
         edtv_content = (EditText)findViewById(R.id.edtv_content);
         tv_upload_file = (TextView)findViewById(R.id.tv_upload_file);
-
-
-        /*progressSnackbar = TSnackbar.make(findViewById(android.R.id.content),"스낵바다",TSnackbar.LENGTH_INDEFINITE);
-        progressSnackbar2 = TSnackbar.make(findViewById(android.R.id.content),"스낵바다2",TSnackbar.LENGTH_SHORT);
-        View snackView = progressSnackbar.getView();
-        View snackView2 = progressSnackbar2.getView();
-        snackView.setBackgroundColor(Color.parseColor("#574FBA"));
-        snackView2.setBackgroundColor(Color.parseColor("#574FBA"));
-        TextView textView = (TextView) snackView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-        textView.setTextColor(Color.WHITE);
-        TextView textView2 = (TextView) snackView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-        textView2.setTextColor(Color.WHITE);*/
-
     }
     void check()
     {
@@ -455,5 +448,11 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
         }
     }
 
+    @Override
+    public void onClick(String value) {
+        EditText edtv_select_subject = findViewById(R.id.edtv_select_subject);
+        edtv_select_subject.setText(value);
+        dialog.dismiss();
+    }
 }
 
