@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="253dp"
     android:orientation="vertical"
+    android:windowSoftInputMode="adjustNothing"
     card_view:cardBackgroundColor="@android:color/white"
     card_view:cardCornerRadius="20dp"
     card_view:cardElevation="0dp"
