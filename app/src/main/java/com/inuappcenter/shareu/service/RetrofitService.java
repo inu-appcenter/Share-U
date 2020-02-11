@@ -35,10 +35,10 @@ public interface RetrofitService {
     Call<List<Notice> > getDetailedNotice(@Query("noticeKey") int key);
 
     @GET("/document/send/subjectChoice")
-    Call<List<File> > getSubjectName(@Query("subjectName") String subj);
+    Call<List<subjectName> > getSubjectName(@Query("subjectName") String subj);
 
     @GET("/document/send/profChoice")
-    Call<List<File> > getProfName(@Query("profName") String prof);
+    Call<List<profName> > getProfName(@Query("profName") String prof);
 
     @Multipart
     @POST("/document/store/upload")

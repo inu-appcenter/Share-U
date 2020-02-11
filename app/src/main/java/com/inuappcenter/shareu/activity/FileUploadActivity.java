@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,17 +16,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidadvance.topsnackbar.TSnackbar;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.hbisoft.pickit.PickiT;
 import com.hbisoft.pickit.PickiTCallbacks;
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.fragment.BottomSheetFragement;
+import com.inuappcenter.shareu.model.Notice;
+import com.inuappcenter.shareu.model.subjectName;
+import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
+import com.inuappcenter.shareu.recycler.MajorAdapter2;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
@@ -39,6 +49,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -61,10 +74,11 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
     // 사진 다이얼로그 요청 시에 사용됨.
     private static int PICK_FROM_FILE = 9999;
     private TSnackbar snackbar;
-    private ArrayList<String> dataList;
     public EditText edtv_select_subject,edtv_select_prof,edtv_content,edtv_file_name;
     public TextView tv_upload_file;
     public int one,two,three,four;
+    private ArrayList<com.inuappcenter.shareu.model.subjectName> dataList;
+    ArrayList<com.inuappcenter.shareu.model.profName> dataList2;
     public RetrofitService service;
     RequestBody title,subjectName,profName,content;
     public MultipartBody.Part filePart;
@@ -121,98 +135,116 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
                 check();
             }
         });
-        tv_upload_file.setOnClickListener(new View.OnClickListener(){
 
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(one>=1 && two>=1 &&three>=1 &&four>=30 && file_upload_check==true)
+                switch (view.getId())
                 {
+                    case R.id.tv_upload_file:
+                        if(one>=1 && two>=1 &&three>=1 &&four>=30 && file_upload_check==true)
+                        {
                     /*progressSnackbar.setText("자료 업로드 중...");
                     progressSnackbar.show();*/
-                    tv_upload_file.setEnabled(false);
-                    snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 업로드 중...",TSnackbar.LENGTH_INDEFINITE);
-                    View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                    snackbar.show();
-                    // 이제 올리기
-                    service.uploadImage(title,subjectName,profName,content,filePart).enqueue(new Callback<ResponseBody>() {
-
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 성공",TSnackbar.LENGTH_INDEFINITE);
+                            tv_upload_file.setEnabled(false);
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 업로드 중...",TSnackbar.LENGTH_INDEFINITE);
                             View snackbarView = snackbar.getView();
                             snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
                             snackbar.show();
-                        }
+                            // 이제 올리기
+                            service.uploadImage(title,subjectName,profName,content,filePart).enqueue(new Callback<ResponseBody>() {
 
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 실패",TSnackbar.LENGTH_INDEFINITE);
-                            View snackbarView = snackbar.getView();
-                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                            snackbar.show();
-                            t.printStackTrace();
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 성공",TSnackbar.LENGTH_INDEFINITE);
+                                    View snackbarView = snackbar.getView();
+                                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                                    snackbar.show();
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                    snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 실패",TSnackbar.LENGTH_INDEFINITE);
+                                    View snackbarView = snackbar.getView();
+                                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                                    snackbar.show();
+                                    t.printStackTrace();
+                                }
+                            });
                         }
-                    });
-                }
-                else if(!(one>=1 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true))
-                {
+                        else if(!(one>=1 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true))
+                        {
                     /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
                     progressSnackbar2.show();*/
-                    snackbar = TSnackbar.make(findViewById(android.R.id.content),"모든 항목을 채워주세요!",TSnackbar.LENGTH_SHORT);
-                    View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                    snackbar.show();
-                }
-                else
-                {
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"모든 항목을 채워주세요!",TSnackbar.LENGTH_SHORT);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            snackbar.show();
+                        }
+                        else
+                        {
                     /*progressSnackbar2.setText("모든 내용을 채워주세요");
                     progressSnackbar2.show();*/
-                    snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 30자 이상 채워주세요!",TSnackbar.LENGTH_SHORT);
-                    View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                    snackbar.show();
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 30자 이상 채워주세요!",TSnackbar.LENGTH_SHORT);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            snackbar.show();
+                        }
+                        break;
+                    case R.id.imageButton4:
+                        finish();
+                        break;
+                    case R.id.img_btn_file_upload2:
+
+                        View view2 = getLayoutInflater().inflate(R.layout.layout_bottomsheet,null);
+                        BottomSheetFragement dialog = new BottomSheetFragement();
+                        dialog.show(getSupportFragmentManager(),"냐아옹");
+
+                       /* RetrofitService networkService = RetrofitHelper.create();
+                        networkService.getSubjectName("").enqueue(new Callback<List<com.inuappcenter.shareu.model.subjectName>>(){
+                            @Override
+                            public void onResponse(Call<List<subjectName> > call, Response<List<subjectName>> response)
+                            {
+                                if(response.isSuccessful())
+                                {
+                                    dataList=new ArrayList<>();
+                                    for(int i=0;i<response.body().size();i++)
+                                    {
+                                        dataList.add(new subjectName(response.body().get(i).getSubjectName()));
+                                    }
+
+                                }
+
+                                RecyclerView recyclerView = view2.findViewById(R.id.recyclerview_bottomsheet);
+                                LinearLayoutManager manager
+                                        = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                                recyclerView.setHasFixedSize(true);
+                                recyclerView.setLayoutManager(manager); // LayoutManager 등록
+                                recyclerView.setAdapter(new BottomSheetAdapter(dataList,getApplicationContext()));  // Adapter 등록
+                            }
+                            @Override
+                            public void onFailure(Call<List<com.inuappcenter.shareu.model.subjectName>> call, Throwable t) {
+
+                                //Toast.makeText(getApplicationContext(), "실패지렁", Toast.LENGTH_SHORT).show();
+                                t.printStackTrace();
+                            }
+                        });
+*/
+
+                        break;
                 }
-            }
-        });
-
-        findViewById(R.id.imageButton4).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-        RetrofitService networkService = RetrofitHelper.create();
-        networkService.getSubjectName("").enqueue(new Callback<List<com.inuappcenter.shareu.model.File>>(){
-            @Override
-            public void onResponse(Call<List<com.inuappcenter.shareu.model.File> > call, Response<List<com.inuappcenter.shareu.model.File>> response)
-            {
-                if(response.isSuccessful())
-                {
-                    dataList=new ArrayList<>();
-                    for(int i=0;i<response.body().size();i++)
-                    {
-                        //Log.e("메시지",response.body().get(i).getSubjectName()+"");
-                        dataList.add(response.body().get(i).getSubjectName());
-
-                    }
-
-                }
-                //Log.e("힝",dataList.size()+"");
 
             }
-            @Override
-            public void onFailure(Call<List<com.inuappcenter.shareu.model.File>> call, Throwable t) {
+        };
 
-                //Toast.makeText(getApplicationContext(), "실패지렁", Toast.LENGTH_SHORT).show();
-                t.printStackTrace();
-            }
-        });
+        tv_upload_file.setOnClickListener(onClickListener);
+        findViewById(R.id.imageButton4).setOnClickListener(onClickListener);
+        findViewById(R.id.img_btn_file_upload2).setOnClickListener(onClickListener);
+        findViewById(R.id.img_btn_file_upload3).setOnClickListener(onClickListener);
 
 
-        RetrofitService networkService2 = RetrofitHelper.create();
+        /*RetrofitService networkService2 = RetrofitHelper.create();
         networkService2.getProfName("").enqueue(new Callback<List<com.inuappcenter.shareu.model.File>>(){
             @Override
             public void onResponse(Call<List<com.inuappcenter.shareu.model.File> > call, Response<List<com.inuappcenter.shareu.model.File>> response)
@@ -237,7 +269,7 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
                 //Toast.makeText(getApplicationContext(), "실패지렁", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
-        });
+        });*/
 
         // 권한내놔!
         giveMePermissions();

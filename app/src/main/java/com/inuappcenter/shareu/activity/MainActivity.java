@@ -65,25 +65,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.registerDataSetObserver(indicator.getDataSetObserver());
         indicator.createIndicators(5,0);
 
-        /*LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-
-        ArrayList<SuperiorLecture> items=new ArrayList<>();
-        SuperiorLecture[] item=new SuperiorLecture[5];
-        item[0]=new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5);
-        item[1]=new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",4);
-        item[2]=new SuperiorLecture(R.drawable.ppt,"생명과학 족보",(float)4.5);
-        item[3]=new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",3);
-        item[4]=new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",2);
-
-        for(int i=0;i<5;i++) items.add(item[i]);
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new SuperiorLectureAdapter(getApplicationContext(),items));
-        horizontalIndicator.setRecyclerView(recyclerView);*/
-
-
         RetrofitService networkService = RetrofitHelper.create();
         networkService.getNotice().enqueue(new Callback<List<Notice> >(){
             @Override
@@ -96,10 +77,6 @@ public class MainActivity extends AppCompatActivity {
                     dataList = new ArrayList<>();
                     for(int i=0;i<response.body().size();i++)
                     {
-                        Log.e("휴",response.body().get(i).getTitle()+" "+
-                                response.body().get(i).getContent()+" "+
-                                response.body().get(i).getNoticeDate()+" "+
-                                response.body().get(i).getNoticeKey());
                         dataList.add(new Notice((i+1)+". "+response.body().get(i).getTitle(),
                                 response.body().get(i).getContent(),
                                 response.body().get(i).getNoticeDate(),
@@ -141,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent2);
                         break ;
                     case R.id.fab_main:
-                        Log.e("냥","냥");
                         Intent intent3 = new Intent(getApplicationContext(), FileUploadActivity.class);
                         startActivity(intent3);
                         break ;
