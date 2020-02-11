@@ -61,10 +61,10 @@
             android:textSize="16sp" />
 
         <ImageButton
-            android:layout_gravity="center_horizontal"
             android:id="@+id/img_btn_file_upload"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
             android:background="@color/white"
             app:srcCompat="@drawable/group100" />
 
@@ -131,10 +131,10 @@
 
         <ImageButton
             android:id="@+id/img_btn_file_upload2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
             android:background="@color/white"
-            app:srcCompat="@drawable/group100" />
+            app:srcCompat="@drawable/below_arrow" />
 
     </LinearLayout>
 
@@ -189,10 +189,10 @@
 
         <ImageButton
             android:id="@+id/img_btn_file_upload3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
             android:background="@color/white"
-            app:srcCompat="@drawable/group100" />
+            app:srcCompat="@drawable/below_arrow" />
 
     </LinearLayout>
 

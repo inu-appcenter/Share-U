@@ -39,19 +39,4 @@
 
     </LinearLayout>
 
-    <!-- <include
-         android:id="@+id/include_recyclerview_select_major"
-         layout="@layout/layout_recyclerview_select_major"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="19dp"
-         android:layout_marginLeft="14dp"
-         android:layout_marginRight="14dp"
-         />-->
-
-    <!--<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ScrollView>-->
 </LinearLayout>
