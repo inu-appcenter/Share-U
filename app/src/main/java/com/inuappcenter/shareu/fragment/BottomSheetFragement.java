@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialogFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.FileUploadActivity;
 import com.inuappcenter.shareu.model.subjectName;
+import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
 
 import java.util.ArrayList;
@@ -21,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class BottomSheetFragement extends RoundedBottomSheetDialogFragment {
+
 
     private ArrayList<com.inuappcenter.shareu.model.subjectName> dataList;
     @Nullable
@@ -43,7 +48,8 @@ public class BottomSheetFragement extends RoundedBottomSheetDialogFragment {
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(manager); // LayoutManager 등록
-        recyclerView.setAdapter(new BottomSheetAdapter(dataList,getActivity()));  // Adapter 등록
+        recyclerView.setAdapter(new BottomSheetAdapter(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
         return view;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.inuappcenter.shareu.recycler;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.inuappcenter.shareu.model.Code;
 import com.inuappcenter.shareu.model.Major;
 import com.inuappcenter.shareu.model.SuperiorLecture;
 import com.inuappcenter.shareu.model.subjectName;
+import com.inuappcenter.shareu.my_interface.OnItemClick;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +33,11 @@ public class BottomSheetAdapter extends RecyclerView.Adapter<BottomSheetAdapter.
 
     private ArrayList<subjectName> mitems;
     private Context mContext;
-
-    public BottomSheetAdapter(ArrayList<subjectName> mitems, Context mContext) {
+    private OnItemClick mCallback;
+    public BottomSheetAdapter(ArrayList<subjectName> mitems, Context mContext,OnItemClick listener) {
         this.mitems = mitems;
         this.mContext = mContext;
+        this.mCallback = listener;
     }
 
     @NonNull
@@ -48,11 +51,10 @@ public class BottomSheetAdapter extends RecyclerView.Adapter<BottomSheetAdapter.
     public void onBindViewHolder(@NonNull BottomSheetAdapter.ViewHolder holder, int position) {
         final subjectName item = mitems.get(position);
         holder.tv_bottomsheet.setText(item.getSubjectName());
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                mCallback.onClick(item.getSubjectName());
             }
         });
     }
