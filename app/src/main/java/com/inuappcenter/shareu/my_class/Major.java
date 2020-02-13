@@ -1,11 +1,7 @@
-package com.inuappcenter.shareu.model;
-
-import android.graphics.drawable.Drawable;
+package com.inuappcenter.shareu.my_class;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import androidx.drawerlayout.widget.DrawerLayout;
 
 public class Major {
     @SerializedName("majorName")

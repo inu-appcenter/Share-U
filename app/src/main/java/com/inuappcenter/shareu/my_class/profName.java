@@ -1,4 +1,4 @@
-package com.inuappcenter.shareu.model;
+package com.inuappcenter.shareu.my_class;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -5,13 +5,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.model.Code;
-import com.inuappcenter.shareu.model.Major;
-import com.inuappcenter.shareu.model.Notice;
-import com.inuappcenter.shareu.recycler.MajorAdapter;
+import com.inuappcenter.shareu.my_class.Notice;
+import com.inuappcenter.shareu.presenter.OverallNoticeContract;
+import com.inuappcenter.shareu.presenter.OverallNoticePresenter;
 import com.inuappcenter.shareu.recycler.OverallNoticeAdapter;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
@@ -27,8 +25,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OverallNoticeActivity extends AppCompatActivity {
+public class OverallNoticeActivity extends AppCompatActivity implements OverallNoticeContract.View {
 
+    OverallNoticeContract.Presenter overallNoticePresent;
     RecyclerView recyclerView;
     LinearLayoutManager manager;
     private ArrayList<Notice> dataList;
@@ -36,7 +35,9 @@ public class OverallNoticeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overall_notice);
-        RetrofitService networkService = RetrofitHelper.create();
+        overallNoticePresent=new OverallNoticePresenter(this);
+        overallNoticePresent.onResume();
+        /*RetrofitService networkService = RetrofitHelper.create();
         networkService.getNotice().enqueue(new Callback<List<Notice>>(){
             @Override
             public void onResponse(Call<List<Notice> > call, Response<List<Notice>> response)
@@ -64,7 +65,13 @@ public class OverallNoticeActivity extends AppCompatActivity {
                 Log.e("TAG", t.getMessage());
                 Toast.makeText(OverallNoticeActivity.this, "실패", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
+
+
+        recyclerView = findViewById(R.id.recyclerview_overall_notice);
+        manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(manager); // LayoutManager 등록
+        recyclerView.setAdapter(new OverallNoticeAdapter(dataList,OverallNoticeActivity.this));  // Adapter 등록
 
         View.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -81,7 +88,15 @@ public class OverallNoticeActivity extends AppCompatActivity {
         ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_detailed_notice_backpress);
         btn_detailed_notice_backpress.setOnClickListener(onClickListener);
     }
+
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+
+    @Override
+    public void setDatas(ArrayList<Notice> datas) {
+        dataList=datas;
+        Log.e("잉",dataList.size()+"");
     }
 }

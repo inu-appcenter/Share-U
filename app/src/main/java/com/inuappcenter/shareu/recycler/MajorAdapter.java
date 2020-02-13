@@ -1,29 +1,19 @@
 package com.inuappcenter.shareu.recycler;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.activity.MainActivity;
 import com.inuappcenter.shareu.activity.MajorActivity;
-import com.inuappcenter.shareu.activity.MajorActivity2;
-import com.inuappcenter.shareu.fragment.GyoyangFragment;
-import com.inuappcenter.shareu.fragment.MajorFragment;
 import com.inuappcenter.shareu.fragment.MajorFragment2;
-import com.inuappcenter.shareu.model.Code;
-import com.inuappcenter.shareu.model.Major;
-import com.inuappcenter.shareu.model.Notice;
+import com.inuappcenter.shareu.my_class.Code;
+import com.inuappcenter.shareu.my_class.Major;
 
 import java.util.ArrayList;
 import java.util.List;

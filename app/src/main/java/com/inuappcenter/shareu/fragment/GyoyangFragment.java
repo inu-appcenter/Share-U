@@ -1,17 +1,14 @@
 package com.inuappcenter.shareu.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.model.Code;
-import com.inuappcenter.shareu.model.Major;
+import com.inuappcenter.shareu.my_class.Code;
+import com.inuappcenter.shareu.my_class.Major;
 import com.inuappcenter.shareu.recycler.GyoyangAdapter;
-import com.inuappcenter.shareu.recycler.MajorAdapter;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 

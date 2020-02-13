@@ -10,21 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.model.Notice;
-import com.inuappcenter.shareu.recycler.OverallNoticeAdapter;
+import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

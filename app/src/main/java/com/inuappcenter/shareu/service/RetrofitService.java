@@ -1,10 +1,9 @@
 package com.inuappcenter.shareu.service;
 
-import com.inuappcenter.shareu.model.File;
-import com.inuappcenter.shareu.model.Major;
-import com.inuappcenter.shareu.model.Notice;
-import com.inuappcenter.shareu.model.profName;
-import com.inuappcenter.shareu.model.subjectName;
+import com.inuappcenter.shareu.my_class.Major;
+import com.inuappcenter.shareu.my_class.Notice;
+import com.inuappcenter.shareu.my_class.profName;
+import com.inuappcenter.shareu.my_class.subjectName;
 
 import java.util.List;
 

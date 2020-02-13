@@ -1,7 +1,6 @@
 package com.inuappcenter.shareu.recycler;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.model.Code;
-import com.inuappcenter.shareu.model.Major;
+import com.inuappcenter.shareu.my_class.Code;
+import com.inuappcenter.shareu.my_class.Major;
 
 import java.util.ArrayList;
 import java.util.List;

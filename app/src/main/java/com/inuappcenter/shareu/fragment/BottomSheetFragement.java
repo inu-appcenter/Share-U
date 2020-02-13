@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialogFragment;
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.model.subjectName;
+import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
 
@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class BottomSheetFragement extends RoundedBottomSheetDialogFragment {
 
 
-    private ArrayList<com.inuappcenter.shareu.model.subjectName> dataList;
+    private ArrayList<com.inuappcenter.shareu.my_class.subjectName> dataList;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

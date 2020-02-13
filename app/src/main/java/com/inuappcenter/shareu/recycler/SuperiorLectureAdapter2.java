@@ -1,7 +1,6 @@
 package com.inuappcenter.shareu.recycler;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.model.SuperiorLecture;
+import com.inuappcenter.shareu.my_class.SuperiorLecture;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,4 @@
-package com.inuappcenter.shareu.model;
-
-import android.view.View;
+package com.inuappcenter.shareu.my_class;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

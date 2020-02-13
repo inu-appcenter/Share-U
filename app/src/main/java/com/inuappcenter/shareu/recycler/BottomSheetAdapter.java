@@ -1,32 +1,18 @@
 package com.inuappcenter.shareu.recycler;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.activity.FileUploadActivity;
-import com.inuappcenter.shareu.activity.MajorActivity;
-import com.inuappcenter.shareu.fragment.MajorFragment2;
-import com.inuappcenter.shareu.model.Code;
-import com.inuappcenter.shareu.model.Major;
-import com.inuappcenter.shareu.model.SuperiorLecture;
-import com.inuappcenter.shareu.model.subjectName;
+import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class BottomSheetAdapter extends RecyclerView.Adapter<BottomSheetAdapter.ViewHolder>{

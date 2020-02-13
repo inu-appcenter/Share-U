@@ -1,4 +1,4 @@
-package com.inuappcenter.shareu.model;
+package com.inuappcenter.shareu.my_class;
 
 public class File {
     String title;
