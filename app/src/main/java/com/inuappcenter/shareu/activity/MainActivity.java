@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import me.relex.circleindicator.CircleIndicator;
-import me.relex.circleindicator.CircleIndicator3;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,18 +16,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.model.Notice;
-import com.inuappcenter.shareu.model.SuperiorLecture;
+import com.inuappcenter.shareu.my_class.Notice;
+import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.inuappcenter.shareu.recycler.NoticeAdapter;
 import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter2;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
-import com.kingfisher.easyviewindicator.RecyclerViewIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         //RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclerview_main);
         //RecyclerViewIndicator horizontalIndicator = (RecyclerViewIndicator)findViewById(R.id.recyclerViewIndicator);
 
-        final EditText editText =(EditText)findViewById(R.id.etv_main);
         ArrayList<SuperiorLecture> items=new ArrayList<>();
         items.add(new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5));
         items.add(new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",4));

@@ -1,21 +1,17 @@
 package com.inuappcenter.shareu.recycler;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.DetailedNoticeActivity;
-import com.inuappcenter.shareu.activity.MajorActivity2;
-import com.inuappcenter.shareu.model.Notice;
+import com.inuappcenter.shareu.my_class.Notice;
 
 import java.util.ArrayList;
 

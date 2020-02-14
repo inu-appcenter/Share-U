@@ -16,19 +16,31 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
 
-        <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".activity.MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
+                    />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MajorActivity"></activity>
-        <activity android:name=".activity.MajorActivity2"></activity>
-        <activity android:name=".activity.DetailedNoticeActivity"></activity>
-        <activity android:name=".activity.OverallNoticeActivity"></activity>
-        <activity android:name=".activity.FileUploadActivity">
+        <activity android:name=".activity.MajorActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.MajorActivity2"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.DetailedNoticeActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.OverallNoticeActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.FileUploadActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.UploadedActivity"
+            android:screenOrientation="portrait">
 
         </activity>
     </application>

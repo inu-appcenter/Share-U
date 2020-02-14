@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.DetailedNoticeActivity;
-import com.inuappcenter.shareu.model.Notice;
+import com.inuappcenter.shareu.my_class.Notice;
 
 import java.util.ArrayList;
 

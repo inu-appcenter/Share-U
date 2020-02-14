@@ -1,19 +1,15 @@
 package com.inuappcenter.shareu.fragment;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.view.WindowManager;
 
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialogFragment;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.activity.FileUploadActivity;
-import com.inuappcenter.shareu.model.subjectName;
+import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
 
@@ -27,11 +23,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class BottomSheetFragement extends RoundedBottomSheetDialogFragment {
 
 
-    private ArrayList<com.inuappcenter.shareu.model.subjectName> dataList;
+    private ArrayList<com.inuappcenter.shareu.my_class.subjectName> dataList;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_bottomsheet,container);
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         dataList=new ArrayList<>();
         dataList.add(new subjectName("시벌"));
         dataList.add(new subjectName("시이벌"));
