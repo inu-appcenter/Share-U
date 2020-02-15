@@ -12,16 +12,17 @@ import com.inuappcenter.shareu.activity.DetailedNoticeActivity;
 import com.inuappcenter.shareu.my_class.Notice;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class OverallNoticeAdapter extends RecyclerView.Adapter<OverallNoticeAdapter.ViewHolder>{
 
-    private ArrayList<Notice> mitems;
+    private List<Notice> mitems;
     private Context mContext;
 
-    public OverallNoticeAdapter(ArrayList<Notice> items, Context Context) {
+    public OverallNoticeAdapter(List<Notice> items, Context Context) {
         mitems = items;
         mContext = Context;
     }

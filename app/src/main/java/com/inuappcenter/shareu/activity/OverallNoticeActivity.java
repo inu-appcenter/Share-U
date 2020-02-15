@@ -30,7 +30,7 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
     OverallNoticeContract.Presenter overallNoticePresent;
     RecyclerView recyclerView;
     LinearLayoutManager manager;
-    private ArrayList<Notice> dataList;
+    private List<Notice> dataList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +100,6 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
     public void setDatas(List<Notice> datas) {
         //콜백을 받았습니다!
 
-        dataList=(ArrayList)datas;
+        dataList=datas;
     }
 }
