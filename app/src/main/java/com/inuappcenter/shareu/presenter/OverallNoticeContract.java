@@ -12,8 +12,9 @@ public interface OverallNoticeContract {
         void setDatas(List<Notice> datas);
     }
     interface Presenter{
+        public void onCreate();
         public void onResume();
-        public LiveData<List<Notice>> giveMeDataPleaseWhenEverItIsOkayPleaseJust();
+        public void onDestroy();
     }
     //View와 Presenter은 소통을 할 수 있어야해!
 }

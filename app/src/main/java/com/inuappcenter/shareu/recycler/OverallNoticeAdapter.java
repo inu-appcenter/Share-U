@@ -23,11 +23,11 @@ public class OverallNoticeAdapter extends RecyclerView.Adapter<OverallNoticeAdap
     private List<Notice> mitems;
     private Context mContext;
 
-    public OverallNoticeAdapter(List<Notice> items, Context Context) {
-        Log.d("OverallNoticeAdapter", "items OK? " + (items != null));
-        mitems = items;
+    public OverallNoticeAdapter(Context Context) {
+        mitems = new ArrayList<>();
         mContext = Context;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -58,7 +58,10 @@ public class OverallNoticeAdapter extends RecyclerView.Adapter<OverallNoticeAdap
         return mitems.size();
     }
 
-
+    public void setData(List<Notice> notices) {
+        mitems = notices;
+        notifyDataSetChanged();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
