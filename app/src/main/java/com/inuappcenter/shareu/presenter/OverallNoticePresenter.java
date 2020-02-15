@@ -2,6 +2,8 @@ package com.inuappcenter.shareu.presenter;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.model.OverallModel;
 import com.inuappcenter.shareu.my_class.Notice;
@@ -30,6 +32,12 @@ public class OverallNoticePresenter implements OverallNoticeContract.Presenter{
     public void onResume() {
         //이 context를 가진 애한테 콜백을 넘겨주자!
         overallModel.setDatas();
-        overallNoticeView.setDatas(overallModel.getDataList());
+        Log.d("OverallNoticePresenter", "data secured?");
+        // overallNoticeView.setDatas(overallModel.getDataList());
+    }
+
+    @Override
+    public LiveData<List<Notice>> giveMeDataPleaseWhenEverItIsOkayPleaseJust() {
+        return overallModel.getDataList();
     }
 }

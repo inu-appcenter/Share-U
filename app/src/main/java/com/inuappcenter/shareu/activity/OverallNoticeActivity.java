@@ -19,6 +19,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
@@ -36,44 +37,30 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overall_notice);
         overallNoticePresent=new OverallNoticePresenter(this);
+
+
+
+        overallNoticePresent.giveMeDataPleaseWhenEverItIsOkayPleaseJust().observe(this, new Observer<List<Notice>>() {
+            @Override
+            public void onChanged(List<Notice> notices) {
+                if (notices != null) {
+                    // 여기에 도착한 리스트는 믿을 수 있다!
+                    recyclerView.setAdapter(new OverallNoticeAdapter(notices,OverallNoticeActivity.this));  // Adapter 등록
+                }
+            }
+        });
+
+
+
         overallNoticePresent.onResume();
         //내 컨텍스트.onResume()한거니깐 이것도 콜백이당 ㅇㅅㅇ Caller은 당연히 implements 해당하는 인터페이스를 갖고있어야 한다능
 
-        /*RetrofitService networkService = RetrofitHelper.create();
-        networkService.getNotice().enqueue(new Callback<List<Notice>>(){
-            @Override
-            public void onResponse(Call<List<Notice> > call, Response<List<Notice>> response)
-            {
-                if(response.isSuccessful())
-                {
-                    dataList = new ArrayList<>();
-
-                    for(int i=0;i<response.body().size();i++)
-                    {
-                        dataList.add(new Notice((i+1)+". "+response.body().get(i).getTitle(),
-                                response.body().get(i).getContent(),
-                                response.body().get(i).getNoticeDate(),
-                                i+1,
-                                R.drawable.rightarrow));
-                    }
-                }
-                recyclerView = findViewById(R.id.recyclerview_overall_notice);
-                manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
-                recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                recyclerView.setAdapter(new OverallNoticeAdapter(dataList,OverallNoticeActivity.this));  // Adapter 등록
-            }
-            @Override
-            public void onFailure(Call<List<Notice>> call, Throwable t) {
-                Log.e("TAG", t.getMessage());
-                Toast.makeText(OverallNoticeActivity.this, "실패", Toast.LENGTH_SHORT).show();
-            }
-        });*/
+        Log.d("OverallNoticeActivity", "Has onResume done its job?");
 
 
         recyclerView = findViewById(R.id.recyclerview_overall_notice);
         manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager); // LayoutManager 등록
-        recyclerView.setAdapter(new OverallNoticeAdapter(dataList,OverallNoticeActivity.this));  // Adapter 등록
 
         View.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override

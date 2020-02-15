@@ -13,6 +13,8 @@ import com.inuappcenter.shareu.service.RetrofitService;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
@@ -21,14 +23,14 @@ import retrofit2.Response;
 
 public class OverallModel {
 
-    private List<Notice> dataList;
+    private MutableLiveData<List<Notice>> _dataList = new MutableLiveData<>();
 
-    public List<Notice> getDataList() {
-        return dataList;
+    public LiveData<List<Notice>> getDataList() {
+        return _dataList;
     }
 
     public void setDataList(List<Notice> dataList) {
-        this.dataList = dataList;
+        this._dataList.postValue(dataList);
     }
 
     public void setDatas()

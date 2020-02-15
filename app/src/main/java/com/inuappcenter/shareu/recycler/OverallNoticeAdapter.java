@@ -2,6 +2,7 @@ package com.inuappcenter.shareu.recycler;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class OverallNoticeAdapter extends RecyclerView.Adapter<OverallNoticeAdap
     private Context mContext;
 
     public OverallNoticeAdapter(List<Notice> items, Context Context) {
+        Log.d("OverallNoticeAdapter", "items OK? " + (items != null));
         mitems = items;
         mContext = Context;
     }
