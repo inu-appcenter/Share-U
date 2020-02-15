@@ -37,9 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FileUploadActivity extends AppCompatActivity implements PickiTCallbacks, OnItemClick{
-
-
+public class FileUploadActivity extends AppCompatActivity implements  OnItemClick,PickiTCallbacks{
 
     // 권한 요청 시에 사용됨.
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -53,7 +51,8 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
     // 사진 다이얼로그 요청 시에 사용됨.
     private static int PICK_FROM_FILE = 9999;
     private TSnackbar snackbar;
-    private EditText edtv_select_subject,edtv_select_prof,edtv_content,edtv_file_name;
+    private EditText edtv_content,edtv_file_name;
+    private TextView edtv_select_subject,edtv_select_prof;
     private TextView tv_upload_file;
     private int one,two,three,four;
     private ArrayList<com.inuappcenter.shareu.my_class.subjectName> dataList;
@@ -154,6 +153,15 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
                                 }
                             });
                         }
+                        else if(!(one<20 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true))
+                        {
+                    /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
+                    progressSnackbar2.show();*/
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"파일제목을 20자 미만으로 해주세요!",TSnackbar.LENGTH_SHORT);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            snackbar.show();
+                        }
                         else if(!(one>=1 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true))
                         {
                     /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
@@ -211,9 +219,8 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
                                 t.printStackTrace();
                             }
                         });
-*/
 
-                        break;
+                        break;*/
                 }
 
             }
@@ -331,11 +338,11 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
 
     void init()
     {
-        edtv_file_name=(EditText)findViewById(R.id.edtv_file_name);
-        edtv_select_subject = (EditText) findViewById(R.id.edtv_select_subject);
-        edtv_select_prof = (EditText) findViewById(R.id.edtv_select_prof);
-        edtv_content = (EditText)findViewById(R.id.edtv_content);
-        tv_upload_file = (TextView)findViewById(R.id.tv_upload_file);
+        edtv_file_name=findViewById(R.id.edtv_file_name);
+        edtv_select_subject =  findViewById(R.id.edtv_select_subject);
+        edtv_select_prof =  findViewById(R.id.edtv_select_prof);
+        edtv_content = findViewById(R.id.edtv_content);
+        tv_upload_file = findViewById(R.id.tv_upload_file);
     }
     void check()
     {
@@ -425,7 +432,7 @@ public class FileUploadActivity extends AppCompatActivity implements PickiTCallb
 
     @Override
     public void onClick(String value) {
-        EditText edtv_select_subject = findViewById(R.id.edtv_select_subject);
+        TextView edtv_select_subject = findViewById(R.id.edtv_select_subject);
         edtv_select_subject.setText(value);
         dialog.dismiss();
     }

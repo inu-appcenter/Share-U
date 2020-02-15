@@ -37,6 +37,8 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
         setContentView(R.layout.activity_overall_notice);
         overallNoticePresent=new OverallNoticePresenter(this);
         overallNoticePresent.onResume();
+        //내 컨텍스트.onResume()한거니깐 이것도 콜백이당 ㅇㅅㅇ Caller은 당연히 implements 해당하는 인터페이스를 갖고있어야 한다능
+
         /*RetrofitService networkService = RetrofitHelper.create();
         networkService.getNotice().enqueue(new Callback<List<Notice>>(){
             @Override
@@ -95,8 +97,9 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
 
 
     @Override
-    public void setDatas(ArrayList<Notice> datas) {
-        dataList=datas;
-        Log.e("잉",dataList.size()+"");
+    public void setDatas(List<Notice> datas) {
+        //콜백을 받았습니다!
+
+        dataList=(ArrayList)datas;
     }
 }

@@ -50,7 +50,8 @@ public class OverallNoticeAdapter extends RecyclerView.Adapter<OverallNoticeAdap
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return mitems.size();
     }
 

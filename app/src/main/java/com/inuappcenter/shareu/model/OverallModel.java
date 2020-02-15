@@ -1,5 +1,8 @@
 package com.inuappcenter.shareu.model;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.OverallNoticeActivity;
 import com.inuappcenter.shareu.my_class.Notice;
@@ -18,20 +21,41 @@ import retrofit2.Response;
 
 public class OverallModel {
 
-    private ArrayList<Notice> dataList;
+    private List<Notice> dataList;
 
-    public ArrayList<Notice> getDatas()
-    {
-        dataList = new ArrayList<>();
-
-        for(int i=0;i<5;i++)
-        {
-            dataList.add(new Notice((i+1)+"",
-                    "냥냥"+i+1,
-                    "야옹"+i+1,
-                    i+1,
-                    R.drawable.rightarrow));
-        }
+    public List<Notice> getDataList() {
         return dataList;
     }
+
+    public void setDataList(List<Notice> dataList) {
+        this.dataList = dataList;
+    }
+
+    public void setDatas()
+    {
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.getNotice().enqueue(new Callback<List<Notice>>(){
+            @Override
+            public void onResponse(Call<List<Notice> > call, Response<List<Notice>> response)
+            {
+                if(response.isSuccessful())
+                {
+                    Log.e("냥",response.body().size()+"");
+                    setDataList(response.body());
+                    //overallNoticeView.setDatas(overallModel.getDatas(response.body()));
+                }
+
+            }
+            @Override
+            public void onFailure(Call<List<Notice>> call, Throwable t) {
+
+                Log.e("TAG", t.getMessage());
+
+            }
+        });
+    }
+
+
+
+
 }
