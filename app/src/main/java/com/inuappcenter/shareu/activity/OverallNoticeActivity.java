@@ -38,8 +38,6 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
         setContentView(R.layout.activity_overall_notice);
         overallNoticePresent=new OverallNoticePresenter(this);
 
-
-
         overallNoticePresent.giveMeDataPleaseWhenEverItIsOkayPleaseJust().observe(this, new Observer<List<Notice>>() {
             @Override
             public void onChanged(List<Notice> notices) {
@@ -49,7 +47,6 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
                 }
             }
         });
-
 
 
         overallNoticePresent.onResume();
@@ -83,10 +80,4 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
     }
 
 
-    @Override
-    public void setDatas(List<Notice> datas) {
-        //콜백을 받았습니다!
-
-        dataList=datas;
-    }
 }

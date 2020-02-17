@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface OverallNoticeContract {
     interface  View{
-        void setDatas(List<Notice> datas);
     }
     interface Presenter{
         public void onResume();

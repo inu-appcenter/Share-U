@@ -35,8 +35,6 @@ public class BottomSheetPresenter implements BottomSheetContract.Presenter
                 if(response.isSuccessful())
                 {
                     bottomSheetView.setSubjData(bottomSheetModel.getSubjDatas(response.body()));
-
-
                 }
 
 

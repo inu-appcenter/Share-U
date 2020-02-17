@@ -50,4 +50,23 @@ public class Notice {
         return image;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setNoticeDate(String noticeDate) {
+        this.noticeDate = noticeDate;
+    }
+
+    public void setNoticeKey(int noticeKey) {
+        this.noticeKey = noticeKey;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
 }
