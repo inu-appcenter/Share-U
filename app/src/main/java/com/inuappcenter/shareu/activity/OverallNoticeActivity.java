@@ -28,37 +28,44 @@ import retrofit2.Response;
 
 public class OverallNoticeActivity extends AppCompatActivity implements OverallNoticeContract.View {
 
-    OverallNoticeContract.Presenter overallNoticePresent;
-    RecyclerView recyclerView;
-    LinearLayoutManager manager;
-    private List<Notice> dataList;
+    private OverallNoticeContract.Presenter overallNoticePresent = new OverallNoticePresenter(this, this);
+    private OverallNoticeAdapter adapter = new OverallNoticeAdapter(this);
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overall_notice);
-        overallNoticePresent=new OverallNoticePresenter(this);
 
-        overallNoticePresent.giveMeDataPleaseWhenEverItIsOkayPleaseJust().observe(this, new Observer<List<Notice>>() {
-            @Override
-            public void onChanged(List<Notice> notices) {
-                if (notices != null) {
-                    // 여기에 도착한 리스트는 믿을 수 있다!
-                    recyclerView.setAdapter(new OverallNoticeAdapter(notices,OverallNoticeActivity.this));  // Adapter 등록
-                }
-            }
-        });
+        initializeView();
 
+        overallNoticePresent.onCreate();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Data update starts here.
         overallNoticePresent.onResume();
-        //내 컨텍스트.onResume()한거니깐 이것도 콜백이당 ㅇㅅㅇ Caller은 당연히 implements 해당하는 인터페이스를 갖고있어야 한다능
+    }
 
-        Log.d("OverallNoticeActivity", "Has onResume done its job?");
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        overallNoticePresent.onDestroy();
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
-        recyclerView = findViewById(R.id.recyclerview_overall_notice);
-        manager= new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(manager); // LayoutManager 등록
+    @Override
+    public void setDatas(List<Notice> datas) {
+        //콜백을 받았습니다!
+        adapter.setData(datas);
+    }
 
+    private void initializeView() {
         View.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,15 +76,14 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
                 }
 
             }
-        } ;
+        };
 
         ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_detailed_notice_backpress);
         btn_detailed_notice_backpress.setOnClickListener(onClickListener);
+
+        RecyclerView rcv = findViewById(R.id.recyclerview_overall_notice);
+        RecyclerView.LayoutManager mgr = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
+        rcv.setLayoutManager(mgr);
+        rcv.setAdapter(adapter);
     }
-
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
-
 }
