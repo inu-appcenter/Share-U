@@ -30,7 +30,7 @@ public class OverallModel {
     //LiveData has no public method to modify its data. setValue 나 postValue 불가능 하다.
     private MutableLiveData<List<Notice>> _dataList = new MutableLiveData<>();
 
-    public LiveData<List<Notice>> getDataList() {
+    public MutableLiveData<List<Notice>> getDataList() {
         return _dataList;
     }
     public void setDataList(List<Notice> dataList) {
