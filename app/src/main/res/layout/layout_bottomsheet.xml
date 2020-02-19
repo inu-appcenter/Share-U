@@ -22,15 +22,21 @@
             android:layout_marginTop="34dp"
             android:layout_marginRight="32dp" />
 
-        <include
-            android:id="@+id/include_recyclerview_bottomsheet"
-            layout="@layout/layout_recyclerview_bottomsheet"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="6.5dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginBottom="17.5dp" />
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/include_recyclerview_bottomsheet"
+                layout="@layout/layout_recyclerview_bottomsheet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="6.5dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="17.5dp" />
+        </FrameLayout>
+
     </LinearLayout>
 
 

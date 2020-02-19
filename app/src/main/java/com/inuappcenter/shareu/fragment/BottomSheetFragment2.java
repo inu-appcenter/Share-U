@@ -1,8 +1,6 @@
 package com.inuappcenter.shareu.fragment;
 
-
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +8,17 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.androidadvance.topsnackbar.TSnackbar;
+import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialog;
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialogFragment;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
+import com.inuappcenter.shareu.recycler.BottomSheetAdapter2;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
@@ -32,12 +33,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BottomSheetFragement extends RoundedBottomSheetDialogFragment{
-
-
-    private ArrayList<com.inuappcenter.shareu.my_class.subjectName> dataList;
+public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
+    private ArrayList<profName> dataList;
     private RecyclerView recyclerView;
-    private  LinearLayoutManager manager;
+    private LinearLayoutManager manager;
     private RetrofitService networkService;
     private EditText etv_search;
     private ImageButton  etv_search_click;
@@ -48,48 +47,34 @@ public class BottomSheetFragement extends RoundedBottomSheetDialogFragment{
         View view = inflater.inflate(R.layout.layout_bottomsheet,container);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         init(view);
-
-        etv_search_click.setOnClickListener(new View.OnClickListener()
-        {
+        etv_search_click.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if(etv_search.getText().length()==0)
-                {
-                    snackbar = TSnackbar.make(getActivity().findViewById(android.R.id.content),"과목명을 한 글자 이상 입력해주세요!",TSnackbar.LENGTH_SHORT);
-                    View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                    snackbar.show();
-
-                }
-                else
-                {
-                    networkService = RetrofitHelper.create();
-                    networkService.getSubjectName(etv_search.getText()+"").enqueue(new Callback<List<subjectName>>(){
-                        @Override
-                        public void onResponse(Call<List<subjectName> > call, Response<List<subjectName>> response)
+                networkService = RetrofitHelper.create();
+                networkService.getProfName(etv_search.getText()+"").enqueue(new Callback<List<profName>>(){
+                    @Override
+                    public void onResponse(Call<List<profName> > call, Response<List<profName>> response)
+                    {
+                        if(response.isSuccessful())
                         {
-                            if(response.isSuccessful())
+                            dataList=new ArrayList<>();
+                            for(int i=0;i<response.body().size();i++)
                             {
-                                dataList=new ArrayList<>();
-                                for(int i=0;i<response.body().size();i++)
-                                {
-                                    dataList.add(new subjectName(response.body().get(i).getSubjectName()));
-                                }
-
+                                dataList.add(new profName(response.body().get(i).getProfName()));
                             }
 
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                            recyclerView.setAdapter(new BottomSheetAdapter(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
                         }
-                        @Override
-                        public void onFailure(Call<List<subjectName>> call, Throwable t) {
 
-                            t.printStackTrace();
-                        }
-                    });
-
-                }
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(manager); // LayoutManager 등록
+                        recyclerView.setAdapter(new BottomSheetAdapter2(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
+                    }
+                    @Override
+                    public void onFailure(Call<List<profName>> call, Throwable t)
+                    {
+                        t.printStackTrace();
+                    }
+                });
             }
         });
 
@@ -97,10 +82,11 @@ public class BottomSheetFragement extends RoundedBottomSheetDialogFragment{
     }
     public void init(View view)
     {
-
         recyclerView = view.findViewById(R.id.recyclerview_bottomsheet);
         manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         etv_search = view.findViewById(R.id.etv_search);
         etv_search_click = view.findViewById(R.id.etv_search_click);
+
     }
+
 }

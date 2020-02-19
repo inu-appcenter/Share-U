@@ -23,17 +23,20 @@ import retrofit2.Response;
 
 public class OverallModel {
 
+    // MutableLiveData란 변경할 수 있는 LiveData 형이다.
+    // 일반적인 LiveData형은 변경할 수 없고 오로지 데이터의 변경값만을 소비하는데 반해
+    // MutableLiveData는 데이터를 UI Thread와 Background Thread에서 선택적으로 바꿀 수 있다.
+
+    //LiveData has no public method to modify its data. setValue 나 postValue 불가능 하다.
     private MutableLiveData<List<Notice>> _dataList = new MutableLiveData<>();
 
     public LiveData<List<Notice>> getDataList() {
         return _dataList;
     }
-
     public void setDataList(List<Notice> dataList) {
-
         this._dataList.postValue(dataList);
+        //콜백
     }
-
     public void setDatas()
     {
         RetrofitService networkService = RetrofitHelper.create();
@@ -63,8 +66,5 @@ public class OverallModel {
             }
         });
     }
-
-
-
 
 }

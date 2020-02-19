@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.androidadvance.topsnackbar.TSnackbar;
@@ -18,17 +19,25 @@ import com.hbisoft.pickit.PickiT;
 import com.hbisoft.pickit.PickiTCallbacks;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.fragment.BottomSheetFragement;
+import com.inuappcenter.shareu.fragment.BottomSheetFragment2;
+import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
+import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -54,6 +63,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
     private EditText edtv_content,edtv_file_name;
     private TextView edtv_select_subject,edtv_select_prof;
     private TextView tv_upload_file;
+    private ImageButton img_btn_file_upload_on;
     private int one,two,three,four;
     private ArrayList<com.inuappcenter.shareu.my_class.subjectName> dataList;
     private ArrayList<com.inuappcenter.shareu.my_class.profName> dataList2;
@@ -63,6 +73,8 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
     private Boolean file_upload_check=false;
     private MediaType type = MediaType.parse("multipart/form-data");
     private BottomSheetFragement dialog;
+    private BottomSheetFragment2 dialog2;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,6 +135,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                 switch (view.getId())
                 {
                     case R.id.tv_upload_file:
+                        check();
                         if(one>=1 && two>=1 &&three>=1 &&four>=30 && file_upload_check==true)
                         {
                     /*progressSnackbar.setText("자료 업로드 중...");
@@ -137,10 +150,13 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
 
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 성공",TSnackbar.LENGTH_INDEFINITE);
+                                    /*snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 성공",TSnackbar.LENGTH_INDEFINITE);
                                     View snackbarView = snackbar.getView();
                                     snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                                    snackbar.show();
+                                    snackbar.show();*/
+                                    Intent intent = new Intent(getApplicationContext(), UploadedActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 }
 
                                 @Override
@@ -186,41 +202,14 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                         break;
                     case R.id.img_btn_file_upload2:
 
-                        View view2 = getLayoutInflater().inflate(R.layout.layout_bottomsheet,null);
+                        //View view2 = getLayoutInflater().inflate(R.layout.layout_bottomsheet,null);
                         dialog = new BottomSheetFragement();
                         dialog.show(getSupportFragmentManager(),"냐아옹");
-
-                       /* RetrofitService networkService = RetrofitHelper.create();
-                        networkService.getSubjectName("").enqueue(new Callback<List<com.inuappcenter.shareu.model.subjectName>>(){
-                            @Override
-                            public void onResponse(Call<List<subjectName> > call, Response<List<subjectName>> response)
-                            {
-                                if(response.isSuccessful())
-                                {
-                                    dataList=new ArrayList<>();
-                                    for(int i=0;i<response.body().size();i++)
-                                    {
-                                        dataList.add(new subjectName(response.body().get(i).getSubjectName()));
-                                    }
-
-                                }
-
-                                RecyclerView recyclerView = view2.findViewById(R.id.recyclerview_bottomsheet);
-                                LinearLayoutManager manager
-                                        = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                                recyclerView.setHasFixedSize(true);
-                                recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                                recyclerView.setAdapter(new BottomSheetAdapter(dataList,getApplicationContext()));  // Adapter 등록
-                            }
-                            @Override
-                            public void onFailure(Call<List<com.inuappcenter.shareu.model.subjectName>> call, Throwable t) {
-
-                                //Toast.makeText(getApplicationContext(), "실패지렁", Toast.LENGTH_SHORT).show();
-                                t.printStackTrace();
-                            }
-                        });
-
-                        break;*/
+                        break;
+                    case R.id.img_btn_file_upload3:
+                        dialog2 = new BottomSheetFragment2();
+                        dialog2.show(getSupportFragmentManager(),"냐아옹");
+                        break;
                 }
 
             }
@@ -231,39 +220,17 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         findViewById(R.id.img_btn_file_upload2).setOnClickListener(onClickListener);
         findViewById(R.id.img_btn_file_upload3).setOnClickListener(onClickListener);
 
-
-        /*RetrofitService networkService2 = RetrofitHelper.create();
-        networkService2.getProfName("").enqueue(new Callback<List<com.inuappcenter.shareu.model.File>>(){
-            @Override
-            public void onResponse(Call<List<com.inuappcenter.shareu.model.File> > call, Response<List<com.inuappcenter.shareu.model.File>> response)
-            {
-                if(response.isSuccessful())
-                {
-                    dataList=new ArrayList<>();
-                    for(int i=0;i<response.body().size();i++)
-                    {
-                        //Log.e("메시지",response.body().get(i).getProfName()+"");
-                        dataList.add(response.body().get(i).getProfName());
-
-                    }
-
-                }
-                //Log.e("힝",dataList.size()+"");
-
-            }
-            @Override
-            public void onFailure(Call<List<com.inuappcenter.shareu.model.File>> call, Throwable t) {
-
-                //Toast.makeText(getApplicationContext(), "실패지렁", Toast.LENGTH_SHORT).show();
-                t.printStackTrace();
-            }
-        });*/
-
         // 권한내놔!
         giveMePermissions();
 
         // 버튼 클릭 리스너 설정 부분
         findViewById(R.id.img_btn_file_upload).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickFile();
+            }
+        });
+        findViewById(R.id.img_btn_file_upload_on).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pickFile();
@@ -333,6 +300,8 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
 /*        progressSnackbar.setText("자료 업로드 중...");
         progressSnackbar.show();*/
         file_upload_check=true;
+        img_btn_file_upload_on.setVisibility(View.VISIBLE);
+
         check();
     }
 
@@ -343,6 +312,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         edtv_select_prof =  findViewById(R.id.edtv_select_prof);
         edtv_content = findViewById(R.id.edtv_content);
         tv_upload_file = findViewById(R.id.tv_upload_file);
+        img_btn_file_upload_on=findViewById(R.id.img_btn_file_upload_on);
     }
     void check()
     {
@@ -435,6 +405,13 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         TextView edtv_select_subject = findViewById(R.id.edtv_select_subject);
         edtv_select_subject.setText(value);
         dialog.dismiss();
+    }
+
+    @Override
+    public void onClick2(String value) {
+        TextView edtv_select_prof = findViewById(R.id.edtv_select_prof);
+        edtv_select_prof.setText(value);
+        dialog2.dismiss();
     }
 }
 

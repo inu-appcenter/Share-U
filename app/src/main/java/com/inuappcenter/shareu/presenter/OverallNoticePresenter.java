@@ -34,6 +34,7 @@ public class OverallNoticePresenter implements OverallNoticeContract.Presenter{
     @Override
     public void onCreate() {
         // Add observer(activity as a Lifecycle Observer.)
+        // 모델에서 데이터가 바뀌면 observe하다가 onChanged 콜백이 불리게 된다.
         overallModel.getDataList().observe(lifecycleOwner, new Observer<List<Notice>>() {
             @Override
             public void onChanged(List<Notice> notices) {

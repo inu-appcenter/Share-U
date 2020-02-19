@@ -31,6 +31,7 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
     private OverallNoticeContract.Presenter overallNoticePresent = new OverallNoticePresenter(this, this);
     private OverallNoticeAdapter adapter = new OverallNoticeAdapter(this);
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

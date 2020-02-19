@@ -15,7 +15,6 @@
         android:hint=" 검색"
         android:inputType="textPersonName"
         android:paddingLeft="9dp"
-        android:textColor="@color/cardview_dark_background"
         android:textColorHint="#57000000"
         android:textSize="16sp" />
 

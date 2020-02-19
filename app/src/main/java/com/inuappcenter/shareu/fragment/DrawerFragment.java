@@ -52,6 +52,7 @@ public class DrawerFragment extends Fragment {
             }
         } ;
 
+
         TextView tv_my_notice_my_page = (TextView) view.findViewById(R.id.tv_my_notice_my_page) ;
         tv_my_notice_my_page.setOnClickListener(onClickListener);
         ImageButton btn_drawer_back = (ImageButton) view.findViewById(R.id.btn_drawer_back) ;
