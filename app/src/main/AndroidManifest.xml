@@ -13,7 +13,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@drawable/group326"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/AppTheme">
 
 
         <activity android:name=".activity.MainActivity"
@@ -46,6 +46,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.MyDetailedUploadActivtity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

@@ -2,9 +2,11 @@ package com.inuappcenter.shareu.activity;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.my_class.MyUpload;
@@ -25,7 +27,6 @@ public class MyUploadActivity extends AppCompatActivity implements MyUploadContr
 
     private MyUploadPresenter myUploadPresenter = new MyUploadPresenter(this,this);
     private MyUploadAdapter myUploadAdapter = new MyUploadAdapter(this);
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,7 @@ public class MyUploadActivity extends AppCompatActivity implements MyUploadContr
                     case R.id.btn_detailed_notice_backpress :
                         finish();
                         break ;
+
                 }
 
             }
@@ -67,10 +69,10 @@ public class MyUploadActivity extends AppCompatActivity implements MyUploadContr
 
         ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_detailed_notice_backpress);
         btn_detailed_notice_backpress.setOnClickListener(onClickListener);
-
         RecyclerView rcv = findViewById(R.id.recyclerview_myupload);
         RecyclerView.LayoutManager mgr = new GridLayoutManager(getApplicationContext(),2);
         rcv.setLayoutManager(mgr);
         rcv.setAdapter(myUploadAdapter);
+
     }
 }

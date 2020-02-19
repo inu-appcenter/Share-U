@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.my_class.Notice;
@@ -31,14 +32,11 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
     private OverallNoticeContract.Presenter overallNoticePresent = new OverallNoticePresenter(this, this);
     private OverallNoticeAdapter adapter = new OverallNoticeAdapter(this);
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overall_notice);
-
         initializeView();
-
         overallNoticePresent.onCreate();
     }
 

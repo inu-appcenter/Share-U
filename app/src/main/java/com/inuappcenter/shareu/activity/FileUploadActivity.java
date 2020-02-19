@@ -169,11 +169,11 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                                 }
                             });
                         }
-                        else if(!(one<20 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true))
+                        else if(!(one<=15 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true))
                         {
                     /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
                     progressSnackbar2.show();*/
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"파일제목을 20자 미만으로 해주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"파일제목을 15자 이하로 해주세요!",TSnackbar.LENGTH_SHORT);
                             View snackbarView = snackbar.getView();
                             snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
                             snackbar.show();
