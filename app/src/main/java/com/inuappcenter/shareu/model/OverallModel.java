@@ -28,6 +28,10 @@ public class OverallModel {
     // MutableLiveData는 데이터를 UI Thread와 Background Thread에서 선택적으로 바꿀 수 있다.
 
     //LiveData has no public method to modify its data. setValue 나 postValue 불가능 하다.
+    //setValue는 데이터를 set하는데 UI Thread에서 진행, 값을 즉시 받아옴 postValue는 데이터를 set하긴 하지만 background에서 과정이 진행되다가 UI Thread에서
+    //값을 변경함. postValue하고 바로 getValue를 하면 값을 받아오지 못할 확률이 크다.
+    //메인스레드에서 LiveData를 갱신하려면 반드시 setValue(T) 메서드를 호출해야 한다. 만약, 작업스레드에서 LiveData를 갱신하려면 postValue(T) 메서드를 호출해야 한다.
+    // .
     private MutableLiveData<List<Notice>> _dataList = new MutableLiveData<>();
 
     public MutableLiveData<List<Notice>> getDataList() {

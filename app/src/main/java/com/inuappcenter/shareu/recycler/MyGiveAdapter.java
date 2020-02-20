@@ -25,25 +25,25 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHolder> {
+public class MyGiveAdapter extends RecyclerView.Adapter<MyGiveAdapter.ViewHolder> {
     private Context mContext;
     private List<MyUpload> mitems;
 
 
-    public MyUploadAdapter(Context mContext) {
+    public MyGiveAdapter(Context mContext) {
         this.mContext = mContext;
         this.mitems = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public MyUploadAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyGiveAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_my_upload,parent,false);
-        return new MyUploadAdapter.ViewHolder(view);
+        return new MyGiveAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyUploadAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyGiveAdapter.ViewHolder holder, int position) {
         final MyUpload item = mitems.get(position);
         if(item.getExtension()=="ppt" || item.getExtension()=="pptx" )
         {
@@ -92,32 +92,7 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
         }
         holder.tv_my_upload_title.setText(item.getTitle());
         holder.tv_my_upload_date.setText(item.getDate());
-        holder.btn_my_upload.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(mContext,holder.btn_my_upload);
-                popupMenu.inflate(R.menu.popup);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        switch (menuItem.getItemId()){
-                            case R.id.popup_modify:
-                                Intent intent = new Intent(mContext.getApplicationContext(), MyDetailedUploadActivtity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                mContext.startActivity(intent);
-                                break;
-                            case R.id.popup_delete:
-                                mitems.remove(position);
-                                notifyItemRemoved(position);
-                                notifyItemChanged(position,mitems.size());
-                                break;
-                        }
-                        return false;
-                    }
-                });
-                popupMenu.show();
-            }
-        });
+        holder.btn_my_upload.setVisibility(View.GONE);
     }
 
     @Override
