@@ -43,14 +43,29 @@
 
         ></TextView>
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        style="?android:attr/ratingBarStyleSmall"
+    <com.willy.ratingbar.BaseRatingBar
+        android:id="@+id/superior_ratingbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        app:srb_numStars="5"
+        app:srb_starWidth="17.4dp"
+        app:srb_starHeight="17.4dp"
+        app:srb_starPadding="1dp"
+        app:srb_drawableFilled="@drawable/fill"
+        app:srb_drawableEmpty="@drawable/empty_star"
+        app:srb_stepSize="0.1"
         android:layout_marginTop="6.6dp"
-        android:progressTint="@color/Iris" />
+        ></com.willy.ratingbar.BaseRatingBar>
+    <!--<com.willy.ratingbar.ScaleRatingBar
+
+        android:id="@+id/ratingBar"
+        android:layout_width="96.5dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="6.6dp"
+
+        />-->
 
 
 </LinearLayout>

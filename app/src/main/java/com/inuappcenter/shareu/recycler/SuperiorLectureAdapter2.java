@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
+import com.willy.ratingbar.BaseRatingBar;
 
 import java.util.ArrayList;
 
@@ -39,11 +40,12 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
             textView.setText("TEXT " + position) ;*/
         ImageView item_default_superior=view.findViewById(R.id.item_default_superior);
         TextView tv_superior_name=view.findViewById(R.id.tv_superior_name);
-        RatingBar ratingBar=view.findViewById(R.id.ratingBar);
+        BaseRatingBar ratingBar=view.findViewById(R.id.superior_ratingbar);
 
         item_default_superior.setImageResource(mitems.get(position).getImage());
         tv_superior_name.setText(mitems.get(position).getTitle());
         ratingBar.setRating(mitems.get(position).getRating());
+
 
         // 뷰페이저에 추가.
         container.addView(view,0) ;

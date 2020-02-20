@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<SuperiorLecture> items=new ArrayList<>();
         items.add(new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5));
-        items.add(new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",4));
+        items.add(new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",(float)4.8));
         items.add(new SuperiorLecture(R.drawable.ppt,"생명과학 족보",(float)4.5));
-        items.add(new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",3));
-        items.add(new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",2));
+        items.add(new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",(float)3.2));
+        items.add(new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",(float)2.5));
         viewPager = (ViewPager) findViewById(R.id.viewpager_superior) ;
 
         SuperiorLectureAdapter2 adapter = new SuperiorLectureAdapter2(items,this);

@@ -62,4 +62,9 @@ dependencies {
     //rounded bottomsheet
     implementation 'com.github.Deishelon:RoundedBottomSheet:1.0.1'
 
+    //custom rating bar
+    //https://github.com/ome450901/SimpleRatingBar
+    implementation 'com.github.ome450901:SimpleRatingBar:1.4.0'
+
+
 }
