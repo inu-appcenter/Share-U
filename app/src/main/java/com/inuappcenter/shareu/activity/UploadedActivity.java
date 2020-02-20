@@ -1,5 +1,6 @@
 package com.inuappcenter.shareu.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,12 +13,23 @@ import androidx.appcompat.app.AppCompatActivity;
 public class UploadedActivity extends AppCompatActivity {
 
     private ImageButton btn_back_home;
+    private ImageButton btn_ok;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uploaded);
         btn_back_home = findViewById(R.id.btn_back_home);
+        btn_ok = findViewById(R.id.btn_ok);
         btn_back_home.setOnClickListener(v->finish());
+        btn_ok.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),MyUploadActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
     }
 
     @Override
