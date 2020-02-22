@@ -35,6 +35,16 @@
                 android:layout_marginTop="6.5dp"
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="17.5dp" />
+
+            <TextView
+                android:id="@+id/tv_search_please"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="과목을 검색해주세요 :)"
+                android:textColor="@color/Iris"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </FrameLayout>
 
     </LinearLayout>
