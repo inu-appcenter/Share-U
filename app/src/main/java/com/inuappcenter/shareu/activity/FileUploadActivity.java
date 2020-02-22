@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -80,6 +81,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_file_register);
+
         init();
 
         edtv_select_subject.addTextChangedListener(new TextWatcher() {
@@ -174,11 +176,11 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                                 }
                             });
                         }
-                        else if(!(one>=1 && one<=15))
+                        else if(one>200)
                         {
                     /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
                     progressSnackbar2.show();*/
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"파일제목을 15자 이하로 해주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 200자 미만으로 채워주세요!",TSnackbar.LENGTH_SHORT);
                             snackbar.setActionTextColor(Color.WHITE);
                             View snackbarView = snackbar.getView();
                             snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
@@ -321,6 +323,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
 
     void init()
     {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         edtv_file_name=findViewById(R.id.edtv_file_name);
         edtv_select_subject =  findViewById(R.id.edtv_select_subject);
         edtv_select_prof =  findViewById(R.id.edtv_select_prof);

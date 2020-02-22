@@ -13,7 +13,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@drawable/group326"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
 
 
         <activity android:name=".activity.MainActivity"
@@ -51,6 +52,11 @@
         </activity>
         <activity android:name=".activity.MyGiveActivity"
             android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activity.DetailedFileActivity"
+            android:screenOrientation="portrait"
+            >
 
         </activity>
     </application>

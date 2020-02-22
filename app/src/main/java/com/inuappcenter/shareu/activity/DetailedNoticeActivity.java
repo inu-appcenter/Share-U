@@ -37,7 +37,6 @@ public class DetailedNoticeActivity extends AppCompatActivity {
         RetrofitService networkService = RetrofitHelper.create();
         Intent intent = getIntent();
         int key = intent.getExtras().getInt("key");
-        Log.e("키 ? ",key+"");
         networkService.getDetailedNotice(key).enqueue(new Callback<List<Notice>>(){
             @Override
             public void onResponse(Call<List<Notice> > call, Response<List<Notice>> response)
