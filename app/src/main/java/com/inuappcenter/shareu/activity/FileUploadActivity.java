@@ -152,7 +152,6 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                             snackbar.show();
                             // 이제 올리기
                             service.uploadImage(title,subjectName,profName,content,filePart).enqueue(new Callback<ResponseBody>() {
-
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     /*snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 성공",TSnackbar.LENGTH_INDEFINITE);
@@ -166,13 +165,8 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
 
                                 @Override
                                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 실패",TSnackbar.LENGTH_INDEFINITE);
-                                    View snackbarView = snackbar.getView();
-                                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                                    TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-                                    textView.setTextColor(Color.WHITE);
-                                    snackbar.show();
-                                    t.printStackTrace();
+                                    Intent intent = new Intent(getApplicationContext(),NotUploadedActivity.class);
+                                    startActivity(intent);
                                 }
                             });
                         }

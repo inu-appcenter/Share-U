@@ -80,7 +80,7 @@
                         android:layout_marginLeft="37.5dp"
                         android:layout_marginTop="20.5dp"
                         android:layout_marginRight="36.5dp"
-                        android:layout_marginBottom="20.5dp"
+                        android:layout_marginBottom="48dp"
                         android:text="문테기 족보 공유합니다 자료가 정말 좋습니다 별점 5개는 필수입니다 이거 보신 분들 꼭 에이쁠 받으세요 그럼 20000" />
 
                 </LinearLayout>
@@ -152,7 +152,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:paddingLeft="15dp"
+                        android:paddingLeft="14dp"
                         android:text="문서 정보"
                         android:textColor="@color/Iris"
                         android:textStyle="bold" />
@@ -168,7 +168,7 @@
                             android:paddingLeft="15dp"
                             android:text="작성자"
                             android:textColor="@color/black"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -181,7 +181,7 @@
                             android:text="홍길동"
                             android:textColor="@color/black"
 
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -189,7 +189,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="7dp">
+                        android:layout_marginTop="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
                             android:paddingLeft="15dp"
                             android:text="카테고리"
                             android:textColor="@color/black"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -210,7 +210,7 @@
                             android:text="교양"
                             android:textColor="@color/black"
 
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -218,7 +218,36 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="7dp">
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:text="과목명"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_detailed_file_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="95dp"
+                            android:text="문학과 테마 기행"
+                            android:textColor="@color/black"
+
+                            android:textSize="12sp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
 
                         <TextView
 
@@ -227,7 +256,7 @@
                             android:paddingLeft="15dp"
                             android:text="등록일"
                             android:textColor="@color/black"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -240,7 +269,7 @@
                             android:text="2020.01.05"
                             android:textColor="@color/black"
 
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -248,7 +277,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="7dp">
+                        android:layout_marginTop="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -256,7 +285,7 @@
                             android:paddingLeft="15dp"
                             android:text="지원형식"
                             android:textColor="@color/black"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -269,7 +298,7 @@
                             android:text="WORD"
                             android:textColor="@color/black"
 
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -302,14 +331,16 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/textView29"
+                            android:id="@+id/tv_no_review"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="7dp"
                             android:layout_marginRight="15dp"
                             android:ellipsize="end"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:text="등록된 리뷰가 업습니다."
+                            android:visibility="gone" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -370,9 +401,9 @@
                                     app:srb_drawableFilled="@drawable/fill"
                                     app:srb_numStars="5"
                                     app:srb_rating="3.5"
-                                    app:srb_starHeight="12.5dp"
+                                    app:srb_starHeight="14dp"
                                     app:srb_starPadding="1dp"
-                                    app:srb_starWidth="12.5dp"
+                                    app:srb_starWidth="14dp"
                                     app:srb_stepSize="0.5">
 
                                 </com.willy.ratingbar.BaseRatingBar>
@@ -388,7 +419,7 @@
                                 android:singleLine="true"
                                 android:text="잘 쓸게요"
                                 android:textColor="@color/black"
-                                android:textSize="13sp" />
+                                android:textSize="14sp" />
 
                         </LinearLayout>
 
@@ -416,7 +447,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="6dp"
@@ -428,15 +459,15 @@
                 <EditText
                     android:id="@+id/edtv_review"
                     android:layout_width="match_parent"
-                    android:layout_height="69dp"
+                    android:layout_height="150dp"
                     android:background="@null"
                     android:ems="10"
                     android:gravity="top|start"
                     android:hint="내용을 입력하세요"
                     android:inputType="textMultiLine"
                     android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
                     android:paddingTop="10dp"
+                    android:paddingRight="12dp"
                     android:paddingBottom="10dp"
                     android:textSize="13sp" />
 
@@ -486,7 +517,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:height="55dp"
+                android:height="60dp"
                 android:background="@color/Iris"
                 android:gravity="center"
                 android:text="자료 받기"
