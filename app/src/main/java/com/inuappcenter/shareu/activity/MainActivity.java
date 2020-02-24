@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawer_my_page;
     private ArrayList<Notice> dataList;
     private ViewPager viewPager ;
-    private SuperiorLectureAdapter2 pagerAdapter ;
+    private EditText etv_search;
+    private ImageButton etv_search_click;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent3 = new Intent(getApplicationContext(), FileUploadActivity.class);
                         startActivity(intent3);
                         break ;
+                    case R.id.etv_search_click:
+                        //메인화면 검색
                 }
 
             }
@@ -128,11 +133,16 @@ public class MainActivity extends AppCompatActivity {
         Button btn_my_page_main = (Button)findViewById(R.id.btn_my_page_main);
         btn_my_page_main.setOnClickListener(onClickListener) ;
 
-        TextView tv_notice_set_title_more = (TextView)findViewById(R.id.tv_notice_set_title_more);
+        TextView tv_notice_set_title_more = (TextView)findViewById(R.id.tv_notice_title);
         tv_notice_set_title_more.setOnClickListener(onClickListener);
 
         FloatingActionButton fab_main = (FloatingActionButton)findViewById(R.id.fab_main);
         fab_main.setOnClickListener(onClickListener);
+
+        etv_search=findViewById(R.id.etv_search);
+        etv_search_click = findViewById(R.id.etv_search_click);
+        etv_search_click.setOnClickListener(onClickListener);
+
 
     }
     @Override

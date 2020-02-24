@@ -52,7 +52,7 @@ public class MyGiveActivity extends AppCompatActivity implements MyGiveContract.
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.btn_detailed_notice_backpress :
+                    case R.id.btn_backpress:
                         finish();
                         break ;
 
@@ -61,7 +61,7 @@ public class MyGiveActivity extends AppCompatActivity implements MyGiveContract.
             }
         };
 
-        ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_detailed_notice_backpress);
+        ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_backpress);
         btn_detailed_notice_backpress.setOnClickListener(onClickListener);
         RecyclerView rcv = findViewById(R.id.recyclerview_myupload);
         RecyclerView.LayoutManager mgr = new GridLayoutManager(getApplicationContext(),2);

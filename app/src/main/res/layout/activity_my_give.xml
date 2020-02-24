@@ -12,7 +12,7 @@
         android:background="@color/white">
 
         <ImageButton
-            android:id="@+id/btn_detailed_notice_backpress"
+            android:id="@+id/btn_backpress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/group91"

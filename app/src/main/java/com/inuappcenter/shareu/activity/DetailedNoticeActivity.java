@@ -62,7 +62,7 @@ public class DetailedNoticeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.btn_detailed_notice_backpress :
+                    case R.id.btn_backpress:
                         finish();
                         break ;
                 }
@@ -70,7 +70,7 @@ public class DetailedNoticeActivity extends AppCompatActivity {
             }
         } ;
 
-        ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_detailed_notice_backpress);
+        ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_backpress);
         btn_detailed_notice_backpress.setOnClickListener(onClickListener);
     }
     public void onBackPressed() {

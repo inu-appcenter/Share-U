@@ -9,8 +9,6 @@ import com.inuappcenter.shareu.R;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class MyDetailedUploadActivtity extends AppCompatActivity {
     @Override
@@ -25,7 +23,7 @@ public class MyDetailedUploadActivtity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.btn_detailed_notice_backpress :
+                    case R.id.btn_backpress:
                         finish();
                         break ;
 
@@ -34,7 +32,7 @@ public class MyDetailedUploadActivtity extends AppCompatActivity {
             }
         };
 
-        ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_detailed_notice_backpress);
+        ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_backpress);
         btn_detailed_notice_backpress.setOnClickListener(onClickListener);
     }
 }

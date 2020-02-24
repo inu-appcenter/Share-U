@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="과목을 검색해주세요 :)"
+                android:text="과목명을 검색해주세요 :)"
                 android:textColor="@color/Iris"
                 android:textSize="18sp"
                 android:textStyle="bold" />
