@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <include
+                android:id="@+id/include_superior_title_main"
+                layout="@layout/layout_superior_title_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginRight="15dp" />
+
+            <include
+                android:id="@+id/include_viewpager_superior"
+                layout="@layout/viewpager_superior"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="7dp" />
+
+
+            <include
+                android:id="@+id/include_ad_main"
+                layout="@layout/layout_ad_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp" />
+
+            <include
+                android:id="@+id/include_notice_set_title_main"
+                layout="@layout/layout_notice_set_title_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="14dp" />
+
+            <include
+                android:id="@+id/include_recyclerview2_main"
+                layout="@layout/layout_recyclerview2_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>

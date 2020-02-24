@@ -54,7 +54,23 @@
 
             </LinearLayout>
 
-            <ScrollView
+            <include
+                android:id="@+id/include_search"
+                layout="@layout/layout_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="16dp" />
+
+            <LinearLayout
+                android:id="@+id/layout_frame_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
+            <!--<ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0">
@@ -64,14 +80,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <include
-                        android:id="@+id/include_search"
-                        layout="@layout/layout_search"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginRight="16dp" />
+
 
                     <include
                         android:id="@+id/include_superior_title_main"
@@ -116,8 +125,9 @@
                 </LinearLayout>
 
 
-            </ScrollView>
+            </ScrollView>-->
 
+            //fragment 공간
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -127,11 +137,12 @@
             android:layout_gravity="bottom|end"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="13dp"
-            android:clickable="true"
             android:backgroundTint="@color/Iris"
+            android:clickable="true"
             android:src="@drawable/plus"
             app:borderWidth="0dp"
             app:fabSize="normal" />
+
     </FrameLayout>
 
 

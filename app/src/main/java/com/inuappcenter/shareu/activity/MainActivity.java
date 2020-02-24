@@ -3,6 +3,8 @@ package com.inuappcenter.shareu.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -22,6 +24,8 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.fragment.MainFragment;
+import com.inuappcenter.shareu.fragment.MajorFragment;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.inuappcenter.shareu.recycler.NoticeAdapter;
@@ -36,64 +40,18 @@ public class MainActivity extends AppCompatActivity {
 
     //Drawer 처리
     DrawerLayout drawer_my_page;
-    private ArrayList<Notice> dataList;
-    private ViewPager viewPager ;
+   /* private ArrayList<Notice> dataList;
+    private ViewPager viewPager ;*/
     private EditText etv_search;
     private ImageButton etv_search_click;
+    private FragmentManager fragmentManager;
+    private MainFragment fragmentMain;
+    private FragmentTransaction transaction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //recycler 처리
-        //RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclerview_main);
-        //RecyclerViewIndicator horizontalIndicator = (RecyclerViewIndicator)findViewById(R.id.recyclerViewIndicator);
-
-        ArrayList<SuperiorLecture> items=new ArrayList<>();
-        items.add(new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5));
-        items.add(new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",(float)4.8));
-        items.add(new SuperiorLecture(R.drawable.ppt,"생명과학 족보",(float)4.5));
-        items.add(new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",(float)3.2));
-        items.add(new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",(float)2.5));
-        viewPager = (ViewPager) findViewById(R.id.viewpager_superior) ;
-
-        SuperiorLectureAdapter2 adapter = new SuperiorLectureAdapter2(items,this);
-        viewPager.setAdapter(adapter) ;
-        CircleIndicator indicator = (CircleIndicator)findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager);
-        adapter.registerDataSetObserver(indicator.getDataSetObserver());
-        indicator.createIndicators(5,0);
-
-        RetrofitService networkService = RetrofitHelper.create();
-        networkService.getNotice().enqueue(new Callback<List<Notice> >(){
-            @Override
-            public void onResponse(Call<List<Notice> > call, Response<List<Notice>> response)
-            {
-
-                Log.e("ㅎㅎ",response.body().get(0).getTitle());
-                if(response.isSuccessful())
-                {
-                    dataList = new ArrayList<>();
-                    for(int i=0;i<response.body().size();i++)
-                    {
-                        dataList.add(new Notice((i+1)+". "+response.body().get(i).getTitle(),
-                                response.body().get(i).getContent(),
-                                response.body().get(i).getNoticeDate(),
-                                i+1,
-                                R.drawable.rightarrow));
-                    }
-                }
-                RecyclerView recyclerView2=(RecyclerView)findViewById(R.id.recyclerview2_main);
-                LinearLayoutManager layoutManager2=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
-                recyclerView2.setHasFixedSize(true);
-                recyclerView2.setLayoutManager(layoutManager2);
-                recyclerView2.setAdapter(new NoticeAdapter(MainActivity.this,dataList));
-            }
-            @Override
-            public void onFailure(Call<List<Notice>> call, Throwable t) {
-                Log.e("TAG", t.getMessage());
-            }
-        });
 
 
         //drawer 처리
@@ -112,10 +70,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.btn_my_page_main :
                         drawer_my_page.openDrawer(GravityCompat.END);
                         break ;
-                    case R.id.tv_notice_set_title_more :
-                        Intent intent2 = new Intent(getApplicationContext(), OverallNoticeActivity.class);
-                        startActivity(intent2);
-                        break ;
                     case R.id.fab_main:
                         Intent intent3 = new Intent(getApplicationContext(), FileUploadActivity.class);
                         startActivity(intent3);
@@ -133,15 +87,17 @@ public class MainActivity extends AppCompatActivity {
         Button btn_my_page_main = (Button)findViewById(R.id.btn_my_page_main);
         btn_my_page_main.setOnClickListener(onClickListener) ;
 
-        TextView tv_notice_set_title_more = (TextView)findViewById(R.id.tv_notice_title);
-        tv_notice_set_title_more.setOnClickListener(onClickListener);
-
         FloatingActionButton fab_main = (FloatingActionButton)findViewById(R.id.fab_main);
         fab_main.setOnClickListener(onClickListener);
 
         etv_search=findViewById(R.id.etv_search);
         etv_search_click = findViewById(R.id.etv_search_click);
         etv_search_click.setOnClickListener(onClickListener);
+        fragmentManager = getSupportFragmentManager();
+        fragmentMain = new MainFragment();
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.layout_frame_main,fragmentMain);
+        transaction.commit();
 
 
     }
