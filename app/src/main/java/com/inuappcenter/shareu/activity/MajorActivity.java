@@ -5,12 +5,15 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.fragment.GyoyangFragment;
 import com.inuappcenter.shareu.fragment.MajorFragment;
 import com.inuappcenter.shareu.my_class.Major;
+import com.inuappcenter.shareu.my_interface.OnItemClick;
 
 import java.util.ArrayList;
 
@@ -31,6 +34,8 @@ public class MajorActivity extends AppCompatActivity {
     private MajorFragment fragmentMajor;
     private GyoyangFragment fragmentGyoyang;
     private FragmentTransaction transaction;
+    private EditText etv_search;
+    private ImageButton etv_search_click;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,8 @@ public class MajorActivity extends AppCompatActivity {
         TextView tv_major = (TextView) findViewById(R.id.tv_major) ;
         TextView tv_gyoyang = (TextView) findViewById(R.id.tv_gyoyang) ;
         Button btn_left_bar_major = (Button)findViewById(R.id.btn_left_bar_major);
+        etv_search = findViewById(R.id.etv_search);
+        etv_search_click=findViewById(R.id.etv_search_click);
 
         tv_gyoyang.setTextColor(Color.parseColor("#000000"));
         tv_major.setTextColor(Color.parseColor("#574FBA"));
@@ -78,11 +85,14 @@ public class MajorActivity extends AppCompatActivity {
                             transaction.replace(R.id.layout_frame_category,fragmentGyoyang).commitAllowingStateLoss();
                         }
                         break;
+                    case R.id.etv_search_click:
+                       fragmentMajor.onClick(etv_search.getText()+"");
                 }
             }
         } ;
         tv_major.setOnClickListener(onClickListener) ;
         tv_gyoyang.setOnClickListener(onClickListener);
+        etv_search_click.setOnClickListener(onClickListener);
 
 
         Button.OnClickListener onClickListener2 = new Button.OnClickListener()

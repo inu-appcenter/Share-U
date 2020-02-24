@@ -37,7 +37,6 @@ public class DetailedNoticeActivity extends AppCompatActivity {
         RetrofitService networkService = RetrofitHelper.create();
         Intent intent = getIntent();
         int key = intent.getExtras().getInt("key");
-        Log.e("키 ? ",key+"");
         networkService.getDetailedNotice(key).enqueue(new Callback<List<Notice>>(){
             @Override
             public void onResponse(Call<List<Notice> > call, Response<List<Notice>> response)
@@ -45,6 +44,7 @@ public class DetailedNoticeActivity extends AppCompatActivity {
                 if(response.isSuccessful())
                 {
                     Log.e("엥",response.body().size()+"");
+                    // TODO size가 0일 때 처리가 안 되어 있어요
                     tv_detailed_notice_title.setText(response.body().get(0).getTitle());
                     tv_detailed_notice_date.setText(response.body().get(0).getNoticeDate());
                     tv_detailed_notice_content.setText(response.body().get(0).getContent());
@@ -62,7 +62,7 @@ public class DetailedNoticeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.btn_detailed_notice_backpress :
+                    case R.id.btn_backpress:
                         finish();
                         break ;
                 }
@@ -70,7 +70,7 @@ public class DetailedNoticeActivity extends AppCompatActivity {
             }
         } ;
 
-        ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_detailed_notice_backpress);
+        ImageButton btn_detailed_notice_backpress =(ImageButton)findViewById(R.id.btn_backpress);
         btn_detailed_notice_backpress.setOnClickListener(onClickListener);
     }
     public void onBackPressed() {

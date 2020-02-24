@@ -9,19 +9,18 @@
         android:id="@+id/include_select_major_bar"
         layout="@layout/layout_select_major_bar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
     <include
         android:id="@+id/include_select_tap"
         layout="@layout/layout_select_tap"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="9dp"
         android:layout_marginLeft="19dp"
-        android:layout_marginRight="17dp"
-        />
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="17dp" />
 
 
 

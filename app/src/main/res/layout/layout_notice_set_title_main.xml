@@ -13,11 +13,12 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_notice_set_title_main"
+            android:id="@+id/tv_search_result_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_weight="0"
+            android:gravity="center"
             android:text="공지사항"
             android:textColor="@color/black"
             android:textSize="18sp"

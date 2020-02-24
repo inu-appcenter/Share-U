@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="253dp"
     android:orientation="vertical"
-    android:windowSoftInputMode="adjustNothing"
-    card_view:cardBackgroundColor="@android:color/white"
-    card_view:cardCornerRadius="20dp"
-    card_view:cardElevation="0dp"
-    card_view:contentPadding="0dp">
+    android:background="@color/white"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,16 +22,32 @@
             android:layout_marginTop="34dp"
             android:layout_marginRight="32dp" />
 
-        <include
-            android:id="@+id/include_recyclerview_bottomsheet"
-            layout="@layout/layout_recyclerview_bottomsheet"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="6.5dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginBottom="17.5dp" />
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/include_recyclerview_bottomsheet"
+                layout="@layout/layout_recyclerview_bottomsheet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="6.5dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="17.5dp" />
+
+            <TextView
+                android:id="@+id/tv_search_please"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="과목명을 검색해주세요 :)"
+                android:textColor="@color/Iris"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
     </LinearLayout>
 
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

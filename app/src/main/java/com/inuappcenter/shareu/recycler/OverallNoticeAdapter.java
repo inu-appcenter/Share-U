@@ -2,6 +2,7 @@ package com.inuappcenter.shareu.recycler;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +13,21 @@ import com.inuappcenter.shareu.activity.DetailedNoticeActivity;
 import com.inuappcenter.shareu.my_class.Notice;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class OverallNoticeAdapter extends RecyclerView.Adapter<OverallNoticeAdapter.ViewHolder>{
 
-    private ArrayList<Notice> mitems;
+    private List<Notice> mitems;
     private Context mContext;
 
-    public OverallNoticeAdapter(ArrayList<Notice> items, Context Context) {
-        mitems = items;
+    public OverallNoticeAdapter(Context Context) {
+        mitems = new ArrayList<>();
         mContext = Context;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,11 +53,15 @@ public class OverallNoticeAdapter extends RecyclerView.Adapter<OverallNoticeAdap
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return mitems.size();
     }
 
-
+    public void setData(List<Notice> notices) {
+        mitems = notices;
+        notifyDataSetChanged();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 

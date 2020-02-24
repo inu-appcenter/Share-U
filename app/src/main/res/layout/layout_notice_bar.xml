@@ -7,7 +7,7 @@
     android:background="@color/white">
 
     <ImageButton
-        android:id="@+id/btn_detailed_notice_backpress"
+        android:id="@+id/btn_backpress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/group91"
@@ -17,7 +17,7 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/tv_my_detailed_file_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="공지사항"

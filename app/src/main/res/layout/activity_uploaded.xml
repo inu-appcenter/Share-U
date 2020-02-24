@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="내가올린자료"
+                android:text="내가 올린 자료"
                 android:textColor="@color/Iris"
                 android:textStyle="bold" />
 

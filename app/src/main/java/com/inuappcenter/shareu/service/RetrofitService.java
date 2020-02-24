@@ -5,6 +5,8 @@ import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.subjectName;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MultipartBody;

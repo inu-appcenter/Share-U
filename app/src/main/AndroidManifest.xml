@@ -13,7 +13,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@drawable/group326"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/AppTheme"
+        >
 
 
         <activity android:name=".activity.MainActivity"
@@ -21,12 +22,7 @@
         </activity>
         <activity android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"
-                    />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.MajorActivity"
             android:screenOrientation="portrait"></activity>
@@ -43,6 +39,36 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity android:name=".activity.MyUploadActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.MyDetailedUploadActivtity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.MyGiveActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activity.DetailedFileActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+
+        <activity android:name=".activity.SearchActivity"
+            android:screenOrientation="portrait"
+            >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"
+                    />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
     </application>
 
 </manifest>
