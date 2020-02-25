@@ -459,7 +459,7 @@
                 <EditText
                     android:id="@+id/edtv_review"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="171dp"
                     android:background="@null"
                     android:ems="10"
                     android:gravity="top|start"
@@ -513,7 +513,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/tv_get_file"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"

@@ -86,6 +86,10 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
         {
             holder.img_my_upload.setImageResource(R.drawable.zip);
         }
+        else if(item.getExtension()=="txt")
+        {
+            holder.img_my_upload.setImageResource(R.drawable.txt2);
+        }
         else
         {
             holder.img_my_upload.setImageResource(R.drawable.file);
