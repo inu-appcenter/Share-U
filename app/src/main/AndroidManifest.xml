@@ -63,10 +63,12 @@
         <activity android:name=".activity.SearchActivity"
             android:screenOrientation="portrait"
             >
-
-
         </activity>
 
+        <activity android:name=".activity.ServerFailActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
 
 
     </application>

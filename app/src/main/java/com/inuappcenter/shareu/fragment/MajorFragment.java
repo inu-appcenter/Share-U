@@ -1,5 +1,6 @@
 package com.inuappcenter.shareu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
@@ -79,8 +81,8 @@ public class MajorFragment extends Fragment implements OnItemClick {
 
             @Override
             public void onFailure(Call<List<Major>> call, Throwable t) {
-                Log.e("TAG", t.getMessage());
-                Toast.makeText(getActivity(), "실패", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ServerFailActivity.class);
+                startActivity(intent);
             }
         });
 

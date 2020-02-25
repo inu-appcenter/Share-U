@@ -25,7 +25,7 @@ public class SearchAllResultFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_main_search_all, container, false);
-        ArrayList<SuperiorLecture> items=new ArrayList<>();
+        /*ArrayList<SuperiorLecture> items=new ArrayList<>();
         items.add(new SuperiorLecture(R.drawable.ai,"문학과테마기행 족보",5));
         items.add(new SuperiorLecture(R.drawable.korean,"문테기 족보당",(float)4.8));
         items.add(new SuperiorLecture(R.drawable.ppt,"문테기 족보입니당",(float)4.5));
@@ -38,8 +38,7 @@ public class SearchAllResultFragment extends Fragment {
         CircleIndicator indicator = view.findViewById(R.id.indicator);
         indicator.setViewPager(viewPager);
         adapter.registerDataSetObserver(indicator.getDataSetObserver());
-        indicator.createIndicators(5,0);
-
+        indicator.createIndicators(5,0);*/
         return view;
     }
 }

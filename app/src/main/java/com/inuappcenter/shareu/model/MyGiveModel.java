@@ -18,7 +18,6 @@ import retrofit2.Response;
 
 public class MyGiveModel {
     MutableLiveData<List<MyUpload> > listMutableLiveData = new MutableLiveData<>();
-
     public MutableLiveData<List<MyUpload>> getListMutableLiveData() {
         return listMutableLiveData;
     }

@@ -9,21 +9,23 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.willy.ratingbar.BaseRatingBar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 public class SuperiorLectureAdapter2 extends PagerAdapter {
     // LayoutInflater 서비스 사용을 위한 Context 참조 저장.
-    private ArrayList<SuperiorLecture> mitems;
+    private List<SuperiorLecture> mitems;
     private Context mContext;
 
-    public SuperiorLectureAdapter2(ArrayList<SuperiorLecture> mitem, Context mContext) {
-        this.mitems = mitem;
+    public SuperiorLectureAdapter2(Context mContext) {
+        this.mitems = new ArrayList<>();
         this.mContext = mContext;
     }
 
@@ -68,5 +70,11 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view.equals(object);
+    }
+
+    public void setItem(List<SuperiorLecture> data)
+    {
+        mitems=data;
+        notifyDataSetChanged();
     }
 }

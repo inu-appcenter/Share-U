@@ -1,5 +1,6 @@
 package com.inuappcenter.shareu.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.androidadvance.topsnackbar.TSnackbar;
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialog;
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialogFragment;
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
@@ -82,7 +84,8 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
                     @Override
                     public void onFailure(Call<List<profName>> call, Throwable t)
                     {
-                        t.printStackTrace();
+                        Intent intent = new Intent(getActivity(), ServerFailActivity.class);
+                        startActivity(intent);
                     }
                 });
             }

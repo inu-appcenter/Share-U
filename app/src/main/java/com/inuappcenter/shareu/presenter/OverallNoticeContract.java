@@ -11,6 +11,7 @@ import java.util.List;
 public interface OverallNoticeContract {
     interface  View{
         void setDatas(List<Notice> datas);
+        void setInternet();
     }
     interface Presenter{
         public void onCreate();

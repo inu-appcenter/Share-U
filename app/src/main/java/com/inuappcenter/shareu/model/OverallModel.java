@@ -33,6 +33,7 @@ public class OverallModel {
     //메인스레드에서 LiveData를 갱신하려면 반드시 setValue(T) 메서드를 호출해야 한다. 만약, 작업스레드에서 LiveData를 갱신하려면 postValue(T) 메서드를 호출해야 한다.
     // .
     private MutableLiveData<List<Notice>> _dataList = new MutableLiveData<>();
+    private MutableLiveData<Boolean> flag = new MutableLiveData<>();
 
     public MutableLiveData<List<Notice>> getDataList() {
         return _dataList;
@@ -41,6 +42,11 @@ public class OverallModel {
         this._dataList.postValue(dataList);
         //콜백
     }
+
+    public MutableLiveData<Boolean> getFlag() {
+        return flag;
+    }
+
     public void setDatas()
     {
         RetrofitService networkService = RetrofitHelper.create();
@@ -48,6 +54,7 @@ public class OverallModel {
             @Override
             public void onResponse(Call<List<Notice> > call, Response<List<Notice>> response)
             {
+                flag.postValue(false);
                 if(response.isSuccessful())
                 {
                     List<Notice> tmp_list = new ArrayList<>();
@@ -65,10 +72,11 @@ public class OverallModel {
             @Override
             public void onFailure(Call<List<Notice>> call, Throwable t) {
 
-                Log.e("TAG", t.getMessage());
+                flag.postValue(true);
 
             }
         });
     }
+
 
 }

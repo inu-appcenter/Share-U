@@ -1,5 +1,6 @@
 package com.inuappcenter.shareu.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -75,5 +76,11 @@ public class OverallNoticeActivity extends AppCompatActivity implements OverallN
         RecyclerView.LayoutManager mgr = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         rcv.setLayoutManager(mgr);
         rcv.setAdapter(adapter);
+    }
+
+    @Override
+    public void setInternet() {
+        Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+        startActivity(intent);
     }
 }

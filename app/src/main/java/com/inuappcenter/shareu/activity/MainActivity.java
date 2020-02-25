@@ -20,12 +20,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.fragment.MainFragment;
 import com.inuappcenter.shareu.fragment.MajorFragment;
+import com.inuappcenter.shareu.fragment.SearchAllResultFragment;
+import com.inuappcenter.shareu.fragment.SearchNoResultFragment;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.inuappcenter.shareu.recycler.NoticeAdapter;
@@ -45,15 +48,22 @@ public class MainActivity extends AppCompatActivity {
     private EditText etv_search;
     private ImageButton etv_search_click;
     private FragmentManager fragmentManager;
-    private MainFragment fragmentMain;
+    private ImageView btn_backpress;
+
+    private MainFragment mainFragment;
+    private SearchAllResultFragment searchAllResultFragment;
+    private SearchNoResultFragment searchNoResultFragment;
+
     private FragmentTransaction transaction;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
 
-
+        //TODO : 프래그먼트 전환되면 햄버거 바 백스페이스로 바꾸고 마이페이지 버튼도 비활성화, 원래대로 돌아오면 다시 살려놓자. 사라져야 하는거 drawer_my_page랑 btn_left_bar_main,btn_backpress
         //drawer 처리
         View view = (View)findViewById(R.id.drawer_logout);
         view.setVisibility(View.GONE);
@@ -90,15 +100,19 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab_main = (FloatingActionButton)findViewById(R.id.fab_main);
         fab_main.setOnClickListener(onClickListener);
 
-        etv_search=findViewById(R.id.etv_search);
-        etv_search_click = findViewById(R.id.etv_search_click);
         etv_search_click.setOnClickListener(onClickListener);
         fragmentManager = getSupportFragmentManager();
-        fragmentMain = new MainFragment();
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.layout_frame_main,fragmentMain);
+        transaction.replace(R.id.layout_frame_main,mainFragment);
         transaction.commit();
 
+    }
+    void init()
+    {
+        etv_search=findViewById(R.id.etv_search);
+        etv_search_click = findViewById(R.id.etv_search_click);
+        btn_backpress = findViewById(R.id.btn_backpress);
+        mainFragment = new MainFragment();
 
     }
     @Override
