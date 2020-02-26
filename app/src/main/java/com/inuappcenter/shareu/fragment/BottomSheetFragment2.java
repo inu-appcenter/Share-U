@@ -49,7 +49,22 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.layout_bottomsheet,container);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         init(view);
+        return view;
+    }
+    public void init(View view)
+    {
+        tv_search_please = view.findViewById(R.id.tv_search_please);
+        recyclerView = view.findViewById(R.id.recyclerview_bottomsheet);
+        manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        etv_search = view.findViewById(R.id.etv_search);
+        etv_search_click = view.findViewById(R.id.etv_search_click);
+        tv_search_please.setText("교수명을 검색해주세요 :)");
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         etv_search_click.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -91,17 +106,5 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
             }
         });
 
-        return view;
     }
-    public void init(View view)
-    {
-        tv_search_please = view.findViewById(R.id.tv_search_please);
-        recyclerView = view.findViewById(R.id.recyclerview_bottomsheet);
-        manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        etv_search = view.findViewById(R.id.etv_search);
-        etv_search_click = view.findViewById(R.id.etv_search_click);
-        tv_search_please.setText("교수명을 검색해주세요 :)");
-
-    }
-
 }

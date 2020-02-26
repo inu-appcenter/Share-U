@@ -27,10 +27,17 @@ import androidx.fragment.app.Fragment;
 
 public class DrawerFragment extends Fragment {
     DrawerLayout drawer_my_page;
+    private View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_drawer_my_page, container, false);
+        view = inflater.inflate(R.layout.layout_drawer_my_page, container, false);
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         View.OnClickListener onClickListener = new TextView.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +97,5 @@ public class DrawerFragment extends Fragment {
 
         TextView tv_my_get_my_page = (TextView) view.findViewById(R.id.tv_my_get_my_page) ;
         tv_my_get_my_page.setOnClickListener(onClickListener);
-        return view;
     }
-
 }

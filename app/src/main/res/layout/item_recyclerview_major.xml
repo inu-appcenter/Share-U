@@ -1,45 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@color/white"
-    >
-    <LinearLayout
+    android:orientation="vertical"
+    android:shrinkColumns="0">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="6.5dp">
 
         <TextView
             android:id="@+id/tv_major_first"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="5.5dp"
-            android:layout_marginRight="6dp"
-            android:text="과목 또는 전공이다"
+            android:ellipsize="end"
+            android:maxEms="15"
             android:paddingLeft="12dp"
+            android:singleLine="true"
+            android:text="과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다과목 또는 전공이다v"
             android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
 
-            android:textSize="16sp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_major_second"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
-            android:layout_marginTop="14dp"
-            android:text="교수 이름이다"
+            android:layout_marginLeft="7dp"
+            android:ellipsize="end"
+            android:maxEms="8"
+            android:singleLine="true"
+            android:text="교수 이름이다교수 이름이다교수 이름이다교수 이름이다교수 이름이다교수 이름이다교수 이름이다교수 이름이다vv"
             android:textColor="#afafaf"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
 
-            android:textSize="11sp" />
+            app:layout_constraintLeft_toRightOf="@id/tv_major_first" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
         android:id="@+id/line_notice"
@@ -48,8 +57,9 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginLeft="3.5dp"
+        android:layout_marginTop="6.5dp"
+
+
         android:layout_marginRight="3.5dp"
-
-
         android:background="@color/Iris" />
-</LinearLayout>
+</TableLayout>

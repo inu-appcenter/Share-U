@@ -53,38 +53,25 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_main, container, false);
-        superiorLectureAdapter2 = new SuperiorLectureAdapter2(getActivity());
-        noticeAdapter = new NoticeAdapter(getActivity());
         init();
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.tv_notice_set_title_more :
-                        Intent intent2 = new Intent(getActivity(), OverallNoticeActivity.class);
-                        startActivity(intent2);
-                        break ;
-                }
-
-            }
-        } ;
-
-        TextView tv_notice_set_title_more = view.findViewById(R.id.tv_notice_set_title_more);
-        tv_notice_set_title_more.setOnClickListener(onClickListener);
-
-
-
         return view;
     }
 
     void init()
     {
         viewPager = view.findViewById(R.id.viewpager_superior) ;
+
+        superiorLectureAdapter2 = new SuperiorLectureAdapter2(getActivity());
         viewPager.setAdapter(superiorLectureAdapter2) ;
+
+        noticeAdapter = new NoticeAdapter(getActivity());
+
         CircleIndicator indicator = view.findViewById(R.id.indicator);
         indicator.setViewPager(viewPager);
+
         superiorLectureAdapter2.registerDataSetObserver(indicator.getDataSetObserver());
         indicator.createIndicators(5,0);
+
 
         RecyclerView recyclerView2=view.findViewById(R.id.recyclerview2_main);
         LinearLayoutManager layoutManager2=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
@@ -104,6 +91,21 @@ public class MainFragment extends Fragment implements MainContract.View {
     public void onResume() {
         super.onResume();
         mainPresenter.onResume();
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.tv_notice_set_title_more :
+                        Intent intent2 = new Intent(getActivity(), OverallNoticeActivity.class);
+                        startActivity(intent2);
+                        break ;
+                }
+
+            }
+        } ;
+
+        TextView tv_notice_set_title_more = view.findViewById(R.id.tv_notice_set_title_more);
+        tv_notice_set_title_more.setOnClickListener(onClickListener);
     }
 
     @Override

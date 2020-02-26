@@ -23,18 +23,16 @@
         android:layout_marginRight="17dp" />
 
 
-
     <LinearLayout
         android:id="@+id/layout_frame_category"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="19dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16.5dp"
-        android:orientation="vertical"
-        >
+        android:background="@color/white"
+        android:orientation="vertical">
 
     </LinearLayout>
 

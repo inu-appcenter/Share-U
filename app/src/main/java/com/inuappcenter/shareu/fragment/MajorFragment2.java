@@ -35,18 +35,25 @@ public class MajorFragment2 extends Fragment {
     private LinearLayoutManager manager;
     private ArrayList<Major> dataList;
     TextView tv_my_major;
+    private String name;
+    private View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_recyclerview_select_major, container, false);
+        view = inflater.inflate(R.layout.layout_recyclerview_select_major, container, false);
 
         Bundle args = getArguments();
-        String name = getArguments().getString("name");
+        name = getArguments().getString("name");
 
         tv_my_major = view.findViewById(R.id.tv_my_major);
         tv_my_major.setVisibility(VISIBLE);
         tv_my_major.setText(name);
+        return view;
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         RetrofitService networkService = RetrofitHelper.create();
         networkService.getDetailedMajorList(name).enqueue(new Callback<List<Major>>() {
             @Override
@@ -55,12 +62,20 @@ public class MajorFragment2 extends Fragment {
                     dataList = new ArrayList<>();
                     String flag = "?";
                     for (int i = 0; i < response.body().size(); i++) {
+                        Log.e("체크 ! ",name+" "+response.body().get(i).first+" "+response.body().get(i).second+" "+response.body().get(i).third);
                         if (flag.equals(response.body().get(i).third)) {
                             if (i == response.body().size() - 1) {
                                 dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.white));
-                            } else if (!response.body().get(i + 1).third.equals(response.body().get(i).third)) {
-                                dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.white));
-                            } else {
+                            }
+                            else if(i==response.body().size()-1)
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                            }
+                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                            }
+                            else {
                                 dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.gray));
                             }
                         }
@@ -70,6 +85,10 @@ public class MajorFragment2 extends Fragment {
                             if(response.body().size()==1)
                             {
                                 dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
+                            }
+                            else if(i==response.body().size()-1 )
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
                             }
                             else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
                             {
@@ -100,7 +119,5 @@ public class MajorFragment2 extends Fragment {
             }
         });
 
-        return view;
     }
-
 }

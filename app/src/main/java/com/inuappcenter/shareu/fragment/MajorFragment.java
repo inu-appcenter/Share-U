@@ -1,5 +1,6 @@
 package com.inuappcenter.shareu.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.MainActivity;
 import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
@@ -36,11 +38,17 @@ public class MajorFragment extends Fragment implements OnItemClick {
     private IndexFastScrollRecyclerView recyclerView;
     private LinearLayoutManager manager;
     private ArrayList<Major> dataList;
-
+    private View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_recyclerview_select_major, container, false);
+        view = inflater.inflate(R.layout.layout_recyclerview_select_major, container, false);
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         RetrofitService networkService = RetrofitHelper.create();
         networkService.getMajorList().enqueue(new Callback<List<Major>>() {
             @Override
@@ -81,17 +89,17 @@ public class MajorFragment extends Fragment implements OnItemClick {
 
             @Override
             public void onFailure(Call<List<Major>> call, Throwable t) {
-                Intent intent = new Intent(getActivity(), ServerFailActivity.class);
+                Intent intent = new Intent(getContext(), ServerFailActivity.class);
                 startActivity(intent);
             }
         });
 
-        return view;
     }
 
     @Override
     public void onClick(String value) {
         //통신
+        //search click
         Toast.makeText(getActivity(),value+"", Toast.LENGTH_SHORT).show();
     }
 
@@ -99,4 +107,5 @@ public class MajorFragment extends Fragment implements OnItemClick {
     public void onClick2(String value) {
 
     }
+
 }

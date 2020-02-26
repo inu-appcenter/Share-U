@@ -30,10 +30,17 @@ public class GyoyangFragment extends Fragment {
     private IndexFastScrollRecyclerView recyclerView;
     private LinearLayoutManager manager;
     private ArrayList<Major> dataList;
+    private View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_recyclerview_select_major, container, false);
+        view = inflater.inflate(R.layout.layout_recyclerview_select_major, container, false);
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         RetrofitService networkService2 = RetrofitHelper.create();
         networkService2.getDetailedGyoyangList().enqueue(new Callback<List<Major>>(){
             @Override
@@ -99,6 +106,5 @@ public class GyoyangFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        return view;
     }
 }
