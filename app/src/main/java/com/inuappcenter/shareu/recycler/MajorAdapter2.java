@@ -1,14 +1,18 @@
 package com.inuappcenter.shareu.recycler;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.CategorySearchActivity;
+import com.inuappcenter.shareu.activity.MajorActivity;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
 
@@ -23,10 +27,9 @@ public class MajorAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context mContext;
     private ArrayList<Major> mitems;
     private ArrayList<Integer> mSectionPositions;
-
+    private String name;
     public MajorAdapter2(Context mContext, ArrayList<Major> mitems) {
         this.mContext = mContext;
-
         this.mitems = mitems;
     }
 
@@ -64,7 +67,12 @@ public class MajorAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mContext, text+"", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(view.getContext(), CategorySearchActivity.class);
+                    intent.putExtra("major",mitems.get(position).getFirst());
+                    intent.putExtra("prof",mitems.get(position).getSecond());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    view.getContext().startActivity(intent);
+                    ((Activity)mContext).finish();
                 }
             });
         }

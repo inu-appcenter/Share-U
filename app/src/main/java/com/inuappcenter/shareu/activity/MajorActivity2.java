@@ -31,7 +31,7 @@ import static android.view.View.VISIBLE;
 public class MajorActivity2 extends AppCompatActivity {
 
     private ArrayList<Major> dataList;
-
+    private TextView tv_my_major;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -40,7 +40,7 @@ public class MajorActivity2 extends AppCompatActivity {
         //this.initializeData();
         TextView tv_major = (TextView) findViewById(R.id.tv_major);
         TextView tv_gyoyang = (TextView)findViewById(R.id.tv_gyoyang);
-        TextView tv_my_major = (TextView) findViewById(R.id.tv_my_major);
+        tv_my_major = (TextView) findViewById(R.id.tv_my_major);
 
         tv_major.setTextColor(Color.parseColor("#574FBA"));
         tv_major.setTypeface(Typeface.DEFAULT_BOLD);
@@ -123,4 +123,5 @@ public class MajorActivity2 extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
+
 }

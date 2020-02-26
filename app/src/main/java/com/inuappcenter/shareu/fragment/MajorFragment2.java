@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 import static android.view.View.VISIBLE;
 
-public class MajorFragment2 extends Fragment {
+public class MajorFragment2 extends Fragment{
     private IndexFastScrollRecyclerView recyclerView;
     private LinearLayoutManager manager;
     private ArrayList<Major> dataList;
@@ -120,4 +120,5 @@ public class MajorFragment2 extends Fragment {
         });
 
     }
+
 }

@@ -71,7 +71,10 @@
             >
         </activity>
 
-
+        <activity android:name=".activity.CategorySearchActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
     </application>
 
 </manifest>

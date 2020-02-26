@@ -13,7 +13,6 @@ import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.fragment.GyoyangFragment;
 import com.inuappcenter.shareu.fragment.MajorFragment;
 import com.inuappcenter.shareu.my_class.Major;
-import com.inuappcenter.shareu.my_interface.OnItemClick;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 
-public class MajorActivity extends AppCompatActivity {
+public class MajorActivity extends AppCompatActivity{
     IndexFastScrollRecyclerView recyclerView;
     IndexFastScrollRecyclerView recyclerView2;
     LinearLayoutManager manager;

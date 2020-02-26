@@ -33,6 +33,8 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private FragmentTransaction transaction;
 
     private ArrayList<Integer> mSectionPositions;
+
+    private String name;
     public MajorAdapter(Context mContext, ArrayList<Major> mitems) {
         this.mContext = mContext;
 
@@ -84,6 +86,7 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                    fragmentMajor2 = new MajorFragment2();
                    Bundle bundle = new Bundle();
                    bundle.putString("name",((MajorViewHolder) viewHolder).first.getText().toString());
+                   name = ((MajorViewHolder) viewHolder).first.getText().toString();
                    fragmentMajor2.setArguments(bundle);
                    fragmentManager =((MajorActivity)mContext).getSupportFragmentManager();
                    transaction = fragmentManager.beginTransaction();
@@ -155,6 +158,5 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public int getPositionForSection(int sectionIndex) {
         return mSectionPositions.get(sectionIndex);
     }
-
 
 }
