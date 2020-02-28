@@ -38,7 +38,7 @@ import retrofit2.Response;
 public class BottomSheetFragement extends RoundedBottomSheetDialogFragment{
 
 
-    private ArrayList<com.inuappcenter.shareu.my_class.subjectName> dataList;
+    private ArrayList<subjectName> dataList;
     private RecyclerView recyclerView;
     private  LinearLayoutManager manager;
     private RetrofitService networkService;
@@ -98,7 +98,7 @@ public class BottomSheetFragement extends RoundedBottomSheetDialogFragment{
                                     dataList=new ArrayList<>();
                                     for(int i=0;i<response.body().size();i++)
                                     {
-                                        dataList.add(new subjectName(response.body().get(i).getSubjectName()));
+                                        dataList.add(new subjectName(response.body().get(i).getMajorName()));
                                     }
                                     recyclerView.setHasFixedSize(true);
                                     recyclerView.setLayoutManager(manager); // LayoutManager 등록

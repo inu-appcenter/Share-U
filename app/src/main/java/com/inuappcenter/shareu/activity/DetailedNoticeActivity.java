@@ -43,7 +43,6 @@ public class DetailedNoticeActivity extends AppCompatActivity {
             {
                 if(response.isSuccessful())
                 {
-                    //Log.e("엥",response.body().size()+"");
                     // TODO size가 0일 때 처리가 안 되어 있어요
                     //Log.e("읭",response.body().get(0).getContent()+"");
                     String sibal = response.body().get(0).getContent().replace("\\n","\n");

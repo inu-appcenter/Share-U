@@ -62,14 +62,10 @@ public class MajorFragment2 extends Fragment{
                     dataList = new ArrayList<>();
                     String flag = "?";
                     for (int i = 0; i < response.body().size(); i++) {
-                        Log.e("체크 ! ",name+" "+response.body().get(i).first+" "+response.body().get(i).second+" "+response.body().get(i).third);
+                        //Log.e("체크 ! ",name+" "+response.body().get(i).first+" "+response.body().get(i).second+" "+response.body().get(i).third);
                         if (flag.equals(response.body().get(i).third)) {
                             if (i == response.body().size() - 1) {
                                 dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.white));
-                            }
-                            else if(i==response.body().size()-1)
-                            {
-                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
                             }
                             else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
                             {

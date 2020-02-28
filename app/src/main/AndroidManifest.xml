@@ -31,8 +31,6 @@
         </activity>
         <activity android:name=".activity.MajorActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.MajorActivity2"
-            android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.DetailedNoticeActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.OverallNoticeActivity"
@@ -58,6 +56,8 @@
             android:screenOrientation="portrait"
             >
 
+
+
         </activity>
 
 
@@ -74,6 +74,45 @@
         <activity android:name=".activity.CategorySearchActivity"
             android:screenOrientation="portrait"
             >
+        </activity>
+        <activity android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.ModifyInformActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.FindPassswdActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.GetPasswdActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.RegisteredReviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.PoliceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+
         </activity>
     </application>
 

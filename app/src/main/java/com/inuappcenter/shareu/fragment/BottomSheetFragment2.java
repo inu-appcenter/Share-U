@@ -43,6 +43,7 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
     private EditText etv_search;
     private ImageButton  etv_search_click;
     private TextView tv_search_please;
+    private TextView edtv_select_subject;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
         etv_search = view.findViewById(R.id.etv_search);
         etv_search_click = view.findViewById(R.id.etv_search_click);
         tv_search_please.setText("교수명을 검색해주세요 :)");
+        edtv_select_subject=getActivity().findViewById(R.id.edtv_select_subject);
 
     }
 
@@ -68,41 +70,51 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
         etv_search_click.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                networkService = RetrofitHelper.create();
-                networkService.getProfName(etv_search.getText()+"").enqueue(new Callback<List<profName>>(){
-                    @Override
-                    public void onResponse(Call<List<profName> > call, Response<List<profName>> response)
-                    {
-                        if(response.body().size()==0)
+                if(edtv_select_subject.getText().length()==0)
+                {
+                    tv_search_please.setVisibility(View.VISIBLE);
+                    tv_search_please.setText("과목명부터 검색해주세요 :(");
+                }
+                else
+                {
+                    networkService = RetrofitHelper.create();
+                    networkService.getProfName(edtv_select_subject.getText()+"",etv_search.getText()+"").enqueue(new Callback<List<profName>>(){
+                        @Override
+                        public void onResponse(Call<List<profName> > call, Response<List<profName>> response)
                         {
-                            tv_search_please.setVisibility(View.VISIBLE);
-                            tv_search_please.setText("검색 결과가 없습니다 :(");
-                        }
-                        else
-                        {
-                            tv_search_please.setVisibility(View.GONE);
-                            if(response.isSuccessful())
+                            if(response.body().size()==0)
                             {
-                                dataList=new ArrayList<>();
-                                for(int i=0;i<response.body().size();i++)
-                                {
-                                    dataList.add(new profName(response.body().get(i).getProfName()));
-                                }
-
+                                tv_search_please.setVisibility(View.VISIBLE);
+                                tv_search_please.setText("검색 결과가 없습니다 :(");
                             }
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                            recyclerView.setAdapter(new BottomSheetAdapter2(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
-                        }
+                            else
+                            {
+                                tv_search_please.setVisibility(View.GONE);
+                                if(response.isSuccessful())
+                                {
+                                    dataList=new ArrayList<>();
+                                    for(int i=0;i<response.body().size();i++)
+                                    {
+                                        dataList.add(new profName(response.body().get(i).getProfName()));
+                                    }
 
-                    }
-                    @Override
-                    public void onFailure(Call<List<profName>> call, Throwable t)
-                    {
-                        Intent intent = new Intent(getActivity(), ServerFailActivity.class);
-                        startActivity(intent);
-                    }
-                });
+                                }
+                                recyclerView.setHasFixedSize(true);
+                                recyclerView.setLayoutManager(manager); // LayoutManager 등록
+                                recyclerView.setAdapter(new BottomSheetAdapter2(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
+                            }
+
+                        }
+                        @Override
+                        public void onFailure(Call<List<profName>> call, Throwable t)
+                        {
+                            Intent intent = new Intent(getActivity(), ServerFailActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                }
+
             }
         });
 

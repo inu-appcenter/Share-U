@@ -74,7 +74,7 @@ public class MainModel {
                         tmp_list.add(new Notice((i+1)+". "+response.body().get(i).getTitle(),
                                 response.body().get(i).getContent(),
                                 response.body().get(i).getNoticeDate(),
-                                i+1,
+                                response.body().get(i).getNoticeKey(),
                                 R.drawable.rightarrow));
                     }
                     setNotiecData(tmp_list);

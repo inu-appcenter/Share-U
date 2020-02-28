@@ -14,6 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Intent;
+import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,8 @@ import com.inuappcenter.shareu.fragment.SearchAllResultFragment;
 import com.inuappcenter.shareu.fragment.SearchNoResultFragment;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
+import com.inuappcenter.shareu.my_class.TokenManager;
+import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.NoticeAdapter;
 import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter2;
 import com.inuappcenter.shareu.service.RetrofitHelper;
@@ -39,7 +42,7 @@ import com.inuappcenter.shareu.service.RetrofitService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemClick {
 
     //Drawer 처리
     DrawerLayout drawer_my_page;
@@ -56,17 +59,21 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentTransaction transaction;
 
+    private View drawer_login;
+    private View drawer_logout;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-
+        check_login();
         //TODO : 프래그먼트 전환되면 햄버거 바 백스페이스로 바꾸고 마이페이지 버튼도 비활성화, 원래대로 돌아오면 다시 살려놓자. 사라져야 하는거 drawer_my_page랑 btn_left_bar_main,btn_backpress
         //drawer 처리
-        View view = (View)findViewById(R.id.drawer_logout);
-        view.setVisibility(View.GONE);
+        drawer_login = (View)findViewById(R.id.drawer_login);
+        drawer_logout = (View)findViewById(R.id.drawer_logout);
         drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
         drawer_my_page.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -79,6 +86,16 @@ public class MainActivity extends AppCompatActivity {
                         break ;
                     case R.id.btn_my_page_main :
                         drawer_my_page.openDrawer(GravityCompat.END);
+                        if(check_login())
+                        {
+                            drawer_login.setVisibility(View.VISIBLE);
+                            drawer_logout.setVisibility(View.GONE);
+                        }
+                        else
+                        {
+                            drawer_login.setVisibility(View.GONE);
+                            drawer_logout.setVisibility(View.VISIBLE);
+                        }
                         break ;
                     case R.id.fab_main:
                         Intent intent3 = new Intent(getApplicationContext(), FileUploadActivity.class);
@@ -115,6 +132,20 @@ public class MainActivity extends AppCompatActivity {
         mainFragment = new MainFragment();
 
     }
+
+    boolean check_login()
+    {
+        TokenManager tm= TokenManager.getInstance();
+        String token = tm.getToken(this);
+        if(token!=null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     @Override
     public void onBackPressed() {
         if (drawer_my_page.isDrawerOpen(GravityCompat.END)) {
@@ -127,6 +158,17 @@ public class MainActivity extends AppCompatActivity {
     public void closeDrawer()
     {
         drawer_my_page.closeDrawer(GravityCompat.END);
+    }
+
+    @Override
+    public void onClick(String value) {
+        //drawer를 닫을꺼야
+        drawer_my_page.closeDrawer(GravityCompat.END);
+    }
+
+    @Override
+    public void onClick2(String value) {
+
     }
 }
 

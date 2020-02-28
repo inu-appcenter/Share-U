@@ -2,6 +2,7 @@ package com.inuappcenter.shareu.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +75,10 @@ public class GyoyangFragment extends Fragment {
                             if(response.body().size()==1)
                             {
                                 dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
+                            }
+                            else if(i==response.body().size()-1)
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
                             }
                             else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
                             {

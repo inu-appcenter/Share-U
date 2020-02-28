@@ -5,14 +5,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class subjectName {
     @SerializedName("subjectName")
-    @Expose
-    private String subjectName;
+    private String majorName;
 
-    public String getSubjectName() {
-        return subjectName;
+
+    public subjectName(String majorName) {
+        this.majorName = majorName;
     }
 
-    public subjectName(String subjectName) {
-        this.subjectName = subjectName;
+    public String getMajorName() {
+        return majorName;
     }
+
 }

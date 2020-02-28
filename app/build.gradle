@@ -66,5 +66,7 @@ dependencies {
     //https://github.com/ome450901/SimpleRatingBar
     implementation 'com.github.ome450901:SimpleRatingBar:1.4.0'
 
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.5'
 
 }

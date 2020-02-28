@@ -61,18 +61,32 @@ public class MajorFragment extends Fragment implements OnItemClick {
                         if (flag.equals(response.body().get(i).third)) {
                             if (i == response.body().size() - 1) {
                                 dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.white));
-                            } else if (!response.body().get(i + 1).third.equals(response.body().get(i).third)) {
-                                dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.white));
-                            } else {
+                            }
+                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                            }
+                            else {
                                 dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.gray));
                             }
-                        } else {
+                        }
+                        else {
                             flag = response.body().get(i).third;
                             dataList.add(new Major(response.body().get(i).third, response.body().get(i).second, response.body().get(i).third, Code.ViewType.INDEX, R.color.gray));
-                            if (!response.body().get(i + 1).third.equals(response.body().get(i).third)) {
-                                dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.white));
-                            } else
-                                dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.gray));
+                            if(response.body().size()==1)
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
+                            }
+                            else if(i==response.body().size()-1 )
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                            }
+                            else if(!response.body().get(i+1).third.equals(response.body().get(i).third))
+                            {
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.white));
+                            }
+                            else
+                                dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
                         }
                     }
                 }
