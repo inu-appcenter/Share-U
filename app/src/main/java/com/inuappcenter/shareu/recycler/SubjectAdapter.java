@@ -14,6 +14,7 @@ import com.inuappcenter.shareu.activity.MajorActivity;
 import com.inuappcenter.shareu.fragment.MajorFragment2;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
+import com.inuappcenter.shareu.my_class.categorySubject;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 
 import java.util.ArrayList;
@@ -24,10 +25,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
+public class SubjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
 
     private Context mContext;
-    private ArrayList<Major> mitems;
+    private ArrayList<categorySubject> mitems;
 
     private FragmentManager fragmentManager;
     private MajorFragment2 fragmentMajor2;
@@ -36,7 +37,7 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private ArrayList<Integer> mSectionPositions;
 
     private String name;
-    public MajorAdapter(Context mContext, ArrayList<Major> mitems) {
+    public SubjectAdapter(Context mContext, ArrayList<categorySubject> mitems) {
         this.mContext = mContext;
 
         this.mitems = mitems;
@@ -66,37 +67,37 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         if(viewHolder instanceof IndexViewHolder)
         {
-            ((IndexViewHolder) viewHolder).index.setText(mitems.get(position).getFirst());
+            ((IndexViewHolder) viewHolder).index.setText(mitems.get(position).getProfName());
         }
         else
         {
 
-            ((MajorViewHolder) viewHolder).first.setText(mitems.get(position).getFirst());
-            ((MajorViewHolder) viewHolder).second.setText(mitems.get(position).getSecond());
+            ((MajorViewHolder) viewHolder).first.setText(mitems.get(position).getSubjectname());
+            ((MajorViewHolder) viewHolder).second.setText(mitems.get(position).getSubjectInitiality());
             ((MajorViewHolder) viewHolder).line_notice.setBackgroundColor(mContext.getResources().getColor(mitems.get(position).getLine()));
-           viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View view) {
-                 //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
                   /* Intent intent = new Intent(mContext,MajorActivity2.class);
                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                    intent.putExtra("select_major",mitems.get(position).getFirst());
                    mContext.startActivity(intent);
                    ((Activity)mContext).overridePendingTransition(R.anim.slide_right,R.anim.hold);
 */
-                   fragmentMajor2 = new MajorFragment2();
-                   Bundle bundle = new Bundle();
-                   bundle.putString("name",((MajorViewHolder) viewHolder).first.getText().toString());
-                   name = ((MajorViewHolder) viewHolder).first.getText().toString();
-                   fragmentMajor2.setArguments(bundle);
-                   fragmentManager =((MajorActivity)mContext).getSupportFragmentManager();
-                   transaction = fragmentManager.beginTransaction();
+                    fragmentMajor2 = new MajorFragment2();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name",((MajorViewHolder) viewHolder).first.getText().toString());
+                    name = ((MajorViewHolder) viewHolder).first.getText().toString();
+                    fragmentMajor2.setArguments(bundle);
+                    fragmentManager =((MajorActivity)mContext).getSupportFragmentManager();
+                    transaction = fragmentManager.beginTransaction();
 
-                   transaction.replace(R.id.layout_frame_category,fragmentMajor2);
-                   transaction.addToBackStack(null);
-                   transaction.commit();
-               }
-           });
+                    transaction.replace(R.id.layout_frame_category,fragmentMajor2);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            });
         }
 
     }
@@ -146,7 +147,7 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         List<String> sections = new ArrayList<>(100);
         mSectionPositions = new ArrayList<>(100);
         for (int i = 0; i< mitems.size(); i++) {
-            String section = mitems.get(i).getThird();
+            String section = mitems.get(i).getProfName();
             if (!sections.contains(section)) {
                 sections.add(section);
                 mSectionPositions.add(i);

@@ -21,6 +21,8 @@ public class Major {
 
 
 
+
+
     public Major(String first, String second,String third, int viewType,int line) {
         this.first = first;
         this.second = second;

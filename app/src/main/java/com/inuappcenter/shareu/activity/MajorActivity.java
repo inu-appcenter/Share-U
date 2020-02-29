@@ -85,7 +85,14 @@ public class MajorActivity extends AppCompatActivity{
                         }
                         break;
                     case R.id.etv_search_click:
-                       fragmentMajor.onClick(etv_search.getText()+"");
+                        if(fragmentMajor.isAdded())
+                        {
+                            fragmentMajor.onClick(etv_search.getText()+"");
+                        }
+                        else
+                        {
+
+                        }
                 }
             }
         } ;

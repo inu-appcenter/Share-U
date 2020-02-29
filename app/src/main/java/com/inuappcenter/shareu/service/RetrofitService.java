@@ -8,6 +8,7 @@ import com.inuappcenter.shareu.my_class.MyInform;
 import com.inuappcenter.shareu.my_class.MyPage;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SumPoint;
+import com.inuappcenter.shareu.my_class.categorySubject;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.subjectName;
 
@@ -95,5 +96,14 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("/document/user_doc/checkGiftPoint")
     Call<BooleanFuck>checkGiftPoint(@Field("token")String token);
+
+    //전공리스트에서 전공이름 검색
+    @GET("/search/bar/categoryMajor")
+    Call<List<Major> >categoryMajor(@Query("majorName")String majorName);
+
+    //전공선택후 과목이름 검색
+    @GET("/search/bar/categorySubject")
+    Call<List<categorySubject>>categorySubject
+    (@Query("majorName")String majorName,@Query("subjectName")String subjectName);
 
 }
