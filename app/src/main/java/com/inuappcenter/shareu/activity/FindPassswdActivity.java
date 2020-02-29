@@ -1,8 +1,8 @@
 package com.inuappcenter.shareu.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -13,7 +13,6 @@ import com.androidadvance.topsnackbar.TSnackbar;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.my_class.Fuck;
 import com.inuappcenter.shareu.my_class.TokenManager;
-import com.inuappcenter.shareu.my_class.tmpPasswd;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
@@ -63,21 +62,28 @@ public class FindPassswdActivity extends Activity {
                     TokenManager tm = TokenManager.getInstance();
                     String token = tm.getToken(getApplicationContext());
                     RetrofitService networkService = RetrofitHelper.create();
-                    networkService.tmpPasswd(etv_id.getText() + "", etv_name.getText() + "").enqueue(new Callback<tmpPasswd>() {
+                    networkService.tmpPasswd(etv_id.getText() + "", etv_name.getText() + "").enqueue(new Callback<Fuck>() {
                         @Override
-                        public void onResponse(Call<tmpPasswd> call, Response<tmpPasswd> response) {
+                        public void onResponse(Call<Fuck> call, Response<Fuck> response) {
                             if (response.isSuccessful()) {
+                               if(response.body().getAns().equals("success"))
+                               {
+                                   Intent intent =new Intent(getApplicationContext(),GetPasswdActivity.class);
+                                   startActivity(intent);
+                                   finish();
 
+                               }
+                               else
+                               {
+                                   Toast.makeText(getApplicationContext(),"아이디 또는 비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show();
+                               }
 
                             }
-                            else
-                            {
 
-                            }
                         }
 
                         @Override
-                        public void onFailure(Call<tmpPasswd> call, Throwable t) {
+                        public void onFailure(Call<Fuck> call, Throwable t) {
 
                         }
                     });

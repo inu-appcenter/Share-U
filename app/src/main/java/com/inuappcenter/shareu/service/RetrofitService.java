@@ -10,10 +10,7 @@ import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SumPoint;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.subjectName;
-import com.inuappcenter.shareu.my_class.tmpPasswd;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -87,7 +84,7 @@ public interface RetrofitService {
     //비밀번호찾기
     @FormUrlEncoded
     @POST("/account/tmpPasswd")
-    Call<tmpPasswd>tmpPasswd(@Field("id")String id, @Field("name")String name);
+    Call<Fuck>tmpPasswd(@Field("id")String id, @Field("name")String name);
 
     //사용자 회원가입시 10포인트 선물 받는다 이미받은적있으면 false
     @FormUrlEncoded
