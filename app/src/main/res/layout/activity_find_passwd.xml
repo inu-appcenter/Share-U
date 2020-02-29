@@ -61,6 +61,8 @@
             android:paddingLeft="9dp"
             android:textColor="@color/black"
             android:textColorHint="#57000000"
+            android:hint="홍길동"
+            android:textCursorDrawable="@null"
             android:textSize="14sp" />
 
         <TextView
@@ -82,6 +84,8 @@
             android:paddingLeft="9dp"
             android:textColor="@color/black"
             android:textColorHint="#57000000"
+            android:hint="201801234"
+            android:textCursorDrawable="@null"
             android:textSize="14sp" />
     </LinearLayout>
 
