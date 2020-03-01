@@ -9,19 +9,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.activity.CategorySearchActivity;
-import com.inuappcenter.shareu.activity.CategorySuccessedActivity;
+import com.inuappcenter.shareu.activity.SearchSuccessedActivity;
 import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.Document;
-import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
-import com.inuappcenter.shareu.presenter.MainContract;
 import com.inuappcenter.shareu.presenter.SearchAllResultContract;
 import com.inuappcenter.shareu.presenter.SearchAllResultPresenter;
 import com.inuappcenter.shareu.recycler.DocumentAdapter;
 import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter2;
-import com.inuappcenter.shareu.service.RetrofitHelper;
-import com.inuappcenter.shareu.service.RetrofitService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +28,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import me.relex.circleindicator.CircleIndicator;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SearchAllResultFragment extends Fragment implements SearchAllResultContract.View {
     private ArrayList<SuperiorLecture> dataList;
@@ -88,7 +80,7 @@ public class SearchAllResultFragment extends Fragment implements SearchAllResult
             @Override
             public void onClick(View view) {
                 //더보기 넘어가기
-                Intent intent = new Intent(getActivity(), CategorySuccessedActivity.class);
+                Intent intent = new Intent(getActivity(), SearchSuccessedActivity.class);
                 intent.putExtra("name",tv_search_result_name.getText()+"");
                 startActivity(intent);
             }
@@ -127,9 +119,8 @@ public class SearchAllResultFragment extends Fragment implements SearchAllResult
     public void giveMeSuperior(List<SuperiorLecture> superiorLectures) {
 
         superiorLectureAdapter2.setData(superiorLectures);
-
-
     }
+
 
 
     @Override
@@ -156,4 +147,34 @@ public class SearchAllResultFragment extends Fragment implements SearchAllResult
     public void giveMeNew(List<Document> documents) {
         documentAdapter.setData(documents);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
+    }
+
+    /*이 에러도 프래그먼트를 사용하다 보면 접하기 쉬운데, 주로 여러 프래그먼트를 전환하는 구성을 사용할 때 발생하기 쉽습니다.
+    (FragmentTransaction.replace(), add(), remove() 등을 사용하여 한 액티비티 내에서 선택한 메뉴에 따라 다른 프래그먼트를 보여주는 경우가 대표적인 예)
+위에서 본 두 사례의 원인은 모두 '프래그먼트를 구성하는 뷰(View)를 중복해서 레이아웃 내에 추가하려 했기 때문' 입니다.
+프래그먼트가 화면에 표시되는 과정에서, 프래그먼트가 표시되는 뷰(컨테이너 뷰)에 프래그먼트의 뷰가 추가되는데,
+이 상태에서 다시 프래그먼트를 추가하면 뷰가 중복되어 오류가 발생하는 것입니다.
+이를 방지하려면, 프래그먼트가 화면에서 사라질 때 프래그먼트의 뷰를 컨테이너 뷰에서 제거해주면 됩니다.
+일반적으로 다음과 프래그먼트의 코드 내에 onDestroyView()를 다음과 같이 오버라이드 하면 됩니다.
+프래그먼트가 화면에서 사라질 때, 컨테이너 뷰(parent)에서 프래그먼트 뷰(v)를 제거하여 이후에 중복 추가되는 것을 방지하는 원리입니다.
+
+    * */
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(view!=null){
+            ViewGroup parent = (ViewGroup)view.getParent();
+            if(parent!=null){
+                parent.removeView(view);
+            }
+        }
+
+    }
+
+
 }

@@ -20,5 +20,8 @@ public interface SearchAllResultContract {
         void onResume();
         void onDestroy();
         void setText(String name);
+
+        void onResume2();
+        void setText2(String subj,String prof);
     }
 }

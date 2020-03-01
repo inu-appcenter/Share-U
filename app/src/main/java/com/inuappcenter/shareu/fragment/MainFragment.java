@@ -131,4 +131,15 @@ public class MainFragment extends Fragment implements MainContract.View {
         Intent intent = new Intent(getActivity(), ServerFailActivity.class);
         startActivity(intent);
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(view!=null){
+            ViewGroup parent = (ViewGroup)view.getParent();
+            if(parent!=null){
+                parent.removeView(view);
+            }
+        }
+
+    }
 }

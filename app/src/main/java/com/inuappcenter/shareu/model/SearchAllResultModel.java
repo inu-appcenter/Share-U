@@ -53,7 +53,7 @@ public class SearchAllResultModel {
     public void setSuperiorDatas(String name)
     {
         RetrofitService networkService = RetrofitHelper.create();
-        networkService.documentTop5ScoreList(name).enqueue(new Callback<List<SuperiorLecture>>() {
+        networkService.documentTop5ScoreList(name,"","").enqueue(new Callback<List<SuperiorLecture>>() {
             @Override
             public void onResponse(Call<List<SuperiorLecture>> call, Response<List<SuperiorLecture>> response) {
                 if (response.isSuccessful()) {
@@ -84,10 +84,46 @@ public class SearchAllResultModel {
             }
         });
     }
+
+    public void setSuperiorDatas(String subj,String prof)
+    {
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.documentTop5ScoreList("",subj,prof).enqueue(new Callback<List<SuperiorLecture>>() {
+            @Override
+            public void onResponse(Call<List<SuperiorLecture>> call, Response<List<SuperiorLecture>> response) {
+                if (response.isSuccessful()) {
+                    List<SuperiorLecture> tmp_list = new ArrayList<>();
+                    if(response.body().size()==0)
+                    {
+                        flag.postValue(true);
+                        //tv_no_superior.setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        flag.postValue(false);
+                        //tv_no_superior.setVisibility(View.GONE);
+                        for(int i=0;i<response.body().size();i++)
+                        {
+                            tmp_list.add(new SuperiorLecture(response.body().get(i).getDocumentKey(),response.body().get(i).getTitle(),
+                                    response.body().get(i).getUploadDate(),response.body().get(i).getExtension(),response.body().get(i).getRating()));
+                        }
+                        setSuperiorData(tmp_list);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<SuperiorLecture>> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void setNewDatas(String name)
     {
         RetrofitService networkService = RetrofitHelper.create();
-        networkService.documentTop5DateList(name).enqueue(new Callback<List<Document>>() {
+        networkService.documentTop5DateList(name,"","").enqueue(new Callback<List<Document>>() {
             @Override
             public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
                 if (response.isSuccessful()) {
@@ -97,7 +133,34 @@ public class SearchAllResultModel {
                         tmp_list.add(new Document(response.body().get(i).getTitle(),
                                 response.body().get(i).getUploadDate(),
                                 response.body().get(i).getDocumentKey(),
-                        null,null,null,null,0));
+                                null,null,null,null,0));
+                    }
+                    setNewData(tmp_list);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Document>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void setNewDatas(String subj,String prof)
+    {
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.documentTop5DateList("",subj,prof).enqueue(new Callback<List<Document>>() {
+            @Override
+            public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
+                if (response.isSuccessful()) {
+                    List<Document> tmp_list = new ArrayList<>();
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        tmp_list.add(new Document(response.body().get(i).getTitle(),
+                                response.body().get(i).getUploadDate(),
+                                response.body().get(i).getDocumentKey(),
+                                null,null,null,null,0));
                     }
                     setNewData(tmp_list);
                 }

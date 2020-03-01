@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
                         else
                         {
                             RetrofitService networkService = RetrofitHelper.create();
-                            networkService.documentTop5DateList(etv_search.getText()+"").enqueue(new Callback<List<Document>>() {
+                            networkService.documentTop5DateList(etv_search.getText()+"","","").enqueue(new Callback<List<Document>>() {
                                 @Override
                                 public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
                                     if (response.isSuccessful()) {

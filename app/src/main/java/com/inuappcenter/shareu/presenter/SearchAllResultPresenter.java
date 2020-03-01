@@ -19,6 +19,8 @@ public class SearchAllResultPresenter implements SearchAllResultContract.Present
     SearchAllResultContract.View searchAllView;
 
     private String name;
+    private String subjectName;
+    private String profName;
 
     public SearchAllResultPresenter(LifecycleOwner lifecycleOwner, SearchAllResultContract.View searchAllView) {
         this.lifecycleOwner = lifecycleOwner;
@@ -77,5 +79,19 @@ public class SearchAllResultPresenter implements SearchAllResultContract.Present
     @Override
     public void setText(String name) {
         this.name = name;
+    }
+
+
+    @Override
+    public void onResume2() {
+        searchAllResultModel.setSuperiorDatas(subjectName,profName);
+        searchAllResultModel.setNewDatas(subjectName,profName);
+    }
+
+
+    @Override
+    public void setText2(String subj, String prof) {
+        this.subjectName = subj;
+        this.profName = prof;
     }
 }

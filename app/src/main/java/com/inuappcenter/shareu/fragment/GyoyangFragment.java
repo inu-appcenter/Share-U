@@ -200,5 +200,15 @@ public class GyoyangFragment extends Fragment {
             }
         });
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(view!=null){
+            ViewGroup parent = (ViewGroup)view.getParent();
+            if(parent!=null){
+                parent.removeView(view);
+            }
+        }
 
+    }
 }

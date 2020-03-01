@@ -114,6 +114,12 @@
             >
 
         </activity>
+        <activity android:name=".activity.SearchSuccessedActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
         <activity android:name=".activity.CategorySuccessedActivity"
             android:screenOrientation="portrait"
             >

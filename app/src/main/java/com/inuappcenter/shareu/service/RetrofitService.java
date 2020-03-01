@@ -10,6 +10,7 @@ import com.inuappcenter.shareu.my_class.MyPage;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SumPoint;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
+import com.inuappcenter.shareu.my_class.categoryResend;
 import com.inuappcenter.shareu.my_class.categorySubject;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.subjectName;
@@ -115,14 +116,19 @@ public interface RetrofitService {
 
     //우수자료 선정 -> 검색바에서 검색할 시 전송
     @GET("/document/send/documentTop5ScoreList")
-    Call<List<SuperiorLecture>>documentTop5ScoreList(@Query("title")String title);
+    Call<List<SuperiorLecture>>documentTop5ScoreList(@Query("title")String title,@Query("subjectName")String subjectName,
+                                                     @Query("profName")String profName);
 
     //최신자료 5개 선정 -> 검색바에서 검색할 시 전송
     @GET("/document/send/documentTop5DateList")
-    Call<List<Document>>documentTop5DateList(@Query("title")String title);
+    Call<List<Document>>documentTop5DateList(@Query("title")String title,@Query("subjectName")String subjectName,
+                                             @Query("profName")String profName);
 
     //더보기 -> 검색바에서 과목이름 검색시
-    @GET("/document/send/more?subjectName")
-    Call<List<Document>>more(@Query("subjectName")String title);
+    @GET("/document/send/more")
+    Call<List<Document>>more(@Query("subjectName")String subjectName,@Query("profName")String profName);
 
+    //카테고리 과목이름과 교수이름을 받은 후 과목이름과 교수이름 해당 학과 이름까지 재전송
+    @GET("/document/send/categoryResend")
+    Call<List<categoryResend>>categoryResend(@Query("subjectName")String subjectName, @Query("profName")String profName);
 }

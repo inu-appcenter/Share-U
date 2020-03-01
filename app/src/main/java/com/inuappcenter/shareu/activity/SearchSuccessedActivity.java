@@ -2,7 +2,6 @@ package com.inuappcenter.shareu.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,9 +24,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CategorySuccessedActivity extends AppCompatActivity {
+public class SearchSuccessedActivity extends AppCompatActivity {
 
-    private String subjectName,profName;
+    private String name;
     private CategorySuccessedAdatper categorySuccessedAdatper;
     private TextView tv_my_major;
     private ImageView btn_backpress,btn_down,btn_up;
@@ -38,9 +37,8 @@ public class CategorySuccessedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_succeesed);
         Intent intent = getIntent();
-        subjectName = intent.getExtras().getString("subjectName");
-        profName=intent.getExtras().getString("profName");
-        subjectName=subjectName.replace("\"","");
+        name = intent.getExtras().getString("name");
+        name=name.replace("\"","");
         tv_my_major=findViewById(R.id.tv_my_major);
         btn_backpress=findViewById(R.id.btn_backpress);
         click_me=findViewById(R.id.click_me);
@@ -51,7 +49,7 @@ public class CategorySuccessedActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        tv_my_major.setText(subjectName);
+        tv_my_major.setText(name);
         btn_backpress.setOnClickListener(v->finish());
         goDown();
         click_me.setOnClickListener(new View.OnClickListener(){
@@ -79,7 +77,7 @@ public class CategorySuccessedActivity extends AppCompatActivity {
     void goDown()
     {
         RetrofitService networkService = RetrofitHelper.create();
-        networkService.more(subjectName,profName).enqueue(new Callback<List<Document>>() {
+        networkService.more(name,"").enqueue(new Callback<List<Document>>() {
             @Override
             public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
                 if (response.isSuccessful()) {
@@ -113,7 +111,7 @@ public class CategorySuccessedActivity extends AppCompatActivity {
     void goUp()
     {
         RetrofitService networkService = RetrofitHelper.create();
-        networkService.more(subjectName,profName).enqueue(new Callback<List<Document>>() {
+        networkService.more(name,"").enqueue(new Callback<List<Document>>() {
             @Override
             public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
                 if (response.isSuccessful()) {
@@ -142,4 +140,5 @@ public class CategorySuccessedActivity extends AppCompatActivity {
             }
         });
     }
+
 }

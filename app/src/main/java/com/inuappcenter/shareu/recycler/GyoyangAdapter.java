@@ -1,6 +1,8 @@
 package com.inuappcenter.shareu.recycler;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.CategorySearchActivity;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
 
@@ -65,7 +68,12 @@ public class GyoyangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Intent intent = new Intent(view.getContext(), CategorySearchActivity.class);
+                    intent.putExtra("major",mitems.get(position).getFirst());
+                    intent.putExtra("prof",mitems.get(position).getSecond());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    view.getContext().startActivity(intent);
+                    ((Activity)mContext).finish();
                 }
             });
         }

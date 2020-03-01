@@ -44,10 +44,11 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
     private ImageButton  etv_search_click;
     private TextView tv_search_please;
     private TextView edtv_select_subject;
+    private View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_bottomsheet,container);
+        view = inflater.inflate(R.layout.layout_bottomsheet,container);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         init(view);
         return view;
@@ -117,6 +118,17 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
 
             }
         });
+
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(view!=null){
+            ViewGroup parent = (ViewGroup)view.getParent();
+            if(parent!=null){
+                parent.removeView(view);
+            }
+        }
 
     }
 }

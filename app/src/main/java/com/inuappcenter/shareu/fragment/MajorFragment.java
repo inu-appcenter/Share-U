@@ -197,5 +197,15 @@ public class MajorFragment extends Fragment implements OnItemClick {
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(view!=null){
+            ViewGroup parent = (ViewGroup)view.getParent();
+            if(parent!=null){
+                parent.removeView(view);
+            }
+        }
 
+    }
 }
