@@ -23,31 +23,58 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="23dp"
+                android:layout_marginTop="17dp"
                 android:layout_marginRight="15dp" />
 
-            <include
-                android:id="@+id/include_viewpager_superior"
-                layout="@layout/viewpager_superior"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:layout_marginTop="4dp" />
+                android:layout_height="wrap_content">
 
+                <include
+                    android:id="@+id/include_viewpager_superior"
+                    layout="@layout/viewpager_superior"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="4dp" />
+
+
+                <TextView
+                    android:id="@+id/tv_no_superior"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="아직 리뷰가 달린 자료가 없습니다 :("
+                    android:visibility="gone"
+                    android:textColor="@color/Iris"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+            </FrameLayout>
+
+            <include
+                android:id="@+id/include_ad_main"
+                layout="@layout/layout_ad_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp" />
 
             <include
                 android:id="@+id/include_search_result"
                 layout="@layout/layout_search_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginRight="7dp" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="14dp" />
 
             <include
                 android:id="@+id/include_recyclerview2_main"
                 layout="@layout/layout_recyclerview2_main"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="16dp" />
 
 
         </LinearLayout>

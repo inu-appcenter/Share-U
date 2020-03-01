@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.inuappcenter.shareu.R;
@@ -30,6 +31,7 @@ import com.inuappcenter.shareu.fragment.MainFragment;
 import com.inuappcenter.shareu.fragment.MajorFragment;
 import com.inuappcenter.shareu.fragment.SearchAllResultFragment;
 import com.inuappcenter.shareu.fragment.SearchNoResultFragment;
+import com.inuappcenter.shareu.my_class.Document;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.inuappcenter.shareu.my_class.TokenManager;
@@ -70,12 +72,16 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         setContentView(R.layout.activity_main);
         init();
         check_login();
-        //TODO : 프래그먼트 전환되면 햄버거 바 백스페이스로 바꾸고 마이페이지 버튼도 비활성화, 원래대로 돌아오면 다시 살려놓자. 사라져야 하는거 drawer_my_page랑 btn_left_bar_main,btn_backpress
-        //drawer 처리
-        drawer_login = (View)findViewById(R.id.drawer_login);
-        drawer_logout = (View)findViewById(R.id.drawer_logout);
-        drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
-        drawer_my_page.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        //TODO : 프래그먼트 전환되면 햄버거 바 백스페이스로 바꾸고 마이페이지 버튼도 비활성화, 원래대로 돌아오면 다시 살려놓자.
+        // 사라져야 하는거 drawer_my_page랑 btn_left_bar_main,btn_backpress
+
+
+        fragmentManager = getSupportFragmentManager();
+        mainFragment = new MainFragment();
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.layout_frame_main,mainFragment);
+        transaction.commit();
+
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +108,40 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
                         startActivity(intent3);
                         break ;
                     case R.id.etv_search_click:
+                        //Toast.makeText(getApplicationContext(),"냐냐냔냥",Toast.LENGTH_SHORT).show();
+                        //최신자료는 우수자료 상관없이 다 뜸
+                        RetrofitService networkService = RetrofitHelper.create();
+                        networkService.documentTop5DateList(etv_search.getText()+"").enqueue(new Callback<List<Document>>() {
+                            @Override
+                            public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
+                                if (response.isSuccessful()) {
+
+                                    if(response.body().size()==0)
+                                    {
+                                        fragmentManager = getSupportFragmentManager();
+                                        searchNoResultFragment = new SearchNoResultFragment();
+                                        transaction = fragmentManager.beginTransaction();
+                                        transaction.replace(R.id.layout_frame_main,searchNoResultFragment);
+                                        transaction.commit();
+                                    }
+                                    else
+                                    {
+                                        fragmentManager = getSupportFragmentManager();
+                                        searchAllResultFragment=new SearchAllResultFragment();
+                                        transaction = fragmentManager.beginTransaction();
+                                        transaction.replace(R.id.layout_frame_main,searchAllResultFragment);
+                                        transaction.commit();
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<Document>> call, Throwable t) {
+
+                            }
+                        });
+                        break;
                         //메인화면 검색
                 }
 
@@ -118,10 +158,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         fab_main.setOnClickListener(onClickListener);
 
         etv_search_click.setOnClickListener(onClickListener);
-        fragmentManager = getSupportFragmentManager();
-        transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.layout_frame_main,mainFragment);
-        transaction.commit();
 
     }
     void init()
@@ -129,8 +165,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         etv_search=findViewById(R.id.etv_search);
         etv_search_click = findViewById(R.id.etv_search_click);
         btn_backpress = findViewById(R.id.btn_backpress);
-        mainFragment = new MainFragment();
 
+        //drawer 처리
+        drawer_login = (View)findViewById(R.id.drawer_login);
+        drawer_logout = (View)findViewById(R.id.drawer_logout);
+        drawer_my_page = (DrawerLayout)findViewById(R.id.include_drawer_my_page);
+        drawer_my_page.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     boolean check_login()
@@ -170,6 +210,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     public void onClick2(String value) {
 
     }
+
+    void giveMeResult()
+    {
+
+    }
+
 }
 
 

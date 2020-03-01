@@ -59,12 +59,18 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     void init()
     {
-        viewPager = view.findViewById(R.id.viewpager_superior) ;
+        noticeAdapter = new NoticeAdapter(getActivity());
+        RecyclerView recyclerView2=view.findViewById(R.id.recyclerview2_main);
+        LinearLayoutManager layoutManager2=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(layoutManager2);
+        recyclerView2.setAdapter(noticeAdapter);
+        /*viewPager = view.findViewById(R.id.viewpager_superior) ;
 
         superiorLectureAdapter2 = new SuperiorLectureAdapter2(getActivity());
         viewPager.setAdapter(superiorLectureAdapter2) ;
 
-        noticeAdapter = new NoticeAdapter(getActivity());
+
 
         CircleIndicator indicator = view.findViewById(R.id.indicator);
         indicator.setViewPager(viewPager);
@@ -73,11 +79,7 @@ public class MainFragment extends Fragment implements MainContract.View {
         indicator.createIndicators(5,0);
 
 
-        RecyclerView recyclerView2=view.findViewById(R.id.recyclerview2_main);
-        LinearLayoutManager layoutManager2=new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
-        recyclerView2.setHasFixedSize(true);
-        recyclerView2.setLayoutManager(layoutManager2);
-        recyclerView2.setAdapter(noticeAdapter);
+        ;*/
 
     }
 

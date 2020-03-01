@@ -2,11 +2,13 @@ package com.inuappcenter.shareu.model;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
+import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter2;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
@@ -16,15 +18,20 @@ import java.util.List;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainModel {
 
-    MutableLiveData< List<SuperiorLecture>> SuperiorData = new MutableLiveData<>();
-    MutableLiveData< List<Notice>> NoticeData = new MutableLiveData<>();
+    MutableLiveData< List<SuperiorLecture> > SuperiorData = new MutableLiveData<>();
+    MutableLiveData< List<Notice> > NoticeData = new MutableLiveData<>();
     MutableLiveData<Boolean> internet = new MutableLiveData<>();
+
+
+
+
     public MutableLiveData<List<SuperiorLecture>> getSuperiorData() {
         return SuperiorData;
     }
@@ -32,6 +39,8 @@ public class MainModel {
     public void setSuperiorData(List<SuperiorLecture> superiorData) {
         SuperiorData.postValue(superiorData);
     }
+
+
 
     public MutableLiveData<List<Notice>> getNoticeData() {
         return NoticeData;
@@ -46,16 +55,18 @@ public class MainModel {
     }
 
 
+    //메인 우수자료
     public void setSuperior()
     {
-        List<SuperiorLecture> tmp_list2 =new ArrayList<>();
+        /*List<SuperiorLecture> tmp_list2 =new ArrayList<>();
         tmp_list2.add(new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5));
         tmp_list2.add(new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",(float)4.8));
         tmp_list2.add(new SuperiorLecture(R.drawable.ppt,"생명과학 족보",(float)4.5));
         tmp_list2.add(new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",(float)3.2));
         tmp_list2.add(new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",(float)2.5));
-        setSuperiorData(tmp_list2);
+        setSuperiorData(tmp_list2);*/
     }
+
     public void setNotice()
     {
         internet.postValue(false);

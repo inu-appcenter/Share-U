@@ -81,13 +81,19 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginRight="16dp" />
 
-            <LinearLayout
-                android:id="@+id/layout_frame_main"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_weight="0">
 
-            </LinearLayout>
+                <FrameLayout
+                    android:id="@+id/layout_frame_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                </FrameLayout>
+            </FrameLayout>
 
 
             //fragment 공간

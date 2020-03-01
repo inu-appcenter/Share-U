@@ -1,6 +1,7 @@
 package com.inuappcenter.shareu.recycler;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,14 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
     private List<SuperiorLecture> mitems;
     private Context mContext;
 
-    public SuperiorLectureAdapter2(Context mContext) {
+    public SuperiorLectureAdapter2( Context mContext) {
         this.mitems = new ArrayList<>();
         this.mContext = mContext;
     }
-
+    public void setData(List<SuperiorLecture> superiorLectures) {
+        mitems = superiorLectures;
+        notifyDataSetChanged();
+    }
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view ;
@@ -43,8 +47,53 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
         ImageView item_default_superior=view.findViewById(R.id.item_default_superior);
         TextView tv_superior_name=view.findViewById(R.id.tv_superior_name);
         BaseRatingBar ratingBar=view.findViewById(R.id.superior_ratingbar);
+        if(mitems.get(position).getExtension().equals("PPT") || mitems.get(position).getExtension().equals("PPTX"))
+        {
+            item_default_superior.setImageResource(R.drawable.ppt);
+        }
+        else if(mitems.get(position).getExtension().equals("HWP"))
+        {
+            item_default_superior.setImageResource(R.drawable.korean);
+        }
+        else if(mitems.get(position).getExtension().equals("DOC") || mitems.get(position).getExtension().equals("DOCX"))
+        {
+            item_default_superior.setImageResource(R.drawable.word);
+        }
+        else if(mitems.get(position).getExtension().equals("AI"))
+        {
+            item_default_superior.setImageResource(R.drawable.ai);
+        }
+        else if(mitems.get(position).getExtension().equals("PS"))
+        {
+            item_default_superior.setImageResource(R.drawable.ps);
+        }
 
-        item_default_superior.setImageResource(mitems.get(position).getImage());
+        else if(mitems.get(position).getExtension().equals("JPEG") || mitems.get(position).getExtension().equals("JPG"))
+        {
+            item_default_superior.setImageResource(R.drawable.jpeg);
+        }
+        else if(mitems.get(position).getExtension().equals("PNG"))
+        {
+            item_default_superior.setImageResource(R.drawable.png);
+        }
+        else if(mitems.get(position).getExtension().equals("XLS")||mitems.get(position).getExtension().equals("XLSX")||
+                mitems.get(position).getExtension().equals("XLSM") || mitems.get(position).getExtension().equals("CSV"))
+        {
+            item_default_superior.setImageResource(R.drawable.excel);
+        }
+        else if(mitems.get(position).getExtension().equals("MP3"))
+        {
+            item_default_superior.setImageResource(R.drawable.mp3);
+        }
+        else if(mitems.get(position).getExtension().equals("ZIP"))
+        {
+            item_default_superior.setImageResource(R.drawable.zip);
+        }
+        else
+        {
+            item_default_superior.setImageResource(R.drawable.file);
+        }
+        //item_default_superior.setImageResource(mitems.get(position).getImage());
         tv_superior_name.setText(mitems.get(position).getTitle());
         ratingBar.setRating(mitems.get(position).getRating());
 

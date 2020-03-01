@@ -1,6 +1,7 @@
 package com.inuappcenter.shareu.service;
 
 import com.inuappcenter.shareu.my_class.BooleanFuck;
+import com.inuappcenter.shareu.my_class.Document;
 import com.inuappcenter.shareu.my_class.Fuck;
 import com.inuappcenter.shareu.my_class.Login;
 import com.inuappcenter.shareu.my_class.Major;
@@ -8,6 +9,7 @@ import com.inuappcenter.shareu.my_class.MyInform;
 import com.inuappcenter.shareu.my_class.MyPage;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SumPoint;
+import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.inuappcenter.shareu.my_class.categorySubject;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.subjectName;
@@ -105,5 +107,18 @@ public interface RetrofitService {
     @GET("/search/bar/categorySubject")
     Call<List<categorySubject>>categorySubject
     (@Query("majorName")String majorName,@Query("subjectName")String subjectName);
+
+    //카테고리에서 교양 과목 검색
+    @GET("/search/bar/categoryCulture")
+    Call<List<categorySubject>>categoryCulture
+    (@Query("subjectName")String subjectName);
+
+    //우수자료 선정 -> 검색바에서 검색할 시 전송
+    @GET("/document/send/documentTop5ScoreList")
+    Call<List<SuperiorLecture>>documentTop5ScoreList(@Query("title")String title);
+
+    //최신자료 5개 선정 -> 검색바에서 검색할 시 전송
+    @GET("/document/send/documentTop5DateList")
+    Call<List<Document>>documentTop5DateList(@Query("title")String title);
 
 }
