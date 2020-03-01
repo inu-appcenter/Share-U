@@ -18,7 +18,7 @@ public class Document {
     String profName;
     @SerializedName("content")
     String content;
-    @SerializedName("avg(r.score)")
+    @SerializedName("avg(re.score)")
     int avg_score;
 
     public Document(String title, String uploadDate, int documentKey, String extension, String subjectName, String profName, String content, int avg_score) {

@@ -121,4 +121,8 @@ public interface RetrofitService {
     @GET("/document/send/documentTop5DateList")
     Call<List<Document>>documentTop5DateList(@Query("title")String title);
 
+    //더보기 -> 검색바에서 과목이름 검색시
+    @GET("/document/send/more?subjectName")
+    Call<List<Document>>more(@Query("subjectName")String title);
+
 }

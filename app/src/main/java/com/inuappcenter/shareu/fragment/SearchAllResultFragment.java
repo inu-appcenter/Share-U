@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.CategorySearchActivity;
+import com.inuappcenter.shareu.activity.CategorySuccessedActivity;
 import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.Document;
 import com.inuappcenter.shareu.my_class.Notice;
@@ -46,6 +48,8 @@ public class SearchAllResultFragment extends Fragment implements SearchAllResult
     private View view;
     private EditText etv_search;
     private SearchAllResultContract.Presenter presenter = new SearchAllResultPresenter(this,this);
+    private TextView tv_search_result_more;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,8 +82,17 @@ public class SearchAllResultFragment extends Fragment implements SearchAllResult
     public void onResume() {
         super.onResume();
         presenter.setText(etv_search.getText()+"");
-        tv_search_result_name.setText(etv_search.getText()+"");
+        tv_search_result_name.setText("\""+etv_search.getText()+"\"");
         presenter.onResume();
+        tv_search_result_more.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                //더보기 넘어가기
+                Intent intent = new Intent(getActivity(), CategorySuccessedActivity.class);
+                intent.putExtra("name",tv_search_result_name.getText()+"");
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -91,6 +104,7 @@ public class SearchAllResultFragment extends Fragment implements SearchAllResult
         superiorLectureAdapter2 = new SuperiorLectureAdapter2(getActivity());
         viewPager.setAdapter(superiorLectureAdapter2) ;
         tv_search_result_name=view.findViewById(R.id.tv_search_result_name);
+        tv_search_result_more=view.findViewById(R.id.tv_search_result_more);
 
         CircleIndicator indicator = view.findViewById(R.id.indicator);
         indicator.setViewPager(viewPager);
