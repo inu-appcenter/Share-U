@@ -34,9 +34,12 @@ public class ReviewActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
+        init();
         Intent intent =getIntent();
         key =intent.getExtras().getInt("key");
         name = intent.getExtras().getString("name");
+        btn_backpress.setOnClickListener(v->finish());
+
     }
 
     @Override
@@ -61,7 +64,7 @@ public class ReviewActivity extends AppCompatActivity {
                                 response.body().get(i).getReview(),response.body().get(i).getScore(),response.body().get(i).getReviewKey()));
                     }
                     reviewAdapter =new ReviewAdapter(getApplicationContext(),tmp_list);
-                    RecyclerView recyclerView2=findViewById(R.id.recyclerview_category_success);
+                    RecyclerView recyclerView2=findViewById(R.id.recyclerview_review);
                     LinearLayoutManager layoutManager2=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
                     recyclerView2.setHasFixedSize(true);
                     recyclerView2.setLayoutManager(layoutManager2);
@@ -84,7 +87,7 @@ public class ReviewActivity extends AppCompatActivity {
     }
     void listen()
     {
-        btn_backpress.setOnClickListener(v->finish());
+
         tv_my_major.setText(name);
     }
 }

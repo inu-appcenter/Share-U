@@ -48,6 +48,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     private TextView tv_detailed_file_content,tv_more;
     private LinearLayout yes_review;
     private int key;
+    private ImageView btn_backpress;
 
 
 
@@ -91,6 +92,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
             }
         });
+        btn_backpress.setOnClickListener(v->finish());
     }
 
     void giveMeStar()
@@ -133,7 +135,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         yes_review.setVisibility(View.VISIBLE);
                         tv_more.setVisibility(View.VISIBLE);
                         tv_review_date.setText(response.body().get(0).getUploadDate());
-                        tv_review_name.setText(response.body().get(0).getUploadId());
+                        String name = response.body().get(0).getUploadId();
+                        name=name.substring(0,5);
+                        name+="***";
+                        tv_review_name.setText(name);
                         before_user_ratingbar.setRating(response.body().get(0).getScore());
                         tv_review_content.setText(response.body().get(0).getReview());
                     }
@@ -202,6 +207,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         tv_detailed_file_content=findViewById(R.id.tv_detailed_file_content);
         yes_review=findViewById(R.id.layout_yes_review);
         tv_more = findViewById(R.id.tv_more);
+        btn_backpress=findViewById(R.id.btn_backpress);
     }
 
     @Override

@@ -33,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2020.01.12"
+                android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12.5dp"
                 android:text="홍길동"
+                android:textSize="14sp"
                 app:layout_constraintLeft_toRightOf="@+id/textView34"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,8 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="7dp"
-            android:ellipsize="end"
-            android:singleLine="true"
+            android:layout_marginRight="16dp"
             android:text="잘 쓸게요"
             android:textColor="@color/black"
             android:textSize="14sp" />

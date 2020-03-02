@@ -47,45 +47,58 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
         ImageView item_default_superior=view.findViewById(R.id.item_default_superior);
         TextView tv_superior_name=view.findViewById(R.id.tv_superior_name);
         BaseRatingBar ratingBar=view.findViewById(R.id.superior_ratingbar);
-        if(mitems.get(position).getExtension().equals("PPT") || mitems.get(position).getExtension().equals("PPTX"))
+        if(mitems.get(position).getExtension().equals("PPT") || mitems.get(position).getExtension().equals("PPTX")||
+                mitems.get(position).getExtension().equals("ppt") || mitems.get(position).getExtension().equals("pptx")
+        )
         {
             item_default_superior.setImageResource(R.drawable.ppt);
         }
-        else if(mitems.get(position).getExtension().equals("HWP"))
+        else if(mitems.get(position).getExtension().equals("HWP") ||mitems.get(position).getExtension().equals("hwp") )
         {
             item_default_superior.setImageResource(R.drawable.korean);
         }
-        else if(mitems.get(position).getExtension().equals("DOC") || mitems.get(position).getExtension().equals("DOCX"))
+        else if(mitems.get(position).getExtension().equals("DOC") || mitems.get(position).getExtension().equals("DOCX")
+                ||mitems.get(position).getExtension().equals("doc") || mitems.get(position).getExtension().equals("docx")
+        )
         {
             item_default_superior.setImageResource(R.drawable.word);
         }
-        else if(mitems.get(position).getExtension().equals("AI"))
+        else if(mitems.get(position).getExtension().equals("AI")
+        ||mitems.get(position).getExtension().equals("ai")
+        )
         {
             item_default_superior.setImageResource(R.drawable.ai);
         }
-        else if(mitems.get(position).getExtension().equals("PS"))
+        else if(mitems.get(position).getExtension().equals("PS")
+        ||mitems.get(position).getExtension().equals("ps")
+        )
         {
             item_default_superior.setImageResource(R.drawable.ps);
         }
 
-        else if(mitems.get(position).getExtension().equals("JPEG") || mitems.get(position).getExtension().equals("JPG"))
+        else if(mitems.get(position).getExtension().equals("JPEG") || mitems.get(position).getExtension().equals("JPG")||
+                mitems.get(position).getExtension().equals("jpeg") || mitems.get(position).getExtension().equals("jpg")
+        )
         {
             item_default_superior.setImageResource(R.drawable.jpeg);
         }
-        else if(mitems.get(position).getExtension().equals("PNG"))
+        else if(mitems.get(position).getExtension().equals("PNG") || mitems.get(position).getExtension().equals("png") )
         {
             item_default_superior.setImageResource(R.drawable.png);
         }
         else if(mitems.get(position).getExtension().equals("XLS")||mitems.get(position).getExtension().equals("XLSX")||
-                mitems.get(position).getExtension().equals("XLSM") || mitems.get(position).getExtension().equals("CSV"))
+                mitems.get(position).getExtension().equals("XLSM") || mitems.get(position).getExtension().equals("CSV")||
+                mitems.get(position).getExtension().equals("xls")||mitems.get(position).getExtension().equals("xlsx")||
+                mitems.get(position).getExtension().equals("xlsm") || mitems.get(position).getExtension().equals("csv")
+        )
         {
             item_default_superior.setImageResource(R.drawable.excel);
         }
-        else if(mitems.get(position).getExtension().equals("MP3"))
+        else if(mitems.get(position).getExtension().equals("MP3")||mitems.get(position).getExtension().equals("mp3"))
         {
             item_default_superior.setImageResource(R.drawable.mp3);
         }
-        else if(mitems.get(position).getExtension().equals("ZIP"))
+        else if(mitems.get(position).getExtension().equals("ZIP") ||mitems.get(position).getExtension().equals("zip")  )
         {
             item_default_superior.setImageResource(R.drawable.zip);
         }

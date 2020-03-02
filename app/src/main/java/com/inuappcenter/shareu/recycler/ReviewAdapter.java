@@ -46,7 +46,10 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         final reviewList item = mitems.get(position);
 
         holder.tv_review_date.setText(item.getUploadDate());
-        holder.tv_review_name.setText(item.getReview());
+        String name = item.getUploadId();
+        name=name.substring(0,5);
+        name+="***";
+        holder.tv_review_name.setText(name);
         holder.tv_review_content.setText(item.getReview());
         holder.before_user_ratingbar.setRating(item.getScore());
         holder.before_user_ratingbar.setScrollable(false);
