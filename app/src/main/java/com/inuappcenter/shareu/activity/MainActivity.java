@@ -119,8 +119,18 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
 
                         break ;
                     case R.id.fab_main:
-                        Intent intent3 = new Intent(getApplicationContext(), FileUploadActivity.class);
-                        startActivity(intent3);
+                        TokenManager tm = TokenManager.getInstance();
+                        String token = tm.getToken(getApplicationContext());
+                        if(token!=null)
+                        {
+                            Intent intent3 = new Intent(getApplicationContext(), FileUploadActivity.class);
+                            startActivity(intent3);
+                        }
+                        else
+                        {
+                            Intent intent3 = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent3);
+                        }
                         break ;
                     case R.id.etv_search_click:
                         //Toast.makeText(getApplicationContext(),"냐냐냔냥",Toast.LENGTH_SHORT).show();

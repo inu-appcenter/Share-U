@@ -17,6 +17,7 @@ import com.inuappcenter.shareu.fragment.SearchAllResultFragment;
 import com.inuappcenter.shareu.fragment.SearchNoResultFragment;
 import com.inuappcenter.shareu.my_class.Document;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
+import com.inuappcenter.shareu.my_class.TokenManager;
 import com.inuappcenter.shareu.my_class.categoryResend;
 import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.presenter.SearchAllResultContract;
@@ -101,8 +102,18 @@ public class CategorySearchActivity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.fab_main:
-                        Intent intent = new Intent(getApplicationContext(), FileUploadActivity.class);
-                        startActivity(intent);
+                        TokenManager tm = TokenManager.getInstance();
+                        String token = tm.getToken(getApplicationContext());
+                        if(token!=null)
+                        {
+                            Intent intent3 = new Intent(getApplicationContext(), FileUploadActivity.class);
+                            startActivity(intent3);
+                        }
+                        else
+                        {
+                            Intent intent3 = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent3);
+                        }
                         break ;
 
                 }

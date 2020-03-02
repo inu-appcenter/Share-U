@@ -12,7 +12,9 @@ import com.inuappcenter.shareu.my_class.SumPoint;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.inuappcenter.shareu.my_class.categoryResend;
 import com.inuappcenter.shareu.my_class.categorySubject;
+import com.inuappcenter.shareu.my_class.documentPage;
 import com.inuappcenter.shareu.my_class.profName;
+import com.inuappcenter.shareu.my_class.reviewList;
 import com.inuappcenter.shareu.my_class.subjectName;
 
 import java.util.List;
@@ -53,10 +55,14 @@ public interface RetrofitService {
     @GET("/search/bar/profChoice")
     Call<List<profName> > getProfName(@Query("subjectName")String subj,@Query("profName") String prof);
 
+
     @Multipart
-    @POST("/document/store/upload")
-    Call<ResponseBody> uploadImage(@Part("title") RequestBody title, @Part("subjectName") RequestBody subjectName,
-                                   @Part("profName") RequestBody profName, @Part("content") RequestBody content, @Part MultipartBody.Part filePart);
+    @POST("/document/upload/uploadfile")
+    Call<ResponseBody> uploadImage(@Part("title") String  title, @Part("content") String content,
+                                   @Part("subjectName") String subjectName,
+                                   @Part("profName") String profName,
+                                   @Part("token")String token,@Part MultipartBody.Part filePart);
+
 
     //로그인
     @FormUrlEncoded
@@ -131,4 +137,13 @@ public interface RetrofitService {
     //카테고리 과목이름과 교수이름을 받은 후 과목이름과 교수이름 해당 학과 이름까지 재전송
     @GET("/document/send/categoryResend")
     Call<List<categoryResend>>categoryResend(@Query("subjectName")String subjectName, @Query("profName")String profName);
+
+    //자료상세페이지
+    @GET("/document/send/documentPage")
+    Call<List<documentPage>>documentPage(@Query("documentKey")int key);
+
+    //자료 리뷰 리스트 전송
+    @GET("/document/send/reviewList")
+    Call<List<reviewList>>reviewList(@Query("documentKey")int key);
+
 }

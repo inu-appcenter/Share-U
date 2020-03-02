@@ -21,6 +21,8 @@ import com.hbisoft.pickit.PickiTCallbacks;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.fragment.BottomSheetFragement;
 import com.inuappcenter.shareu.fragment.BottomSheetFragment2;
+import com.inuappcenter.shareu.my_class.Fuck;
+import com.inuappcenter.shareu.my_class.TokenManager;
 import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
@@ -69,7 +71,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
     private ArrayList<com.inuappcenter.shareu.my_class.subjectName> dataList;
     private ArrayList<com.inuappcenter.shareu.my_class.profName> dataList2;
     private RetrofitService service;
-    private RequestBody title,subjectName,profName,content;
+    private ResponseBody title,subjectName,profName,content;
     private MultipartBody.Part filePart;
     private Boolean file_upload_check=false;
     private MediaType type = MediaType.parse("multipart/form-data");
@@ -150,23 +152,35 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                             TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
                             textView.setTextColor(Color.WHITE);
                             snackbar.show();
+
+                            TokenManager tm = TokenManager.getInstance();
+                            String token = tm.getToken(getApplicationContext());
+                            //Log.e("시발",token);
                             // 이제 올리기
-                            service.uploadImage(title,subjectName,profName,content,filePart).enqueue(new Callback<ResponseBody>() {
+                            service.uploadImage(edtv_file_name.getText()+"",edtv_content.getText()+"",
+                                    edtv_select_subject.getText()+"",edtv_select_prof.getText()+""
+                            ,token,filePart).enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    if(response.isSuccessful())
+                                    {
+                                        Intent intent = new Intent(getApplicationContext(), UploadedActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
                                     /*snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 성공",TSnackbar.LENGTH_INDEFINITE);
                                     View snackbarView = snackbar.getView();
                                     snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
                                     snackbar.show();*/
-                                    Intent intent = new Intent(getApplicationContext(), UploadedActivity.class);
-                                    startActivity(intent);
-                                    finish();
+
                                 }
 
                                 @Override
                                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    Intent intent = new Intent(getApplicationContext(),ServerFailActivity.class);
-                                    startActivity(intent);
+                                    Log.e("흠",t.getCause()+"");
+                                    /*Intent intent = new Intent(getApplicationContext(),ServerFailActivity.class);
+                                    startActivity(intent);*/
                                 }
                             });
                         }

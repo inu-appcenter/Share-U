@@ -73,10 +73,8 @@ public class BottomSheetFragement extends RoundedBottomSheetDialogFragment{
             public void onClick(View view) {
                 if(etv_search.getText().length()==0)
                 {
-                    snackbar = TSnackbar.make(getActivity().findViewById(android.R.id.content),"과목명을 한 글자 이상 입력해주세요!",TSnackbar.LENGTH_SHORT);
-                    View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                    snackbar.show();
+                    tv_search_please.setVisibility(View.VISIBLE);
+                    tv_search_please.setText("과목을 한 글자 이상 검색해주세요 :(");;
 
                 }
                 else
