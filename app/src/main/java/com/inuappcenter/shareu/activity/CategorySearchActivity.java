@@ -133,6 +133,7 @@ public class CategorySearchActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     majorName=response.body().get(0).getMajorName();
                     tv_my_major.setText(majorName);
+
                 }
 
             }

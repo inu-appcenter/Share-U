@@ -9,17 +9,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
-import com.inuappcenter.shareu.my_class.categorySubject;
-import com.inuappcenter.shareu.my_interface.OnItemClick;
-import com.inuappcenter.shareu.recycler.MajorAdapter;
+import com.inuappcenter.shareu.my_class.categoryCulture;
 import com.inuappcenter.shareu.recycler.MajorAdapter2;
-import com.inuappcenter.shareu.recycler.SubjectAdapter;
+import com.inuappcenter.shareu.recycler.MajorAdapter3;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
@@ -37,11 +34,11 @@ import retrofit2.Response;
 
 import static android.view.View.VISIBLE;
 
-public class MajorFragment2 extends Fragment {
+public class MajorFragment2 extends Fragment{
     private IndexFastScrollRecyclerView recyclerView;
     private LinearLayoutManager manager;
     private ArrayList<Major> dataList;
-    private ArrayList<categorySubject>dataList2;
+    private ArrayList<categoryCulture>dataList2;
     TextView tv_my_major;
     private String name;
     private View view;
@@ -61,6 +58,8 @@ public class MajorFragment2 extends Fragment {
         tv_my_major = view.findViewById(R.id.tv_my_major);
         tv_my_major.setVisibility(VISIBLE);
         tv_my_major.setText(name);
+
+        etv_search=view.findViewById(R.id.etv_search);
         return view;
     }
 
@@ -128,7 +127,7 @@ public class MajorFragment2 extends Fragment {
                 recyclerView.setIndexBarTextColor("#000000");
                 recyclerView.setIndexBarStrokeVisibility(false);
                 recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                recyclerView.setAdapter(new MajorAdapter2(getActivity(), dataList));  // Adapter 등록
+                recyclerView.setAdapter(new MajorAdapter3(getActivity(), dataList));  // Adapter 등록
                 if(dataList.size()==0)
                     tv_no_search.setVisibility(View.VISIBLE);
                 else
@@ -146,70 +145,71 @@ public class MajorFragment2 extends Fragment {
 
     void giveSearchResult()
     {
-        //Log.e("흠",tv_my_major.getText()+" "+etv_search.getText()+" ");
-        RetrofitService networkService = RetrofitHelper.create();
-        networkService.categorySubject(name,etv_search.getText()+"").enqueue(new Callback<List<categorySubject>>() {
-            @Override
-            public void onResponse(Call<List<categorySubject>> call, Response<List<categorySubject>> response) {
 
+        Log.e("흠",tv_my_major.getText()+" "+etv_search.getText()+" ");
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.categorySubject(tv_my_major.getText()+"",etv_search.getText()+"").enqueue(new Callback<List<categoryCulture>>() {
+            @Override
+            public void onResponse(Call<List<categoryCulture>> call, Response<List<categoryCulture>> response) {
                 if (response.isSuccessful()) {
+                    Log.e("시발",response.body().size()+"");
                     dataList2 = new ArrayList<>();
                     String flag = "?";
-                    Log.e("흠",response.body().size()+"");
                     for (int i = 0; i < response.body().size(); i++) {
+                        //Log.e("체크 ! ",name+" "+response.body().get(i).first+" "+response.body().get(i).second+" "+response.body().get(i).third);
                         if (flag.equals(response.body().get(i).getSubjectInitiality())) {
-
                             if (i == response.body().size() - 1) {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(), response.body().get(i).getProfName(), response.body().get(i).getSubjectInitiality(), Code.ViewType.MAJOR, R.color.white));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(), response.body().get(i).getSubjectInitiality(), response.body().get(i).getProfName(), Code.ViewType.MAJOR, R.color.white));
                             }
                             else if(!response.body().get(i+1).getSubjectInitiality().equals(response.body().get(i).getSubjectInitiality()))
                             {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.white));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getSubjectInitiality(),response.body().get(i).getProfName(),Code.ViewType.MAJOR,R.color.white));
                             }
                             else {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(), response.body().get(i).getProfName(), response.body().get(i).getSubjectInitiality(), Code.ViewType.MAJOR, R.color.gray));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(), response.body().get(i).getSubjectInitiality(), response.body().get(i).getProfName(), Code.ViewType.MAJOR, R.color.gray));
                             }
                         }
                         else {
                             flag = response.body().get(i).getSubjectInitiality();
-                            dataList2.add(new categorySubject(response.body().get(i).getSubjectInitiality(), response.body().get(i).getProfName(), response.body().get(i).getSubjectInitiality(), Code.ViewType.INDEX, R.color.gray));
+                            dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(), response.body().get(i).getSubjectInitiality(), response.body().get(i).getProfName(), Code.ViewType.INDEX, R.color.gray));
                             if(response.body().size()==1)
                             {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.gray));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getSubjectInitiality(),response.body().get(i).getProfName(),Code.ViewType.MAJOR,R.color.gray));
                             }
                             else if(i==response.body().size()-1 )
                             {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.white));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getSubjectInitiality(),response.body().get(i).getProfName(),Code.ViewType.MAJOR,R.color.white));
                             }
                             else if(!response.body().get(i+1).getSubjectInitiality().equals(response.body().get(i).getSubjectInitiality()))
                             {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.white));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getSubjectInitiality(),response.body().get(i).getProfName(),Code.ViewType.MAJOR,R.color.white));
                             }
                             else
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.gray));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getSubjectInitiality(),response.body().get(i).getProfName(),Code.ViewType.MAJOR,R.color.gray));
                         }
                     }
+
+
                 }
-                recyclerView = view.findViewById(R.id.recyclerview_select_major);
-                manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                IndexFastScrollRecyclerView recyclerView = view.findViewById(R.id.recyclerview_select_major);
+                LinearLayoutManager manager
+                        = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                 recyclerView.setIndexTextSize(12);
                 recyclerView.setIndexBarColor("#FFFFFF");
                 recyclerView.setIndexBarTextColor("#000000");
                 recyclerView.setIndexBarStrokeVisibility(false);
                 recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                recyclerView.setAdapter(new SubjectAdapter(getActivity(), dataList2));  // Adapter 등록
-                if(dataList2.size()==0)
+                recyclerView.setAdapter(new MajorAdapter2(getActivity(), dataList2));  // Adapter 등록
+                if(dataList.size()==0)
                     tv_no_search.setVisibility(View.VISIBLE);
                 else
                     tv_no_search.setVisibility(View.GONE);
-
             }
 
             @Override
-            public void onFailure(Call<List<categorySubject>> call, Throwable t) {
-                Intent intent = new Intent(getContext(), ServerFailActivity.class);
+            public void onFailure(Call<List<categoryCulture>> call, Throwable t) {
+                Intent intent = new Intent(getActivity(), ServerFailActivity.class);
                 startActivity(intent);
-
             }
         });
     }
@@ -225,4 +225,6 @@ public class MajorFragment2 extends Fragment {
         }
 
     }
+
+
 }

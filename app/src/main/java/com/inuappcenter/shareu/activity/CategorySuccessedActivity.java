@@ -46,6 +46,7 @@ public class CategorySuccessedActivity extends AppCompatActivity {
         click_me=findViewById(R.id.click_me);
         btn_up=findViewById(R.id.btn_up);
         btn_down=findViewById(R.id.btn_down);
+
     }
 
     @Override

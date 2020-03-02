@@ -3,6 +3,7 @@ package com.inuappcenter.shareu.activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +13,10 @@ import android.widget.TextView;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.fragment.GyoyangFragment;
 import com.inuappcenter.shareu.fragment.MajorFragment;
+import com.inuappcenter.shareu.fragment.MajorFragment2;
 import com.inuappcenter.shareu.my_class.Major;
+import com.inuappcenter.shareu.my_interface.OnItemClick;
+import com.inuappcenter.shareu.recycler.MajorAdapter;
 
 import java.util.ArrayList;
 
@@ -24,7 +28,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 
-public class MajorActivity extends AppCompatActivity{
+public class MajorActivity extends AppCompatActivity {
     IndexFastScrollRecyclerView recyclerView;
     IndexFastScrollRecyclerView recyclerView2;
     LinearLayoutManager manager;
@@ -32,6 +36,7 @@ public class MajorActivity extends AppCompatActivity{
     private FragmentManager fragmentManager;
     private MajorFragment fragmentMajor;
     private GyoyangFragment fragmentGyoyang;
+    private MajorFragment2 fragmentMajor2;
     private FragmentTransaction transaction;
     private EditText etv_search;
     private ImageButton etv_search_click;
@@ -51,11 +56,16 @@ public class MajorActivity extends AppCompatActivity{
         tv_major.setTextColor(Color.parseColor("#574FBA"));
         tv_major.setTypeface(Typeface.DEFAULT_BOLD);
 
+        fragmentMajor = new MajorFragment();
+        fragmentGyoyang = new GyoyangFragment();
+        fragmentMajor2 = new MajorFragment2();
+
         fragmentManager = getSupportFragmentManager();
         fragmentMajor = new MajorFragment();
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.layout_frame_category,fragmentMajor);
         transaction.commit();
+
         TextView.OnClickListener onClickListener = new TextView.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +76,6 @@ public class MajorActivity extends AppCompatActivity{
                             tv_gyoyang.setTextColor(Color.parseColor("#000000"));
                             tv_gyoyang.setTypeface(Typeface.DEFAULT_BOLD);
                             fragmentManager = getSupportFragmentManager();
-                            fragmentMajor = new MajorFragment();
                             transaction = fragmentManager.beginTransaction();
                             transaction.replace(R.id.layout_frame_category,fragmentMajor);
                             transaction.commit();
@@ -75,24 +84,15 @@ public class MajorActivity extends AppCompatActivity{
                     case R.id.tv_gyoyang:
                         if(tv_gyoyang.getCurrentTextColor()!=ContextCompat.getColor(getApplicationContext(), R.color.Iris))
                         {
+
                             tv_major.setTextColor(Color.parseColor("#000000"));
                             tv_gyoyang.setTextColor(Color.parseColor("#574FBA"));
                             tv_gyoyang.setTypeface(Typeface.DEFAULT_BOLD);
                             fragmentManager = getSupportFragmentManager();
-                            fragmentGyoyang = new GyoyangFragment();
                             transaction = fragmentManager.beginTransaction();
                             transaction.replace(R.id.layout_frame_category,fragmentGyoyang).commitAllowingStateLoss();
                         }
                         break;
-                    case R.id.etv_search_click:
-                        if(fragmentMajor.isAdded())
-                        {
-                            fragmentMajor.onClick(etv_search.getText()+"");
-                        }
-                        else
-                        {
-
-                        }
                 }
             }
         } ;
@@ -130,5 +130,6 @@ public class MajorActivity extends AppCompatActivity{
             finish();
         }
     }
+
 
 }

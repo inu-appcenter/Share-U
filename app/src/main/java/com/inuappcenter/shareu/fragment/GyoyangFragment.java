@@ -14,7 +14,8 @@ import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
-import com.inuappcenter.shareu.my_class.categorySubject;
+import com.inuappcenter.shareu.my_class.categoryCulture;
+import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.GyoyangAdapter;
 import com.inuappcenter.shareu.recycler.SubjectAdapter;
 import com.inuappcenter.shareu.service.RetrofitHelper;
@@ -32,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GyoyangFragment extends Fragment {
+public class GyoyangFragment extends Fragment  {
     private IndexFastScrollRecyclerView recyclerView;
     private LinearLayoutManager manager;
     private ArrayList<Major> dataList;
@@ -41,7 +42,7 @@ public class GyoyangFragment extends Fragment {
 
     private EditText etv_search;
     private ImageButton etv_search_click;
-    private ArrayList<categorySubject>dataList2;
+    private ArrayList<categoryCulture>dataList2;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -135,9 +136,9 @@ public class GyoyangFragment extends Fragment {
     void giveMyGyoyang()
     {
         RetrofitService networkService = RetrofitHelper.create();
-        networkService.categoryCulture(etv_search.getText()+"").enqueue(new Callback<List<categorySubject>>() {
+        networkService.categoryCulture(etv_search.getText()+"").enqueue(new Callback<List<categoryCulture>>() {
             @Override
-            public void onResponse(Call<List<categorySubject>> call, Response<List<categorySubject>> response) {
+            public void onResponse(Call<List<categoryCulture>> call, Response<List<categoryCulture>> response) {
 
                 if (response.isSuccessful()) {
                     dataList2 = new ArrayList<>();
@@ -147,33 +148,33 @@ public class GyoyangFragment extends Fragment {
                         if (flag.equals(response.body().get(i).getSubjectInitiality())) {
 
                             if (i == response.body().size() - 1) {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(), response.body().get(i).getProfName(), response.body().get(i).getSubjectInitiality(), Code.ViewType.MAJOR, R.color.white));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(), response.body().get(i).getProfName(), response.body().get(i).getSubjectInitiality(), Code.ViewType.MAJOR, R.color.white));
                             }
                             else if(!response.body().get(i+1).getSubjectInitiality().equals(response.body().get(i).getSubjectInitiality()))
                             {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.white));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.white));
                             }
                             else {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(), response.body().get(i).getProfName(), response.body().get(i).getSubjectInitiality(), Code.ViewType.MAJOR, R.color.gray));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(), response.body().get(i).getProfName(), response.body().get(i).getSubjectInitiality(), Code.ViewType.MAJOR, R.color.gray));
                             }
                         }
                         else {
                             flag = response.body().get(i).getSubjectInitiality();
-                            dataList2.add(new categorySubject(response.body().get(i).getSubjectInitiality(), response.body().get(i).getProfName(), response.body().get(i).getSubjectInitiality(), Code.ViewType.INDEX, R.color.gray));
+                            dataList2.add(new categoryCulture(response.body().get(i).getSubjectInitiality(), response.body().get(i).getProfName(), response.body().get(i).getSubjectInitiality(), Code.ViewType.INDEX, R.color.gray));
                             if(response.body().size()==1)
                             {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.gray));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.gray));
                             }
                             else if(i==response.body().size()-1 )
                             {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.white));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.white));
                             }
                             else if(!response.body().get(i+1).getSubjectInitiality().equals(response.body().get(i).getSubjectInitiality()))
                             {
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.white));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.white));
                             }
                             else
-                                dataList2.add(new categorySubject(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.gray));
+                                dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.gray));
                         }
                     }
                 }
@@ -193,7 +194,7 @@ public class GyoyangFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<categorySubject>> call, Throwable t) {
+            public void onFailure(Call<List<categoryCulture>> call, Throwable t) {
                 Intent intent = new Intent(getContext(), ServerFailActivity.class);
                 startActivity(intent);
 
@@ -211,4 +212,6 @@ public class GyoyangFragment extends Fragment {
         }
 
     }
+
+
 }

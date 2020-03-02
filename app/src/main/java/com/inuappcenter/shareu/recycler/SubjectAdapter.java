@@ -1,7 +1,8 @@
 package com.inuappcenter.shareu.recycler;
 
+import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,10 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.activity.MajorActivity;
+import com.inuappcenter.shareu.activity.CategorySearchActivity;
 import com.inuappcenter.shareu.fragment.MajorFragment2;
 import com.inuappcenter.shareu.my_class.Code;
-import com.inuappcenter.shareu.my_class.Major;
-import com.inuappcenter.shareu.my_class.categorySubject;
-import com.inuappcenter.shareu.my_interface.OnItemClick;
+import com.inuappcenter.shareu.my_class.categoryCulture;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SubjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
 
     private Context mContext;
-    private ArrayList<categorySubject> mitems;
+    private ArrayList<categoryCulture> mitems;
 
     private FragmentManager fragmentManager;
     private MajorFragment2 fragmentMajor2;
@@ -37,7 +36,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ArrayList<Integer> mSectionPositions;
 
     private String name;
-    public SubjectAdapter(Context mContext, ArrayList<categorySubject> mitems) {
+    public SubjectAdapter(Context mContext, ArrayList<categoryCulture> mitems) {
         this.mContext = mContext;
 
         this.mitems = mitems;
@@ -78,24 +77,12 @@ public class SubjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
-                  /* Intent intent = new Intent(mContext,MajorActivity2.class);
-                   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                   intent.putExtra("select_major",mitems.get(position).getFirst());
-                   mContext.startActivity(intent);
-                   ((Activity)mContext).overridePendingTransition(R.anim.slide_right,R.anim.hold);
-*/
-                    fragmentMajor2 = new MajorFragment2();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("name",((MajorViewHolder) viewHolder).first.getText().toString());
-                    name = ((MajorViewHolder) viewHolder).first.getText().toString();
-                    fragmentMajor2.setArguments(bundle);
-                    fragmentManager =((MajorActivity)mContext).getSupportFragmentManager();
-                    transaction = fragmentManager.beginTransaction();
-
-                    transaction.replace(R.id.layout_frame_category,fragmentMajor2);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+                    Intent intent = new Intent(view.getContext(), CategorySearchActivity.class);
+                    intent.putExtra("major",mitems.get(position).getSubjectname());
+                    intent.putExtra("prof",mitems.get(position).getSubjectInitiality());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    view.getContext().startActivity(intent);
+                    //((Activity)mContext).finish();
                 }
             });
         }

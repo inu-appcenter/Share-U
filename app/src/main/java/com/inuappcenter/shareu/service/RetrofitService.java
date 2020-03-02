@@ -10,11 +10,13 @@ import com.inuappcenter.shareu.my_class.MyPage;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SumPoint;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
+import com.inuappcenter.shareu.my_class.categoryCulture;
 import com.inuappcenter.shareu.my_class.categoryResend;
 import com.inuappcenter.shareu.my_class.categorySubject;
 import com.inuappcenter.shareu.my_class.documentPage;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.reviewList;
+import com.inuappcenter.shareu.my_class.score;
 import com.inuappcenter.shareu.my_class.subjectName;
 
 import java.util.List;
@@ -58,10 +60,10 @@ public interface RetrofitService {
 
     @Multipart
     @POST("/document/upload/uploadfile")
-    Call<ResponseBody> uploadImage(@Part("title") String  title, @Part("content") String content,
-                                   @Part("subjectName") String subjectName,
-                                   @Part("profName") String profName,
-                                   @Part("token")String token,@Part MultipartBody.Part filePart);
+    Call<ResponseBody> uploadImage(@Part("title") RequestBody  title, @Part("content") RequestBody content,
+                                   @Part("subjectName") RequestBody subjectName,
+                                   @Part("profName") RequestBody profName,
+                                   @Part("token")RequestBody token,@Part MultipartBody.Part filePart);
 
 
     //로그인
@@ -112,12 +114,12 @@ public interface RetrofitService {
 
     //전공선택후 과목이름 검색
     @GET("/search/bar/categorySubject")
-    Call<List<categorySubject>>categorySubject
+    Call<List<categoryCulture>>categorySubject
     (@Query("majorName")String majorName,@Query("subjectName")String subjectName);
 
     //카테고리에서 교양 과목 검색
     @GET("/search/bar/categoryCulture")
-    Call<List<categorySubject>>categoryCulture
+    Call<List<categoryCulture>>categoryCulture
     (@Query("subjectName")String subjectName);
 
     //우수자료 선정 -> 검색바에서 검색할 시 전송
@@ -145,5 +147,9 @@ public interface RetrofitService {
     //자료 리뷰 리스트 전송
     @GET("/document/send/reviewList")
     Call<List<reviewList>>reviewList(@Query("documentKey")int key);
+
+    //자료 평균 별점 전송
+    @GET("/document/send/score")
+    Call<List<score>>score(@Query("documentKey")int key);
 
 }

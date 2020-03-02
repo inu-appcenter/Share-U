@@ -157,9 +157,39 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                             String token = tm.getToken(getApplicationContext());
                             //Log.e("시발",token);
                             // 이제 올리기
-                            service.uploadImage(edtv_file_name.getText()+"",edtv_content.getText()+"",
-                                    edtv_select_subject.getText()+"",edtv_select_prof.getText()+""
-                            ,token,filePart).enqueue(new Callback<ResponseBody>() {
+                            RequestBody titleBody = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    edtv_file_name.getText()+""
+                            );
+
+
+                            RequestBody contentBody = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    edtv_content.getText()+""
+                            );
+
+                            RequestBody subjectNameBody = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    edtv_select_subject.getText()+""
+                            );
+
+                            RequestBody profNameBody = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    edtv_select_prof.getText()+""
+                            );
+
+                            RequestBody tokenBody = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    token
+                            );
+                            service.uploadImage(
+                                    titleBody,
+                                    contentBody,
+                                    subjectNameBody,
+                                    profNameBody,
+                                    tokenBody,
+                                    filePart
+                            ).enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if(response.isSuccessful())
@@ -186,11 +216,21 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                                 }
                             });
                         }
-                        else if(one>200)
+                        else if(one>20)
+                        {
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"제목을 20자 이하로 채워주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar.setActionTextColor(Color.WHITE);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                            textView.setTextColor(Color.WHITE);
+                            snackbar.show();
+                        }
+                        else if(four>200)
                         {
                     /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
                     progressSnackbar2.show();*/
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 200자 미만으로 채워주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 200자 이하로 채워주세요!",TSnackbar.LENGTH_SHORT);
                             snackbar.setActionTextColor(Color.WHITE);
                             View snackbarView = snackbar.getView();
                             snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
@@ -315,7 +355,9 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
      */
     private void uploadFile(String path,String desc) {
         service = RetrofitHelper.create();
-        type = MediaType.parse("multipart/form-data");
+        type = MediaType.parse("application/octet-stream"); //body의 타입은 multipart가 맞는데 body 속 파일 타입은 모든 파일을 수용할 수 있는
+        //application/octet-stream
+        //안 해도 문제는 없지만 HTTP 표준에 어긋
         // POST의 file 부분 생성
         File imageFile = new File(path);
         RequestBody reqFile = RequestBody.create(type, imageFile);

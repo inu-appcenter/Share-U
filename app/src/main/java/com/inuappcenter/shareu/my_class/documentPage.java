@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class documentPage
 {
+
+    @SerializedName("division")
+    String division;
+    @SerializedName("majorName")
+    String majorName;
     @SerializedName("title")
     String title;
     @SerializedName("subjectName")
@@ -14,10 +19,18 @@ public class documentPage
     String content;
     @SerializedName("uploadDate")
     String uploadDate;
-    @SerializedName("uploadID")
+    @SerializedName("uploadId")
     String uploadId;
     @SerializedName("extension")
     String extension;
+
+    public String getDivision() {
+        return division;
+    }
+
+    public String getMajorName() {
+        return majorName;
+    }
 
     public String getTitle() {
         return title;

@@ -45,6 +45,8 @@ public class CategorySuccessedAdatper extends RecyclerView.Adapter<CategorySucce
         holder.tv_date.setText(item.getUploadDate());
         holder.tv_profName.setText(item.getProfName());
         holder.superior_ratingbar.setRating(item.getAvg_score());
+        holder.superior_ratingbar.setClickable(false);
+        holder.superior_ratingbar.setScrollable(false);
         if(item.getExtension().equals("PPT") || item.getExtension().equals("PPTX"))
         {
             holder.img_extension.setImageResource(R.drawable.ppt);

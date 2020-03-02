@@ -222,7 +222,6 @@
                         android:layout_marginTop="8dp">
 
                         <TextView
-                            android:id="@+id/tv_detailed_file_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="15dp"
@@ -332,7 +331,11 @@
                         android:id="@+id/tv_more"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="더보기"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="16dp"
+                        android:text="모든 리뷰 보기"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

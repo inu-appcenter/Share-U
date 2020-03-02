@@ -15,6 +15,7 @@ import com.inuappcenter.shareu.fragment.BottomSheetPlusPoint;
 import com.inuappcenter.shareu.my_class.Document;
 import com.inuappcenter.shareu.my_class.documentPage;
 import com.inuappcenter.shareu.my_class.reviewList;
+import com.inuappcenter.shareu.my_class.score;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.CategorySuccessedAdatper;
 import com.inuappcenter.shareu.service.RetrofitHelper;
@@ -65,6 +66,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     protected void onResume() {
         super.onResume();
         listen();
+        giveMeStar();
         giveMeList();
         giveMeReview();
 
@@ -74,7 +76,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         tv_more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getApplicationContext(),ReviewActivity.class);
+                intent.putExtra("key",key);
+                intent.putExtra("name",tv_my_major.getText()+"");
+                startActivity(intent);
             }
         });
 
@@ -83,6 +88,26 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
             public void onClick(View view) {
                 //TODO : 상황에 따라 포인트 지급 , 차감 결정..
                 bottomSheetPlusPoint.show(getSupportFragmentManager(),"냐옹");
+
+            }
+        });
+    }
+
+    void giveMeStar()
+    {
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.score(key).enqueue(new Callback<List<score>>() {
+            @Override
+            public void onResponse(Call<List<score>> call, Response<List<score>> response) {
+                if (response.isSuccessful()) {
+                    review_ratingbar.setRating(response.body().get(0).getScore());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<score>> call, Throwable t) {
 
             }
         });
@@ -99,12 +124,14 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                     {
                         tv_no_review.setVisibility(View.VISIBLE);
                         yes_review.setVisibility(View.GONE);
+                        tv_more.setVisibility(View.GONE);
 
                     }
                     else
                     {
                         tv_no_review.setVisibility(View.GONE);
                         yes_review.setVisibility(View.VISIBLE);
+                        tv_more.setVisibility(View.VISIBLE);
                         tv_review_date.setText(response.body().get(0).getUploadDate());
                         tv_review_name.setText(response.body().get(0).getUploadId());
                         before_user_ratingbar.setRating(response.body().get(0).getScore());
@@ -131,9 +158,15 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                     tv_my_major.setText(response.body().get(0).getTitle());
                     tv_detailed_file_content.setText(response.body().get(0).getContent());
                     //review_ratingbar.setRating(response.body().get(0).get);
-                    tv_detailed_file_user_name.setText(response.body().get(0).getUploadId());
+                    String name = response.body().get(0).getUploadId();
+                    name=name.substring(0,5);
+                    name+="****";
+                    tv_detailed_file_user_name.setText(name);
                     //tv_detailed_file_category.setText(response.body().get(0))
                     tv_detailed_file_date.setText(response.body().get(0).getUploadDate());
+                    tv_detailed_file_category.setText(response.body().get(0).getMajorName());
+                    tv_detailed_file_type.setText(response.body().get(0).getExtension());
+                    tv_detailed_file_name.setText(response.body().get(0).getSubjectName());
                 }
 
             }
