@@ -149,7 +149,8 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
             @Override
             public void onFailure(Call<List<reviewList>> call, Throwable t) {
-
+                Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+                startActivity(intent);
             }
         });
     }
