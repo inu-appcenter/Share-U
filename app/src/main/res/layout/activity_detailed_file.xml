@@ -87,7 +87,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_marginTop="10dp">
 
                     <com.willy.ratingbar.BaseRatingBar
@@ -109,31 +109,16 @@
 
                     </com.willy.ratingbar.BaseRatingBar>
 
-                    <FrameLayout
+                    <ImageView
+                        android:id="@+id/singo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
+                        android:layout_weight="1"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-
-                        >
-
-                        <ImageView
-
-                            android:id="@+id/singo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/group199" />
-
-                        <TextView
-                            android:id="@+id/textView15"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center"
-                            android:layout_marginBottom="7dp"
-                            android:text="신고"
-                            android:textSize="10sp" />
-                    </FrameLayout>
+                        app:srcCompat="@drawable/group632" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,14 +1,10 @@
 package com.inuappcenter.shareu.model;
 
-import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 
 import com.inuappcenter.shareu.R;
-import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
-import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter2;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
@@ -16,9 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.lifecycle.MutableLiveData;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,13 +51,31 @@ public class MainModel {
     //메인 우수자료
     public void setSuperior()
     {
-        /*List<SuperiorLecture> tmp_list2 =new ArrayList<>();
-        tmp_list2.add(new SuperiorLecture(R.drawable.pdf,"문학과테마기행 족보",5));
-        tmp_list2.add(new SuperiorLecture(R.drawable.excel,"시스템프로그래밍 족보",(float)4.8));
-        tmp_list2.add(new SuperiorLecture(R.drawable.ppt,"생명과학 족보",(float)4.5));
-        tmp_list2.add(new SuperiorLecture(R.drawable.word,"디지털기술과미래 족보",(float)3.2));
-        tmp_list2.add(new SuperiorLecture(R.drawable.pdf,"경영경제수학 족보",(float)2.5));
-        setSuperiorData(tmp_list2);*/
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.mainTop5ScoreList().enqueue(new Callback<List<SuperiorLecture>>() {
+            @Override
+            public void onResponse(Call<List<SuperiorLecture>> call, Response<List<SuperiorLecture>> response) {
+                List<SuperiorLecture> tmp_list2 =new ArrayList<>();
+                if (response.isSuccessful()) {
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        tmp_list2.add(new SuperiorLecture(response.body().get(i).getDocumentKey(),
+
+                                response.body().get(i).getTitle(),response.body().get(i).getUploadDate(),
+                                response.body().get(i).getExtension(),
+                                response.body().get(i).getRating()));
+                    }
+                    setSuperiorData(tmp_list2);
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<SuperiorLecture>> call, Throwable t) {
+
+            }
+        });
     }
 
     public void setNotice()

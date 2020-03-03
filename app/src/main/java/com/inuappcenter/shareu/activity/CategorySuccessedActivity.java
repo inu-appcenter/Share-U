@@ -80,7 +80,7 @@ public class CategorySuccessedActivity extends AppCompatActivity {
     void goDown()
     {
         RetrofitService networkService = RetrofitHelper.create();
-        networkService.more(subjectName,profName).enqueue(new Callback<List<Document>>() {
+        networkService.more(subjectName,profName,"").enqueue(new Callback<List<Document>>() {
             @Override
             public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
                 if (response.isSuccessful()) {
@@ -114,7 +114,7 @@ public class CategorySuccessedActivity extends AppCompatActivity {
     void goUp()
     {
         RetrofitService networkService = RetrofitHelper.create();
-        networkService.more(subjectName,profName).enqueue(new Callback<List<Document>>() {
+        networkService.more(subjectName,profName,"").enqueue(new Callback<List<Document>>() {
             @Override
             public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
                 if (response.isSuccessful()) {

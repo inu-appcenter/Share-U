@@ -48,7 +48,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     private TextView tv_detailed_file_content,tv_more;
     private LinearLayout yes_review;
     private int key;
-    private ImageView btn_backpress;
+    private ImageView btn_backpress,singo;
 
 
 
@@ -93,6 +93,15 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
             }
         });
         btn_backpress.setOnClickListener(v->finish());
+
+        singo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),SelectPoliceActivity.class);
+                intent.putExtra("key",key);
+                startActivity(intent);
+            }
+        });
     }
 
     void giveMeStar()
@@ -209,6 +218,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         yes_review=findViewById(R.id.layout_yes_review);
         tv_more = findViewById(R.id.tv_more);
         btn_backpress=findViewById(R.id.btn_backpress);
+        singo=findViewById(R.id.singo);
     }
 
     @Override

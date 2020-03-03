@@ -12,7 +12,6 @@ import com.inuappcenter.shareu.my_class.SumPoint;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.inuappcenter.shareu.my_class.categoryCulture;
 import com.inuappcenter.shareu.my_class.categoryResend;
-import com.inuappcenter.shareu.my_class.categorySubject;
 import com.inuappcenter.shareu.my_class.documentPage;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.reviewList;
@@ -134,7 +133,8 @@ public interface RetrofitService {
 
     //더보기 -> 검색바에서 과목이름 검색시
     @GET("/document/send/more")
-    Call<List<Document>>more(@Query("subjectName")String subjectName,@Query("profName")String profName);
+    Call<List<Document>>more(@Query("subjectName")String subjectName,@Query("profName")String profName,
+    @Query("title")String title);
 
     //카테고리 과목이름과 교수이름을 받은 후 과목이름과 교수이름 해당 학과 이름까지 재전송
     @GET("/document/send/categoryResend")
@@ -151,5 +151,15 @@ public interface RetrofitService {
     //자료 평균 별점 전송
     @GET("/document/send/score")
     Call<List<score>>score(@Query("documentKey")int key);
+
+    //자료 신고
+    @FormUrlEncoded
+    @POST("/document/report")
+    Call<Fuck>report(@Field("documentKey")int key,@Field("reportContent")String reportContent);
+
+    //main 페이지 우수자료 전송
+
+    @GET("/document/send/mainTop5ScoreList")
+    Call<List<SuperiorLecture>>mainTop5ScoreList();
 
 }

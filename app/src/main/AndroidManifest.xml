@@ -131,6 +131,13 @@
             >
 
         </activity>
+
+        <activity android:name=".activity.SelectPoliceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+
+        </activity>
     </application>
 
 </manifest>

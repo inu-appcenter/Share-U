@@ -46,7 +46,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     private ViewPager viewPager ;
     private MainPresenter mainPresenter = new MainPresenter(this,this);
-    private SuperiorLectureAdapter2 superiorLectureAdapter2;
+    private SuperiorLectureAdapter2 superiorLectureAdapter2 ;
     private NoticeAdapter noticeAdapter;
     private View view;
     @Nullable
@@ -65,7 +65,7 @@ public class MainFragment extends Fragment implements MainContract.View {
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(layoutManager2);
         recyclerView2.setAdapter(noticeAdapter);
-        /*viewPager = view.findViewById(R.id.viewpager_superior) ;
+        viewPager = view.findViewById(R.id.viewpager_superior) ;
 
         superiorLectureAdapter2 = new SuperiorLectureAdapter2(getActivity());
         viewPager.setAdapter(superiorLectureAdapter2) ;
@@ -79,7 +79,7 @@ public class MainFragment extends Fragment implements MainContract.View {
         indicator.createIndicators(5,0);
 
 
-        ;*/
+        ;
 
     }
 
