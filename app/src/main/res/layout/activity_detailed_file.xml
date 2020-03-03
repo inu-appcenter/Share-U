@@ -31,7 +31,7 @@
             android:singleLine="true"
             android:text="문테기 족보 2019"
             android:textColor="@color/Iris"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
