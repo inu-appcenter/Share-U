@@ -27,7 +27,6 @@
             android:id="@+id/tv_my_major"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="국어국문학과"
             android:textColor="@color/Iris"
             android:textSize="20sp"
             android:textStyle="bold"

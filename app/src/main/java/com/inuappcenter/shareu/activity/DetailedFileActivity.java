@@ -418,13 +418,13 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
     void check() {
         TokenManager tm = TokenManager.getInstance();
-
         String token = tm.getToken(this);
         if (token == null)
         {
             Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(intent);
         }
+
         else if(edtv_review.getText().length()<5)
         {
             snackbar = TSnackbar.make(findViewById(android.R.id.content),"리뷰를 5글자 이상 남겨주세요!",TSnackbar.LENGTH_SHORT);
@@ -453,6 +453,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 @Override
                 public void onResponse(Call<BooleanFuck> call, Response<BooleanFuck> response) {
                     if (response.isSuccessful()) {
+                        Log.e("시발",response.body().getAns()+"");
                         if(response.body().getAns())
                         {
                             bottomSheetPlusPoint.show(getSupportFragmentManager(),"냐아옹");
