@@ -18,34 +18,41 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyGiveModel {
-    MutableLiveData<List<MyUpload> > listMutableLiveData = new MutableLiveData<>();
-    public MutableLiveData<List<MyUpload>> getListMutableLiveData() {
-        return listMutableLiveData;
+    private MutableLiveData<List<MyUpload>> _dataList = new MutableLiveData<>();
+    private String token;
+    public MutableLiveData<List<MyUpload>> getDataList() {
+        return _dataList;
     }
-
-    public void setListMutableLiveData(List<MyUpload> dataList) {
-        this.listMutableLiveData.postValue(dataList);
+    public void setDataList(List<MyUpload> dataList)
+    {
+        this._dataList.postValue(dataList);
     }
     public void setDatas()
     {
 
-       /* RetrofitService networkService = RetrofitHelper.create();
-        networkService.score(key).enqueue(new Callback<List<score>>() {
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.userDownloadList(token).enqueue(new Callback<List<MyUpload>>() {
             @Override
-            public void onResponse(Call<List<score>> call, Response<List<score>> response) {
+            public void onResponse(Call<List<MyUpload>> call, Response<List<MyUpload>> response) {
                 if (response.isSuccessful()) {
-                    review_ratingbar.setRating(response.body().get(0).getScore());
-
+                    List<MyUpload> tmp_list = new ArrayList<>();
+                    for(int i=response.body().size()-1;i>=0;i--)
+                    {
+                        tmp_list.add(new MyUpload(response.body().get(i).getUploadDate(),
+                                response.body().get(i).getTitle(),response.body().get(i).getExtension(),response.body().get(i).getDocumentKey()));
+                    }
+                    setDataList(tmp_list);
                 }
 
             }
 
             @Override
-            public void onFailure(Call<List<score>> call, Throwable t) {
+            public void onFailure(Call<List<MyUpload>> call, Throwable t) {
 
             }
         });
-        List<MyUpload> tmp_list = new ArrayList<>();
+
+        /*List<MyUpload> tmp_list = new ArrayList<>();
         tmp_list.add(new MyUpload("ppt","2019.11.21","2019년도 일본학개론"));
         tmp_list.add(new MyUpload("word","2019.10.30","2017년도 임상여성학 족보"));
         tmp_list.add(new MyUpload("jpeg","2019.09.18","2019년도 1학기 일본학개론"));
@@ -58,7 +65,11 @@ public class MyGiveModel {
         tmp_list.add(new MyUpload("word","2019.10.30","2017년도 임상여성학 족보"));
         tmp_list.add(new MyUpload("jpeg","2019.09.18","2019년도 1학기 일본학개론"));
         tmp_list.add(new MyUpload("ps","2019.08.30","시각디자인 포스터 자료"));
-        setListMutableLiveData(tmp_list);*/
+        setDataList(tmp_list);*/
+    }
+
+    public void setToken(String token) {
+        this.token=token;
     }
 
 }

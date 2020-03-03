@@ -13,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.DetailedFileActivity;
 import com.inuappcenter.shareu.activity.MyDetailedUploadActivtity;
 import com.inuappcenter.shareu.activity.UploadedActivity;
 import com.inuappcenter.shareu.my_class.Fuck;
@@ -142,6 +143,14 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
                     }
                 });
                 popupMenu.show();
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext.getApplicationContext(), DetailedFileActivity.class);
+                intent.putExtra("key",mitems.get(position).getDocumentKey());
+                mContext.startActivity(intent);
             }
         });
     }

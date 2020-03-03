@@ -1,6 +1,7 @@
 package com.inuappcenter.shareu.presenter;
 
 import com.inuappcenter.shareu.model.MyGiveModel;
+import com.inuappcenter.shareu.model.MyUploadModel;
 import com.inuappcenter.shareu.my_class.MyUpload;
 
 import java.util.List;
@@ -13,23 +14,24 @@ import androidx.lifecycle.Observer;
 public class MyGivePresenter implements MyGiveContract.Presenter{
 
     LifecycleOwner lifecycleOwner;
-    MyGiveContract.View myGiveContractView;
+    MyGiveContract.View myUploadView;
     MyGiveModel myGiveModel;
+    //뷰랑 모델을 불러내서 작업을 하게 해야징
 
-    public MyGivePresenter(LifecycleOwner lifecycleOwner, MyGiveContract.View myGiveContractView) {
+
+    public MyGivePresenter(LifecycleOwner lifecycleOwner, MyGiveContract.View myUploadView) {
         this.lifecycleOwner = lifecycleOwner;
-        this.myGiveContractView = myGiveContractView;
+        this.myUploadView = myUploadView;
         this.myGiveModel = new MyGiveModel();
     }
 
     @Override
     public void onCreate() {
-        //여기서 데이터를 구독하자
-        myGiveModel.getListMutableLiveData().observe(lifecycleOwner,new Observer<List<MyUpload> >(){
+        myGiveModel.getDataList().observe(lifecycleOwner,new Observer<List<MyUpload> >(){
                     @Override
                     public void onChanged(List<MyUpload> myUploads) {
                         if (myUploads != null) {
-                            myGiveContractView.setDatas(myUploads);
+                            myUploadView.setDatas(myUploads);
                         }
                     }
                 }
@@ -39,14 +41,17 @@ public class MyGivePresenter implements MyGiveContract.Presenter{
 
     @Override
     public void onResume() {
-        //변화가 발생하면 데이터를 설정해주자
-        //모델의 데이터를 바꿔서 또 observe의 onChanged 콜백이 실행되게끔!
         myGiveModel.setDatas();
     }
 
     @Override
-    public void onDestroy() {
-        //구독자의 참조를 취소해주자
-        myGiveModel.getListMutableLiveData().removeObservers(lifecycleOwner);
+    public void onDestroy()
+    {
+        myGiveModel.getDataList().removeObservers(lifecycleOwner);
+    }
+
+    @Override
+    public void setToken(String token) {
+        myGiveModel.setToken(token);
     }
 }

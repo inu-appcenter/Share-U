@@ -12,6 +12,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.DetailedFileActivity;
 import com.inuappcenter.shareu.activity.MyDetailedUploadActivtity;
 import com.inuappcenter.shareu.activity.UploadedActivity;
 import com.inuappcenter.shareu.my_class.Major;
@@ -107,6 +108,14 @@ public class MyGiveAdapter extends RecyclerView.Adapter<MyGiveAdapter.ViewHolder
         holder.tv_my_upload_title.setText(item.getTitle());
         holder.tv_my_upload_date.setText(item.getUploadDate());
         holder.btn_my_upload.setVisibility(View.GONE);
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext.getApplicationContext(), DetailedFileActivity.class);
+                intent.putExtra("key",mitems.get(position).getDocumentKey());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

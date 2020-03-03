@@ -42,7 +42,6 @@
                     android:id="@+id/tv_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="족보 등록"
                     android:textColor="@color/black" />
 
             </LinearLayout>

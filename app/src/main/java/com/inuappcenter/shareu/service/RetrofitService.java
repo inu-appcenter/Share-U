@@ -13,11 +13,13 @@ import com.inuappcenter.shareu.my_class.SumPoint;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.inuappcenter.shareu.my_class.categoryCulture;
 import com.inuappcenter.shareu.my_class.categoryResend;
+import com.inuappcenter.shareu.my_class.documentFile;
 import com.inuappcenter.shareu.my_class.documentPage;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.reviewList;
 import com.inuappcenter.shareu.my_class.score;
 import com.inuappcenter.shareu.my_class.sendBeforeModify;
+import com.inuappcenter.shareu.my_class.sendFileExtension;
 import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_class.userPointList;
 
@@ -192,5 +194,26 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("/document/user_doc/userPointList")
     Call<List<userPointList>>userPointList(@Field("token")String token);
+
+    //리뷰 등록 -> 다운 O/X 사용자
+    @FormUrlEncoded
+    @POST("/document/upload/uploadreview")
+    Call<BooleanFuck>uploadreview(@Field("review")String review,@Field("score")float score,@Field("documentKey")int key,
+                           @Field("token")String token);
+
+    //사용자 다운로드 리스트
+    @FormUrlEncoded
+    @POST("/document/user_doc/userDownloadList")
+    Call<List<MyUpload> >userDownloadList(@Field("token")String token);
+
+    //자료파일 다운로드
+    @FormUrlEncoded
+    @POST("/document/send/documentFile")
+    Call<List<documentFile>>documentFile(@Field("documentKey")int key,@Field("token")String token);
+
+    //파일 확장자 전송
+    @FormUrlEncoded
+    @POST("/document/send/sendFileExtension")
+    Call<List<sendFileExtension>>sendFileExtension(@Field("documentKey")int key);
 
 }

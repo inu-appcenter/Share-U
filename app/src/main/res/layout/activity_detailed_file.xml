@@ -502,7 +502,7 @@
                     </com.willy.ratingbar.BaseRatingBar>
 
                     <TextView
-                        android:id="@+id/button3"
+                        android:id="@+id/tv_register"
                         android:layout_width="76dp"
                         android:layout_height="49dp"
                         android:layout_weight="1"
