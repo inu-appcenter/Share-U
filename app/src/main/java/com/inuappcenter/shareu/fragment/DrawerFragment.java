@@ -20,6 +20,7 @@ import com.inuappcenter.shareu.activity.LoginActivity;
 import com.inuappcenter.shareu.activity.MainActivity;
 import com.inuappcenter.shareu.activity.ModifyInformActivity;
 import com.inuappcenter.shareu.activity.MyGiveActivity;
+import com.inuappcenter.shareu.activity.MyPointActivity;
 import com.inuappcenter.shareu.activity.MyUploadActivity;
 import com.inuappcenter.shareu.activity.OverallNoticeActivity;
 import com.inuappcenter.shareu.activity.ServerFailActivity;
@@ -62,6 +63,7 @@ public class DrawerFragment extends Fragment {
     private ConstraintLayout welcome_point;
     private FrameLayout getpoint;
 
+    private TextView tv_detail_point;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -149,6 +151,11 @@ public class DrawerFragment extends Fragment {
                         giveMeWelcomePoint();
                         break;
 
+                    case R.id.tv_detail_point:
+                        Intent intent7= new Intent(view.getContext(), MyPointActivity.class);
+                        intent7.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        view.getContext().startActivity(intent7);
+                        break;
 
                 }
 
@@ -182,6 +189,7 @@ public class DrawerFragment extends Fragment {
         welcome_point.setOnClickListener(onClickListener);
         tv_my_change_my_page.setOnClickListener(onClickListener);
         getpoint.setOnClickListener(onClickListener);
+        tv_detail_point.setOnClickListener(onClickListener);
     }
 
     void init()
@@ -195,6 +203,7 @@ public class DrawerFragment extends Fragment {
         my_point = view.findViewById(R.id.my_point);
         welcome_point=view.findViewById(R.id.welcome_point);
         getpoint=view.findViewById(R.id.getpoint);
+        tv_detail_point=view.findViewById(R.id.tv_detail_point);
     }
 
     void giveMyImform()

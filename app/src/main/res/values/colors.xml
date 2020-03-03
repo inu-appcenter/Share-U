@@ -6,4 +6,5 @@
     <color name="black">#000000</color>
     <color name="gray">#57000000</color>
     <color name="transparent">#00000000</color>
+    <color name="minus">#c9c9f4</color>
 </resources>

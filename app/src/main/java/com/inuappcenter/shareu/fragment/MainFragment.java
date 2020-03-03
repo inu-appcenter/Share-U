@@ -79,9 +79,9 @@ public class MainFragment extends Fragment implements MainContract.View {
         indicator.createIndicators(5,0);
 
 
-        ;
 
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

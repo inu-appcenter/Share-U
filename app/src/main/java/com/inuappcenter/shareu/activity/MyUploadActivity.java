@@ -7,6 +7,7 @@ import android.widget.ImageButton;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.my_class.MyUpload;
+import com.inuappcenter.shareu.my_class.TokenManager;
 import com.inuappcenter.shareu.presenter.MyUploadContract;
 import com.inuappcenter.shareu.presenter.MyUploadPresenter;
 import com.inuappcenter.shareu.recycler.MyUploadAdapter;
@@ -28,6 +29,9 @@ public class MyUploadActivity extends AppCompatActivity implements MyUploadContr
         setContentView(R.layout.activity_my_upload);
         initializeView();
         myUploadPresenter.onCreate();
+        TokenManager tm = TokenManager.getInstance();
+        String token = tm.getToken(this);
+        myUploadPresenter.setToken(token);
     }
 
     @Override

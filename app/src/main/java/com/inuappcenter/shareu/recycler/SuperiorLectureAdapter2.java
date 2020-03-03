@@ -1,6 +1,7 @@
 package com.inuappcenter.shareu.recycler;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.DetailedFileActivity;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.willy.ratingbar.BaseRatingBar;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 public class SuperiorLectureAdapter2 extends PagerAdapter {
     // LayoutInflater 서비스 사용을 위한 Context 참조 저장.
@@ -33,6 +36,8 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
         mitems = superiorLectures;
         notifyDataSetChanged();
     }
+
+
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view ;
@@ -109,6 +114,15 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
         //item_default_superior.setImageResource(mitems.get(position).getImage());
         tv_superior_name.setText(mitems.get(position).getTitle());
         ratingBar.setRating(mitems.get(position).getRating());
+
+        view.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext.getApplicationContext(), DetailedFileActivity.class);
+                intent.putExtra("key",mitems.get(position).getDocumentKey());
+                mContext.startActivity(intent);
+            }
+        });
 
 
         // 뷰페이저에 추가.

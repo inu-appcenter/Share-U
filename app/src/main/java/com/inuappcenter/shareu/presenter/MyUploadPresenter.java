@@ -46,4 +46,9 @@ public class MyUploadPresenter implements MyUploadContract.Presenter{
     {
         myUploadModel.getDataList().removeObservers(lifecycleOwner);
     }
+
+    @Override
+    public void setToken(String token) {
+        myUploadModel.setToken(token);
+    }
 }

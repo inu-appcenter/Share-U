@@ -7,6 +7,7 @@ import com.inuappcenter.shareu.my_class.Login;
 import com.inuappcenter.shareu.my_class.Major;
 import com.inuappcenter.shareu.my_class.MyInform;
 import com.inuappcenter.shareu.my_class.MyPage;
+import com.inuappcenter.shareu.my_class.MyUpload;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SumPoint;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
@@ -16,7 +17,9 @@ import com.inuappcenter.shareu.my_class.documentPage;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.reviewList;
 import com.inuappcenter.shareu.my_class.score;
+import com.inuappcenter.shareu.my_class.sendBeforeModify;
 import com.inuappcenter.shareu.my_class.subjectName;
+import com.inuappcenter.shareu.my_class.userPointList;
 
 import java.util.List;
 
@@ -161,5 +164,33 @@ public interface RetrofitService {
 
     @GET("/document/send/mainTop5ScoreList")
     Call<List<SuperiorLecture>>mainTop5ScoreList();
+
+    //사용자 업로드 리스트
+    @FormUrlEncoded
+    @POST("/document/user_doc/userUploadList")
+    Call<List<MyUpload> >userUploadList(@Field("token")String token);
+
+    //게시물 삭제
+    @FormUrlEncoded
+    @POST("/document/delete_doc")
+    Call<Fuck>delete_doc(@Field("documentKey")int key,@Field("token")String token);
+
+    //게시물 수정
+    /*
+    * http 메시지는 header와 body로 이뤄지구여, body에 무언가를 담아 보내는 방법은 multipart/form-data, x-www-form-urlencoded, json 등이 있다.*/
+    //Retrofit2의 Field는 body의 form-urlencoded에 대응
+    @FormUrlEncoded
+    @POST("/document/modify")
+    Call<Fuck>modify(@Field("documentKey")int key,@Field("token")String token,@Field("title")String title,
+                     @Field("content")String content,@Field("subjectName")String subjectName,@Field("profName")String profName);
+
+    //자료 수정하기 전 기존 자료 데이터 전송
+    @GET("/document/send/sendBeforeModify")
+    Call<List<sendBeforeModify>>sendBeforeModify(@Query("documentKey")int key);
+
+    //사용자 포인트 상세내역 리스트
+    @FormUrlEncoded
+    @POST("/document/user_doc/userPointList")
+    Call<List<userPointList>>userPointList(@Field("token")String token);
 
 }

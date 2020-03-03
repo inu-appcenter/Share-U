@@ -105,7 +105,7 @@ public class MyGiveAdapter extends RecyclerView.Adapter<MyGiveAdapter.ViewHolder
             holder.img_my_upload.setImageResource(R.drawable.file);
         }
         holder.tv_my_upload_title.setText(item.getTitle());
-        holder.tv_my_upload_date.setText(item.getDate());
+        holder.tv_my_upload_date.setText(item.getUploadDate());
         holder.btn_my_upload.setVisibility(View.GONE);
     }
 

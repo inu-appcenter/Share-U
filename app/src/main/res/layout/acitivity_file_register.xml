@@ -93,8 +93,7 @@
         android:layout_marginRight="63dp"
         android:layout_marginBottom="16.5dp"
         android:textColor="@color/Iris"
-        android:textSize="12sp"
-        android:visibility="gone" />
+        android:textSize="12sp" />
 
     <View
         android:layout_width="match_parent"

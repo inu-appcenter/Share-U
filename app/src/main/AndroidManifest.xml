@@ -138,6 +138,18 @@
             >
 
         </activity>
+
+
+        <activity android:name=".activity.MyPointActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name=".activity.ModifySuccessActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
     </application>
 
 </manifest>

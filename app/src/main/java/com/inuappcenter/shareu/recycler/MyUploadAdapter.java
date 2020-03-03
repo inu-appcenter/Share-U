@@ -2,6 +2,7 @@ package com.inuappcenter.shareu.recycler;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,9 +15,13 @@ import android.widget.TextView;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.MyDetailedUploadActivtity;
 import com.inuappcenter.shareu.activity.UploadedActivity;
+import com.inuappcenter.shareu.my_class.Fuck;
 import com.inuappcenter.shareu.my_class.Major;
 import com.inuappcenter.shareu.my_class.MyUpload;
 import com.inuappcenter.shareu.my_class.Notice;
+import com.inuappcenter.shareu.my_class.TokenManager;
+import com.inuappcenter.shareu.service.RetrofitHelper;
+import com.inuappcenter.shareu.service.RetrofitService;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -24,11 +29,14 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHolder> {
     private Context mContext;
     private List<MyUpload> mitems;
-
+    private int key;
 
     public MyUploadAdapter(Context mContext) {
         this.mContext = mContext;
@@ -105,7 +113,7 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
             holder.img_my_upload.setImageResource(R.drawable.file);
         }
         holder.tv_my_upload_title.setText(item.getTitle());
-        holder.tv_my_upload_date.setText(item.getDate());
+        holder.tv_my_upload_date.setText(item.getUploadDate());
         holder.btn_my_upload.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -117,10 +125,14 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
                         switch (menuItem.getItemId()){
                             case R.id.popup_modify:
                                 Intent intent = new Intent(mContext.getApplicationContext(), MyDetailedUploadActivtity.class);
+                                key = mitems.get(position).getDocumentKey();
+                                intent.putExtra("key",key);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 mContext.startActivity(intent);
                                 break;
                             case R.id.popup_delete:
+                                key = mitems.get(position).getDocumentKey();
+                                tellServer(key);
                                 mitems.remove(position);
                                 notifyItemRemoved(position);
                                 notifyItemChanged(position,mitems.size());
@@ -158,5 +170,26 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
     public void setData(List<MyUpload> notices) {
         mitems = notices;
         notifyDataSetChanged();
+    }
+    void tellServer(int key)
+    {
+
+        TokenManager tm = TokenManager.getInstance();
+        String token = tm.getToken(mContext.getApplicationContext());
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.delete_doc(key,token).enqueue(new Callback<Fuck>() {
+
+            @Override
+            public void onResponse(Call<Fuck> call, Response<Fuck> response) {
+                if (response.isSuccessful()) {
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Fuck> call, Throwable t) {
+
+            }
+        });
     }
 }

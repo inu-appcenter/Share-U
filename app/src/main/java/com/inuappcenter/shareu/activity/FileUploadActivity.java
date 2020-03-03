@@ -140,12 +140,59 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                 {
                     case R.id.tv_upload_file:
                         check();
-                        if(one>=1 && two>=1 &&three>=1 &&four>=30 && file_upload_check==true)
+
+                        if(one>20)
+                        {
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"제목을 20자 이하로 채워주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar.setActionTextColor(Color.WHITE);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                            textView.setTextColor(Color.WHITE);
+                            snackbar.show();
+                        }
+                        else if(four>200)
+                        {
+                    /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
+                    progressSnackbar2.show();*/
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 200자 이하로 채워주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar.setActionTextColor(Color.WHITE);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                            textView.setTextColor(Color.WHITE);
+                            snackbar.show();
+                        }
+                        else if(!(one>=1 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true))
+                        {
+                    /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
+                    progressSnackbar2.show();*/
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"모든 항목을 채워주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar.setActionTextColor(Color.WHITE);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                            textView.setTextColor(Color.WHITE);
+                            snackbar.show();
+                        }
+                        else if(four<30)
+                        {
+                    /*progressSnackbar2.setText("모든 내용을 채워주세요");
+                    progressSnackbar2.show();*/
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 30자 이상 채워주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar.setActionTextColor(Color.WHITE);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                            textView.setTextColor(Color.WHITE);
+                            snackbar.show();
+                        }
+                        else
                         {
                     /*progressSnackbar.setText("자료 업로드 중...");
                     progressSnackbar.show();*/
                             tv_upload_file.setEnabled(false);
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 업로드 중...",TSnackbar.LENGTH_INDEFINITE);
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 업로드 중입니다...잠시만 기다려주세요",TSnackbar.LENGTH_INDEFINITE);
                             snackbar.setActionTextColor(Color.WHITE);
                             View snackbarView = snackbar.getView();
                             snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
@@ -215,52 +262,6 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                                     startActivity(intent);*/
                                 }
                             });
-                        }
-                        else if(one>20)
-                        {
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"제목을 20자 이하로 채워주세요!",TSnackbar.LENGTH_SHORT);
-                            snackbar.setActionTextColor(Color.WHITE);
-                            View snackbarView = snackbar.getView();
-                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-                            textView.setTextColor(Color.WHITE);
-                            snackbar.show();
-                        }
-                        else if(four>200)
-                        {
-                    /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
-                    progressSnackbar2.show();*/
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 200자 이하로 채워주세요!",TSnackbar.LENGTH_SHORT);
-                            snackbar.setActionTextColor(Color.WHITE);
-                            View snackbarView = snackbar.getView();
-                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-                            textView.setTextColor(Color.WHITE);
-                            snackbar.show();
-                        }
-                        else if(!(one>=1 && two>=1 &&three>=1 &&four>=1 && file_upload_check==true))
-                        {
-                    /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
-                    progressSnackbar2.show();*/
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"모든 항목을 채워주세요!",TSnackbar.LENGTH_SHORT);
-                            snackbar.setActionTextColor(Color.WHITE);
-                            View snackbarView = snackbar.getView();
-                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-                            textView.setTextColor(Color.WHITE);
-                            snackbar.show();
-                        }
-                        else
-                        {
-                    /*progressSnackbar2.setText("모든 내용을 채워주세요");
-                    progressSnackbar2.show();*/
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 30자 이상 채워주세요!",TSnackbar.LENGTH_SHORT);
-                            snackbar.setActionTextColor(Color.WHITE);
-                            View snackbarView = snackbar.getView();
-                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-                            textView.setTextColor(Color.WHITE);
-                            snackbar.show();
                         }
                         break;
                     case R.id.imageButton4:
