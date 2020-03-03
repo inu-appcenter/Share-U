@@ -2,6 +2,7 @@ package com.inuappcenter.shareu.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ public class PoliceActivity extends Activity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setBackgroundDrawable(new ColorDrawable(0));
         setContentView(R.layout.activity_police);
         btn_backpress = findViewById(R.id.btn_backpress);
         tv_type=findViewById(R.id.tv_type);
