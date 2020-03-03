@@ -497,7 +497,7 @@
                         app:srb_starHeight="22.3dp"
                         app:srb_starPadding="1dp"
                         app:srb_starWidth="22.3dp"
-                        app:srb_stepSize="0.5">
+                        app:srb_stepSize="1">
 
                     </com.willy.ratingbar.BaseRatingBar>
 
