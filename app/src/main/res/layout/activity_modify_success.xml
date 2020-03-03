@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="247dp"
             android:layout_marginBottom="237dp"
-            android:text="자료가 업로드 되었습니다"
+            android:text="수정이 완료되었습니다."
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"

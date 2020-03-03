@@ -64,6 +64,7 @@ public class MyDetailedUploadActivtity extends AppCompatActivity {
                         sendList();
                         Intent intent = new Intent(getApplicationContext(),ModifySuccessActivity.class);
                         startActivity(intent);
+                        finish();
                         break;
 
                 }
