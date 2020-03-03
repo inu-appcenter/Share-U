@@ -2,6 +2,7 @@ package com.inuappcenter.shareu.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -102,8 +103,9 @@ public class SearchSuccessedActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Document>> call, Throwable t) {
-                Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+                startActivity(intent);*/
+                Log.e("흠",t.getCause()+"");
             }
         });
 

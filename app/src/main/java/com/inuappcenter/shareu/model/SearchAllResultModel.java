@@ -1,5 +1,6 @@
 package com.inuappcenter.shareu.model;
 
+import android.util.Log;
 import android.view.View;
 
 import com.inuappcenter.shareu.R;
@@ -80,7 +81,7 @@ public class SearchAllResultModel {
 
             @Override
             public void onFailure(Call<List<SuperiorLecture>> call, Throwable t) {
-
+                Log.e("실패",t.getMessage()+"");
             }
         });
     }

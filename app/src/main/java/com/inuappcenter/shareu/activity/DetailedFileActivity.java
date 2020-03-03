@@ -417,6 +417,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     }
 
     void check() {
+        //Log.e("여기 와..?","흠");
         TokenManager tm = TokenManager.getInstance();
         String token = tm.getToken(this);
         if (token == null)

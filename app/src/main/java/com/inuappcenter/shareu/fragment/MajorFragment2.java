@@ -136,8 +136,9 @@ public class MajorFragment2 extends Fragment{
 
             @Override
             public void onFailure(Call<List<Major>> call, Throwable t) {
-                Intent intent = new Intent(getActivity(), ServerFailActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getActivity(), ServerFailActivity.class);
+                startActivity(intent);*/
+                Log.e("흠",t.getCause()+"");
             }
         });
 

@@ -19,9 +19,9 @@ public class Document {
     @SerializedName("content")
     String content;
     @SerializedName("avg(re.score)")
-    int avg_score;
+    float avg_score;
 
-    public Document(String title, String uploadDate, int documentKey, String extension, String subjectName, String profName, String content, int avg_score) {
+    public Document(String title, String uploadDate, int documentKey, String extension, String subjectName, String profName, String content, float avg_score) {
         this.title = title;
         this.uploadDate = uploadDate;
         this.documentKey = documentKey;
@@ -60,7 +60,7 @@ public class Document {
         return content;
     }
 
-    public int getAvg_score() {
+    public float getAvg_score() {
         return avg_score;
     }
 }
