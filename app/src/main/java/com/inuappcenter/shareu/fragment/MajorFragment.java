@@ -120,8 +120,6 @@ public class MajorFragment extends Fragment  {
 
             @Override
             public void onFailure(Call<List<Major>> call, Throwable t) {
-                Intent intent = new Intent(getActivity(), ServerFailActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -186,8 +184,7 @@ public class MajorFragment extends Fragment  {
 
                     @Override
                     public void onFailure(Call<List<Major>> call, Throwable t) {
-                        Intent intent = new Intent(getContext(), ServerFailActivity.class);
-                        startActivity(intent);
+
 
                     }
                 });

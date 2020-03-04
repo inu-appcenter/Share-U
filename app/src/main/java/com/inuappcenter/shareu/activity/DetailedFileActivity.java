@@ -207,8 +207,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
             @Override
             public void onFailure(Call<List<reviewList>> call, Throwable t) {
-                Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
-                startActivity(intent);
+
             }
         });
     }
@@ -331,7 +330,8 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
                                 @Override
                                 public void onFailure(Call<List<sendFileExtension>> call, Throwable t) {
-
+                                    Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+                                    startActivity(intent);
                                 }
                             });
 
@@ -478,7 +478,8 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
                 @Override
                 public void onFailure(Call<BooleanFuck> call, Throwable t) {
-
+                    Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+                    startActivity(intent);
                 }
             });
 

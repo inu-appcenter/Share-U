@@ -54,8 +54,7 @@ public class DetailedNoticeActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<List<Notice>> call, Throwable t) {
-                Intent intent = new Intent(getApplicationContext(),ServerFailActivity.class);
-                startActivity(intent);
+
             }
         });
 

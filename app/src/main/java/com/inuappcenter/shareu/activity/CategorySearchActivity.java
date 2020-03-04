@@ -175,7 +175,8 @@ public class CategorySearchActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Document>> call, Throwable t) {
-
+                Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -34,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:visibility="gone"
                 >
 
                 <include
@@ -129,9 +130,9 @@
                 android:id="@+id/tv_my_major"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="디자인학부"
-                android:textSize="12sp"
-                android:textColor="@color/black"/>
+                android:text="null"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -145,9 +146,9 @@
                 android:id="@+id/tv_my_adress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="201502123"
-                android:textSize="12sp"
-                android:textColor="@color/black"/>
+                android:text="null"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -162,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
                 android:layout_weight="1"
-                android:text="홍길동"
+                android:text="null"
                 android:textColor="@color/Iris"
                 android:textSize="27sp"
                 android:textStyle="bold" />

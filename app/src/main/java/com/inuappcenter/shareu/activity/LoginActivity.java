@@ -152,7 +152,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Login> call, Throwable t) {
-
+                Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+                startActivity(intent);
             }
         });
     }

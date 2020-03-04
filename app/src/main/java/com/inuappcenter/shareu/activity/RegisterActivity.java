@@ -82,7 +82,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Fuck> call, Throwable t) {
-
+                        Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+                        startActivity(intent);
                     }
                 });
             }

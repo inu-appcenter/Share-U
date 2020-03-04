@@ -1,7 +1,9 @@
 package com.inuappcenter.shareu.model;
 
+import android.content.Intent;
 import android.util.Log;
 
+import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.MyUpload;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.TokenManager;

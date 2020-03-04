@@ -128,8 +128,8 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @Override
     public void setInternet() {
-        Intent intent = new Intent(getActivity(), ServerFailActivity.class);
-        startActivity(intent);
+        Intent intent = new Intent(getActivity(),ServerFailActivity.class);
+        getActivity().startActivity(intent);
     }
     @Override
     public void onDestroyView() {

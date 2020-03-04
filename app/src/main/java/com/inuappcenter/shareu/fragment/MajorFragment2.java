@@ -154,11 +154,11 @@ public class MajorFragment2 extends Fragment{
             public void onResponse(Call<List<categoryCulture>> call, Response<List<categoryCulture>> response) {
                 if (response.isSuccessful()) {
                     tv_no_search.setVisibility(View.GONE);
-                    Log.e("시발",response.body().size()+"");
+                    //Log.e("시발",response.body().size()+"");
                     dataList2 = new ArrayList<>();
                     String flag = "?";
                     for (int i = 0; i < response.body().size(); i++) {
-                        //Log.e("체크 ! ",name+" "+response.body().get(i).first+" "+response.body().get(i).second+" "+response.body().get(i).third);
+                        //Log.e("체크 ! ",name+" "+response.body().get(i).getSubjectname()+" "+response.body().get(i).getSubjectInitiality()+" "+response.body().get(i).getProfName());
                         if (flag.equals(response.body().get(i).getSubjectInitiality())) {
                             if (i == response.body().size() - 1) {
                                 dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(), response.body().get(i).getSubjectInitiality(), response.body().get(i).getProfName(), Code.ViewType.MAJOR, R.color.white));
@@ -202,16 +202,19 @@ public class MajorFragment2 extends Fragment{
                 recyclerView.setIndexBarStrokeVisibility(false);
                 recyclerView.setLayoutManager(manager); // LayoutManager 등록
                 recyclerView.setAdapter(new MajorAdapter2(getActivity(), dataList2));  // Adapter 등록
-                if(dataList.size()==0)
+                if(dataList2.size()==0)
+                {
                     tv_no_search.setVisibility(View.VISIBLE);
+                }
                 else
+                {
                     tv_no_search.setVisibility(View.GONE);
+                }
+
             }
 
             @Override
             public void onFailure(Call<List<categoryCulture>> call, Throwable t) {
-                Intent intent = new Intent(getActivity(), ServerFailActivity.class);
-                startActivity(intent);
             }
         });
     }

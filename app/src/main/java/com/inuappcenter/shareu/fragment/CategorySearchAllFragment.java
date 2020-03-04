@@ -90,7 +90,6 @@ public class CategorySearchAllFragment extends Fragment implements SearchAllResu
                 Intent intent = new Intent(getActivity(), CategorySuccessedActivity.class);
                 intent.putExtra("subjectName",subjectName);
                 intent.putExtra("profName",profName);
-                startActivity(intent);
             }
         });
 

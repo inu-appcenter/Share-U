@@ -81,7 +81,6 @@ public class SearchAllResultModel {
 
             @Override
             public void onFailure(Call<List<SuperiorLecture>> call, Throwable t) {
-                Log.e("실패",t.getMessage()+"");
             }
         });
     }

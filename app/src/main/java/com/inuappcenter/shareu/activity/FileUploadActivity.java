@@ -258,8 +258,8 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                                 @Override
                                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                                     Log.e("흠",t.getCause()+"");
-                                    /*Intent intent = new Intent(getApplicationContext(),ServerFailActivity.class);
-                                    startActivity(intent);*/
+                                    Intent intent = new Intent(getApplicationContext(),ServerFailActivity.class);
+                                    startActivity(intent);
                                 }
                             });
                         }
