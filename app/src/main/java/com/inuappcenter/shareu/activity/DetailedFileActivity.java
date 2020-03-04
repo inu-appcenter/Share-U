@@ -30,6 +30,7 @@ import com.inuappcenter.shareu.fragment.BottomSheetSparsePoint;
 import com.inuappcenter.shareu.my_class.BooleanFuck;
 import com.inuappcenter.shareu.my_class.Document;
 import com.inuappcenter.shareu.my_class.Fuck;
+import com.inuappcenter.shareu.my_class.RestError;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.inuappcenter.shareu.my_class.TokenManager;
 import com.inuappcenter.shareu.my_class.documentFile;
@@ -42,6 +43,8 @@ import com.inuappcenter.shareu.recycler.CategorySuccessedAdatper;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 import com.willy.ratingbar.BaseRatingBar;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -174,6 +177,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     }
     void giveMeReview()
     {
+
         RetrofitService networkService = RetrofitHelper.create();
         networkService.reviewList(key).enqueue(new Callback<List<reviewList>>() {
             @Override
@@ -213,29 +217,33 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     }
     void giveMeList()
     {
+        TokenManager tm = TokenManager.getInstance();
+
+        String token = tm.getToken(this);
         RetrofitService networkService = RetrofitHelper.create();
-        networkService.documentPage(key).enqueue(new Callback<List<documentPage>>() {
+        networkService.documentPage(key,token).enqueue(new Callback<documentPage>() {
             @Override
-            public void onResponse(Call<List<documentPage>> call, Response<List<documentPage>> response) {
+            public void onResponse(Call<documentPage> call, Response<documentPage> response) {
+
                 if (response.isSuccessful()) {
-                    tv_my_major.setText(response.body().get(0).getTitle());
-                    tv_detailed_file_content.setText(response.body().get(0).getContent());
+                    tv_my_major.setText(response.body().rows.get(0).title);
+                    tv_detailed_file_content.setText(response.body().rows.get(0).content);
                     //review_ratingbar.setRating(response.body().get(0).get);
-                    String name = response.body().get(0).getUploadId();
+                    String name = response.body().rows.get(0).uploadId;
                     name=name.substring(0,5);
                     name+="****";
                     tv_detailed_file_user_name.setText(name);
                     //tv_detailed_file_category.setText(response.body().get(0))
-                    tv_detailed_file_date.setText(response.body().get(0).getUploadDate());
-                    tv_detailed_file_category.setText(response.body().get(0).getMajorName());
-                    tv_detailed_file_type.setText(response.body().get(0).getExtension());
-                    tv_detailed_file_name.setText(response.body().get(0).getSubjectName());
+                    tv_detailed_file_date.setText(response.body().rows.get(0).uploadDate);
+                    tv_detailed_file_category.setText(response.body().rows.get(0).division);
+                    tv_detailed_file_type.setText(response.body().rows.get(0).extension);
+                    tv_detailed_file_name.setText(response.body().rows.get(0).title);
                 }
 
             }
 
             @Override
-            public void onFailure(Call<List<documentPage>> call, Throwable t) {
+            public void onFailure(Call<documentPage> call, Throwable t) {
 
             }
         });

@@ -146,8 +146,9 @@ public interface RetrofitService {
     Call<List<categoryResend>>categoryResend(@Query("subjectName")String subjectName, @Query("profName")String profName);
 
     //자료상세페이지
-    @GET("/document/send/documentPage")
-    Call<List<documentPage>>documentPage(@Query("documentKey")int key);
+    @FormUrlEncoded
+    @POST("/document/send/documentPage")
+    Call<documentPage>documentPage(@Field("documentKey")int key,@Field("uploadId")String token);
 
     //자료 리뷰 리스트 전송
     @GET("/document/send/reviewList")

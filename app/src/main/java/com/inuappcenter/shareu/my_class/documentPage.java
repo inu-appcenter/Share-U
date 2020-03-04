@@ -2,12 +2,40 @@ package com.inuappcenter.shareu.my_class;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class documentPage
 {
+    @SerializedName("ans")
+    public boolean ans;
 
-    @SerializedName("division")
-    String division;
-    @SerializedName("majorName")
+    @SerializedName("rows")
+    public List<Row> rows;
+
+    public class Row{
+
+        @SerializedName("title")
+        public String title;
+        @SerializedName("subjectName")
+        public String subjectName;
+        @SerializedName("profName")
+        public String profName;
+        @SerializedName("content")
+        public String content;
+        @SerializedName("uploadDate")
+        public String uploadDate;
+        @SerializedName("uploadId")
+        public String uploadId;
+        @SerializedName("extension")
+        public String extension;
+        @SerializedName("division")
+        public String division;
+    }
+
+
+
+    /*@SerializedName("majorName")
     String majorName;
     @SerializedName("title")
     String title;
@@ -24,9 +52,7 @@ public class documentPage
     @SerializedName("extension")
     String extension;
 
-    public String getDivision() {
-        return division;
-    }
+
 
     public String getMajorName() {
         return majorName;
@@ -58,5 +84,5 @@ public class documentPage
 
     public String getExtension() {
         return extension;
-    }
+    }*/
 }

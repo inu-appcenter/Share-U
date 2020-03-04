@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.MainActivity;
+import com.inuappcenter.shareu.activity.MajorActivity;
 import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
@@ -185,7 +186,6 @@ public class MajorFragment extends Fragment  {
 
                     @Override
                     public void onFailure(Call<List<Major>> call, Throwable t) {
-
 
                     }
                 });
