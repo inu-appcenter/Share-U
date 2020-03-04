@@ -216,4 +216,10 @@ public interface RetrofitService {
     @POST("/document/send/sendFileExtension")
     Call<List<sendFileExtension>>sendFileExtension(@Field("documentKey")int key);
 
+    //회원가입
+    @FormUrlEncoded
+    @POST("/account/signUp")
+    Call<Fuck>signUp(@Field("id")String id,@Field("passwd")String passwd,@Field("tel")String tel,@Field("major")String major,
+                     @Field("name")String name);
+
 }

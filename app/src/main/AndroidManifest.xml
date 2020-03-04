@@ -150,6 +150,17 @@
             >
 
         </activity>
+
+        <activity android:name=".activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name=".activity.RegisterAcceptActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
     </application>
 
 </manifest>

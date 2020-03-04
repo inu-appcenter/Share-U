@@ -8,6 +8,7 @@ import android.text.Annotation;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -44,16 +45,18 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView tv_login_go;
+    private TextView tv_login_go,tv_register_go;
     private EditText etv_id;
     private EditText etv_passwd;
     private ImageView btn_backpress;
     private TSnackbar snackbar;
     private TextView tv_find_passwd;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         init();
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -70,6 +73,10 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(),FindPassswdActivity.class);
                         startActivity(intent);
                         break;
+                    case R.id.tv_register_go:
+                        Intent intent2 = new Intent(getApplicationContext(),RegisterActivity.class);
+                        startActivity(intent2);
+                        break;
                 }
 
 
@@ -79,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         tv_login_go.setOnClickListener(onClickListener);
         btn_backpress.setOnClickListener(onClickListener);
         tv_find_passwd.setOnClickListener(onClickListener);
+        tv_register_go.setOnClickListener(onClickListener);
     }
 
     void init()
@@ -88,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         etv_passwd = findViewById(R.id.etv_passwd);
         btn_backpress = findViewById(R.id.btn_backpress);
         tv_find_passwd=findViewById(R.id.tv_find_passwd);
+        tv_register_go=findViewById(R.id.tv_register_go);
     }
     void giveLogin()
     {
