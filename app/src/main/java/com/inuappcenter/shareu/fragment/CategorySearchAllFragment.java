@@ -87,9 +87,11 @@ public class CategorySearchAllFragment extends Fragment implements SearchAllResu
             @Override
             public void onClick(View view) {
                 //더보기 넘어가기
+
                 Intent intent = new Intent(getActivity(), CategorySuccessedActivity.class);
                 intent.putExtra("subjectName",subjectName);
                 intent.putExtra("profName",profName);
+                startActivity(intent);
             }
         });
 

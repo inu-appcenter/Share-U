@@ -79,6 +79,8 @@
             android:id="@+id/tv_review_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="7dp"
             android:layout_marginRight="16dp"
