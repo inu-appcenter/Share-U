@@ -57,7 +57,7 @@ public class ReviewActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     tv_my_detailed_file_review.setText("리뷰 ("+response.body().size()+")");
                     List<reviewList>tmp_list = new ArrayList<>();
-                    for(int i=0;i<response.body().size();i++)
+                    for(int i=response.body().size()-1;i>=0;i--)
                     {
                         tmp_list.add(new reviewList(response.body().get(i).getUploadDate(),response.body().get(i).getUploadId(),
 

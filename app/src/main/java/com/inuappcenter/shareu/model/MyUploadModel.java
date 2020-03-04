@@ -35,7 +35,7 @@ public class MyUploadModel {
             public void onResponse(Call<List<MyUpload>> call, Response<List<MyUpload>> response) {
                 if (response.isSuccessful()) {
                     List<MyUpload> tmp_list = new ArrayList<>();
-                    for(int i=0;i<response.body().size();i++)
+                    for(int i=response.body().size()-1;i>=0;i--)
                     {
                         tmp_list.add(new MyUpload(response.body().get(i).getUploadDate(),
                                 response.body().get(i).getTitle(),response.body().get(i).getExtension(),response.body().get(i).getDocumentKey()));

@@ -192,13 +192,13 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         tv_no_review.setVisibility(View.GONE);
                         yes_review.setVisibility(View.VISIBLE);
                         tv_more.setVisibility(View.VISIBLE);
-                        tv_review_date.setText(response.body().get(0).getUploadDate());
-                        String name = response.body().get(0).getUploadId();
+                        tv_review_date.setText(response.body().get(response.body().size()-1).getUploadDate());
+                        String name = response.body().get(response.body().size()-1).getUploadId();
                         name=name.substring(0,5);
                         name+="***";
                         tv_review_name.setText(name);
-                        before_user_ratingbar.setRating(response.body().get(0).getScore());
-                        tv_review_content.setText(response.body().get(0).getReview());
+                        before_user_ratingbar.setRating(response.body().get(response.body().size()-1).getScore());
+                        tv_review_content.setText(response.body().get(response.body().size()-1).getReview());
                     }
 
                 }
