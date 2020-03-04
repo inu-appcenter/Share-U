@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
             android:layout_weight="1"
-            android:text="24"
+            android:text="?"
             android:textColor="@color/Iris"
             android:textSize="30sp"
             android:textStyle="normal" />

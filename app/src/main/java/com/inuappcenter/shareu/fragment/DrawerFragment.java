@@ -205,6 +205,7 @@ public class DrawerFragment extends Fragment {
         welcome_point=view.findViewById(R.id.welcome_point);
         getpoint=view.findViewById(R.id.getpoint);
         tv_detail_point=view.findViewById(R.id.tv_detail_point);
+        tv_numeric_point.setText("?");
     }
 
     void giveMyImform()

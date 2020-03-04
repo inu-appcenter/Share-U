@@ -65,6 +65,7 @@ public class ModifyInformActivity extends AppCompatActivity {
         tv_numeric_point=findViewById(R.id.tv_numeric_point);
         token = tm.getToken(this);
         btn_backpress=findViewById(R.id.btn_backpress);
+        tv_numeric_point.setText("?");
     }
 
     boolean check()

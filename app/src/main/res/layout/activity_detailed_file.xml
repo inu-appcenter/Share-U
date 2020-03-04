@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="문테기 족보 2019"
+            android:text="null"
             android:textColor="@color/Iris"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -81,7 +81,7 @@
                         android:layout_marginTop="20.5dp"
                         android:layout_marginRight="36.5dp"
                         android:layout_marginBottom="48dp"
-                        android:text="문테기 족보 공유합니다 자료가 정말 좋습니다 별점 5개는 필수입니다 이거 보신 분들 꼭 에이쁠 받으세요 그럼 20000" />
+                        android:text="null" />
 
                 </LinearLayout>
 
@@ -101,7 +101,6 @@
                         app:srb_drawableEmpty="@drawable/empty_star"
                         app:srb_drawableFilled="@drawable/fill"
                         app:srb_numStars="5"
-                        app:srb_rating="4.5"
                         app:srb_starHeight="21dp"
                         app:srb_starPadding="1dp"
                         app:srb_starWidth="21dp"
@@ -163,7 +162,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="95dp"
-                            android:text="홍길동"
+                            android:text="null"
                             android:textColor="@color/black"
 
                             android:textSize="12sp"
@@ -193,7 +192,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="95dp"
-                            android:text="교양"
+                            android:text="null"
                             android:textColor="@color/black"
 
                             android:textSize="12sp"
@@ -222,7 +221,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="95dp"
-                            android:text="문학과 테마 기행"
+                            android:text="null"
                             android:textColor="@color/black"
 
                             android:textSize="12sp"
@@ -252,10 +251,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="95dp"
-                            android:text="2020.01.05"
+                            android:text="null"
                             android:textColor="@color/black"
 
                             android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -281,7 +281,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="95dp"
-                            android:text="WORD"
+                            android:text="null"
                             android:textColor="@color/black"
 
                             android:textSize="12sp"
@@ -306,7 +306,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:paddingLeft="15dp"
-                        android:text="리뷰 (1)"
+                        android:text="리뷰 (null)"
                         android:textColor="@color/Iris"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -375,7 +375,7 @@
                                     android:id="@+id/tv_review_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="2020.01.12"
+                                    android:text="null"
                                     app:layout_constraintLeft_toLeftOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -393,7 +393,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="12.5dp"
-                                    android:text="홍길동"
+                                    android:text="null"
                                     app:layout_constraintLeft_toRightOf="@+id/textView34"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -424,7 +424,7 @@
                                 android:layout_marginTop="7dp"
                                 android:ellipsize="end"
                                 android:singleLine="true"
-                                android:text="잘 쓸게요"
+                                android:text="null"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
 
