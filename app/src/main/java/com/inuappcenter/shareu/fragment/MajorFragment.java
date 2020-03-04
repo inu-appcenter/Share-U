@@ -66,6 +66,7 @@ public class MajorFragment extends Fragment  {
             public void onResponse(Call<List<Major>> call, Response<List<Major>> response) {
 
                 if (response.isSuccessful()) {
+                    tv_no_search.setVisibility(View.GONE);
                     dataList = new ArrayList<>();
                     String flag = "?";
 
@@ -119,7 +120,7 @@ public class MajorFragment extends Fragment  {
 
             @Override
             public void onFailure(Call<List<Major>> call, Throwable t) {
-                Intent intent = new Intent(getContext(), ServerFailActivity.class);
+                Intent intent = new Intent(getActivity(), ServerFailActivity.class);
                 startActivity(intent);
             }
         });

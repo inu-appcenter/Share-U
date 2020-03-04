@@ -81,6 +81,7 @@ public class DrawerFragment extends Fragment {
         String token = tm.getToken(getActivity());
         if(token!=null)
         {
+
             //마이페이지 정보 받아오기
             giveMyImform();
             giveMyPoint();

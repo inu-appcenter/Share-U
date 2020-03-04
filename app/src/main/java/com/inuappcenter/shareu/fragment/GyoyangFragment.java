@@ -69,6 +69,7 @@ public class GyoyangFragment extends Fragment  {
             public void onResponse(Call<List<Major> > call, Response<List<Major>> response) {
                 if(response.isSuccessful())
                 {
+                    tv_no_search.setVisibility(View.GONE);
                     dataList = new ArrayList<>();
                     String flag ="?";
                     for(int i=0;i<response.body().size();i++)

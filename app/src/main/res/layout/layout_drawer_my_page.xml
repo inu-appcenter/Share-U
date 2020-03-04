@@ -12,6 +12,7 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:id="@+id/drawer_login"
+        android:visibility="gone"
         >
 
 
@@ -323,7 +324,6 @@
         android:orientation="vertical"
         android:background="@color/white"
         android:id="@+id/drawer_logout"
-        android:visibility="gone"
 >
         <ImageButton
             android:id="@+id/btn_drawer_back2"

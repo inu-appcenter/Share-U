@@ -40,6 +40,7 @@ public class MajorActivity extends AppCompatActivity {
     private FragmentTransaction transaction;
     private EditText etv_search;
     private ImageButton etv_search_click;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

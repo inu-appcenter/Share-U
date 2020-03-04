@@ -153,6 +153,7 @@ public class MajorFragment2 extends Fragment{
             @Override
             public void onResponse(Call<List<categoryCulture>> call, Response<List<categoryCulture>> response) {
                 if (response.isSuccessful()) {
+                    tv_no_search.setVisibility(View.GONE);
                     Log.e("시발",response.body().size()+"");
                     dataList2 = new ArrayList<>();
                     String flag = "?";
