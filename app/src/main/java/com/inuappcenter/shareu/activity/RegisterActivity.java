@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidadvance.topsnackbar.TSnackbar;
@@ -36,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etv_major;
     private String items[]=new String[200];
     private TSnackbar snackbar;
+    private ImageView btn_backpress;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                 check();
             }
         });
+        btn_backpress.setOnClickListener(v->finish());
     }
 
     @Override
@@ -118,5 +121,6 @@ public class RegisterActivity extends AppCompatActivity {
         etv_phone=findViewById(R.id.etv_phone);
         tv_modify=findViewById(R.id.tv_modify);
         etv_major=findViewById(R.id.etv_major);
+        btn_backpress=findViewById(R.id.btn_backpress);
     }
 }

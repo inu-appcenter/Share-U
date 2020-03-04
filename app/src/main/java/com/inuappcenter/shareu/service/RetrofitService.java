@@ -15,6 +15,7 @@ import com.inuappcenter.shareu.my_class.categoryCulture;
 import com.inuappcenter.shareu.my_class.categoryResend;
 import com.inuappcenter.shareu.my_class.documentFile;
 import com.inuappcenter.shareu.my_class.documentPage;
+import com.inuappcenter.shareu.my_class.documentPage2;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.reviewList;
 import com.inuappcenter.shareu.my_class.score;
@@ -228,4 +229,8 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("/document/send/reDownload")
     Call<List<documentFile>>reDownload(@Field("documentKey")int key);
+
+    //자료상세페이지 ->비로그인
+    @GET("/document/send/documentPagenone")
+    Call<List<documentPage2>>documentPageone(@Query("documentKey")int key);
 }

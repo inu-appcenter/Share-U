@@ -37,6 +37,7 @@ import com.inuappcenter.shareu.my_class.SuperiorLecture;
 import com.inuappcenter.shareu.my_class.TokenManager;
 import com.inuappcenter.shareu.my_class.documentFile;
 import com.inuappcenter.shareu.my_class.documentPage;
+import com.inuappcenter.shareu.my_class.documentPage2;
 import com.inuappcenter.shareu.my_class.reviewList;
 import com.inuappcenter.shareu.my_class.score;
 import com.inuappcenter.shareu.my_class.sendFileExtension;
@@ -145,7 +146,18 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 //check();
                 //bottomSheetPlusPoint.show(getSupportFragmentManager(),"냐옹");
                 //goDownload();
-                checkAlreadyDownload();
+                TokenManager tm = TokenManager.getInstance();
+                String token = tm.getToken(getApplicationContext());
+                if(token==null)
+                {
+                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    checkAlreadyDownload();
+                }
+
             }
         });
         tv_register.setOnClickListener(new View.OnClickListener(){
@@ -263,35 +275,38 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     {
         TokenManager tm = TokenManager.getInstance();
         String token = tm.getToken(this);
-
+/////////////여기바꿔시발
         RetrofitService networkService = RetrofitHelper.create();
         Log.e("흠",key+" "+token);
-        networkService.documentPage(key,token).enqueue(new Callback<documentPage>() {
+        networkService.documentPageone(key).enqueue(new Callback<List<documentPage2>>() {
             @Override
-            public void onResponse(Call<documentPage> call, Response<documentPage> response) {
+            public void onResponse(Call<List<documentPage2>> call, Response<List<documentPage2>> response) {
 
 
                 if (response.isSuccessful()) {
-                    Log.e("뿅",response.body().ans+"");
-                    tv_my_major.setText(response.body().rows.get(0).title);
-                    tv_detailed_file_content.setText(response.body().rows.get(0).content);
-                    //review_ratingbar.setRating(response.body().get(0).get);
-                    String name = response.body().rows.get(0).uploadId;
-                    name=name.substring(0,5);
-                    name+="****";
-                    tv_detailed_file_user_name.setText(name);
-                    //tv_detailed_file_category.setText(response.body().get(0))
-                    tv_detailed_file_date.setText(response.body().rows.get(0).uploadDate);
-                    tv_detailed_file_category.setText(response.body().rows.get(0).majorName);
-                    tv_detailed_file_type.setText(response.body().rows.get(0).extension);
-                    tv_detailed_file_name.setText(response.body().rows.get(0).subjectName);
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        tv_my_major.setText(response.body().get(0).title);
+                        tv_detailed_file_content.setText(response.body().get(0).content);
+                        //review_ratingbar.setRating(response.body().get(0).get);
+                        String name = response.body().get(0).uploadId;
+                        name=name.substring(0,5);
+                        name+="****";
+                        tv_detailed_file_user_name.setText(name);
+                        //tv_detailed_file_category.setText(response.body().get(0))
+                        tv_detailed_file_date.setText(response.body().get(0).uploadDate);
+                        tv_detailed_file_category.setText(response.body().get(0).majorName);
+                        tv_detailed_file_type.setText(response.body().get(0).extension);
+                        tv_detailed_file_name.setText(response.body().get(0).subjectName);
+                    }
+
                 }
 
 
             }
 
             @Override
-            public void onFailure(Call<documentPage> call, Throwable t) {
+            public void onFailure(Call<List<documentPage2>> call, Throwable t) {
 
             }
         });

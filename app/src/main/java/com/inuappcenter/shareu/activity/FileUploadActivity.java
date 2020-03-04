@@ -241,6 +241,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if(response.isSuccessful())
                                     {
+                                        snackbar.dismiss();
                                         Intent intent = new Intent(getApplicationContext(), UploadedActivity.class);
                                         startActivity(intent);
                                         finish();
