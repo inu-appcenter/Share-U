@@ -148,7 +148,7 @@ public interface RetrofitService {
     //자료상세페이지
     @FormUrlEncoded
     @POST("/document/send/documentPage")
-    Call<documentPage>documentPage(@Field("documentKey")int key,@Field("uploadId")String token);
+    Call<documentPage>documentPage(@Field("documentKey")int key,@Field("token")String token);
 
     //자료 리뷰 리스트 전송
     @GET("/document/send/reviewList")
@@ -223,4 +223,9 @@ public interface RetrofitService {
     Call<Fuck>signUp(@Field("id")String id,@Field("passwd")String passwd,@Field("tel")String tel,@Field("major")String major,
                      @Field("name")String name);
 
+
+    //자료 재전송
+    @FormUrlEncoded
+    @POST("/document/send/reDownload")
+    Call<List<documentFile>>reDownload(@Field("documentKey")int key);
 }

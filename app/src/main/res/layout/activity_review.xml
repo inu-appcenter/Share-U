@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="null"
             android:textColor="@color/Iris"
             android:textSize="20sp"
             android:textStyle="bold"

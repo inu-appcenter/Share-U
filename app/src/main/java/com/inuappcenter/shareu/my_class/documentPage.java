@@ -29,8 +29,8 @@ public class documentPage
         public String uploadId;
         @SerializedName("extension")
         public String extension;
-        @SerializedName("division")
-        public String division;
+        @SerializedName("majorName")
+        public String majorName;
     }
 
 

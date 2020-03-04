@@ -23,10 +23,12 @@ import com.downloader.OnStartOrResumeListener;
 import com.downloader.PRDownloader;
 import com.downloader.Progress;
 import com.downloader.utils.Utils;
+import com.google.android.material.snackbar.Snackbar;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.fragment.BottomSheetMinusPoint;
 import com.inuappcenter.shareu.fragment.BottomSheetPlusPoint;
 import com.inuappcenter.shareu.fragment.BottomSheetSparsePoint;
+import com.inuappcenter.shareu.fragment.BottomSheetZeroPoint;
 import com.inuappcenter.shareu.my_class.BooleanFuck;
 import com.inuappcenter.shareu.my_class.Document;
 import com.inuappcenter.shareu.my_class.Fuck;
@@ -46,11 +48,15 @@ import com.willy.ratingbar.BaseRatingBar;
 
 import org.json.JSONObject;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -66,8 +72,10 @@ import static com.inuappcenter.shareu.R.id.tv_no_review;
 
 public class DetailedFileActivity extends AppCompatActivity implements OnItemClick {
     private BottomSheetMinusPoint bottomSheetMinusPoint=new BottomSheetMinusPoint();
-    private BottomSheetPlusPoint bottomSheetPlusPoint = new BottomSheetPlusPoint();
+    private BottomSheetPlusPoint bottomSheetPlusPoint=new BottomSheetPlusPoint();
     private BottomSheetSparsePoint bottomSheetSparsePoint=new BottomSheetSparsePoint();
+    private BottomSheetZeroPoint bottomSheetZeroPoint=new BottomSheetZeroPoint();
+
 
     private BaseRatingBar review_ratingbar;
     private BaseRatingBar before_user_ratingbar;
@@ -90,6 +98,8 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     private MutableLiveData<String> extension=new MutableLiveData<>();
     private LifecycleOwner lifecycleOwner;
     private String hi="";
+    //private FragmentManager fm = getSupportFragmentManager();
+    private Boolean flag=false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +110,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         PRDownloader.initialize(getApplicationContext());
         Intent intent =getIntent();
         key =intent.getExtras().getInt("key");
+
     }
 
     @Override
@@ -133,8 +144,8 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 //TODO : 상황에 따라 포인트 지급 , 차감 결정..
                 //check();
                 //bottomSheetPlusPoint.show(getSupportFragmentManager(),"냐옹");
-                goDownload();
-
+                //goDownload();
+                checkAlreadyDownload();
             }
         });
         tv_register.setOnClickListener(new View.OnClickListener(){
@@ -215,17 +226,53 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
             }
         });
     }
-    void giveMeList()
+
+    void checkAlreadyDownload()
     {
         TokenManager tm = TokenManager.getInstance();
-
         String token = tm.getToken(this);
+
         RetrofitService networkService = RetrofitHelper.create();
         networkService.documentPage(key,token).enqueue(new Callback<documentPage>() {
             @Override
             public void onResponse(Call<documentPage> call, Response<documentPage> response) {
 
+                Log.e("냐",response.body().ans+"");
                 if (response.isSuccessful()) {
+                    if(response.body().ans==true)//받은 적 없다
+                    {
+                        goDownload();
+                    }
+                    else//받은 적 있따.
+                    {
+                        giveFree();
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<documentPage> call, Throwable t) {
+
+            }
+        });
+    }
+
+    void giveMeList()
+    {
+        TokenManager tm = TokenManager.getInstance();
+        String token = tm.getToken(this);
+
+        RetrofitService networkService = RetrofitHelper.create();
+        Log.e("흠",key+" "+token);
+        networkService.documentPage(key,token).enqueue(new Callback<documentPage>() {
+            @Override
+            public void onResponse(Call<documentPage> call, Response<documentPage> response) {
+
+
+                if (response.isSuccessful()) {
+                    Log.e("뿅",response.body().ans+"");
                     tv_my_major.setText(response.body().rows.get(0).title);
                     tv_detailed_file_content.setText(response.body().rows.get(0).content);
                     //review_ratingbar.setRating(response.body().get(0).get);
@@ -235,10 +282,11 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                     tv_detailed_file_user_name.setText(name);
                     //tv_detailed_file_category.setText(response.body().get(0))
                     tv_detailed_file_date.setText(response.body().rows.get(0).uploadDate);
-                    tv_detailed_file_category.setText(response.body().rows.get(0).division);
+                    tv_detailed_file_category.setText(response.body().rows.get(0).majorName);
                     tv_detailed_file_type.setText(response.body().rows.get(0).extension);
-                    tv_detailed_file_name.setText(response.body().rows.get(0).title);
+                    tv_detailed_file_name.setText(response.body().rows.get(0).subjectName);
                 }
+
 
             }
 
@@ -251,7 +299,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
     void init()
     {
-        bottomSheetPlusPoint=new BottomSheetPlusPoint();
         review_ratingbar  = findViewById(R.id.review_ratingbar);
         review_ratingbar.setScrollable(false);
         review_ratingbar.setClickable(false);
@@ -284,13 +331,25 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     @Override
     public void onClick(String value) {
         if(bottomSheetPlusPoint.isAdded())
+        {
             bottomSheetPlusPoint.dismiss();
+            flag=false;
+        }
         else if(bottomSheetMinusPoint.isAdded())
         {
             bottomSheetMinusPoint.dismiss();
+            flag=false;
         }
         else if(bottomSheetSparsePoint.isAdded())
+        {
             bottomSheetSparsePoint.dismiss();
+            flag=false;
+        }
+        else if(bottomSheetZeroPoint.isAdded())
+        {
+            bottomSheetZeroPoint.dismiss();
+            flag=false;
+        }
     }
 
     @Override
@@ -317,11 +376,17 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                     if (response.isSuccessful()) {
                         if(response.body().get(0).getFileName()==null)
                         {
+                            if(flag==false)
+                            {
+                                bottomSheetSparsePoint=new BottomSheetSparsePoint();
+                                bottomSheetSparsePoint.show(getSupportFragmentManager(),"냐옹");
+                                flag=true;
+                            }
 
-                            bottomSheetSparsePoint.show(getSupportFragmentManager(),"냐옹");
                         }
                         else
                         {
+                            String file = response.body().get(0).getFileName();
                             RetrofitService networkService = RetrofitHelper.create();
                             networkService.sendFileExtension(key).enqueue(new Callback<List<sendFileExtension>>() {
                                 @Override
@@ -331,6 +396,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                                         Log.e("읭",response.body().get(0).getExtension()+"");
                                         hi=response.body().get(0).getExtension()+"";
                                         extension.setValue(response.body().get(0).getExtension()+"");
+                                        giveFile(file);
 
                                     }
 
@@ -350,12 +416,201 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                             @Override
                             public void onChanged(String s) {
 
-                                sub_url=response.body().get(0).getFileName();
+                            }
+                        });
 
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<documentFile>> call, Throwable t) {
+
+                    Log.e("실패",t.getMessage()+"");
+                }
+            });
+        }
+    }
+
+
+    void giveFile2(String file)
+    {
+        Log.e("흠흠",extension.getValue()+"");
+        Date today = new Date();
+        String bye=today.getTime()+"";
+        String hi = extension.getValue();
+        sub_url=file+"";
+        url = "http://117.16.231.66:7001/document/send/documentFile";
+        url+="/"+sub_url;
+        String dirPath = "/storage/emulated/0/Share U";
+        String fileName = tv_my_major.getText()+bye+"."+hi;
+
+        PRDownloader.download(url, dirPath, fileName)
+                .build()
+                .setOnStartOrResumeListener(new OnStartOrResumeListener() {
+                    @Override
+                    public void onStartOrResume() {
+                        Log.e("onStartOrResume()","");
+                    }
+                })
+                .setOnPauseListener(new OnPauseListener() {
+                    @Override
+                    public void onPause() {
+                        Log.e("onPause()","");
+                    }
+                })
+                .setOnCancelListener(new OnCancelListener() {
+                    @Override
+                    public void onCancel() {
+                        Log.e("onCancel()","");
+                    }
+                })
+                .setOnProgressListener(new OnProgressListener() {
+                    @Override
+                    public void onProgress(Progress progress) {
+                        Log.e("onProgress()","");
+                    }
+                })
+                .start(new OnDownloadListener() {
+                    @Override
+                    public void onDownloadComplete() {
+                        bottomSheetZeroPoint=new BottomSheetZeroPoint();
+                        bottomSheetZeroPoint.show(getSupportFragmentManager(),"냐옹");
+                        flag=true;
+
+
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+                        Log.e("onError()","");
+                    }
+
+                });
+
+    }
+    void giveFile(String file)
+    {
+
+
+
+
+        Log.e("흠흠",extension.getValue()+"");
+        Date today = new Date();
+        String bye=today.getTime()+"";
+        sub_url=file+"";
+        String hi = extension.getValue();
+        url = "http://117.16.231.66:7001/document/send/documentFile";
+        url+="/"+sub_url;
+        String dirPath = "/storage/emulated/0/Share U";
+        String fileName = tv_my_major.getText()+bye+"."+hi;
+
+        PRDownloader.download(url, dirPath, fileName)
+                .build()
+                .setOnStartOrResumeListener(new OnStartOrResumeListener() {
+                    @Override
+                    public void onStartOrResume() {
+                        Log.e("onStartOrResume()","");
+                    }
+                })
+                .setOnPauseListener(new OnPauseListener() {
+                    @Override
+                    public void onPause() {
+                        Log.e("onPause()","");
+                    }
+                })
+                .setOnCancelListener(new OnCancelListener() {
+                    @Override
+                    public void onCancel() {
+                        Log.e("onCancel()","");
+                    }
+                })
+                .setOnProgressListener(new OnProgressListener() {
+                    @Override
+                    public void onProgress(Progress progress) {
+                        Log.e("onProgress()","");
+                    }
+                })
+                .start(new OnDownloadListener() {
+                    @Override
+                    public void onDownloadComplete() {
+                        bottomSheetMinusPoint=new BottomSheetMinusPoint();
+                        bottomSheetMinusPoint.show(getSupportFragmentManager(),"냐옹");
+                        flag=true;
+
+
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+                        Log.e("onError()","");
+                    }
+
+                });
+
+    }
+    void giveFree()
+    {
+        TokenManager tm = TokenManager.getInstance();
+        String token = tm.getToken(this);
+        if(token==null)
+        {
+            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+            startActivity(intent);
+        }
+        else
+        {
+
+            RetrofitService networkService = RetrofitHelper.create();
+            networkService.reDownload(key).enqueue(new Callback<List<documentFile>>() {
+                @Override
+                public void onResponse(Call<List<documentFile>> call, Response<List<documentFile>> response) {
+                    if (response.isSuccessful()) {
+                        if(response.body().get(0).getFileName()==null)
+                        {
+
+                        }
+                        else
+                        {
+                            String file_name = response.body().get(0).getFileName();
+                            RetrofitService networkService = RetrofitHelper.create();
+                            networkService.sendFileExtension(key).enqueue(new Callback<List<sendFileExtension>>() {
+                                @Override
+                                public void onResponse(Call<List<sendFileExtension>> call, Response<List<sendFileExtension>> response) {
+                                    if (response.isSuccessful()) {
+
+                                        Log.e("읭",response.body().get(0).getExtension()+"");
+                                        hi=response.body().get(0).getExtension()+"";
+                                        extension.setValue(response.body().get(0).getExtension()+"");
+                                        giveFile2(file_name);
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<sendFileExtension>> call, Throwable t) {
+                                    /*Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+                                    startActivity(intent);*/
+                                }
+                            });
+
+
+                        }
+
+                        extension.observe(lifecycleOwner, new Observer<String>() {
+                            @Override
+                            public void onChanged(String s) {
+
+
+                                /*Log.e("변신!",extension.getValue());
+                                Date today = new Date();
+                                String bye=today.getTime()+"";
+                                sub_url=response.body().get(0).getFileName();
                                 url = "http://117.16.231.66:7001/document/send/documentFile";
                                 url+="/"+sub_url;
                                 String dirPath = "/storage/emulated/0/Share U";
-                                String fileName = tv_my_major.getText()+"."+hi;
+                                String fileName = tv_my_major.getText()+bye+"."+hi;
 
                                 PRDownloader.download(url, dirPath, fileName)
                                         .build()
@@ -386,7 +641,13 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                                         .start(new OnDownloadListener() {
                                             @Override
                                             public void onDownloadComplete() {
-                                                bottomSheetMinusPoint.show(getSupportFragmentManager(),"냐옹");
+                                                if(flag==false)
+                                                {
+                                                    bottomSheetZeroPoint = new BottomSheetZeroPoint();
+                                                    bottomSheetZeroPoint.show(getSupportFragmentManager(),"냐옹");
+                                                    flag=true;
+                                                }
+
 
                                             }
 
@@ -395,7 +656,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                                                 Log.e("onError()","");
                                             }
 
-                                        });
+                                        });*/
 
                             }
                         });
@@ -413,17 +674,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
             });
         }
 
-
-
-
-
-
-
-
-
-
     }
-
     void check() {
         //Log.e("여기 와..?","흠");
         TokenManager tm = TokenManager.getInstance();
@@ -465,7 +716,12 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         Log.e("시발",response.body().getAns()+"");
                         if(response.body().getAns())
                         {
-                            bottomSheetPlusPoint.show(getSupportFragmentManager(),"냐아옹");
+                            if(flag==false)
+                            {
+                                bottomSheetPlusPoint = new BottomSheetPlusPoint();
+                                bottomSheetPlusPoint.show(getSupportFragmentManager(),"냐아옹");
+                                flag=true;
+                            }
                             giveMeStar();
                             giveMeReview();
                         }
