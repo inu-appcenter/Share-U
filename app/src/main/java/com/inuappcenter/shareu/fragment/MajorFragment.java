@@ -120,6 +120,7 @@ public class MajorFragment extends Fragment  {
 
             @Override
             public void onFailure(Call<List<Major>> call, Throwable t) {
+
             }
         });
 

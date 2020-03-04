@@ -196,7 +196,6 @@ public class GyoyangFragment extends Fragment  {
 
             @Override
             public void onFailure(Call<List<categoryCulture>> call, Throwable t) {
-                Intent intent = new Intent(getContext(), ServerFailActivity.class);
 
             }
         });

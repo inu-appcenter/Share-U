@@ -139,8 +139,7 @@ public class SearchAllResultFragment extends Fragment implements SearchAllResult
 
     @Override
     public void setInternet() {
-        Intent intent = new Intent(getActivity(), ServerFailActivity.class);
-        getActivity().startActivity(intent);
+
     }
 
     @Override

@@ -109,8 +109,7 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
                         @Override
                         public void onFailure(Call<List<profName>> call, Throwable t)
                         {
-                            Intent intent = new Intent(getActivity(), ServerFailActivity.class);
-                            getActivity().startActivity(intent);
+
                         }
                     });
 
