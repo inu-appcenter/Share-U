@@ -73,7 +73,7 @@ public class GyoyangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     intent.putExtra("prof",mitems.get(position).getSecond());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     view.getContext().startActivity(intent);
-                    ((Activity)mContext).finish();
+                    //((Activity)mContext).finish();
                 }
             });
         }
