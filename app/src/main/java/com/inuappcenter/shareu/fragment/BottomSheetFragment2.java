@@ -119,6 +119,18 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
                 @Override
                 public void onResponse(Call<List<profName> > call, Response<List<profName>> response)
                 {
+                    if(response.isSuccessful())
+                    {
+                        dataList=new ArrayList<>();
+                        for(int i=0;i<response.body().size();i++)
+                        {
+                            dataList.add(new profName(response.body().get(i).getProfName()));
+                        }
+
+                    }
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(manager); // LayoutManager 등록
+                    recyclerView.setAdapter(new BottomSheetAdapter2(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
                     if(response.body().size()==0)
                     {
                         tv_search_please.setVisibility(View.VISIBLE);
@@ -127,18 +139,6 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
                     else
                     {
                         tv_search_please.setVisibility(View.GONE);
-                        if(response.isSuccessful())
-                        {
-                            dataList=new ArrayList<>();
-                            for(int i=0;i<response.body().size();i++)
-                            {
-                                dataList.add(new profName(response.body().get(i).getProfName()));
-                            }
-
-                        }
-                        recyclerView.setHasFixedSize(true);
-                        recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                        recyclerView.setAdapter(new BottomSheetAdapter2(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
                     }
 
                 }

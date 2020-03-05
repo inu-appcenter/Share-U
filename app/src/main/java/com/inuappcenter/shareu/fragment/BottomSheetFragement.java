@@ -2,6 +2,7 @@ package com.inuappcenter.shareu.fragment;
 
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -18,15 +19,19 @@ import android.widget.TextView;
 
 import com.androidadvance.topsnackbar.TSnackbar;
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialogFragment;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
+import com.inuappcenter.shareu.recycler.BottomSheetAdapter2;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,6 +127,18 @@ public class BottomSheetFragement extends RoundedBottomSheetDialogFragment{
                 {
                     if(response.isSuccessful())
                     {
+                        if(response.isSuccessful())
+                        {
+                            dataList=new ArrayList<>();
+                            for(int i=0;i<response.body().size();i++)
+                            {
+                                dataList.add(new subjectName(response.body().get(i).getMajorName()));
+                            }
+
+                        }
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(manager); // LayoutManager 등록
+                        recyclerView.setAdapter(new BottomSheetAdapter(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
                         if(response.body().size()==0)
                         {
                             tv_search_please.setVisibility(View.VISIBLE);
@@ -130,14 +147,6 @@ public class BottomSheetFragement extends RoundedBottomSheetDialogFragment{
                         else
                         {
                             tv_search_please.setVisibility(View.GONE);
-                            dataList=new ArrayList<>();
-                            for(int i=0;i<response.body().size();i++)
-                            {
-                                dataList.add(new subjectName(response.body().get(i).getMajorName()));
-                            }
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                            recyclerView.setAdapter(new BottomSheetAdapter(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
                         }
 
                     }

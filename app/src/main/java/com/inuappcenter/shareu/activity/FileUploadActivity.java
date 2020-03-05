@@ -1,6 +1,7 @@
 package com.inuappcenter.shareu.activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -15,9 +16,14 @@ import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidadvance.topsnackbar.TSnackbar;
+import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialogFragment;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.hbisoft.pickit.PickiT;
 import com.hbisoft.pickit.PickiTCallbacks;
 import com.inuappcenter.shareu.R;
@@ -34,6 +40,7 @@ import com.inuappcenter.shareu.service.RetrofitService;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +89,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
 
     private String extension;
     private TextView tv_uploaded_file_name;
+    private LinearLayout bottom_sheet;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -406,6 +414,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         edtv_content = findViewById(R.id.edtv_content);
         tv_upload_file = findViewById(R.id.tv_upload_file);
         img_btn_file_upload_on=findViewById(R.id.img_btn_file_upload_on);
+        bottom_sheet=findViewById(R.id.bottom_sheet);
     }
     void check()
     {
@@ -508,17 +517,13 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
     }
 
     @Override
-    public void onBackPressed() {
-        finish();
-    }
-    @Override
     protected void onPause() {
         super.onPause();
-        //Log.e("퍼즈","씨발 왜 아무것도 안오냐고");
         if(snackbar!=null && snackbar.isShown())
         {
             snackbar.dismiss();;
         }
     }
+
 }
 
