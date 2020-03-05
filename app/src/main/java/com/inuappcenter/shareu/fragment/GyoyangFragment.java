@@ -51,8 +51,8 @@ public class GyoyangFragment extends Fragment  {
     private ImageButton etv_search_click;
     private ArrayList<categoryCulture>dataList2;
 
-    private List<AlphabetItem> mAlphabetItems=new ArrayList<>();
-    private List<AlphabetItem> mAlphabetItem2 = new ArrayList<>();
+    private List<AlphabetItem> mAlphabetItems;
+    private List<AlphabetItem> mAlphabetItem2;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -122,14 +122,14 @@ public class GyoyangFragment extends Fragment  {
                                 dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.gray));
                         }
                     }
-                    if (mAlphabetItems.isEmpty()) {
-                        List<String> strAlphabets = new ArrayList<>();
-                        for (int i = 0; i < dataList.size(); i++) {
-                            String name = dataList.get(i).getThird();
-                            if (!strAlphabets.contains(name)) {
-                                strAlphabets.add(name);
-                                mAlphabetItems.add(new AlphabetItem(i, name, false));
-                            }
+
+                    mAlphabetItems=new ArrayList<>();
+                    List<String> strAlphabets = new ArrayList<>();
+                    for (int i = 0; i < dataList.size(); i++) {
+                        String name = dataList.get(i).getThird();
+                        if (!strAlphabets.contains(name)) {
+                            strAlphabets.add(name);
+                            mAlphabetItems.add(new AlphabetItem(i, name, false));
                         }
                     }
 
@@ -156,6 +156,7 @@ public class GyoyangFragment extends Fragment  {
     }
     void giveMyGyoyang()
     {
+        mAlphabetItem2 = new ArrayList<>();
         RetrofitService networkService = RetrofitHelper.create();
         networkService.categoryCulture(etv_search.getText()+"").enqueue(new Callback<List<categoryCulture>>() {
             @Override
@@ -198,17 +199,16 @@ public class GyoyangFragment extends Fragment  {
                                 dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getProfName(),response.body().get(i).getSubjectInitiality(),Code.ViewType.MAJOR,R.color.gray));
                         }
                     }
-                    if(mAlphabetItem2.isEmpty())
+
+                    mAlphabetItem2 = new ArrayList<>();
+                    List<String>strAlphabets = new ArrayList<>();
+                    for(int i=0;i<dataList2.size();i++)
                     {
-                        List<String>strAlphabets = new ArrayList<>();
-                        for(int i=0;i<dataList2.size();i++)
+                        String name = dataList2.get(i).getProfName();
+                        if(!strAlphabets.contains(name))
                         {
-                            String name = dataList2.get(i).getProfName();
-                            if(!strAlphabets.contains(name))
-                            {
-                                strAlphabets.add(name);
-                                mAlphabetItem2.add(new AlphabetItem(i,name,false));
-                            }
+                            strAlphabets.add(name);
+                            mAlphabetItem2.add(new AlphabetItem(i,name,false));
                         }
                     }
                 }

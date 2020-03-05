@@ -44,8 +44,8 @@ public class MajorFragment2 extends Fragment{
     private RecyclerViewFastScroller fastScroller;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager manager;
-    private List<AlphabetItem> mAlphabetItems=new ArrayList<>();
-    private List<AlphabetItem> mAlphabetItem2 = new ArrayList<>();
+    private List<AlphabetItem> mAlphabetItems;
+    private List<AlphabetItem> mAlphabetItem2;
 
 
     private ArrayList<Major> dataList;
@@ -142,21 +142,21 @@ public class MajorFragment2 extends Fragment{
                                 dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
                         }
                     }
-                    if(mAlphabetItems.isEmpty())
+
+                    mAlphabetItems=new ArrayList<>();
+                    List<String>strAlphabets = new ArrayList<>();
+                    for(int i=0;i<dataList.size();i++)
                     {
-                        List<String>strAlphabets = new ArrayList<>();
-                        for(int i=0;i<dataList.size();i++)
+                        String name = dataList.get(i).getThird();
+                        if(!strAlphabets.contains(name))
                         {
-                            String name = dataList.get(i).getThird();
-                            if(!strAlphabets.contains(name))
-                            {
-                                strAlphabets.add(name);
-                                mAlphabetItems.add(new AlphabetItem(i,name,false));
-                            }
+                            strAlphabets.add(name);
+                            mAlphabetItems.add(new AlphabetItem(i,name,false));
                         }
                     }
 
                 }
+
                 manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                 mRecyclerView.setLayoutManager(manager); // LayoutManager 등록
                 mRecyclerView.setAdapter(new MajorAdapter3(getActivity(), dataList));  // Adapter 등록
@@ -181,6 +181,7 @@ public class MajorFragment2 extends Fragment{
     void giveSearchResult()
     {
 
+        mAlphabetItem2 = new ArrayList<>();
         Log.e("흠",tv_my_major.getText()+" "+etv_search.getText()+" ");
         RetrofitService networkService = RetrofitHelper.create();
         networkService.categorySubject(tv_my_major.getText()+"",etv_search.getText()+"").enqueue(new Callback<List<categoryCulture>>() {
@@ -224,17 +225,15 @@ public class MajorFragment2 extends Fragment{
                                 dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(),response.body().get(i).getSubjectInitiality(),response.body().get(i).getProfName(),Code.ViewType.MAJOR,R.color.gray));
                         }
                     }
-                    if(mAlphabetItem2.isEmpty())
+                    mAlphabetItem2=new ArrayList<>();
+                    List<String>strAlphabets = new ArrayList<>();
+                    for(int i=0;i<dataList2.size();i++)
                     {
-                        List<String>strAlphabets = new ArrayList<>();
-                        for(int i=0;i<dataList.size();i++)
+                        String name = dataList2.get(i).getSubjectInitiality();
+                        if(!strAlphabets.contains(name))
                         {
-                            String name = dataList.get(i).getThird();
-                            if(!strAlphabets.contains(name))
-                            {
-                                strAlphabets.add(name);
-                                mAlphabetItem2.add(new AlphabetItem(i,name,false));
-                            }
+                            strAlphabets.add(name);
+                            mAlphabetItem2.add(new AlphabetItem(i,name,false));
                         }
                     }
                 }

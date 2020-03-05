@@ -52,8 +52,8 @@ public class MajorFragment extends Fragment  {
     private EditText etv_search;
     private ImageView etv_search_click;
 
-    private List<AlphabetItem> mAlphabetItems=new ArrayList<>();
-    private List<AlphabetItem> mAlphabetItem2 = new ArrayList<>();
+    private List<AlphabetItem> mAlphabetItems;
+    private List<AlphabetItem> mAlphabetItem2 ;
 
 
     @Nullable
@@ -127,17 +127,15 @@ public class MajorFragment extends Fragment  {
                                 dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
                         }
                     }
-                    if(mAlphabetItems.isEmpty())
+                    mAlphabetItems=new ArrayList<>();
+                    List<String>strAlphabets = new ArrayList<>();
+                    for(int i=0;i<dataList.size();i++)
                     {
-                        List<String>strAlphabets = new ArrayList<>();
-                        for(int i=0;i<dataList.size();i++)
+                        String name = dataList.get(i).getThird();
+                        if(!strAlphabets.contains(name))
                         {
-                            String name = dataList.get(i).getThird();
-                            if(!strAlphabets.contains(name))
-                            {
-                                strAlphabets.add(name);
-                                mAlphabetItems.add(new AlphabetItem(i,name,false));
-                            }
+                            strAlphabets.add(name);
+                            mAlphabetItems.add(new AlphabetItem(i,name,false));
                         }
                     }
 
@@ -197,6 +195,7 @@ public class MajorFragment extends Fragment  {
     }
     void listen()
     {
+        mAlphabetItem2 = new ArrayList<>();
         RetrofitService networkService = RetrofitHelper.create();
         networkService.categoryMajor(etv_search.getText()+"").enqueue(new Callback<List<Major>>() {
             @Override
@@ -237,17 +236,16 @@ public class MajorFragment extends Fragment  {
                                 dataList.add(new Major(response.body().get(i).first,response.body().get(i).second,response.body().get(i).third,Code.ViewType.MAJOR,R.color.gray));
                         }
                     }
-                    if(mAlphabetItem2.isEmpty())
+
+                    mAlphabetItem2 = new ArrayList<>();
+                    List<String>strAlphabets = new ArrayList<>();
+                    for(int i=0;i<dataList.size();i++)
                     {
-                        List<String>strAlphabets = new ArrayList<>();
-                        for(int i=0;i<dataList.size();i++)
+                        String name = dataList.get(i).getThird();
+                        if(!strAlphabets.contains(name))
                         {
-                            String name = dataList.get(i).getThird();
-                            if(!strAlphabets.contains(name))
-                            {
-                                strAlphabets.add(name);
-                                mAlphabetItem2.add(new AlphabetItem(i,name,false));
-                            }
+                            strAlphabets.add(name);
+                            mAlphabetItem2.add(new AlphabetItem(i,name,false));
                         }
                     }
                 }
