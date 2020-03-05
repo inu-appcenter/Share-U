@@ -1,6 +1,8 @@
 package com.inuappcenter.shareu.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,6 +23,7 @@ import com.downloader.OnPauseListener;
 import com.downloader.OnProgressListener;
 import com.downloader.OnStartOrResumeListener;
 import com.downloader.PRDownloader;
+import com.downloader.PRDownloaderConfig;
 import com.downloader.Progress;
 import com.downloader.utils.Utils;
 import com.google.android.material.snackbar.Snackbar;
@@ -57,6 +60,7 @@ import java.util.Timer;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
@@ -72,6 +76,12 @@ import static com.inuappcenter.shareu.R.id.tv_detailed_file_date;
 import static com.inuappcenter.shareu.R.id.tv_no_review;
 
 public class DetailedFileActivity extends AppCompatActivity implements OnItemClick {
+    // 권한 요청 시에 사용됨.
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
     private BottomSheetMinusPoint bottomSheetMinusPoint=new BottomSheetMinusPoint();
     private BottomSheetPlusPoint bottomSheetPlusPoint=new BottomSheetPlusPoint();
     private BottomSheetSparsePoint bottomSheetSparsePoint=new BottomSheetSparsePoint();
@@ -111,6 +121,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         PRDownloader.initialize(getApplicationContext());
         Intent intent =getIntent();
         key =intent.getExtras().getInt("key");
+        giveMePermissions();
 
     }
 
@@ -397,7 +408,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                                 bottomSheetSparsePoint.show(getSupportFragmentManager(),"냐옹");
                                 flag=true;
                             }
-
                         }
                         else
                         {
@@ -451,6 +461,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
     void giveFile2(String file)
     {
+        Log.e("썅",file);
         Log.e("흠흠",extension.getValue()+"");
         Date today = new Date();
         String bye=today.getTime()+"";
@@ -460,6 +471,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         url+="/"+sub_url;
         String dirPath = "/storage/emulated/0/Share U";
         String fileName = tv_my_major.getText()+bye+"."+hi;
+
 
         PRDownloader.download(url, dirPath, fileName)
                 .build()
@@ -490,10 +502,13 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 .start(new OnDownloadListener() {
                     @Override
                     public void onDownloadComplete() {
-                        bottomSheetZeroPoint=new BottomSheetZeroPoint();
-                        bottomSheetZeroPoint.show(getSupportFragmentManager(),"냐옹");
-                        flag=true;
-
+                        if(flag==false)
+                        {
+                            Log.e("뀨","흠");
+                            bottomSheetZeroPoint=new BottomSheetZeroPoint();
+                            bottomSheetZeroPoint.show(getSupportFragmentManager(),"냐옹");
+                            flag=true;
+                        }
 
                     }
 
@@ -504,14 +519,13 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
                 });
 
+        Log.e("샹","샹");
     }
     void giveFile(String file)
     {
+        
 
-
-
-
-        Log.e("흠흠",extension.getValue()+"");
+        Log.e("홍홍",extension.getValue()+"");
         Date today = new Date();
         String bye=today.getTime()+"";
         sub_url=file+"";
@@ -521,12 +535,13 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         String dirPath = "/storage/emulated/0/Share U";
         String fileName = tv_my_major.getText()+bye+"."+hi;
 
+
         PRDownloader.download(url, dirPath, fileName)
                 .build()
                 .setOnStartOrResumeListener(new OnStartOrResumeListener() {
                     @Override
                     public void onStartOrResume() {
-                        Log.e("onStartOrResume()","");
+                        Log.e("onStartOrResume()","왜안돼");
                     }
                 })
                 .setOnPauseListener(new OnPauseListener() {
@@ -550,15 +565,18 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 .start(new OnDownloadListener() {
                     @Override
                     public void onDownloadComplete() {
-                        bottomSheetMinusPoint=new BottomSheetMinusPoint();
-                        bottomSheetMinusPoint.show(getSupportFragmentManager(),"냐옹");
-                        flag=true;
-
+                        if(flag==false)
+                        {
+                            bottomSheetMinusPoint=new BottomSheetMinusPoint();
+                            bottomSheetMinusPoint.show(getSupportFragmentManager(),"냐옹");
+                            flag=true;
+                        }
 
                     }
 
                     @Override
                     public void onError(Error error) {
+
                         Log.e("onError()","");
                     }
 
@@ -595,7 +613,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                                 public void onResponse(Call<List<sendFileExtension>> call, Response<List<sendFileExtension>> response) {
                                     if (response.isSuccessful()) {
 
-                                        Log.e("읭",response.body().get(0).getExtension()+"");
+                                        Log.e("웅",response.body().get(0).getExtension()+"");
                                         hi=response.body().get(0).getExtension()+"";
                                         extension.setValue(response.body().get(0).getExtension()+"");
                                         giveFile2(file_name);
@@ -764,5 +782,13 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
         }
 
+    }
+    private void giveMePermissions() {
+        int readPermission = ActivityCompat.checkSelfPermission(DetailedFileActivity.this, PERMISSIONS_STORAGE[0]);
+        int writePermission = ActivityCompat.checkSelfPermission(DetailedFileActivity.this, PERMISSIONS_STORAGE[1]);
+
+        if (writePermission != PackageManager.PERMISSION_GRANTED || readPermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(DetailedFileActivity.this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        }
     }
 }

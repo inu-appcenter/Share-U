@@ -484,5 +484,6 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         edtv_select_prof.setText(value);
         dialog2.dismiss();
     }
+
 }
 
