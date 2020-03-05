@@ -18,279 +18,299 @@
             android:id="@+id/imageButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/group264"
-            android:background="@color/white"/>
+            android:background="@color/white"
+            app:srcCompat="@drawable/group264" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="15.5dp"
-        android:layout_marginRight="15.5dp"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <TextView
-            android:layout_gravity="center_vertical"
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="*"
-            android:textColor="@color/Iris"
-            android:textSize="18sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_gravity="center_vertical"
-            android:id="@+id/textView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@+id/textView13"
-            android:text="파일제목"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="15.5dp"
+                android:layout_marginRight="15.5dp"
+                android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edtv_file_name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="1dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="과목명을 반드시 포함해주세요."
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="*"
+                    android:textColor="@color/Iris"
+                    android:textSize="18sp" />
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/textView13"
+                    android:text="파일제목"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
-            <ImageButton
-                android:id="@+id/img_btn_file_upload"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                app:srcCompat="@drawable/group100" />
+                <EditText
+                    android:id="@+id/edtv_file_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="과목명을 반드시 포함해주세요."
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-            <ImageButton
-                android:id="@+id/img_btn_file_upload_on"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                app:srcCompat="@drawable/sibal"
-                android:visibility="gone"/>
-        </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-    </LinearLayout>
+                    <ImageButton
+                        android:id="@+id/img_btn_file_upload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/white"
+                        app:srcCompat="@drawable/group100" />
 
-    <TextView
-        android:id="@+id/tv_uploaded_file_name"
+                    <ImageButton
+                        android:id="@+id/img_btn_file_upload_on"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/white"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/sibal" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_uploaded_file_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="119dp"
+                android:layout_marginRight="63dp"
+                android:layout_marginBottom="16.5dp"
+                android:textColor="@color/Iris"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15.5dp"
+                android:layout_marginRight="15.5dp"
+                android:background="#57707070" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="15.5dp"
+                android:layout_marginRight="15.5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="*"
+                    android:textColor="@color/Iris"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/textView13"
+                    android:text="과목선택"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/edtv_select_subject"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center|left"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/img_btn_file_upload2"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/below_arrow" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15.5dp"
+                android:layout_marginRight="15.5dp"
+                android:background="#57707070" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="15.5dp"
+                android:layout_marginRight="15.5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="*"
+                    android:textColor="@color/Iris"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/textView13"
+                    android:text="담당교수"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/edtv_select_prof"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center|left"
+                    android:popupBackground="@color/white"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/img_btn_file_upload3"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    app:srcCompat="@drawable/below_arrow" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15.5dp"
+                android:layout_marginRight="15.5dp"
+                android:background="#57707070" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:layout_marginLeft="15.5dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="15.5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="*"
+                    android:textColor="@color/Iris"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/textView13"
+                    android:text="내용"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edtv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="32.5dp"
+                    android:layout_marginTop="12.5dp"
+                    android:layout_marginRight="32.5dp"
+                    android:background="@null"
+                    android:gravity="top|start"
+                    android:hint="여기에 눌러서 글을 작성할 수 있습니다.\n아래 내용을 모두 지켜서 작성해주시기 바랍니다.\n\n1. 정보통신망법에 의한 홍보 게시물 작성 금지.\n2. 욕설, 비하, 음란물, 개인 정보가 포함되는 게시물 작성 금지.\n\n자세한 내용은 공지사항에 [커뮤니티 이용규칙]을 참고하시기 바랍니다."
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="119dp"
-        android:layout_marginRight="63dp"
-        android:layout_marginBottom="16.5dp"
-        android:textColor="@color/Iris"
-        android:textSize="12sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="15.5dp"
-        android:layout_marginRight="15.5dp"
-        android:background="#57707070" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="15.5dp"
-        android:layout_marginRight="15.5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="*"
-            android:textColor="@color/Iris"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@+id/textView13"
-            android:text="과목선택"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/edtv_select_subject"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="1dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:gravity="center|left"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <ImageButton
-            android:id="@+id/img_btn_file_upload2"
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            app:srcCompat="@drawable/below_arrow" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="15.5dp"
-        android:layout_marginRight="15.5dp"
-        android:background="#57707070" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="15.5dp"
-        android:layout_marginRight="15.5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="*"
-            android:textColor="@color/Iris"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@+id/textView13"
-            android:text="담당교수"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/edtv_select_prof"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="1dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:gravity="center|left"
-            android:popupBackground="@color/white"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <ImageButton
-            android:id="@+id/img_btn_file_upload3"
-            android:layout_width="48dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            app:srcCompat="@drawable/below_arrow" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="15.5dp"
-        android:layout_marginRight="15.5dp"
-        android:background="#57707070" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="27dp"
-        android:layout_marginLeft="15.5dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginRight="15.5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="*"
-            android:textColor="@color/Iris"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
-            android:layout_toRightOf="@+id/textView13"
-            android:text="내용"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/edtv_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="32.5dp"
-            android:layout_marginTop="12.5dp"
-            android:layout_marginRight="32.5dp"
-            android:background="@null"
-            android:gravity="top|start"
-            android:hint="여기에 눌러서 글을 작성할 수 있습니다.\n아래 내용을 모두 지켜서 작성해주시기 바랍니다.\n\n1. 정보통신망법에 의한 홍보 게시물 작성 금지.\n2. 욕설, 비하, 음란물, 개인 정보가 포함되는 게시물 작성 금지.\n\n자세한 내용은 공지사항에 [커뮤니티 이용규칙]을 참고하시기 바랍니다."
-            android:inputType="textMultiLine"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="39dp">
+        android:layout_marginTop="39dp"
+        android:layout_weight="0">
 
         <TextView
             android:id="@+id/tv_upload_file"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray"
             android:gravity="center"
+            android:paddingTop="15.5dp"
+            android:paddingBottom="15.5dp"
             android:text="자료 올리기"
             android:textColor="@color/white"
-            android:background="@color/gray"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>

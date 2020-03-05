@@ -94,7 +94,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_file_register);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         init();
 
         edtv_select_subject.addTextChangedListener(new TextWatcher() {
