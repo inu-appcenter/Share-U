@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         etv_search_click.setOnClickListener(onClickListener);
         btn_backpress.setOnClickListener(onClickListener);
 
+
     }
     void init()
     {

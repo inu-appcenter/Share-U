@@ -199,6 +199,8 @@ public class DrawerFragment extends Fragment {
         getpoint.setOnClickListener(onClickListener);
         tv_detail_point.setOnClickListener(onClickListener);
         musihe.setOnClickListener(onClickListener);
+        musihe2.setOnClickListener(onClickListener);
+        musihe3.setOnClickListener(onClickListener);
     }
 
     void init()

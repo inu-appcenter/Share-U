@@ -26,11 +26,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
+
 
 public class MajorActivity extends AppCompatActivity {
-    IndexFastScrollRecyclerView recyclerView;
-    IndexFastScrollRecyclerView recyclerView2;
+
     LinearLayoutManager manager;
     private ArrayList<Major> dataList;
     private FragmentManager fragmentManager;
