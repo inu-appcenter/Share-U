@@ -120,63 +120,71 @@
             android:background="@color/gray" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="17.5dp"
-            android:layout_gravity="center">
+            android:id="@+id/musihe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_my_major"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="null"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="17.5dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView6"
+                <TextView
+                    android:id="@+id/tv_my_major"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="null"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" / "
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_my_adress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="null"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" / "
-                android:textSize="12sp"
-                android:textColor="@color/black"/>
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_my_adress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="null"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_my_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:layout_weight="1"
+                    android:text="null"
+                    android:textColor="@color/Iris"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:text="님"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_my_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|bottom"
-                android:layout_weight="1"
-                android:text="null"
-                android:textColor="@color/Iris"
-                android:textSize="27sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|bottom"
-                android:layout_marginLeft="3dp"
-                android:layout_weight="1"
-                android:text="님"
-                android:textColor="@color/gray"
-                android:textSize="14sp" />
         </LinearLayout>
 
         <View
@@ -311,6 +319,11 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/musihe3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
 
 
 
@@ -414,6 +427,12 @@
                 android:textColor="@color/Iris"
                 android:textSize="18sp" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/musihe2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
 
     </LinearLayout>
 

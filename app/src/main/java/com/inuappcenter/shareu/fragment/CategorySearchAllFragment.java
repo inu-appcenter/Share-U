@@ -44,15 +44,16 @@ public class CategorySearchAllFragment extends Fragment implements SearchAllResu
     private TextView tv_search_result_more;
     private String subjectName,profName;
 
-    public CategorySearchAllFragment(String subjectName, String profName) {
-        this.subjectName = subjectName;
-        this.profName = profName;
-    }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_search_category_all, container, false);
+        Bundle args = getArguments();
+        subjectName = getArguments().getString("subjectName");
+        profName = getArguments().getString("profName");
+
         init();
         /*ArrayList<SuperiorLecture> items=new ArrayList<>();
         items.add(new SuperiorLecture(R.drawable.ai,"문학과테마기행 족보",5));

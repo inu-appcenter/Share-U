@@ -59,9 +59,16 @@ public class MyPointAdapter extends RecyclerView.Adapter<MyPointAdapter.ViewHold
             holder.tv_point.setTextColor(Color.parseColor("#c9c9f4"));
             holder.tv_subtitle.setText(" 게시물 다운");
         }
+        else if(item.getPoint()==10)
+        {
+            holder.tv_point.setText("+10p");
+            holder.tv_point.setTextColor(Color.parseColor("#574fba"));
+            holder.tv_title.setText("회원가입 축하 포인트");
+            holder.tv_subtitle.setText("");
+        }
         else
         {
-            String hi;
+            String hi="";
             if(item.getPoint()>=0)
             {
                 hi ="+"+item.getPoint()+"p";
@@ -73,6 +80,8 @@ public class MyPointAdapter extends RecyclerView.Adapter<MyPointAdapter.ViewHold
                 holder.tv_point.setTextColor(Color.parseColor("#c9c9f4"));
             }
             holder.tv_point.setText(hi);
+            holder.tv_subtitle.setText("");
+
         }
        /* holder.tv_review_date.setText(item.getUploadDate());
         String name = item.getUploadId();

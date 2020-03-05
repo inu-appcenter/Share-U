@@ -42,9 +42,6 @@ dependencies {
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    //implementation 'com.android.support:recyclerview-v7:28.0.0'
-    //reclclerview indicator index
-    implementation 'com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.95'
 
     //floating button
     implementation 'com.google.android.material:material:1.0.0-rc01'
@@ -72,6 +69,12 @@ dependencies {
     //file download
     //https://github.com/MindorksOpenSource/PRDownloader
     implementation 'com.mindorks.android:prdownloader:0.6.0'
+
+
+
+    //https://github.com/viethoa/recyclerview-alphabet-fast-scroller-android
+    //reclclerview indicator index
+    implementation 'com.github.viethoa:fastscroller:1.2.0'
 
 
 }

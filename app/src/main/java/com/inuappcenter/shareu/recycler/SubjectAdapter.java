@@ -15,6 +15,7 @@ import com.inuappcenter.shareu.activity.CategorySearchActivity;
 import com.inuappcenter.shareu.fragment.MajorFragment2;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.categoryCulture;
+import com.viethoa.RecyclerViewFastScroller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SubjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
+public class SubjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements RecyclerViewFastScroller.BubbleTextGetter {
 
     private Context mContext;
     private ArrayList<categoryCulture> mitems;
@@ -123,28 +124,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     @Override
-    public int getSectionForPosition(int position) {
-        return 0;
+    public String getTextToShowInBubble(int pos) {
+        return null;
     }
-
-    @Override
-
-    public Object[] getSections() {
-        List<String> sections = new ArrayList<>(100);
-        mSectionPositions = new ArrayList<>(100);
-        for (int i = 0; i< mitems.size(); i++) {
-            String section = mitems.get(i).getProfName();
-            if (!sections.contains(section)) {
-                sections.add(section);
-                mSectionPositions.add(i);
-            }
-        }
-        return sections.toArray(new String[0]);
-    }
-
-    @Override
-    public int getPositionForSection(int sectionIndex) {
-        return mSectionPositions.get(sectionIndex);
-    }
-
 }

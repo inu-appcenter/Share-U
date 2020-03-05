@@ -163,8 +163,15 @@ public class CategorySearchActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        fragmentManager = getSupportFragmentManager();
-                        categorySearchAllFragment=new CategorySearchAllFragment(subjectName,profName);
+                        //categorySearchAllFragment=new CategorySearchAllFragment(subjectName,profName);
+                        categorySearchAllFragment=new CategorySearchAllFragment();
+                        Bundle args=new Bundle(2);
+                        args.putString("subjectName",subjectName);
+                        args.putString("profName",profName);
+                        categorySearchAllFragment.setArguments(args);
+
+
+                        fragmentManager =getSupportFragmentManager();
                         transaction = fragmentManager.beginTransaction();
                         transaction.replace(R.id.layout_frame_search_result,categorySearchAllFragment);
                         transaction.commit();

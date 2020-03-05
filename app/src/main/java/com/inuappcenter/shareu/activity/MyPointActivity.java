@@ -100,6 +100,9 @@ public class MyPointActivity extends AppCompatActivity {
                     List<userPointList>tmp_list = new ArrayList<>();
                     for(int i=response.body().size()-1;i>=0;i--)
                     {
+                        Log.e("끄앙",response.body().get(i).getPoint()+" "+response.body().get(i).getDocumentKey()+" "+
+
+                                response.body().get(i).getPointloadDate()+" "+response.body().get(i).getTitle());
                         tmp_list.add(new userPointList(response.body().get(i).getPoint(),response.body().get(i).getDocumentKey(),
 
                                 response.body().get(i).getPointloadDate(),response.body().get(i).getTitle()));

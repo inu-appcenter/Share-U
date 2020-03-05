@@ -13,12 +13,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -87,6 +90,20 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         transaction.replace(R.id.layout_frame_main,mainFragment);
         transaction.commit();
 
+
+        etv_search.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //Enter key Action
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    listen();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE); imm.hideSoftInputFromWindow( etv_search.getWindowToken(), 0);
+
+                    return true;
+                }
+                return false;
+            }
+        });
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,68 +152,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
                     case R.id.etv_search_click:
                         //Toast.makeText(getApplicationContext(),"냐냐냔냥",Toast.LENGTH_SHORT).show();
                         //최신자료는 우수자료 상관없이 다 뜸
-                        if(etv_search.getText().length()==0)
-                        {
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"한 글자 이상 검색해주세요!",TSnackbar.LENGTH_SHORT);
-                            snackbar.setActionTextColor(Color.WHITE);
-                            View snackbarView = snackbar.getView();
-                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-                            textView.setTextColor(Color.WHITE);
-                            snackbar.show();
-                        }
-                        else
-                        {
-                            RetrofitService networkService = RetrofitHelper.create();
-                            networkService.documentTop5DateList(etv_search.getText()+"","","").enqueue(new Callback<List<Document>>() {
-                                @Override
-                                public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
-                                    if (response.isSuccessful()) {
-
-                                        if(response.body().size()==0)
-                                        {
-                                            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                                                getSupportFragmentManager().popBackStack();
-                                            }
-                                            fragmentManager = getSupportFragmentManager();
-                                            searchNoResultFragment = new SearchNoResultFragment();
-                                            transaction = fragmentManager.beginTransaction();
-                                            transaction.replace(R.id.layout_frame_main,searchNoResultFragment);
-
-                                            btn_backpress.setVisibility(View.VISIBLE);
-                                            btn_left_bar_main.setVisibility(View.GONE);
-                                            btn_my_page_main.setVisibility(View.INVISIBLE);
-                                            transaction.addToBackStack(null);
-                                            transaction.commit();
-
-                                        }
-                                        else
-                                        {
-                                            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                                                getSupportFragmentManager().popBackStack();
-                                            }
-                                            fragmentManager = getSupportFragmentManager();
-                                            searchAllResultFragment=new SearchAllResultFragment();
-                                            transaction = fragmentManager.beginTransaction();
-                                            transaction.replace(R.id.layout_frame_main,searchAllResultFragment);
-
-                                            btn_backpress.setVisibility(View.VISIBLE);
-                                            btn_left_bar_main.setVisibility(View.GONE);
-                                            btn_my_page_main.setVisibility(View.INVISIBLE);
-                                            transaction.addToBackStack(null);
-                                            transaction.commit();
-                                        }
-                                    }
-
-                                }
-
-                                @Override
-                                public void onFailure(Call<List<Document>> call, Throwable t) {
-
-                                }
-                            });
-                        }
-
+                        listen();
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE); imm.hideSoftInputFromWindow( etv_search.getWindowToken(), 0);
                         break;
                         //메인화면 검색
                 }
@@ -283,6 +240,78 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();
+        }
+    }
+    void listen()
+    {
+        if(etv_search.getText().length()==0)
+        {
+            snackbar = TSnackbar.make(findViewById(android.R.id.content),"한 글자 이상 검색해주세요!",TSnackbar.LENGTH_SHORT);
+            snackbar.setActionTextColor(Color.WHITE);
+            View snackbarView = snackbar.getView();
+            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+            textView.setTextColor(Color.WHITE);
+            snackbar.show();
+        }
+        else
+        {
+            RetrofitService networkService = RetrofitHelper.create();
+            networkService.documentTop5DateList(etv_search.getText()+"","","").enqueue(new Callback<List<Document>>() {
+                @Override
+                public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
+                    if (response.isSuccessful()) {
+
+                        if(response.body().size()==0)
+                        {
+                            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                                getSupportFragmentManager().popBackStack();
+                            }
+                            fragmentManager = getSupportFragmentManager();
+                            searchNoResultFragment = new SearchNoResultFragment();
+                            transaction = fragmentManager.beginTransaction();
+                            transaction.replace(R.id.layout_frame_main,searchNoResultFragment);
+
+                            btn_backpress.setVisibility(View.VISIBLE);
+                            btn_left_bar_main.setVisibility(View.GONE);
+                            btn_my_page_main.setVisibility(View.INVISIBLE);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+
+                        }
+                        else
+                        {
+                            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                                getSupportFragmentManager().popBackStack();
+                            }
+                            fragmentManager = getSupportFragmentManager();
+                            searchAllResultFragment=new SearchAllResultFragment();
+                            transaction = fragmentManager.beginTransaction();
+                            transaction.replace(R.id.layout_frame_main,searchAllResultFragment);
+
+                            btn_backpress.setVisibility(View.VISIBLE);
+                            btn_left_bar_main.setVisibility(View.GONE);
+                            btn_my_page_main.setVisibility(View.INVISIBLE);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<Document>> call, Throwable t) {
+
+                }
+            });
+        }
+    }
 }
 
 

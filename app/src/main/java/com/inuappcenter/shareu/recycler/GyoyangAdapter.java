@@ -14,6 +14,7 @@ import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.activity.CategorySearchActivity;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
+import com.viethoa.RecyclerViewFastScroller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class GyoyangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
+public class GyoyangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements RecyclerViewFastScroller.BubbleTextGetter {
 
     private Context mContext;
     private ArrayList<Major> mitems;
@@ -113,29 +114,9 @@ public class GyoyangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         }
     }
-    @Override
-    public int getSectionForPosition(int position) {
-        return 0;
-    }
 
     @Override
-
-    public Object[] getSections() {
-        List<String> sections = new ArrayList<>(100);
-        mSectionPositions = new ArrayList<>(100);
-        for (int i = 0; i< mitems.size(); i++) {
-            String section = mitems.get(i).getThird();
-            if (!sections.contains(section)) {
-                sections.add(section);
-                mSectionPositions.add(i);
-            }
-        }
-        return sections.toArray(new String[0]);
+    public String getTextToShowInBubble(int pos) {
+        return null;
     }
-
-    @Override
-    public int getPositionForSection(int sectionIndex) {
-        return mSectionPositions.get(sectionIndex);
-    }
-
 }

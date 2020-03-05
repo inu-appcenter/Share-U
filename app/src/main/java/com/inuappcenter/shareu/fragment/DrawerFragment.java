@@ -64,6 +64,7 @@ public class DrawerFragment extends Fragment {
     private FrameLayout getpoint;
 
     private TextView tv_detail_point;
+    private LinearLayout musihe,musihe2,musihe3;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -157,6 +158,12 @@ public class DrawerFragment extends Fragment {
                         intent7.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         view.getContext().startActivity(intent7);
                         break;
+                    case R.id.musihe:
+                        break;
+                    case R.id.musihe2:
+                        break;
+                    case R.id.musihe3:
+                        break;
 
                 }
 
@@ -191,6 +198,7 @@ public class DrawerFragment extends Fragment {
         tv_my_change_my_page.setOnClickListener(onClickListener);
         getpoint.setOnClickListener(onClickListener);
         tv_detail_point.setOnClickListener(onClickListener);
+        musihe.setOnClickListener(onClickListener);
     }
 
     void init()
@@ -206,6 +214,9 @@ public class DrawerFragment extends Fragment {
         getpoint=view.findViewById(R.id.getpoint);
         tv_detail_point=view.findViewById(R.id.tv_detail_point);
         tv_numeric_point.setText("?");
+        musihe=view.findViewById(R.id.musihe);
+        musihe2=view.findViewById(R.id.musihe2);
+        musihe3=view.findViewById(R.id.musihe3);
     }
 
     void giveMyImform()

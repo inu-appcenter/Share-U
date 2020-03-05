@@ -3,6 +3,7 @@ package com.inuappcenter.shareu.recycler;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MajorAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
+public class MajorAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private ArrayList<categoryCulture> mitems;
@@ -65,6 +66,7 @@ public class MajorAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     Intent intent = new Intent(view.getContext(), CategorySearchActivity.class);
                     intent.putExtra("major",mitems.get(position).getSubjectname());
                     intent.putExtra("prof",mitems.get(position).getProfName());
@@ -107,30 +109,6 @@ public class MajorAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             line_notice = itemView.findViewById(R.id.line_notice);
 
         }
-    }
-    @Override
-    public int getSectionForPosition(int position) {
-        return 0;
-    }
-
-    @Override
-
-    public Object[] getSections() {
-        List<String> sections = new ArrayList<>(100);
-        mSectionPositions = new ArrayList<>(100);
-        for (int i = 0; i< mitems.size(); i++) {
-            String section = mitems.get(i).getSubjectInitiality();
-            if (!sections.contains(section)) {
-                sections.add(section);
-                mSectionPositions.add(i);
-            }
-        }
-        return sections.toArray(new String[0]);
-    }
-
-    @Override
-    public int getPositionForSection(int sectionIndex) {
-        return mSectionPositions.get(sectionIndex);
     }
 
 }
