@@ -278,8 +278,13 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                             });
                         }
                         break;
-                    case R.id.imageButton4:
+                    case R.id.imageButton4: {
+                        if(snackbar!=null && snackbar.isShown())
+                        {
+                            snackbar.dismiss();
+                        }
                         finish();
+                    }
                         break;
                     case R.id.img_btn_file_upload2:
 
@@ -502,5 +507,13 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         dialog2.dismiss();
     }
 
+    @Override
+    public void onBackPressed() {
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
+        super.onBackPressed();
+    }
 }
 

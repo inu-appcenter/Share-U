@@ -58,6 +58,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -159,6 +160,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 //check();
                 //bottomSheetPlusPoint.show(getSupportFragmentManager(),"냐옹");
                 //goDownload();
+                if(snackbar!=null && snackbar.isShown())
+                {
+                    snackbar.dismiss();;
+                }
                 TokenManager tm = TokenManager.getInstance();
                 String token = tm.getToken(getApplicationContext());
                 if(token==null)
@@ -176,6 +181,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         tv_register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                if(snackbar!=null && snackbar.isShown())
+                {
+                    snackbar.dismiss();;
+                }
                 check();
             }
         });
@@ -185,6 +194,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         singo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                if(snackbar!=null && snackbar.isShown())
+                {
+                    snackbar.dismiss();;
+                }
                 Intent intent = new Intent(getApplicationContext(),SelectPoliceActivity.class);
                 intent.putExtra("key",key);
                 startActivity(intent);
@@ -266,10 +279,14 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 if (response.isSuccessful()) {
                     if(response.body().ans==true)//받은 적 없다
                     {
+                        tv_register.setClickable(false);
+                        tv_get_file.setClickable(false);
                         goDownload();
                     }
                     else//받은 적 있따.
                     {
+                        tv_register.setClickable(false);
+                        tv_get_file.setClickable(false);
                         giveFree();
                     }
                 }
@@ -358,6 +375,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
     @Override
     public void onClick(String value) {
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
         if(bottomSheetPlusPoint.isAdded())
         {
             bottomSheetPlusPoint.dismiss();
@@ -406,9 +427,16 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         {
                             if(flag==false)
                             {
+                                tv_get_file.setText("자료 받기 실패");
+                                tv_register.setClickable(true);
+                                tv_get_file.setBackgroundColor(Color.parseColor("#a8a8a8"));
                                 bottomSheetSparsePoint=new BottomSheetSparsePoint();
                                 bottomSheetSparsePoint.show(getSupportFragmentManager(),"냐옹");
                                 flag=true;
+                            }
+                            if(snackbar!=null && snackbar.isShown())
+                            {
+                                snackbar.dismiss();;
                             }
                         }
                         else
@@ -473,7 +501,13 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         url+="/"+sub_url;
         String dirPath = "/storage/emulated/0/Share U";
         String fileName = tv_my_major.getText()+bye+"."+hi;
-
+        snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 다운로드 중입니다...잠시만 기다려주세요",TSnackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(Color.WHITE);
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+        TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        snackbar.show();
 
         PRDownloader.download(url, dirPath, fileName)
                 .build()
@@ -504,12 +538,23 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 .start(new OnDownloadListener() {
                     @Override
                     public void onDownloadComplete() {
+                        if(snackbar!=null && snackbar.isShown())
+                        {
+                            snackbar.dismiss();;
+                        }
                         if(flag==false)
                         {
+                            tv_get_file.setText("자료 받기 완료");
+                            tv_get_file.setBackgroundColor(Color.parseColor("#a8a8a8"));
                             Log.e("뀨","흠");
                             bottomSheetZeroPoint=new BottomSheetZeroPoint();
                             bottomSheetZeroPoint.show(getSupportFragmentManager(),"냐옹");
                             flag=true;
+                            if(snackbar!=null && snackbar.isShown())
+                            {
+                                snackbar.dismiss();;
+                            }
+                            tv_register.setClickable(true);
                         }
 
                     }
@@ -520,6 +565,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                     }
 
                 });
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
 
         Log.e("샹","샹");
     }
@@ -537,7 +586,13 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         String dirPath = "/storage/emulated/0/Share U";
         String fileName = tv_my_major.getText()+bye+"."+hi;
 
-
+        snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 다운로드 중입니다...잠시만 기다려주세요",TSnackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(Color.WHITE);
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+        TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        snackbar.show();
         PRDownloader.download(url, dirPath, fileName)
                 .build()
                 .setOnStartOrResumeListener(new OnStartOrResumeListener() {
@@ -567,11 +622,22 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 .start(new OnDownloadListener() {
                     @Override
                     public void onDownloadComplete() {
+                        if(snackbar!=null && snackbar.isShown())
+                        {
+                            snackbar.dismiss();;
+                        }
                         if(flag==false)
                         {
+                            tv_get_file.setText("자료 받기 완료");
+                            tv_get_file.setBackgroundColor(Color.parseColor("#a8a8a8"));
                             bottomSheetMinusPoint=new BottomSheetMinusPoint();
                             bottomSheetMinusPoint.show(getSupportFragmentManager(),"냐옹");
                             flag=true;
+                            if(snackbar!=null && snackbar.isShown())
+                            {
+                                snackbar.dismiss();;
+                            }
+                            tv_register.setClickable(true);
                         }
 
                     }
@@ -583,6 +649,11 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                     }
 
                 });
+
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
 
     }
     void giveFree()
@@ -711,7 +782,12 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
     }
     void check() {
-        //Log.e("여기 와..?","흠");
+
+        Log.e("여기 와..?","흠");
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
         TokenManager tm = TokenManager.getInstance();
         String token = tm.getToken(this);
         if (token == null)
@@ -722,6 +798,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
         else if(edtv_review.getText().length()<5)
         {
+            Log.e("읭","읭");
             snackbar = TSnackbar.make(findViewById(android.R.id.content),"리뷰를 5글자 이상 남겨주세요!",TSnackbar.LENGTH_SHORT);
             snackbar.setActionTextColor(Color.WHITE);
             View snackbarView = snackbar.getView();
@@ -751,11 +828,20 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         Log.e("시발",response.body().getAns()+"");
                         if(response.body().getAns())
                         {
+                            if(snackbar!=null && snackbar.isShown())
+                            {
+                                snackbar.dismiss();;
+                            }
                             if(flag==false)
                             {
+
                                 bottomSheetPlusPoint = new BottomSheetPlusPoint();
                                 bottomSheetPlusPoint.show(getSupportFragmentManager(),"냐아옹");
                                 flag=true;
+                                if(snackbar!=null && snackbar.isShown())
+                                {
+                                    snackbar.dismiss();;
+                                }
                             }
                             giveMeStar();
                             giveMeReview();
@@ -783,6 +869,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
             });
 
         }
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
 
     }
     private void giveMePermissions() {
@@ -792,5 +882,14 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         if (writePermission != PackageManager.PERMISSION_GRANTED || readPermission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(DetailedFileActivity.this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
+        super.onBackPressed();
     }
 }
