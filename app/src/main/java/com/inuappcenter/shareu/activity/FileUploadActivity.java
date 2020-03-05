@@ -509,11 +509,16 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
 
     @Override
     public void onBackPressed() {
+        finish();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //Log.e("퍼즈","씨발 왜 아무것도 안오냐고");
         if(snackbar!=null && snackbar.isShown())
         {
             snackbar.dismiss();;
         }
-        super.onBackPressed();
     }
 }
 

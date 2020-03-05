@@ -118,6 +118,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_file);
+        Log.e("크리에이트","씨발 왜 아무것도 안오냐고");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         init();
         lifecycleOwner=this;
@@ -135,6 +136,8 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         giveMeStar();
         giveMeList();
         giveMeReview();
+        Log.e("레쥬미","");
+
 
     }
 
@@ -554,6 +557,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                             {
                                 snackbar.dismiss();;
                             }
+                            if(snackbar!=null && snackbar.isShown())
+                            {
+                                snackbar.dismiss();;
+                            }
                             tv_register.setClickable(true);
                         }
 
@@ -637,6 +644,11 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                             {
                                 snackbar.dismiss();;
                             }
+                            if(snackbar!=null && snackbar.isShown())
+                            {
+                                snackbar.dismiss();;
+                            }
+
                             tv_register.setClickable(true);
                         }
 
@@ -885,11 +897,34 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     }
 
     @Override
-    public void onBackPressed() {
+    protected void onStop() {
+        super.onStop();
+        //Log.e("스탑","씨발 왜 아무것도 안오냐고");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //Log.e("퍼즈","씨발 왜 아무것도 안오냐고");
         if(snackbar!=null && snackbar.isShown())
         {
             snackbar.dismiss();;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        //Log.e("온ㅏ여기","씨발 왜 아무것도 안오냐고");
+        super.onDestroy();
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
         super.onBackPressed();
     }
+
 }
