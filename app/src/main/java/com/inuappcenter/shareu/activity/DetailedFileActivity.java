@@ -111,6 +111,8 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     private String hi="";
     //private FragmentManager fm = getSupportFragmentManager();
     private Boolean flag=false;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

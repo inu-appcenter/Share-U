@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -78,7 +80,8 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
     private BottomSheetFragement dialog;
     private BottomSheetFragment2 dialog2;
 
-
+    private String extension;
+    private TextView tv_uploaded_file_name;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +183,16 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                     /*progressSnackbar2.setText("모든 내용을 채워주세요");
                     progressSnackbar2.show();*/
                             snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 30자 이상 채워주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar.setActionTextColor(Color.WHITE);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                            textView.setTextColor(Color.WHITE);
+                            snackbar.show();
+                        }
+                        else if(extension.equals("tempFile"))
+                        {
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"올바른 확장자의 파일을 업로드 해주세요!",TSnackbar.LENGTH_SHORT);
                             snackbar.setActionTextColor(Color.WHITE);
                             View snackbarView = snackbar.getView();
                             snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
@@ -364,16 +377,20 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         File imageFile = new File(path);
         RequestBody reqFile = RequestBody.create(type, imageFile);
         filePart = MultipartBody.Part.createFormData("userfile", imageFile.getName(), reqFile);
-        TextView tv_uploaded_file_name = findViewById(R.id.tv_uploaded_file_name);
+        tv_uploaded_file_name = findViewById(R.id.tv_uploaded_file_name);
         tv_uploaded_file_name.setVisibility(View.VISIBLE);
         tv_uploaded_file_name.setText(imageFile.getName()+"");
+        extension=tv_uploaded_file_name.getText()+"";
 /*        progressSnackbar.setText("자료 업로드 중...");
         progressSnackbar.show();*/
         file_upload_check=true;
         img_btn_file_upload_on.setVisibility(View.VISIBLE);
-
         check();
+
+
     }
+
+
 
     void init()
     {
