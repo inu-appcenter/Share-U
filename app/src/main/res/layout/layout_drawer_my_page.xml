@@ -362,20 +362,22 @@
 
         <TextView
             android:id="@+id/textView9"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="18dp"
 
+            android:gravity="center"
+            android:paddingTop="19dp"
+            android:paddingBottom="28.5dp"
             android:text="로그인을 해주세요."
             android:textColor="@color/black"
             android:textSize="18sp" />
+
         <View
             android:id="@+id/view3"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginLeft="14.5dp"
-            android:layout_marginTop="28.5dp"
             android:layout_marginRight="15.5dp"
             android:background="@color/gray" />
 

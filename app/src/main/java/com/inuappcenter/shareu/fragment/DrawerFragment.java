@@ -65,6 +65,7 @@ public class DrawerFragment extends Fragment {
 
     private TextView tv_detail_point;
     private LinearLayout musihe,musihe2,musihe3;
+    private TextView textView9;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -164,6 +165,8 @@ public class DrawerFragment extends Fragment {
                         break;
                     case R.id.musihe3:
                         break;
+                    case R.id.textView9:
+                        break;
 
                 }
 
@@ -201,6 +204,7 @@ public class DrawerFragment extends Fragment {
         musihe.setOnClickListener(onClickListener);
         musihe2.setOnClickListener(onClickListener);
         musihe3.setOnClickListener(onClickListener);
+        textView9.setOnClickListener(onClickListener);
     }
 
     void init()
@@ -219,6 +223,7 @@ public class DrawerFragment extends Fragment {
         musihe=view.findViewById(R.id.musihe);
         musihe2=view.findViewById(R.id.musihe2);
         musihe3=view.findViewById(R.id.musihe3);
+        textView9=view.findViewById(R.id.textView9);
     }
 
     void giveMyImform()
