@@ -94,6 +94,9 @@ public class MajorActivity extends AppCompatActivity {
                             transaction.replace(R.id.layout_frame_category,fragmentGyoyang).commitAllowingStateLoss();
                         }
                         break;
+                    case R.id.btn_backpress:
+                        finish();
+                        break;
                 }
             }
         } ;
@@ -102,24 +105,7 @@ public class MajorActivity extends AppCompatActivity {
         etv_search_click.setOnClickListener(onClickListener);
 
 
-        Button.OnClickListener onClickListener2 = new Button.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                switch(view.getId())
-                {
-                    case R.id.btn_left_bar_major:
-                    {
-                        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                            getSupportFragmentManager().popBackStack();
-                        } else {
-                            finish();
-                        }
-                    }
-                }
-            }
-        };
-        btn_left_bar_major.setOnClickListener(onClickListener2);
+
 
     }
 
