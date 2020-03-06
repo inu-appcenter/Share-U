@@ -49,6 +49,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     private SuperiorLectureAdapter2 superiorLectureAdapter2 ;
     private NoticeAdapter noticeAdapter;
     private View view;
+    private CircleIndicator indicator;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,19 +67,7 @@ public class MainFragment extends Fragment implements MainContract.View {
         recyclerView2.setLayoutManager(layoutManager2);
         recyclerView2.setAdapter(noticeAdapter);
         viewPager = view.findViewById(R.id.viewpager_superior) ;
-
-        superiorLectureAdapter2 = new SuperiorLectureAdapter2(getActivity());
-        viewPager.setAdapter(superiorLectureAdapter2) ;
-
-
-
-        CircleIndicator indicator = view.findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager);
-
-        superiorLectureAdapter2.registerDataSetObserver(indicator.getDataSetObserver());
-        indicator.createIndicators(5,0);
-
-
+        indicator = view.findViewById(R.id.indicator);
 
     }
 
@@ -92,6 +81,15 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void onResume() {
         super.onResume();
+        superiorLectureAdapter2 = new SuperiorLectureAdapter2(getActivity());
+        viewPager.setAdapter(superiorLectureAdapter2) ;
+
+
+
+        indicator.setViewPager(viewPager);
+
+        superiorLectureAdapter2.registerDataSetObserver(indicator.getDataSetObserver());
+        indicator.createIndicators(5,0);
         mainPresenter.onResume();
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override

@@ -51,6 +51,7 @@ public class MainModel {
     //메인 우수자료
     public void setSuperior()
     {
+        Log.e("여기도 오능데","야ㅑㅇ야야옹");
         RetrofitService networkService = RetrofitHelper.create();
         networkService.mainTop5ScoreList().enqueue(new Callback<List<SuperiorLecture>>() {
             @Override

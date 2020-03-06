@@ -80,8 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         setContentView(R.layout.activity_main);
         init();
         check_login();
-        //TODO : 프래그먼트 전환되면 햄버거 바 백스페이스로 바꾸고 마이페이지 버튼도 비활성화, 원래대로 돌아오면 다시 살려놓자.
-        // 사라져야 하는거 drawer_my_page랑 btn_left_bar_main,btn_backpress
+
 
 
         fragmentManager = getSupportFragmentManager();

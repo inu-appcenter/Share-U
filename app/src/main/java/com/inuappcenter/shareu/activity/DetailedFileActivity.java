@@ -118,7 +118,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_file);
-        Log.e("크리에이트","씨발 왜 아무것도 안오냐고");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         init();
         lifecycleOwner=this;
@@ -136,8 +135,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         giveMeStar();
         giveMeList();
         giveMeReview();
-        Log.e("레쥬미","");
-
 
     }
 
@@ -278,7 +275,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
             @Override
             public void onResponse(Call<documentPage> call, Response<documentPage> response) {
 
-                Log.e("냐",response.body().ans+"");
                 if (response.isSuccessful()) {
                     if(response.body().ans==true)//받은 적 없다
                     {
@@ -308,9 +304,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     {
         TokenManager tm = TokenManager.getInstance();
         String token = tm.getToken(this);
-/////////////여기바꿔시발
         RetrofitService networkService = RetrofitHelper.create();
-        Log.e("흠",key+" "+token);
         networkService.documentPageone(key).enqueue(new Callback<List<documentPage2>>() {
             @Override
             public void onResponse(Call<List<documentPage2>> call, Response<List<documentPage2>> response) {
@@ -451,7 +445,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                                 public void onResponse(Call<List<sendFileExtension>> call, Response<List<sendFileExtension>> response) {
                                     if (response.isSuccessful()) {
 
-                                        Log.e("읭",response.body().get(0).getExtension()+"");
                                         hi=response.body().get(0).getExtension()+"";
                                         extension.setValue(response.body().get(0).getExtension()+"");
                                         giveFile(file);
@@ -485,7 +478,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 @Override
                 public void onFailure(Call<List<documentFile>> call, Throwable t) {
 
-                    Log.e("실패",t.getMessage()+"");
                 }
             });
         }
@@ -494,8 +486,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
     void giveFile2(String file)
     {
-        Log.e("썅",file);
-        Log.e("흠흠",extension.getValue()+"");
+
         Date today = new Date();
         String bye=today.getTime()+"";
         String hi = extension.getValue();
@@ -549,7 +540,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         {
                             tv_get_file.setText("자료 받기 완료");
                             tv_get_file.setBackgroundColor(Color.parseColor("#a8a8a8"));
-                            Log.e("뀨","흠");
+
                             bottomSheetZeroPoint=new BottomSheetZeroPoint();
                             bottomSheetZeroPoint.show(getSupportFragmentManager(),"냐옹");
                             flag=true;

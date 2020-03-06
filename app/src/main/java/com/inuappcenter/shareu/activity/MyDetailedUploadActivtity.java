@@ -62,9 +62,6 @@ public class MyDetailedUploadActivtity extends AppCompatActivity {
                         break ;
                     case R.id.tv_upload_file:
                         sendList();
-                        Intent intent = new Intent(getApplicationContext(),ModifySuccessActivity.class);
-                        startActivity(intent);
-                        finish();
                         break;
 
                 }
@@ -177,7 +174,7 @@ public class MyDetailedUploadActivtity extends AppCompatActivity {
     }
     void sendList()
     {
-        if(edtv_content.getText().length()<0 || edtv_file_name.getText().length()<0)
+        if(edtv_content.getText().length()<=0 || edtv_file_name.getText().length()<=0)
         {
             snackbar = TSnackbar.make(findViewById(android.R.id.content),"모든 항목을 채워주세요!",TSnackbar.LENGTH_SHORT);
             snackbar.setActionTextColor(Color.WHITE);
@@ -230,7 +227,9 @@ public class MyDetailedUploadActivtity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Fuck> call, Response<Fuck> response) {
                     if (response.isSuccessful()) {
-
+                        Intent intent = new Intent(getApplicationContext(),ModifySuccessActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
 
                 }
