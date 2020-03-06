@@ -106,7 +106,11 @@ public class MajorActivity extends AppCompatActivity {
         btn_left_bar_major.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                finish();
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    finish();
+                }
             }
         });
     }
