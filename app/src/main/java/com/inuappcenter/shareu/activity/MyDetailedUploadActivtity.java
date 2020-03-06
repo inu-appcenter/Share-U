@@ -219,24 +219,37 @@ public class MyDetailedUploadActivtity extends AppCompatActivity {
             textView.setTextColor(Color.WHITE);
             snackbar.show();
         }
-        TokenManager tm = TokenManager.getInstance();
-        String token = tm.getToken(this);
-        RetrofitService networkService = RetrofitHelper.create();
-        networkService.modify(key,token,edtv_file_name.getText()+"",edtv_content.getText()+"",
-                edtv_select_subject.getText()+"",edtv_select_prof.getText()+"").enqueue(new Callback<Fuck>() {
+        else
+        {
+            TokenManager tm = TokenManager.getInstance();
+            String token = tm.getToken(this);
+            RetrofitService networkService = RetrofitHelper.create();
+            networkService.modify(key,token,edtv_file_name.getText()+"",edtv_content.getText()+"",
+                    edtv_select_subject.getText()+"",edtv_select_prof.getText()+"").enqueue(new Callback<Fuck>() {
 
-            @Override
-            public void onResponse(Call<Fuck> call, Response<Fuck> response) {
-                if (response.isSuccessful()) {
+                @Override
+                public void onResponse(Call<Fuck> call, Response<Fuck> response) {
+                    if (response.isSuccessful()) {
+
+                    }
 
                 }
 
-            }
+                @Override
+                public void onFailure(Call<Fuck> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<Fuck> call, Throwable t) {
+                }
+            });
+        }
 
-            }
-        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
     }
 }

@@ -210,5 +210,12 @@ public class ModifyInformActivity extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
+    }
 }

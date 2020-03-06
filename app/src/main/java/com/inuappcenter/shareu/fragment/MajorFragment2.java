@@ -58,6 +58,8 @@ public class MajorFragment2 extends Fragment{
     private EditText etv_search;
     private ImageButton etv_search_click;
 
+    TextView tv_my_major2;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,6 +71,8 @@ public class MajorFragment2 extends Fragment{
         tv_my_major = view.findViewById(R.id.tv_my_major);
         tv_my_major.setVisibility(VISIBLE);
         tv_my_major.setText(name);
+        tv_my_major2=getActivity().findViewById(R.id.tv_my_major);
+        tv_my_major2.setText("과목명 검색");
 
         etv_search=view.findViewById(R.id.etv_search);
         fastScroller=view.findViewById(R.id.fast_scroller);

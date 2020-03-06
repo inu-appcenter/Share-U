@@ -52,7 +52,6 @@ public class BottomSheetFragement extends RoundedBottomSheetDialogFragment{
     private RetrofitService networkService;
     private EditText etv_search;
     private ImageButton  etv_search_click;
-    private TSnackbar snackbar;
     private TextView tv_search_please;
     private View view;
     @Nullable

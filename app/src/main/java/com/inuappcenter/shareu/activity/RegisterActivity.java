@@ -123,4 +123,12 @@ public class RegisterActivity extends AppCompatActivity {
         etv_major=findViewById(R.id.etv_major);
         btn_backpress=findViewById(R.id.btn_backpress);
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
+    }
 }

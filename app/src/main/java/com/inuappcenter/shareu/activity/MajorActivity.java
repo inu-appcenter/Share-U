@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
@@ -48,7 +49,7 @@ public class MajorActivity extends AppCompatActivity {
 
         TextView tv_major = (TextView) findViewById(R.id.tv_major) ;
         TextView tv_gyoyang = (TextView) findViewById(R.id.tv_gyoyang) ;
-        Button btn_left_bar_major = (Button)findViewById(R.id.btn_left_bar_major);
+        ImageView btn_left_bar_major = (ImageView)findViewById(R.id.btn_backpress);
         etv_search = findViewById(R.id.etv_search);
         etv_search_click=findViewById(R.id.etv_search_click);
 

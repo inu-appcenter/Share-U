@@ -51,6 +51,7 @@ public class MajorFragment extends Fragment  {
     private TextView tv_no_search;
     private EditText etv_search;
     private ImageView etv_search_click;
+    TextView tv_my_major;
 
     private List<AlphabetItem> mAlphabetItems;
     private List<AlphabetItem> mAlphabetItem2 ;
@@ -71,6 +72,8 @@ public class MajorFragment extends Fragment  {
         etv_search=getActivity().findViewById(R.id.etv_search);
         etv_search_click=getActivity().findViewById(R.id.etv_search_click);
         tv_no_search = getActivity().findViewById(R.id.tv_no_search);
+        tv_my_major=getActivity().findViewById(R.id.tv_my_major);
+        tv_my_major.setText("학과명 검색");
         tv_no_search.setVisibility(View.GONE);
         etv_search.setOnKeyListener(new View.OnKeyListener() {
             @Override

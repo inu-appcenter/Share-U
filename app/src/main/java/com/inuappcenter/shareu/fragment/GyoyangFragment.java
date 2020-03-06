@@ -53,12 +53,15 @@ public class GyoyangFragment extends Fragment  {
 
     private List<AlphabetItem> mAlphabetItems;
     private List<AlphabetItem> mAlphabetItem2;
+    private TextView tv_my_major;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_recyclerview_select_major, container, false);
         fastScroller=view.findViewById(R.id.fast_scroller);
         mRecyclerView=view.findViewById(R.id.recyclerview_select_major);
+        tv_my_major=getActivity().findViewById(R.id.tv_my_major);
+        tv_my_major.setText("학과명 검색");
         return view;
     }
 

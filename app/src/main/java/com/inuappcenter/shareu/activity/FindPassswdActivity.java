@@ -109,5 +109,13 @@ public class FindPassswdActivity extends Activity {
             return false;
         }
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
+    }
 
 }
