@@ -40,16 +40,18 @@ public class MajorActivity extends AppCompatActivity {
     private FragmentTransaction transaction;
     private EditText etv_search;
     private ImageButton etv_search_click;
-
+    ImageButton btn_left_bar_major;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_major);
         //this.initializeData();
 
-        TextView tv_major = (TextView) findViewById(R.id.tv_major) ;
-        TextView tv_gyoyang = (TextView) findViewById(R.id.tv_gyoyang) ;
-        ImageView btn_left_bar_major = (ImageView)findViewById(R.id.btn_backpress);
+        TextView tv_major =  findViewById(R.id.tv_major) ;
+        TextView tv_gyoyang = findViewById(R.id.tv_gyoyang) ;
+
+        btn_left_bar_major = findViewById(R.id.btn_backpress);
+
         etv_search = findViewById(R.id.etv_search);
         etv_search_click=findViewById(R.id.etv_search_click);
 
@@ -67,7 +69,7 @@ public class MajorActivity extends AppCompatActivity {
         transaction.replace(R.id.layout_frame_category,fragmentMajor);
         transaction.commit();
 
-        TextView.OnClickListener onClickListener = new TextView.OnClickListener() {
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
@@ -94,9 +96,6 @@ public class MajorActivity extends AppCompatActivity {
                             transaction.replace(R.id.layout_frame_category,fragmentGyoyang).commitAllowingStateLoss();
                         }
                         break;
-                    case R.id.btn_left_bar_major:
-                        finish();
-                        break;
                 }
             }
         } ;
@@ -104,9 +103,12 @@ public class MajorActivity extends AppCompatActivity {
         tv_gyoyang.setOnClickListener(onClickListener);
         etv_search_click.setOnClickListener(onClickListener);
 
-        btn_left_bar_major.setOnClickListener(onClickListener);
-
-
+        btn_left_bar_major.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
