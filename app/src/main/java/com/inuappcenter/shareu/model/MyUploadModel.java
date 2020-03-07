@@ -19,6 +19,13 @@ public class MyUploadModel {
 
     private MutableLiveData<List<MyUpload>> _dataList = new MutableLiveData<>();
     private String token;
+    private MutableLiveData<Boolean> internet = new MutableLiveData<>();
+
+    public MutableLiveData<Boolean> getInternet() {
+        return internet;
+    }
+
+
     public MutableLiveData<List<MyUpload>> getDataList() {
         return _dataList;
     }
@@ -48,6 +55,7 @@ public class MyUploadModel {
             @Override
             public void onFailure(Call<List<MyUpload>> call, Throwable t) {
 
+                internet.postValue(true);
             }
         });
 

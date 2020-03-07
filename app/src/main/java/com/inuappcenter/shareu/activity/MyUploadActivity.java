@@ -1,5 +1,6 @@
 package com.inuappcenter.shareu.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,6 +53,13 @@ public class MyUploadActivity extends AppCompatActivity implements MyUploadContr
         myUploadAdapter.setData(datas);
 
     }
+
+    @Override
+    public void setInternet() {
+        Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+        startActivity(intent);
+    }
+
     private void initializeView() {
         View.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override

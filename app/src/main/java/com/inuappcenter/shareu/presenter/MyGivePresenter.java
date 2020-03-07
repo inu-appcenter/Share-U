@@ -37,6 +37,15 @@ public class MyGivePresenter implements MyGiveContract.Presenter{
                 }
 
         );
+        myGiveModel.getInternet().observe(lifecycleOwner, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean)
+                {
+                    myUploadView.setInternet(aBoolean);
+                }
+            }
+        });
     }
 
     @Override

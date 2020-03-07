@@ -67,6 +67,13 @@ public class MyGiveActivity extends AppCompatActivity implements MyGiveContract.
         myGiveAdapter.setData(datas);
 
     }
+
+    @Override
+    public void setInternet(Boolean internet) {
+        Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+        startActivity(intent);
+    }
+
     private void initializeView() {
         View.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override

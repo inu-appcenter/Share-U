@@ -7,6 +7,7 @@ import java.util.List;
 public interface MyGiveContract {
     interface  View{
         void setDatas(List<MyUpload> datas);
+        void setInternet(Boolean internet);
     }
     interface Presenter{
         public void onCreate();
