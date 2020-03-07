@@ -38,6 +38,8 @@ public class MyGiveActivity extends AppCompatActivity implements MyGiveContract.
 
     private MyGivePresenter myGivePresenter = new MyGivePresenter(this,this);
     private MyGiveAdapter myGiveAdapter = new MyGiveAdapter(this);
+    private TextView tv_no_search;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,14 @@ public class MyGiveActivity extends AppCompatActivity implements MyGiveContract.
     @Override
     public void setDatas(List<MyUpload> datas) {
         myGiveAdapter.setData(datas);
-
+        if(datas.size()==0)
+        {
+            tv_no_search.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_no_search.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -94,7 +103,7 @@ public class MyGiveActivity extends AppCompatActivity implements MyGiveContract.
         RecyclerView.LayoutManager mgr = new GridLayoutManager(getApplicationContext(),2);
         rcv.setLayoutManager(mgr);
         rcv.setAdapter(myGiveAdapter);
-
+        tv_no_search=findViewById(R.id.tv_no_search);
     }
 
 }

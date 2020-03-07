@@ -20,6 +20,7 @@ import com.inuappcenter.shareu.my_class.Major;
 import com.inuappcenter.shareu.recycler.MajorAdapter;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
+import com.viethoa.models.AlphabetItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,15 +35,16 @@ import retrofit2.Response;
 public class RegisterActivity extends AppCompatActivity {
 
     private TextView etv_id,etv_passwd,etv_check_passwd,etv_name,etv_phone,tv_modify;
-    private EditText etv_major;
     private String items[]=new String[200];
     private TSnackbar snackbar;
     private ImageView btn_backpress;
+    private AutoCompleteTextView etv_major;
+    private List<String> list;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         init();
         tv_modify.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -51,14 +53,20 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         btn_backpress.setOnClickListener(v->finish());
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        list=new ArrayList<String>();
+        settingList();
+        etv_major.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,list));
     }
     void check()
     {
+
+
         if(etv_id.getText().length()>0 && etv_passwd.getText().length()>0 &&
         etv_check_passwd.getText().length()>0 && etv_name.getText().length()>0 &&
         etv_phone.getText().length()>0)
@@ -130,5 +138,27 @@ public class RegisterActivity extends AppCompatActivity {
         {
             snackbar.dismiss();;
         }
+    }
+    private void settingList(){
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.getMajorList().enqueue(new Callback<List<Major>>() {
+            @Override
+            public void onResponse(Call<List<Major>> call, Response<List<Major>> response) {
+
+                if (response.isSuccessful()) {
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        list.add(response.body().get(i).getFirst());
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Major>> call, Throwable t) {
+
+            }
+        });
     }
 }
