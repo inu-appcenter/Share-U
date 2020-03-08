@@ -88,28 +88,28 @@
         </activity>
 
         <activity android:name=".activity.FindPassswdActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@android:style/Theme.Holo.Dialog"
             >
 
         </activity>
 
         <activity android:name=".activity.GetPasswdActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@android:style/Theme.Holo.Dialog"
             >
 
         </activity>
 
         <activity android:name=".activity.RegisteredReviewActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@android:style/Theme.Holo.Dialog"
             >
 
         </activity>
 
         <activity android:name=".activity.PoliceActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@android:style/Theme.Holo.Dialog"
             >
 
@@ -133,7 +133,7 @@
         </activity>
 
         <activity android:name=".activity.SelectPoliceActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@android:style/Theme.Holo.Dialog"
             >
 
