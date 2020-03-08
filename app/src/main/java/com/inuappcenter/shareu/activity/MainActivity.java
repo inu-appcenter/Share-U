@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         mainFragment = new MainFragment();
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.layout_frame_main,mainFragment);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
 
 
         etv_search.setOnKeyListener(new View.OnKeyListener() {
