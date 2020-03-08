@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
                             btn_left_bar_main.setVisibility(View.GONE);
                             btn_my_page_main.setVisibility(View.INVISIBLE);
                             transaction.addToBackStack(null);
-                            transaction.commit();
+                            transaction.commitAllowingStateLoss();
 
                         }
                         else
@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
                             btn_left_bar_main.setVisibility(View.GONE);
                             btn_my_page_main.setVisibility(View.INVISIBLE);
                             transaction.addToBackStack(null);
-                            transaction.commit();
+                            transaction.commitAllowingStateLoss();
                         }
                     }
 

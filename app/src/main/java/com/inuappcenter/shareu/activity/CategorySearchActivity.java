@@ -159,7 +159,7 @@ public class CategorySearchActivity extends AppCompatActivity {
                         categorySearchNoFragment = new CategorySearchNoFragment();
                         transaction = fragmentManager.beginTransaction();
                         transaction.replace(R.id.layout_frame_search_result,categorySearchNoFragment);
-                        transaction.commit();
+                        transaction.commitAllowingStateLoss();
                     }
                     else
                     {
@@ -174,7 +174,7 @@ public class CategorySearchActivity extends AppCompatActivity {
                         fragmentManager =getSupportFragmentManager();
                         transaction = fragmentManager.beginTransaction();
                         transaction.replace(R.id.layout_frame_search_result,categorySearchAllFragment);
-                        transaction.commit();
+                        transaction.commitAllowingStateLoss();
                     }
                 }
 

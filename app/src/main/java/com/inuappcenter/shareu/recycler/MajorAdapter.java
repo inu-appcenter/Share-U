@@ -95,7 +95,7 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
                    transaction.replace(R.id.layout_frame_category,fragmentMajor2);
                    transaction.addToBackStack(null);
-                   transaction.commit();
+                   transaction.commitAllowingStateLoss();
                }
            });
         }

@@ -67,7 +67,7 @@ public class MajorActivity extends AppCompatActivity {
         fragmentMajor = new MajorFragment();
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.layout_frame_category,fragmentMajor);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -81,7 +81,7 @@ public class MajorActivity extends AppCompatActivity {
                             fragmentManager = getSupportFragmentManager();
                             transaction = fragmentManager.beginTransaction();
                             transaction.replace(R.id.layout_frame_category,fragmentMajor);
-                            transaction.commit();
+                            transaction.commitAllowingStateLoss();
                         }
                         break;
                     case R.id.tv_gyoyang:
