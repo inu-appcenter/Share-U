@@ -28,13 +28,31 @@
                 android:layout_weight="0"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_left_bar_main"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/group62" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/btn_backpress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/group91"
+                        android:background="@color/white"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:visibility="gone"
+                        />
+
+                    <Button
+                        android:id="@+id/btn_left_bar_main"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/group62" />
+                </FrameLayout>
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -54,70 +72,31 @@
 
             </LinearLayout>
 
-            <ScrollView
+            <include
+                android:id="@+id/include_search"
+                layout="@layout/layout_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="16dp" />
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0">
 
-                <LinearLayout
+                <FrameLayout
+                    android:id="@+id/layout_frame_main"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <include
-                        android:id="@+id/include_search"
-                        layout="@layout/layout_search"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginRight="16dp" />
-
-                    <include
-                        android:id="@+id/include_superior_title_main"
-                        layout="@layout/layout_superior_title_main"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="17dp"
-                        android:layout_marginRight="15dp" />
-
-                    <include
-                        android:id="@+id/include_viewpager_superior"
-                        layout="@layout/viewpager_superior"
-                        android:layout_width="match_parent"
-                        android:layout_height="220dp"
-                        android:layout_marginTop="7dp" />
+                </FrameLayout>
+            </FrameLayout>
 
 
-                    <include
-                        android:id="@+id/include_ad_main"
-                        layout="@layout/layout_ad_main"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="27dp" />
-
-                    <include
-                        android:id="@+id/include_notice_set_title_main"
-                        layout="@layout/layout_notice_set_title_main"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginRight="14dp" />
-
-                    <include
-                        android:id="@+id/include_recyclerview2_main"
-                        layout="@layout/layout_recyclerview2_main"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-
-                </LinearLayout>
-
-
-            </ScrollView>
-
+            //fragment 공간
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -127,11 +106,12 @@
             android:layout_gravity="bottom|end"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="13dp"
-            android:clickable="true"
             android:backgroundTint="@color/Iris"
+            android:clickable="true"
             android:src="@drawable/plus"
             app:borderWidth="0dp"
             app:fabSize="normal" />
+
     </FrameLayout>
 
 

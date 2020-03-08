@@ -12,6 +12,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.DetailedFileActivity;
 import com.inuappcenter.shareu.activity.MyDetailedUploadActivtity;
 import com.inuappcenter.shareu.activity.UploadedActivity;
 import com.inuappcenter.shareu.my_class.Major;
@@ -45,44 +46,58 @@ public class MyGiveAdapter extends RecyclerView.Adapter<MyGiveAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyGiveAdapter.ViewHolder holder, int position) {
         final MyUpload item = mitems.get(position);
-        if(item.getExtension()=="ppt" || item.getExtension()=="pptx" )
+        if(mitems.get(position).getExtension().equals("PPT") || mitems.get(position).getExtension().equals("PPTX")||
+                mitems.get(position).getExtension().equals("ppt") || mitems.get(position).getExtension().equals("pptx")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.ppt);
         }
-        else if(item.getExtension()=="hwp")
+        else if(mitems.get(position).getExtension().equals("HWP") ||mitems.get(position).getExtension().equals("hwp") )
         {
             holder.img_my_upload.setImageResource(R.drawable.korean);
         }
-        else if(item.getExtension()=="doc" || item.getExtension()=="docx")
+        else if(mitems.get(position).getExtension().equals("DOC") || mitems.get(position).getExtension().equals("DOCX")
+                ||mitems.get(position).getExtension().equals("doc") || mitems.get(position).getExtension().equals("docx")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.word);
         }
-        else if(item.getExtension()=="ai")
+        else if(mitems.get(position).getExtension().equals("AI")
+                ||mitems.get(position).getExtension().equals("ai")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.ai);
         }
-        else if(item.getExtension()=="ps")
+        else if(mitems.get(position).getExtension().equals("PS")
+                ||mitems.get(position).getExtension().equals("ps")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.ps);
         }
 
-        else if(item.getExtension()=="jpeg" || item.getExtension()=="jpg")
+        else if(mitems.get(position).getExtension().equals("JPEG") || mitems.get(position).getExtension().equals("JPG")||
+                mitems.get(position).getExtension().equals("jpeg") || mitems.get(position).getExtension().equals("jpg")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.jpeg);
         }
-        else if(item.getExtension()=="png")
+        else if(mitems.get(position).getExtension().equals("PNG") || mitems.get(position).getExtension().equals("png") )
         {
             holder.img_my_upload.setImageResource(R.drawable.png);
         }
-        else if(item.getExtension()=="xls"||item.getExtension()=="xlsx"|| item.getExtension()=="xlsm" || item.getExtension()=="csv")
+        else if(mitems.get(position).getExtension().equals("XLS")||mitems.get(position).getExtension().equals("XLSX")||
+                mitems.get(position).getExtension().equals("XLSM") || mitems.get(position).getExtension().equals("CSV")||
+                mitems.get(position).getExtension().equals("xls")||mitems.get(position).getExtension().equals("xlsx")||
+                mitems.get(position).getExtension().equals("xlsm") || mitems.get(position).getExtension().equals("csv")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.excel);
         }
-        else if(item.getExtension()=="mp3")
+        else if(mitems.get(position).getExtension().equals("MP3")||mitems.get(position).getExtension().equals("mp3"))
         {
             holder.img_my_upload.setImageResource(R.drawable.mp3);
         }
-        else if(item.getExtension()=="zip")
+        else if(mitems.get(position).getExtension().equals("ZIP") ||mitems.get(position).getExtension().equals("zip")  )
         {
             holder.img_my_upload.setImageResource(R.drawable.zip);
         }
@@ -91,8 +106,16 @@ public class MyGiveAdapter extends RecyclerView.Adapter<MyGiveAdapter.ViewHolder
             holder.img_my_upload.setImageResource(R.drawable.file);
         }
         holder.tv_my_upload_title.setText(item.getTitle());
-        holder.tv_my_upload_date.setText(item.getDate());
+        holder.tv_my_upload_date.setText(item.getUploadDate());
         holder.btn_my_upload.setVisibility(View.GONE);
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext.getApplicationContext(), DetailedFileActivity.class);
+                intent.putExtra("key",mitems.get(position).getDocumentKey());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

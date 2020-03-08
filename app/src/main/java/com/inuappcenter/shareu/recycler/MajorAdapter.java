@@ -14,6 +14,8 @@ import com.inuappcenter.shareu.activity.MajorActivity;
 import com.inuappcenter.shareu.fragment.MajorFragment2;
 import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
+import com.inuappcenter.shareu.my_interface.OnItemClick;
+import com.viethoa.RecyclerViewFastScroller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SectionIndexer {
+public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements RecyclerViewFastScroller.BubbleTextGetter{
 
     private Context mContext;
     private ArrayList<Major> mitems;
@@ -32,12 +34,12 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private MajorFragment2 fragmentMajor2;
     private FragmentTransaction transaction;
 
-    private ArrayList<Integer> mSectionPositions;
+
+    private String name;
     public MajorAdapter(Context mContext, ArrayList<Major> mitems) {
         this.mContext = mContext;
 
         this.mitems = mitems;
-        Log.e("테스트","으아아아");
     }
 
     @NonNull
@@ -74,6 +76,8 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
+
+
                  //Toast.makeText(mContext,"sibal",Toast.LENGTH_LONG).show();
                   /* Intent intent = new Intent(mContext,MajorActivity2.class);
                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -84,13 +88,14 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                    fragmentMajor2 = new MajorFragment2();
                    Bundle bundle = new Bundle();
                    bundle.putString("name",((MajorViewHolder) viewHolder).first.getText().toString());
+                   name = ((MajorViewHolder) viewHolder).first.getText().toString();
                    fragmentMajor2.setArguments(bundle);
                    fragmentManager =((MajorActivity)mContext).getSupportFragmentManager();
                    transaction = fragmentManager.beginTransaction();
 
                    transaction.replace(R.id.layout_frame_category,fragmentMajor2);
                    transaction.addToBackStack(null);
-                   transaction.commit();
+                   transaction.commitAllowingStateLoss();
                }
            });
         }
@@ -132,29 +137,7 @@ public class MajorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     @Override
-    public int getSectionForPosition(int position) {
-        return 0;
+    public String getTextToShowInBubble(int pos) {
+        return null;
     }
-
-    @Override
-
-    public Object[] getSections() {
-        List<String> sections = new ArrayList<>(100);
-        mSectionPositions = new ArrayList<>(100);
-        for (int i = 0; i< mitems.size(); i++) {
-            String section = mitems.get(i).getThird();
-            if (!sections.contains(section)) {
-                sections.add(section);
-                mSectionPositions.add(i);
-            }
-        }
-        return sections.toArray(new String[0]);
-    }
-
-    @Override
-    public int getPositionForSection(int sectionIndex) {
-        return mSectionPositions.get(sectionIndex);
-    }
-
-
 }

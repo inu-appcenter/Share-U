@@ -22,11 +22,14 @@
         </activity>
         <activity android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"
+                    />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.MajorActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.MajorActivity2"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.DetailedNoticeActivity"
             android:screenOrientation="portrait"></activity>
@@ -52,23 +55,112 @@
         <activity android:name=".activity.DetailedFileActivity"
             android:screenOrientation="portrait"
             >
+
+
+
         </activity>
 
 
         <activity android:name=".activity.SearchActivity"
             android:screenOrientation="portrait"
             >
+        </activity>
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"
-                    />
+        <activity android:name=".activity.ServerFailActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".activity.CategorySearchActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.ModifyInformActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.FindPassswdActivity"
+            android:screenOrientation="unspecified"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.GetPasswdActivity"
+            android:screenOrientation="unspecified"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.RegisteredReviewActivity"
+            android:screenOrientation="unspecified"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.PoliceActivity"
+            android:screenOrientation="unspecified"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+
+        </activity>
+        <activity android:name=".activity.SearchSuccessedActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.CategorySuccessedActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.ReviewActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.SelectPoliceActivity"
+            android:screenOrientation="unspecified"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+
         </activity>
 
 
+        <activity android:name=".activity.MyPointActivity"
+            android:screenOrientation="portrait"
+            >
 
+        </activity>
+        <activity android:name=".activity.ModifySuccessActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity android:name=".activity.RegisterAcceptActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
     </application>
 
 </manifest>

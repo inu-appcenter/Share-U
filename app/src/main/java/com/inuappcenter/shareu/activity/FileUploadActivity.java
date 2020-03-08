@@ -1,9 +1,11 @@
 package com.inuappcenter.shareu.activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,16 +13,24 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidadvance.topsnackbar.TSnackbar;
+import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialogFragment;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.hbisoft.pickit.PickiT;
 import com.hbisoft.pickit.PickiTCallbacks;
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.fragment.BottomSheetFragement;
 import com.inuappcenter.shareu.fragment.BottomSheetFragment2;
+import com.inuappcenter.shareu.my_class.Fuck;
+import com.inuappcenter.shareu.my_class.TokenManager;
 import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
@@ -30,6 +40,7 @@ import com.inuappcenter.shareu.service.RetrofitService;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,19 +80,21 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
     private ArrayList<com.inuappcenter.shareu.my_class.subjectName> dataList;
     private ArrayList<com.inuappcenter.shareu.my_class.profName> dataList2;
     private RetrofitService service;
-    private RequestBody title,subjectName,profName,content;
+    private ResponseBody title,subjectName,profName,content;
     private MultipartBody.Part filePart;
     private Boolean file_upload_check=false;
     private MediaType type = MediaType.parse("multipart/form-data");
     private BottomSheetFragement dialog;
     private BottomSheetFragment2 dialog2;
 
-
+    private String extension;
+    private TextView tv_uploaded_file_name;
+    private LinearLayout bottom_sheet;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_file_register);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         init();
 
         edtv_select_subject.addTextChangedListener(new TextWatcher() {
@@ -138,43 +151,22 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                 {
                     case R.id.tv_upload_file:
                         check();
-                        if(one>=1 && two>=1 &&three>=1 &&four>=30 && file_upload_check==true)
+
+                        if(one>20)
                         {
-                    /*progressSnackbar.setText("자료 업로드 중...");
-                    progressSnackbar.show();*/
-                            tv_upload_file.setEnabled(false);
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 업로드 중...",TSnackbar.LENGTH_INDEFINITE);
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"제목을 20자 이하로 채워주세요!",TSnackbar.LENGTH_SHORT);
                             snackbar.setActionTextColor(Color.WHITE);
                             View snackbarView = snackbar.getView();
                             snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
                             TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
                             textView.setTextColor(Color.WHITE);
                             snackbar.show();
-                            // 이제 올리기
-                            service.uploadImage(title,subjectName,profName,content,filePart).enqueue(new Callback<ResponseBody>() {
-                                @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    /*snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 성공",TSnackbar.LENGTH_INDEFINITE);
-                                    View snackbarView = snackbar.getView();
-                                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
-                                    snackbar.show();*/
-                                    Intent intent = new Intent(getApplicationContext(), UploadedActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-
-                                @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    Intent intent = new Intent(getApplicationContext(),NotUploadedActivity.class);
-                                    startActivity(intent);
-                                }
-                            });
                         }
-                        else if(one>200)
+                        else if(four>200)
                         {
                     /*progressSnackbar2.setText("내용을 30자 이상 채워주세요!");
                     progressSnackbar2.show();*/
-                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 200자 미만으로 채워주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"내용을 200자 이하로 채워주세요!",TSnackbar.LENGTH_SHORT);
                             snackbar.setActionTextColor(Color.WHITE);
                             View snackbarView = snackbar.getView();
                             snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
@@ -194,7 +186,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                             textView.setTextColor(Color.WHITE);
                             snackbar.show();
                         }
-                        else
+                        else if(four<30)
                         {
                     /*progressSnackbar2.setText("모든 내용을 채워주세요");
                     progressSnackbar2.show();*/
@@ -206,9 +198,101 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                             textView.setTextColor(Color.WHITE);
                             snackbar.show();
                         }
+                        else if(extension.equals("tempFile"))
+                        {
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"올바른 확장자의 파일을 업로드 해주세요!",TSnackbar.LENGTH_SHORT);
+                            snackbar.setActionTextColor(Color.WHITE);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                            textView.setTextColor(Color.WHITE);
+                            snackbar.show();
+                        }
+                        else
+                        {
+                    /*progressSnackbar.setText("자료 업로드 중...");
+                    progressSnackbar.show();*/
+                            tv_upload_file.setEnabled(false);
+                            snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 업로드 중입니다...잠시만 기다려주세요",TSnackbar.LENGTH_INDEFINITE);
+                            snackbar.setActionTextColor(Color.WHITE);
+                            View snackbarView = snackbar.getView();
+                            snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                            TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                            textView.setTextColor(Color.WHITE);
+                            snackbar.show();
+
+                            TokenManager tm = TokenManager.getInstance();
+                            String token = tm.getToken(getApplicationContext());
+                            //Log.e("시발",token);
+                            // 이제 올리기
+                            RequestBody titleBody = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    edtv_file_name.getText()+""
+                            );
+
+
+                            RequestBody contentBody = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    edtv_content.getText()+""
+                            );
+
+                            RequestBody subjectNameBody = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    edtv_select_subject.getText()+""
+                            );
+
+                            RequestBody profNameBody = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    edtv_select_prof.getText()+""
+                            );
+
+                            RequestBody tokenBody = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    token
+                            );
+                            service.uploadImage(
+                                    titleBody,
+                                    contentBody,
+                                    subjectNameBody,
+                                    profNameBody,
+                                    tokenBody,
+                                    filePart
+                            ).enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    if(response.isSuccessful())
+                                    {
+                                        snackbar.dismiss();
+                                        Intent intent = new Intent(getApplicationContext(), UploadedActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
+                                    /*snackbar = TSnackbar.make(findViewById(android.R.id.content),"업로드 성공",TSnackbar.LENGTH_INDEFINITE);
+                                    View snackbarView = snackbar.getView();
+                                    snackbarView.setBackgroundColor(Color.parseColor("#574FBA"));
+                                    snackbar.show();*/
+
+                                }
+
+
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                    Log.e("흠",t.getCause()+"");
+                                    Intent intent = new Intent(getApplicationContext(),ServerFailActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
                         break;
-                    case R.id.imageButton4:
+                    case R.id.imageButton4: {
+                        if(snackbar!=null && snackbar.isShown())
+                        {
+                            snackbar.dismiss();
+                        }
                         finish();
+                    }
                         break;
                     case R.id.img_btn_file_upload2:
 
@@ -299,21 +383,27 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
      */
     private void uploadFile(String path,String desc) {
         service = RetrofitHelper.create();
-        type = MediaType.parse("multipart/form-data");
+        type = MediaType.parse("application/octet-stream"); //body의 타입은 multipart가 맞는데 body 속 파일 타입은 모든 파일을 수용할 수 있는
+        //application/octet-stream
+        //안 해도 문제는 없지만 HTTP 표준에 어긋
         // POST의 file 부분 생성
         File imageFile = new File(path);
         RequestBody reqFile = RequestBody.create(type, imageFile);
         filePart = MultipartBody.Part.createFormData("userfile", imageFile.getName(), reqFile);
-        TextView tv_uploaded_file_name = findViewById(R.id.tv_uploaded_file_name);
+        tv_uploaded_file_name = findViewById(R.id.tv_uploaded_file_name);
         tv_uploaded_file_name.setVisibility(View.VISIBLE);
         tv_uploaded_file_name.setText(imageFile.getName()+"");
+        extension=tv_uploaded_file_name.getText()+"";
 /*        progressSnackbar.setText("자료 업로드 중...");
         progressSnackbar.show();*/
         file_upload_check=true;
         img_btn_file_upload_on.setVisibility(View.VISIBLE);
-
         check();
+
+
     }
+
+
 
     void init()
     {
@@ -324,6 +414,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         edtv_content = findViewById(R.id.edtv_content);
         tv_upload_file = findViewById(R.id.tv_upload_file);
         img_btn_file_upload_on=findViewById(R.id.img_btn_file_upload_on);
+        bottom_sheet=findViewById(R.id.bottom_sheet);
     }
     void check()
     {
@@ -424,5 +515,15 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         edtv_select_prof.setText(value);
         dialog2.dismiss();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(snackbar!=null && snackbar.isShown())
+        {
+            snackbar.dismiss();;
+        }
+    }
+
 }
 

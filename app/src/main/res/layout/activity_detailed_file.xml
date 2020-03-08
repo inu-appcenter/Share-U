@@ -24,14 +24,14 @@
             app:srcCompat="@drawable/group91" />
 
         <TextView
-            android:id="@+id/tv_my_detailed_file_title"
+            android:id="@+id/tv_my_major"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="문테기 족보 2019"
+            android:text="null"
             android:textColor="@color/Iris"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -42,7 +42,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,13 +82,13 @@
                         android:layout_marginTop="20.5dp"
                         android:layout_marginRight="36.5dp"
                         android:layout_marginBottom="48dp"
-                        android:text="문테기 족보 공유합니다 자료가 정말 좋습니다 별점 5개는 필수입니다 이거 보신 분들 꼭 에이쁠 받으세요 그럼 20000" />
+                        android:text="null" />
 
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_marginTop="10dp">
 
                     <com.willy.ratingbar.BaseRatingBar
@@ -101,7 +102,6 @@
                         app:srb_drawableEmpty="@drawable/empty_star"
                         app:srb_drawableFilled="@drawable/fill"
                         app:srb_numStars="5"
-                        app:srb_rating="4.5"
                         app:srb_starHeight="21dp"
                         app:srb_starPadding="1dp"
                         app:srb_starWidth="21dp"
@@ -109,31 +109,18 @@
 
                     </com.willy.ratingbar.BaseRatingBar>
 
-                    <FrameLayout
+                    <ImageView
+                        android:id="@+id/singo"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-
-                        >
-
-                        <ImageView
-
-                            android:id="@+id/singo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/group199" />
-
-                        <TextView
-                            android:id="@+id/textView15"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center"
-                            android:layout_marginBottom="7dp"
-                            android:text="신고"
-                            android:textSize="10sp" />
-                    </FrameLayout>
+                        app:srcCompat="@drawable/group632" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -178,10 +165,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="95dp"
-                            android:text="홍길동"
+                            android:text="null"
                             android:textColor="@color/black"
 
                             android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -207,7 +195,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="95dp"
-                            android:text="교양"
+                            android:text="null"
                             android:textColor="@color/black"
 
                             android:textSize="12sp"
@@ -236,7 +224,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="95dp"
-                            android:text="문학과 테마 기행"
+                            android:text="null"
                             android:textColor="@color/black"
 
                             android:textSize="12sp"
@@ -266,10 +254,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="95dp"
-                            android:text="2020.01.05"
+                            android:text="null"
                             android:textColor="@color/black"
 
                             android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -295,7 +284,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="95dp"
-                            android:text="WORD"
+                            android:text="null"
                             android:textColor="@color/black"
 
                             android:textSize="12sp"
@@ -310,15 +299,34 @@
                     android:layout_marginTop="8dp"
                     android:background="#efefef" />
 
-                <TextView
-                    android:id="@+id/tv_my_detailed_file_review"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:paddingLeft="15dp"
-                    android:text="리뷰 (1)"
-                    android:textColor="@color/Iris"
-                    android:textStyle="bold" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_my_detailed_file_review"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:paddingLeft="15dp"
+                        android:text="리뷰 (null)"
+                        android:textColor="@color/Iris"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingRight="16dp"
+                        android:text="모든 리뷰 보기"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -339,10 +347,11 @@
                             android:layout_marginRight="15dp"
                             android:ellipsize="end"
                             android:singleLine="true"
-                            android:text="등록된 리뷰가 업습니다."
+                            android:text="등록된 리뷰가 없습니다."
                             android:visibility="gone" />
 
                         <LinearLayout
+                            android:id="@+id/layout_yes_review"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
@@ -368,7 +377,7 @@
                                     android:id="@+id/tv_review_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="2020.01.12"
+                                    android:text="null"
                                     app:layout_constraintLeft_toLeftOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -386,7 +395,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="12.5dp"
-                                    android:text="홍길동"
+                                    android:text="null"
                                     app:layout_constraintLeft_toRightOf="@+id/textView34"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -400,7 +409,6 @@
                                     app:srb_drawableEmpty="@drawable/empty_star"
                                     app:srb_drawableFilled="@drawable/fill"
                                     app:srb_numStars="5"
-                                    app:srb_rating="3.5"
                                     app:srb_starHeight="14dp"
                                     app:srb_starPadding="1dp"
                                     app:srb_starWidth="14dp"
@@ -415,9 +423,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginTop="7dp"
-                                android:ellipsize="end"
-                                android:singleLine="true"
-                                android:text="잘 쓸게요"
+                                android:layout_marginRight="16dp"
+                                android:text="null"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
 
@@ -459,7 +466,7 @@
                 <EditText
                     android:id="@+id/edtv_review"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="171dp"
                     android:background="@null"
                     android:ems="10"
                     android:gravity="top|start"
@@ -490,12 +497,12 @@
                         app:srb_starHeight="22.3dp"
                         app:srb_starPadding="1dp"
                         app:srb_starWidth="22.3dp"
-                        app:srb_stepSize="0.5">
+                        app:srb_stepSize="1">
 
                     </com.willy.ratingbar.BaseRatingBar>
 
                     <TextView
-                        android:id="@+id/button3"
+                        android:id="@+id/tv_register"
                         android:layout_width="76dp"
                         android:layout_height="49dp"
                         android:layout_weight="1"
@@ -512,21 +519,22 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView28"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:height="60dp"
-                android:background="@color/Iris"
-                android:gravity="center"
-                android:text="자료 받기"
-                android:textColor="@color/white"
-                android:textSize="17sp" />
-
 
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_get_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_weight="0"
+        android:height="60dp"
+        android:background="@color/Iris"
+        android:gravity="center"
+        android:text="자료 받기"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
 
 </LinearLayout>
 

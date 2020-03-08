@@ -12,10 +12,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class SearchNoResultFragment extends Fragment {
+
+    private View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_main_search_no, container, false);
+        view = inflater.inflate(R.layout.layout_main_search_no, container, false);
         return view;
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(view!=null){
+            ViewGroup parent = (ViewGroup)view.getParent();
+            if(parent!=null){
+                parent.removeView(view);
+            }
+        }
+
     }
 }

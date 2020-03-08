@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="328dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corner"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="18.5dp"
+        android:gravity="center"
+        android:text="신고 사유 선택"
+        android:textColor="@color/Iris"
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/line_notice"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+
+        android:layout_marginStart="24.5dp"
+        android:layout_marginEnd="23.5dp"
+        android:background="#8a000000" />
+
+    <TextView
+        android:id="@+id/tv_fish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24.5dp"
+        android:layout_marginBottom="31dp"
+        android:gravity="center"
+        android:text="낚시 / 허위 자료"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="광고 / 홍보성 자료"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_trick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="31dp"
+        android:gravity="center"
+        android:text="사칭 / 사기"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_fuck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="욕설 / 비하"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+</LinearLayout>

@@ -1,9 +1,12 @@
 package com.inuappcenter.shareu.model;
 
+import android.content.Intent;
 import android.util.Log;
 
+import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.MyUpload;
 import com.inuappcenter.shareu.my_class.Notice;
+import com.inuappcenter.shareu.my_class.TokenManager;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
@@ -17,31 +20,52 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyGiveModel {
-    MutableLiveData<List<MyUpload> > listMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<MyUpload>> _dataList = new MutableLiveData<>();
+    private String token;
+    private MutableLiveData<Boolean> internet = new MutableLiveData<>();
 
-    public MutableLiveData<List<MyUpload>> getListMutableLiveData() {
-        return listMutableLiveData;
+    public MutableLiveData<Boolean> getInternet() {
+        return internet;
     }
 
-    public void setListMutableLiveData(List<MyUpload> dataList) {
-        this.listMutableLiveData.postValue(dataList);
+    public MutableLiveData<List<MyUpload>> getDataList() {
+        return _dataList;
     }
+    public void setDataList(List<MyUpload> dataList)
+    {
+        this._dataList.postValue(dataList);
+    }
+
     public void setDatas()
     {
-        List<MyUpload> tmp_list = new ArrayList<>();
-        tmp_list.add(new MyUpload("ppt","2019.11.21","2019년도 일본학개론"));
-        tmp_list.add(new MyUpload("word","2019.10.30","2017년도 임상여성학 족보"));
-        tmp_list.add(new MyUpload("jpeg","2019.09.18","2019년도 1학기 일본학개론"));
-        tmp_list.add(new MyUpload("ps","2019.08.30","시각디자인 포스터 자료"));
-        tmp_list.add(new MyUpload("ppt","2019.11.21","2019년도 일본학개론"));
-        tmp_list.add(new MyUpload("word","2019.10.30","2017년도 임상여성학 족보"));
-        tmp_list.add(new MyUpload("hwp","2019.09.18","2019년도 1학기 일본학개론"));
-        tmp_list.add(new MyUpload("mp3","2019.08.30","시각디자인 포스터 자료"));
-        tmp_list.add(new MyUpload("ppt","2019.11.21","2019년도 일본학개론"));
-        tmp_list.add(new MyUpload("word","2019.10.30","2017년도 임상여성학 족보"));
-        tmp_list.add(new MyUpload("jpeg","2019.09.18","2019년도 1학기 일본학개론"));
-        tmp_list.add(new MyUpload("ps","2019.08.30","시각디자인 포스터 자료"));
-        setListMutableLiveData(tmp_list);
+
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.userDownloadList(token).enqueue(new Callback<List<MyUpload>>() {
+            @Override
+            public void onResponse(Call<List<MyUpload>> call, Response<List<MyUpload>> response) {
+                if (response.isSuccessful()) {
+                    List<MyUpload> tmp_list = new ArrayList<>();
+                    for(int i=response.body().size()-1;i>=0;i--)
+                    {
+                        tmp_list.add(new MyUpload(response.body().get(i).getUploadDate(),
+                                response.body().get(i).getTitle(),response.body().get(i).getExtension(),response.body().get(i).getDocumentKey()));
+                    }
+                    setDataList(tmp_list);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<MyUpload>> call, Throwable t) {
+
+                internet.postValue(true);
+            }
+        });
     }
+
+    public void setToken(String token) {
+        this.token=token;
+    }
+
 
 }

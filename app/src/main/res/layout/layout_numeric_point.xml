@@ -12,23 +12,22 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_numeric_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="5"
+            android:text="3"
             android:textColor="@color/Iris"
-            android:textSize="40sp"
-            android:textStyle="bold" />
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Point"
             android:layout_gravity="center"
+            android:text="Point"
             android:textColor="@color/Iris"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="normal" />
     </LinearLayout>
 </FrameLayout>

@@ -11,7 +11,7 @@
         android:layout_height="48dp"
         android:layout_weight="0"
         android:background="@drawable/edit_text_shadow"
-        android:ems="10"
+        android:ems="20"
         android:hint=" 검색"
         android:inputType="textPersonName"
         android:paddingLeft="9dp"

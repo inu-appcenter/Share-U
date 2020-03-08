@@ -22,7 +22,7 @@
             app:layout_constraintLeft_toLeftOf="parent"/>
 
         <TextView
-            android:id="@+id/tv_my_detailed_file_title"
+            android:id="@+id/tv_my_major"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내가 받은 자료"
@@ -36,15 +36,31 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_myupload"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="21dp"
-        />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_myupload"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="21dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/tv_no_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="아직 받은 자료가 없습니다 :("
+            android:textColor="@color/Iris"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </FrameLayout>
 
 </LinearLayout>

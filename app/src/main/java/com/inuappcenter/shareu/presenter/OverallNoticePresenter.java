@@ -43,6 +43,15 @@ public class OverallNoticePresenter implements OverallNoticeContract.Presenter{
                 }
             }
         });
+        overallModel.getFlag().observe(lifecycleOwner, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean)
+                {
+                    overallNoticeView.setInternet();
+                }
+            }
+        });
     }
 
     @Override

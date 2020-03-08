@@ -1,37 +1,38 @@
 package com.inuappcenter.shareu.my_class;
 
+import com.google.gson.annotations.SerializedName;
+
 public class MyUpload {
-    String extension;
-    String date;
+
+    @SerializedName("uploadDate")
+    String uploadDate;
+    @SerializedName("title")
     String title;
+    @SerializedName("extension")
+    String extension;
+    @SerializedName("documentKey")
+    int documentKey;
 
-    public MyUpload(String extension, String date, String title) {
-        this.extension = extension;
-        this.date = date;
+    public MyUpload(String uploadDate, String title, String extension, int documentKey) {
+        this.uploadDate = uploadDate;
         this.title = title;
-    }
-
-    public String getExtension() {
-        return extension;
-    }
-
-    public void setExtension(String extension) {
         this.extension = extension;
+        this.documentKey = documentKey;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public String getUploadDate() {
+        return uploadDate;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getExtension() {
+        return extension;
+    }
+
+    public int getDocumentKey() {
+        return documentKey;
     }
 }

@@ -43,18 +43,18 @@ public class DetailedNoticeActivity extends AppCompatActivity {
             {
                 if(response.isSuccessful())
                 {
-                    Log.e("엥",response.body().size()+"");
                     // TODO size가 0일 때 처리가 안 되어 있어요
+                    //Log.e("읭",response.body().get(0).getContent()+"");
+                    String sibal = response.body().get(0).getContent().replace("\\n","\n");
                     tv_detailed_notice_title.setText(response.body().get(0).getTitle());
                     tv_detailed_notice_date.setText(response.body().get(0).getNoticeDate());
-                    tv_detailed_notice_content.setText(response.body().get(0).getContent());
+                    tv_detailed_notice_content.setText(sibal);
                 }
 
             }
             @Override
             public void onFailure(Call<List<Notice>> call, Throwable t) {
-                Log.e("TAG", t.getMessage());
-                Toast.makeText(DetailedNoticeActivity.this, "실패", Toast.LENGTH_SHORT).show();
+
             }
         });
 

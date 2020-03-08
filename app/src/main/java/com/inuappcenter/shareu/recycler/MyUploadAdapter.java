@@ -2,6 +2,7 @@ package com.inuappcenter.shareu.recycler;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,11 +13,16 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.DetailedFileActivity;
 import com.inuappcenter.shareu.activity.MyDetailedUploadActivtity;
 import com.inuappcenter.shareu.activity.UploadedActivity;
+import com.inuappcenter.shareu.my_class.Fuck;
 import com.inuappcenter.shareu.my_class.Major;
 import com.inuappcenter.shareu.my_class.MyUpload;
 import com.inuappcenter.shareu.my_class.Notice;
+import com.inuappcenter.shareu.my_class.TokenManager;
+import com.inuappcenter.shareu.service.RetrofitHelper;
+import com.inuappcenter.shareu.service.RetrofitService;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -24,11 +30,14 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHolder> {
     private Context mContext;
     private List<MyUpload> mitems;
-
+    private int key;
 
     public MyUploadAdapter(Context mContext) {
         this.mContext = mContext;
@@ -45,44 +54,58 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull MyUploadAdapter.ViewHolder holder, int position) {
         final MyUpload item = mitems.get(position);
-        if(item.getExtension()=="ppt" || item.getExtension()=="pptx" )
+        if(mitems.get(position).getExtension().equals("PPT") || mitems.get(position).getExtension().equals("PPTX")||
+                mitems.get(position).getExtension().equals("ppt") || mitems.get(position).getExtension().equals("pptx")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.ppt);
         }
-        else if(item.getExtension()=="hwp")
+        else if(mitems.get(position).getExtension().equals("HWP") ||mitems.get(position).getExtension().equals("hwp") )
         {
             holder.img_my_upload.setImageResource(R.drawable.korean);
         }
-        else if(item.getExtension()=="doc" || item.getExtension()=="docx")
+        else if(mitems.get(position).getExtension().equals("DOC") || mitems.get(position).getExtension().equals("DOCX")
+                ||mitems.get(position).getExtension().equals("doc") || mitems.get(position).getExtension().equals("docx")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.word);
         }
-        else if(item.getExtension()=="ai")
+        else if(mitems.get(position).getExtension().equals("AI")
+                ||mitems.get(position).getExtension().equals("ai")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.ai);
         }
-        else if(item.getExtension()=="ps")
+        else if(mitems.get(position).getExtension().equals("PS")
+                ||mitems.get(position).getExtension().equals("ps")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.ps);
         }
 
-        else if(item.getExtension()=="jpeg" || item.getExtension()=="jpg")
+        else if(mitems.get(position).getExtension().equals("JPEG") || mitems.get(position).getExtension().equals("JPG")||
+                mitems.get(position).getExtension().equals("jpeg") || mitems.get(position).getExtension().equals("jpg")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.jpeg);
         }
-        else if(item.getExtension()=="png")
+        else if(mitems.get(position).getExtension().equals("PNG") || mitems.get(position).getExtension().equals("png") )
         {
             holder.img_my_upload.setImageResource(R.drawable.png);
         }
-        else if(item.getExtension()=="xls"||item.getExtension()=="xlsx"|| item.getExtension()=="xlsm" || item.getExtension()=="csv")
+        else if(mitems.get(position).getExtension().equals("XLS")||mitems.get(position).getExtension().equals("XLSX")||
+                mitems.get(position).getExtension().equals("XLSM") || mitems.get(position).getExtension().equals("CSV")||
+                mitems.get(position).getExtension().equals("xls")||mitems.get(position).getExtension().equals("xlsx")||
+                mitems.get(position).getExtension().equals("xlsm") || mitems.get(position).getExtension().equals("csv")
+        )
         {
             holder.img_my_upload.setImageResource(R.drawable.excel);
         }
-        else if(item.getExtension()=="mp3")
+        else if(mitems.get(position).getExtension().equals("MP3")||mitems.get(position).getExtension().equals("mp3"))
         {
             holder.img_my_upload.setImageResource(R.drawable.mp3);
         }
-        else if(item.getExtension()=="zip")
+        else if(mitems.get(position).getExtension().equals("ZIP") ||mitems.get(position).getExtension().equals("zip")  )
         {
             holder.img_my_upload.setImageResource(R.drawable.zip);
         }
@@ -91,7 +114,7 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
             holder.img_my_upload.setImageResource(R.drawable.file);
         }
         holder.tv_my_upload_title.setText(item.getTitle());
-        holder.tv_my_upload_date.setText(item.getDate());
+        holder.tv_my_upload_date.setText(item.getUploadDate());
         holder.btn_my_upload.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -103,10 +126,14 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
                         switch (menuItem.getItemId()){
                             case R.id.popup_modify:
                                 Intent intent = new Intent(mContext.getApplicationContext(), MyDetailedUploadActivtity.class);
+                                key = mitems.get(position).getDocumentKey();
+                                intent.putExtra("key",key);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 mContext.startActivity(intent);
                                 break;
                             case R.id.popup_delete:
+                                key = mitems.get(position).getDocumentKey();
+                                tellServer(key);
                                 mitems.remove(position);
                                 notifyItemRemoved(position);
                                 notifyItemChanged(position,mitems.size());
@@ -116,6 +143,14 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
                     }
                 });
                 popupMenu.show();
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext.getApplicationContext(), DetailedFileActivity.class);
+                intent.putExtra("key",mitems.get(position).getDocumentKey());
+                mContext.startActivity(intent);
             }
         });
     }
@@ -144,5 +179,26 @@ public class MyUploadAdapter extends RecyclerView.Adapter<MyUploadAdapter.ViewHo
     public void setData(List<MyUpload> notices) {
         mitems = notices;
         notifyDataSetChanged();
+    }
+    void tellServer(int key)
+    {
+
+        TokenManager tm = TokenManager.getInstance();
+        String token = tm.getToken(mContext.getApplicationContext());
+        RetrofitService networkService = RetrofitHelper.create();
+        networkService.delete_doc(key,token).enqueue(new Callback<Fuck>() {
+
+            @Override
+            public void onResponse(Call<Fuck> call, Response<Fuck> response) {
+                if (response.isSuccessful()) {
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Fuck> call, Throwable t) {
+
+            }
+        });
     }
 }

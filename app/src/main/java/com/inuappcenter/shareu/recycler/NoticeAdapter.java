@@ -14,18 +14,19 @@ import com.inuappcenter.shareu.activity.DetailedNoticeActivity;
 import com.inuappcenter.shareu.my_class.Notice;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder> {
 
-    private ArrayList<Notice> mitems;
+    private List<Notice> mitems;
     private Context mContext;
 
-    public NoticeAdapter(Context context, ArrayList<Notice> items)
+    public NoticeAdapter(Context context)
     {
-        mitems= items;
+        mitems= new ArrayList<>();
         mContext = context;
     }
 
@@ -70,5 +71,10 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
             tv_notice_title = itemView.findViewById(R.id.tv_notice_title);
             imv_notice_right_arrow = itemView.findViewById(R.id.imv_notice_right_arrow);
         }
+    }
+    public void setItem(List<Notice> data)
+    {
+        mitems=data;
+        notifyDataSetChanged();
     }
 }

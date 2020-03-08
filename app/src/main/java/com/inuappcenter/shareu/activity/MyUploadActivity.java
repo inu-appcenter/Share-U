@@ -1,12 +1,15 @@
 package com.inuappcenter.shareu.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.inuappcenter.shareu.R;
 import com.inuappcenter.shareu.my_class.MyUpload;
+import com.inuappcenter.shareu.my_class.TokenManager;
 import com.inuappcenter.shareu.presenter.MyUploadContract;
 import com.inuappcenter.shareu.presenter.MyUploadPresenter;
 import com.inuappcenter.shareu.recycler.MyUploadAdapter;
@@ -20,14 +23,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MyUploadActivity extends AppCompatActivity implements MyUploadContract.View {
 
+
     private MyUploadPresenter myUploadPresenter = new MyUploadPresenter(this,this);
     private MyUploadAdapter myUploadAdapter = new MyUploadAdapter(this);
+    private TextView tv_no_search;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_upload);
         initializeView();
         myUploadPresenter.onCreate();
+        TokenManager tm = TokenManager.getInstance();
+        String token = tm.getToken(this);
+        myUploadPresenter.setToken(token);
     }
 
     @Override
@@ -46,8 +55,23 @@ public class MyUploadActivity extends AppCompatActivity implements MyUploadContr
     @Override
     public void setDatas(List<MyUpload> datas) {
         myUploadAdapter.setData(datas);
+        if(datas.size()==0)
+        {
+            tv_no_search.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tv_no_search.setVisibility(View.GONE);
+        }
 
     }
+
+    @Override
+    public void setInternet() {
+        Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
+        startActivity(intent);
+    }
+
     private void initializeView() {
         View.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -68,6 +92,7 @@ public class MyUploadActivity extends AppCompatActivity implements MyUploadContr
         RecyclerView.LayoutManager mgr = new GridLayoutManager(getApplicationContext(),2);
         rcv.setLayoutManager(mgr);
         rcv.setAdapter(myUploadAdapter);
+        tv_no_search=findViewById(R.id.tv_no_search);
 
     }
 }

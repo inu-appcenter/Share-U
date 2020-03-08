@@ -36,11 +36,11 @@ public class BottomSheetAdapter extends RecyclerView.Adapter<BottomSheetAdapter.
     @Override
     public void onBindViewHolder(@NonNull BottomSheetAdapter.ViewHolder holder, int position) {
         final subjectName item = mitems.get(position);
-        holder.tv_bottomsheet.setText(item.getSubjectName());
+        holder.tv_bottomsheet.setText(item.getMajorName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCallback.onClick(item.getSubjectName());
+                mCallback.onClick(item.getMajorName());
             }
         });
     }

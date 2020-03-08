@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "603125898380",
+    "firebase_url": "https://shareu-ede54.firebaseio.com",
+    "project_id": "shareu-ede54",
+    "storage_bucket": "shareu-ede54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603125898380:android:807c9f7dab70b5f2a7efa9",
+        "android_client_info": {
+          "package_name": "com.inuappcenter.shareu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603125898380-lu1b2gifg6a2fuacfbgkviv1a7jdr7h7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.inuappcenter.shareu",
+            "certificate_hash": "168c14c5689cbaaf4dc2e47e1a3b538fa520751e"
+          }
+        },
+        {
+          "client_id": "603125898380-nsqg6qdvkn6j9vkhtn2oti94fi368e2i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD146AmZD0cQiy64t67bpcGrsVNqSNH4TA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603125898380-nsqg6qdvkn6j9vkhtn2oti94fi368e2i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

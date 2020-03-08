@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="328dp"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/rounded_corner"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btn_backpress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/group219"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:gravity="center"
+        android:text="비밀번호 찾기"
+        android:textColor="@color/Iris"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="이름"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etv_name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="11dp"
+            android:layout_weight="0"
+            android:background="@drawable/edit_text_shadow"
+            android:ems="20"
+            android:paddingLeft="9dp"
+            android:textColor="@color/black"
+            android:textColorHint="#57000000"
+            android:hint="홍길동"
+            android:textCursorDrawable="@null"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="학번"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etv_id"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="11dp"
+            android:layout_weight="0"
+            android:background="@drawable/edit_text_shadow"
+            android:ems="20"
+            android:paddingLeft="9dp"
+            android:textColor="@color/black"
+            android:textColorHint="#57000000"
+            android:hint="201801234"
+            android:textCursorDrawable="@null"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_find_passwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginRight="39dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rectangle411"
+        android:gravity="center"
+        android:text="비밀번호 찾기"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+
+
+</LinearLayout>

@@ -19,7 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_weight="0"
             android:gravity="center"
-            android:text='"문테기 족보"'
+            android:text='"null"'
             android:textColor="@color/Iris"
             android:textSize="18sp"
             android:textStyle="bold" />

@@ -34,6 +34,13 @@ public class MyUploadPresenter implements MyUploadContract.Presenter{
                 }
 
         );
+        myUploadModel.getInternet().observe(lifecycleOwner, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean)
+                    myUploadView.setInternet();
+            }
+        });
     }
 
     @Override
@@ -45,5 +52,10 @@ public class MyUploadPresenter implements MyUploadContract.Presenter{
     public void onDestroy()
     {
         myUploadModel.getDataList().removeObservers(lifecycleOwner);
+    }
+
+    @Override
+    public void setToken(String token) {
+        myUploadModel.setToken(token);
     }
 }

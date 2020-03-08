@@ -1,11 +1,15 @@
 package com.inuappcenter.shareu.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -14,6 +18,7 @@ import com.androidadvance.topsnackbar.TSnackbar;
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialog;
 import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialogFragment;
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.ServerFailActivity;
 import com.inuappcenter.shareu.my_class.profName;
 import com.inuappcenter.shareu.my_class.subjectName;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
@@ -41,53 +46,14 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
     private EditText etv_search;
     private ImageButton  etv_search_click;
     private TextView tv_search_please;
+    private TextView edtv_select_subject;
+    private View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_bottomsheet,container);
+        view = inflater.inflate(R.layout.layout_bottomsheet,container);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         init(view);
-
-        etv_search_click.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                networkService = RetrofitHelper.create();
-                networkService.getProfName(etv_search.getText()+"").enqueue(new Callback<List<profName>>(){
-                    @Override
-                    public void onResponse(Call<List<profName> > call, Response<List<profName>> response)
-                    {
-                        if(response.body().size()==0)
-                        {
-                            tv_search_please.setVisibility(View.VISIBLE);
-                            tv_search_please.setText("검색 결과가 없습니다 :(");
-                        }
-                        else
-                        {
-                            tv_search_please.setVisibility(View.GONE);
-                            if(response.isSuccessful())
-                            {
-                                dataList=new ArrayList<>();
-                                for(int i=0;i<response.body().size();i++)
-                                {
-                                    dataList.add(new profName(response.body().get(i).getProfName()));
-                                }
-
-                            }
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setLayoutManager(manager); // LayoutManager 등록
-                            recyclerView.setAdapter(new BottomSheetAdapter2(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
-                        }
-
-                    }
-                    @Override
-                    public void onFailure(Call<List<profName>> call, Throwable t)
-                    {
-                        t.printStackTrace();
-                    }
-                });
-            }
-        });
-
         return view;
     }
     public void init(View view)
@@ -98,7 +64,91 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
         etv_search = view.findViewById(R.id.etv_search);
         etv_search_click = view.findViewById(R.id.etv_search_click);
         tv_search_please.setText("교수명을 검색해주세요 :)");
+        edtv_select_subject=getActivity().findViewById(R.id.edtv_select_subject);
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        etv_search.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //Enter key Action
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    giveMeList();
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE); imm.hideSoftInputFromWindow( etv_search.getWindowToken(), 0);
+
+                    return true;
+                }
+                return false;
+            }
+        });
+        etv_search_click.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                giveMeList();
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE); imm.hideSoftInputFromWindow( etv_search.getWindowToken(), 0);
+
+            }
+        });
+
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(view!=null){
+            ViewGroup parent = (ViewGroup)view.getParent();
+            if(parent!=null){
+                parent.removeView(view);
+            }
+        }
+
+    }
+    void giveMeList()
+    {
+        if(edtv_select_subject.getText().length()==0)
+        {
+            tv_search_please.setVisibility(View.VISIBLE);
+            tv_search_please.setText("과목명부터 검색해주세요 :(");
+        }
+        else
+        {
+            networkService = RetrofitHelper.create();
+            networkService.getProfName(edtv_select_subject.getText()+"",etv_search.getText()+"").enqueue(new Callback<List<profName>>(){
+                @Override
+                public void onResponse(Call<List<profName> > call, Response<List<profName>> response)
+                {
+                    if(response.isSuccessful())
+                    {
+                        dataList=new ArrayList<>();
+                        for(int i=0;i<response.body().size();i++)
+                        {
+                            dataList.add(new profName(response.body().get(i).getProfName()));
+                        }
+
+                    }
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(manager); // LayoutManager 등록
+                    recyclerView.setAdapter(new BottomSheetAdapter2(dataList,getActivity(),(OnItemClick)(getActivity())));  // Adapter 등록
+                    if(response.body().size()==0)
+                    {
+                        tv_search_please.setVisibility(View.VISIBLE);
+                        tv_search_please.setText("검색 결과가 없습니다 :(");
+                    }
+                    else
+                    {
+                        tv_search_please.setVisibility(View.GONE);
+                    }
+
+                }
+                @Override
+                public void onFailure(Call<List<profName>> call, Throwable t)
+                {
+
+                }
+            });
+        }
+
+    }
 }
