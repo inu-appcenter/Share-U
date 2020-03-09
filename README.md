@@ -22,7 +22,7 @@
  - Java
  - Java Script
 
-## 7. 주요사용 라이브러리
+## 7. 주요 사용 라이브러리
  - Retrofit (통신)
- - Pick IT (파일 업로드)
+ - PickIT (파일 업로드)
  - PRDownloader (파일 다운로드)
