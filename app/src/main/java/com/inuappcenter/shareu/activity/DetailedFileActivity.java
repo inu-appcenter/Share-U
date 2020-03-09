@@ -125,13 +125,15 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         Intent intent =getIntent();
         key =intent.getExtras().getInt("key");
         giveMePermissions();
-
+        listen();
+        Log.e("크리에이트","크리에이트");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        listen();
+        Log.e("레쥬미","레쥬미");
+        flag=false;
         giveMeStar();
         giveMeList();
         giveMeReview();
@@ -431,6 +433,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                                 bottomSheetSparsePoint.show(getSupportFragmentManager(),"냐옹");
                                 flag=true;
                             }
+
                             if(snackbar!=null && snackbar.isShown())
                             {
                                 snackbar.dismiss();;
@@ -495,6 +498,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         url+="/"+sub_url;
         String dirPath = "/storage/emulated/0/Share U";
         String fileName = tv_my_major.getText()+bye+"."+hi;
+
         snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 다운로드 중입니다...잠시만 기다려주세요",TSnackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(Color.WHITE);
         View snackbarView = snackbar.getView();
@@ -526,7 +530,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 .setOnProgressListener(new OnProgressListener() {
                     @Override
                     public void onProgress(Progress progress) {
-                        Log.e("onProgress()","");
+                        snackbar.setText("자료 다운로드 중입니다...잠시만 기다려주세요 "+"("+progress.currentBytes+" / "+progress.totalBytes+")");
+                        tv_get_file.setText("자료 받기 진행중");
+                        tv_get_file.setBackgroundColor(Color.parseColor("#a8a8a8"));
+                        //Log.e("onProgress()",progress.currentBytes+" "+progress.totalBytes);
                     }
                 })
                 .start(new OnDownloadListener() {
@@ -536,11 +543,11 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         {
                             snackbar.dismiss();;
                         }
+                        tv_get_file.setText("자료 받기 완료");
+                        tv_get_file.setBackgroundColor(Color.parseColor("#a8a8a8"));
+
                         if(flag==false)
                         {
-                            tv_get_file.setText("자료 받기 완료");
-                            tv_get_file.setBackgroundColor(Color.parseColor("#a8a8a8"));
-
                             bottomSheetZeroPoint=new BottomSheetZeroPoint();
                             bottomSheetZeroPoint.show(getSupportFragmentManager(),"냐옹");
                             flag=true;
@@ -553,6 +560,11 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                                 snackbar.dismiss();;
                             }
                             tv_register.setClickable(true);
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(getApplicationContext(),AlreadyDownloadedActivity.class);
+                            startActivity(intent);
                         }
 
                     }
@@ -584,6 +596,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         String dirPath = "/storage/emulated/0/Share U";
         String fileName = tv_my_major.getText()+bye+"."+hi;
 
+
         snackbar = TSnackbar.make(findViewById(android.R.id.content),"자료 다운로드 중입니다...잠시만 기다려주세요",TSnackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(Color.WHITE);
         View snackbarView = snackbar.getView();
@@ -614,7 +627,11 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 .setOnProgressListener(new OnProgressListener() {
                     @Override
                     public void onProgress(Progress progress) {
-                        Log.e("onProgress()","");
+
+                        snackbar.setText("자료 다운로드 중입니다...잠시만 기다려주세요 "+"("+progress.currentBytes+" / "+progress.totalBytes+")");
+                        tv_get_file.setText("자료 받기 진행중");
+                        tv_get_file.setBackgroundColor(Color.parseColor("#a8a8a8"));
+                        Log.e("onProgress()",progress+"");
                     }
                 })
                 .start(new OnDownloadListener() {
@@ -624,10 +641,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         {
                             snackbar.dismiss();;
                         }
+                        tv_get_file.setText("자료 받기 완료");
+                        tv_get_file.setBackgroundColor(Color.parseColor("#a8a8a8"));
                         if(flag==false)
                         {
-                            tv_get_file.setText("자료 받기 완료");
-                            tv_get_file.setBackgroundColor(Color.parseColor("#a8a8a8"));
                             bottomSheetMinusPoint=new BottomSheetMinusPoint();
                             bottomSheetMinusPoint.show(getSupportFragmentManager(),"냐옹");
                             flag=true;
@@ -635,12 +652,12 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                             {
                                 snackbar.dismiss();;
                             }
-                            if(snackbar!=null && snackbar.isShown())
-                            {
-                                snackbar.dismiss();;
-                            }
-
                             tv_register.setClickable(true);
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(getApplicationContext(),DownloadedActivity.class);
+                            startActivity(intent);
                         }
 
                     }
@@ -710,62 +727,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         extension.observe(lifecycleOwner, new Observer<String>() {
                             @Override
                             public void onChanged(String s) {
-
-
-                                /*Log.e("변신!",extension.getValue());
-                                Date today = new Date();
-                                String bye=today.getTime()+"";
-                                sub_url=response.body().get(0).getFileName();
-                                url = "http://117.16.231.66:7001/document/send/documentFile";
-                                url+="/"+sub_url;
-                                String dirPath = "/storage/emulated/0/Share U";
-                                String fileName = tv_my_major.getText()+bye+"."+hi;
-
-                                PRDownloader.download(url, dirPath, fileName)
-                                        .build()
-                                        .setOnStartOrResumeListener(new OnStartOrResumeListener() {
-                                            @Override
-                                            public void onStartOrResume() {
-                                                Log.e("onStartOrResume()","");
-                                            }
-                                        })
-                                        .setOnPauseListener(new OnPauseListener() {
-                                            @Override
-                                            public void onPause() {
-                                                Log.e("onPause()","");
-                                            }
-                                        })
-                                        .setOnCancelListener(new OnCancelListener() {
-                                            @Override
-                                            public void onCancel() {
-                                                Log.e("onCancel()","");
-                                            }
-                                        })
-                                        .setOnProgressListener(new OnProgressListener() {
-                                            @Override
-                                            public void onProgress(Progress progress) {
-                                                Log.e("onProgress()","");
-                                            }
-                                        })
-                                        .start(new OnDownloadListener() {
-                                            @Override
-                                            public void onDownloadComplete() {
-                                                if(flag==false)
-                                                {
-                                                    bottomSheetZeroPoint = new BottomSheetZeroPoint();
-                                                    bottomSheetZeroPoint.show(getSupportFragmentManager(),"냐옹");
-                                                    flag=true;
-                                                }
-
-
-                                            }
-
-                                            @Override
-                                            public void onError(Error error) {
-                                                Log.e("onError()","");
-                                            }
-
-                                        });*/
 
                             }
                         });
@@ -846,6 +807,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                                     snackbar.dismiss();;
                                 }
                             }
+
                             giveMeStar();
                             giveMeReview();
                         }
@@ -889,28 +851,30 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
     @Override
     protected void onStop() {
+        flag=true;
         super.onStop();
-        //Log.e("스탑","씨발 왜 아무것도 안오냐고");
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //Log.e("퍼즈","씨발 왜 아무것도 안오냐고");
+        flag=true;
+        Log.e("퍼즈","퍼즈");
         if(snackbar!=null && snackbar.isShown())
         {
-            snackbar.dismiss();;
+            snackbar.dismiss();
         }
+
     }
 
     @Override
     protected void onDestroy() {
-        //Log.e("온ㅏ여기","씨발 왜 아무것도 안오냐고");
+        Log.e("디스트로이","디스트로이");
         super.onDestroy();
-        if(snackbar!=null && snackbar.isShown())
-        {
-            snackbar.dismiss();;
-        }
+        flag=true;
+
+
     }
 
     @Override

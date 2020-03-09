@@ -7,8 +7,8 @@ android {
         applicationId "com.inuappcenter.shareu"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.0.0"
+        versionCode 5
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0-rc01'
 
     //file upload library
+    //https://github.com/HBiSoft/PickiT
     implementation 'com.github.HBiSoft:PickiT:0.1.8'
 
     //superior lecture indicator library
@@ -80,4 +81,8 @@ dependencies {
     implementation 'com.github.viethoa:fastscroller:1.2.0'
 
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
+
+    //progress bar
+    //https://github.com/yankai-victor/Loading
+    implementation 'com.victor:lib:1.0.4'
 }

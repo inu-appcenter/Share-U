@@ -150,7 +150,6 @@ public class DrawerFragment extends Fragment {
                         view.getContext().startActivity(intent6);
                         break;
                     case R.id.getpoint:
-                        Log.e("읭","읭");
                         giveMeWelcomePoint();
                         break;
 
