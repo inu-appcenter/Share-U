@@ -36,6 +36,8 @@ import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.BottomSheetAdapter;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
+import com.victor.loading.book.BookLoading;
+import com.victor.loading.rotate.RotateLoading;
 
 import org.w3c.dom.Text;
 
@@ -90,6 +92,8 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
     private String extension;
     private TextView tv_uploaded_file_name;
     private LinearLayout bottom_sheet;
+
+    private RotateLoading bookLoading;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -220,6 +224,8 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                             TextView textView = (TextView)snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
                             textView.setTextColor(Color.WHITE);
                             snackbar.show();
+                            bookLoading.setVisibility(View.VISIBLE);
+                            bookLoading.start();
 
                             TokenManager tm = TokenManager.getInstance();
                             String token = tm.getToken(getApplicationContext());
@@ -263,6 +269,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                                     if(response.isSuccessful())
                                     {
                                         snackbar.dismiss();
+                                        bookLoading.stop();
                                         Intent intent = new Intent(getApplicationContext(), UploadedActivity.class);
                                         startActivity(intent);
                                         finish();
@@ -290,6 +297,10 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
                         if(snackbar!=null && snackbar.isShown())
                         {
                             snackbar.dismiss();
+                        }
+                        if(bookLoading.isStart())
+                        {
+                            bookLoading.stop();
                         }
                         finish();
                     }
@@ -415,6 +426,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         tv_upload_file = findViewById(R.id.tv_upload_file);
         img_btn_file_upload_on=findViewById(R.id.img_btn_file_upload_on);
         bottom_sheet=findViewById(R.id.bottom_sheet);
+        bookLoading=findViewById(R.id.bookloading);
     }
     void check()
     {
@@ -517,13 +529,30 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
-        if(snackbar!=null && snackbar.isShown())
+        if(snackbar!=null)
         {
-            snackbar.dismiss();;
+            Log.e("사라지지렁","사라지지렁");
+            snackbar.dismiss();
+        }
+        if(bookLoading.isStart())
+        {
+            bookLoading.stop();
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 }
 

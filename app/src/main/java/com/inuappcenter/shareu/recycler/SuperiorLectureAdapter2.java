@@ -114,7 +114,8 @@ public class SuperiorLectureAdapter2 extends PagerAdapter {
         //item_default_superior.setImageResource(mitems.get(position).getImage());
         tv_superior_name.setText(mitems.get(position).getTitle());
         ratingBar.setRating(mitems.get(position).getRating());
-
+        ratingBar.setScrollable(false);
+        ratingBar.setClickable(false);
         view.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
