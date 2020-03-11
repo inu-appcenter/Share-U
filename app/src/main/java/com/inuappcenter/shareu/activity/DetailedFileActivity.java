@@ -1,6 +1,7 @@
 package com.inuappcenter.shareu.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -563,7 +564,8 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         }
                         else
                         {
-                            Intent intent = new Intent(getApplicationContext(),AlreadyDownloadedActivity.class);
+                            Log.e("냐옹","냐옹");
+                            Intent intent = new Intent(DetailedFileActivity.this,AlreadyDownloadedActivity.class);
                             startActivity(intent);
                         }
 

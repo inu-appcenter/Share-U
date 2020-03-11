@@ -152,8 +152,7 @@ public class GyoyangFragment extends Fragment  {
             }
             @Override
             public void onFailure(Call<List<Major>> call, Throwable t) {
-                Intent intent = new Intent(getActivity(), ServerFailActivity.class);
-                startActivity(intent);
+
             }
         });
     }
