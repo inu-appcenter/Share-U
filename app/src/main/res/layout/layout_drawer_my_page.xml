@@ -12,7 +12,7 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:id="@+id/drawer_login"
-        android:visibility="gone"
+
         >
 
 
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="gone"
+
                 >
 
                 <include
@@ -42,13 +42,14 @@
                     layout="@layout/layout_my_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center|center_horizontal" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/welcome_point"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 >
 
                 <LinearLayout
@@ -338,6 +339,7 @@
         android:orientation="vertical"
         android:background="@color/white"
         android:id="@+id/drawer_logout"
+        android:visibility="gone"
 >
         <ImageButton
             android:id="@+id/btn_drawer_back2"
