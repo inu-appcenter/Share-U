@@ -98,9 +98,9 @@ public class GyoyangFragment extends Fragment  {
         networkService2.getDetailedGyoyangList().enqueue(new Callback<List<Major>>(){
             @Override
             public void onResponse(Call<List<Major> > call, Response<List<Major>> response) {
+                dataList = new ArrayList<>();
                 if (response.isSuccessful()) {
                     tv_no_search.setVisibility(View.GONE);
-                    dataList = new ArrayList<>();
                     String flag = "?";
                     for (int i = 0; i < response.body().size(); i++) {
                         if (flag.equals(response.body().get(i).third)) {
@@ -164,8 +164,8 @@ public class GyoyangFragment extends Fragment  {
             @Override
             public void onResponse(Call<List<categoryCulture>> call, Response<List<categoryCulture>> response) {
 
+                dataList2 = new ArrayList<>();
                 if (response.isSuccessful()) {
-                    dataList2 = new ArrayList<>();
                     String flag = "?";
                     Log.e("흠",response.body().size()+"");
                     for (int i = 0; i < response.body().size(); i++) {

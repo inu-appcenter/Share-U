@@ -119,9 +119,9 @@ public class BottomSheetFragment2 extends RoundedBottomSheetDialogFragment {
                 @Override
                 public void onResponse(Call<List<profName> > call, Response<List<profName>> response)
                 {
+                    dataList=new ArrayList<>();
                     if(response.isSuccessful())
                     {
-                        dataList=new ArrayList<>();
                         for(int i=0;i<response.body().size();i++)
                         {
                             dataList.add(new profName(response.body().get(i).getProfName()));

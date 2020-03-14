@@ -124,11 +124,11 @@ public class BottomSheetFragement extends RoundedBottomSheetDialogFragment{
                 @Override
                 public void onResponse(Call<List<subjectName> > call, Response<List<subjectName>> response)
                 {
+                    dataList=new ArrayList<>();
                     if(response.isSuccessful())
                     {
                         if(response.isSuccessful())
                         {
-                            dataList=new ArrayList<>();
                             for(int i=0;i<response.body().size();i++)
                             {
                                 dataList.add(new subjectName(response.body().get(i).getMajorName()));

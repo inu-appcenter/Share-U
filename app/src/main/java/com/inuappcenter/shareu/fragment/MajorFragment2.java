@@ -110,8 +110,8 @@ public class MajorFragment2 extends Fragment{
         networkService.getDetailedMajorList(name).enqueue(new Callback<List<Major>>() {
             @Override
             public void onResponse(Call<List<Major>> call, Response<List<Major>> response) {
+                dataList = new ArrayList<>();
                 if (response.isSuccessful()) {
-                    dataList = new ArrayList<>();
                     String flag = "?";
                     for (int i = 0; i < response.body().size(); i++) {
                         //Log.e("체크 ! ",name+" "+response.body().get(i).first+" "+response.body().get(i).second+" "+response.body().get(i).third);
@@ -191,10 +191,11 @@ public class MajorFragment2 extends Fragment{
         networkService.categorySubject(tv_my_major.getText()+"",etv_search.getText()+"").enqueue(new Callback<List<categoryCulture>>() {
             @Override
             public void onResponse(Call<List<categoryCulture>> call, Response<List<categoryCulture>> response) {
+                dataList2 = new ArrayList<>();
                 if (response.isSuccessful()) {
                     tv_no_search.setVisibility(View.GONE);
                     //Log.e("시발",response.body().size()+"");
-                    dataList2 = new ArrayList<>();
+
                     String flag = "?";
                     for (int i = 0; i < response.body().size(); i++) {
                         //Log.e("체크 ! ",name+" "+response.body().get(i).getSubjectname()+" "+response.body().get(i).getSubjectInitiality()+" "+response.body().get(i).getProfName());
