@@ -3,8 +3,11 @@ package com.inuappcenter.shareu.model;
 import android.util.Log;
 
 import com.inuappcenter.shareu.R;
+import com.inuappcenter.shareu.activity.ServerFailActivity;
+import com.inuappcenter.shareu.activity.ServerFailActivity2;
 import com.inuappcenter.shareu.my_class.Notice;
 import com.inuappcenter.shareu.my_class.SuperiorLecture;
+import com.inuappcenter.shareu.service.Navigator;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
@@ -51,7 +54,7 @@ public class MainModel {
     //메인 우수자료
     public void setSuperior()
     {
-        Log.e("여기도 오능데","야ㅑㅇ야야옹");
+        //Log.e("여기도 오능데","야ㅑㅇ야야옹");
         RetrofitService networkService = RetrofitHelper.create();
         networkService.mainTop5ScoreList().enqueue(new Callback<List<SuperiorLecture>>() {
             @Override
@@ -69,12 +72,16 @@ public class MainModel {
                     setSuperiorData(tmp_list2);
 
                 }
+                else
+                {
+                    Navigator.launchActicity(ServerFailActivity2.class);
+                }
 
             }
 
             @Override
             public void onFailure(Call<List<SuperiorLecture>> call, Throwable t) {
-
+                Navigator.launchActicity(ServerFailActivity.class);
             }
         });
     }
