@@ -54,7 +54,7 @@ public class MainModel {
     //메인 우수자료
     public void setSuperior()
     {
-        //Log.e("여기도 오능데","야ㅑㅇ야야옹");
+        Log.e("여기도 오능데","야ㅑㅇ야야옹");
         RetrofitService networkService = RetrofitHelper.create();
         networkService.mainTop5ScoreList().enqueue(new Callback<List<SuperiorLecture>>() {
             @Override
@@ -74,6 +74,7 @@ public class MainModel {
                 }
                 else
                 {
+
                     Navigator.launchActicity(ServerFailActivity2.class);
                 }
 
@@ -81,7 +82,7 @@ public class MainModel {
 
             @Override
             public void onFailure(Call<List<SuperiorLecture>> call, Throwable t) {
-                Navigator.launchActicity(ServerFailActivity.class);
+                Navigator.launchActicity(ServerFailActivity2.class);
             }
         });
     }

@@ -46,6 +46,7 @@
         app:srcCompat="@drawable/serverfail" />
 
     <TextView
+        android:id="@+id/tv_server_fail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
