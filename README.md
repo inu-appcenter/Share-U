@@ -20,7 +20,7 @@
 
 ## 6. 개발 언어
  - Java
- - Java Script
+ - JavaScript
 
 ## 7. 주요 사용 라이브러리
  - Retrofit (통신)
