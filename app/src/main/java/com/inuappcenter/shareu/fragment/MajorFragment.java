@@ -23,6 +23,7 @@ import com.inuappcenter.shareu.my_class.Code;
 import com.inuappcenter.shareu.my_class.Major;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.MajorAdapter;
+import com.inuappcenter.shareu.service.Navigator;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 import com.viethoa.RecyclerViewFastScroller;
@@ -92,10 +93,9 @@ public class MajorFragment extends Fragment  {
         networkService.getMajorList().enqueue(new Callback<List<Major>>() {
             @Override
             public void onResponse(Call<List<Major>> call, Response<List<Major>> response) {
-
+                dataList = new ArrayList<>();
                 if (response.isSuccessful()) {
                     tv_no_search.setVisibility(View.GONE);
-                    dataList = new ArrayList<>();
                     String flag = "?";
 
                     for (int i = 0; i < response.body().size(); i++) {
@@ -157,6 +157,7 @@ public class MajorFragment extends Fragment  {
 
             @Override
             public void onFailure(Call<List<Major>> call, Throwable t) {
+                //Navigator.launchActicity(ServerFailActivity.class);
 
             }
         });
@@ -203,8 +204,9 @@ public class MajorFragment extends Fragment  {
         networkService.categoryMajor(etv_search.getText()+"").enqueue(new Callback<List<Major>>() {
             @Override
             public void onResponse(Call<List<Major>> call, Response<List<Major>> response) {
+                dataList = new ArrayList<>();
                 if (response.isSuccessful()) {
-                    dataList = new ArrayList<>();
+
                     String flag = "?";
 
                     for (int i = 0; i < response.body().size(); i++) {

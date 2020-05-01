@@ -53,7 +53,6 @@ public class BottomSheetZeroPoint extends RoundedBottomSheetDialogFragment {
     {
         TokenManager tm = TokenManager.getInstance();
         String token = tm.getToken(getActivity());
-        Log.e("읭",token);
         RetrofitService networkService = RetrofitHelper.create();
         networkService.sumpoint(token).enqueue(new Callback<List<SumPoint>>(){
             @Override

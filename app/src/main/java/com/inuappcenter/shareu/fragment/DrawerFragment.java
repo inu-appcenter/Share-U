@@ -78,7 +78,7 @@ public class DrawerFragment extends Fragment {
         super.onResume();
         init();
         mListener=(OnItemClick)getActivity();
-        //Log.e("토큰 : ",tm.getToken(getActivity()));
+
         TokenManager tm = TokenManager.getInstance();
         String token = tm.getToken(getActivity());
         if(token!=null)

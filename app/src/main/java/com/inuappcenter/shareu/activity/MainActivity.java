@@ -43,6 +43,7 @@ import com.inuappcenter.shareu.my_class.TokenManager;
 import com.inuappcenter.shareu.my_interface.OnItemClick;
 import com.inuappcenter.shareu.recycler.NoticeAdapter;
 import com.inuappcenter.shareu.recycler.SuperiorLectureAdapter2;
+import com.inuappcenter.shareu.service.Navigator;
 import com.inuappcenter.shareu.service.RetrofitHelper;
 import com.inuappcenter.shareu.service.RetrofitService;
 
@@ -303,11 +304,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
                         }
                     }
 
+
                 }
 
                 @Override
                 public void onFailure(Call<List<Document>> call, Throwable t) {
-
                 }
             });
         }

@@ -32,7 +32,6 @@ public class GyoyangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.mContext = mContext;
 
         this.mitems = mitems;
-        Log.e("테스트","으아아아");
     }
 
     @NonNull

@@ -127,13 +127,11 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         key =intent.getExtras().getInt("key");
         giveMePermissions();
         listen();
-        Log.e("크리에이트","크리에이트");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("레쥬미","레쥬미");
         flag=false;
         giveMeStar();
         giveMeList();
@@ -564,7 +562,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                         }
                         else
                         {
-                            Log.e("냐옹","냐옹");
                             Intent intent = new Intent(DetailedFileActivity.this,AlreadyDownloadedActivity.class);
                             startActivity(intent);
                         }
@@ -581,14 +578,10 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
         {
             snackbar.dismiss();;
         }
-
-        Log.e("샹","샹");
     }
     void giveFile(String file)
     {
-        
 
-        Log.e("홍홍",extension.getValue()+"");
         Date today = new Date();
         String bye=today.getTime()+"";
         sub_url=file+"";
@@ -611,7 +604,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 .setOnStartOrResumeListener(new OnStartOrResumeListener() {
                     @Override
                     public void onStartOrResume() {
-                        Log.e("onStartOrResume()","왜안돼");
                     }
                 })
                 .setOnPauseListener(new OnPauseListener() {
@@ -708,7 +700,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                                 public void onResponse(Call<List<sendFileExtension>> call, Response<List<sendFileExtension>> response) {
                                     if (response.isSuccessful()) {
 
-                                        Log.e("웅",response.body().get(0).getExtension()+"");
+
                                         hi=response.body().get(0).getExtension()+"";
                                         extension.setValue(response.body().get(0).getExtension()+"");
                                         giveFile2(file_name);
@@ -741,7 +733,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 @Override
                 public void onFailure(Call<List<documentFile>> call, Throwable t) {
 
-                    Log.e("실패",t.getMessage()+"");
+
                 }
             });
         }
@@ -749,7 +741,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     }
     void check() {
 
-        Log.e("여기 와..?","흠");
+
         if(snackbar!=null && snackbar.isShown())
         {
             snackbar.dismiss();;
@@ -764,7 +756,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
         else if(edtv_review.getText().length()<5)
         {
-            Log.e("읭","읭");
+
             snackbar = TSnackbar.make(findViewById(android.R.id.content),"리뷰를 5글자 이상 남겨주세요!",TSnackbar.LENGTH_SHORT);
             snackbar.setActionTextColor(Color.WHITE);
             View snackbarView = snackbar.getView();
@@ -791,7 +783,6 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
                 @Override
                 public void onResponse(Call<BooleanFuck> call, Response<BooleanFuck> response) {
                     if (response.isSuccessful()) {
-                        Log.e("시발",response.body().getAns()+"");
                         if(response.body().getAns())
                         {
                             if(snackbar!=null && snackbar.isShown())
@@ -862,7 +853,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
     protected void onPause() {
         super.onPause();
         flag=true;
-        Log.e("퍼즈","퍼즈");
+
         if(snackbar!=null && snackbar.isShown())
         {
             snackbar.dismiss();
@@ -872,7 +863,7 @@ public class DetailedFileActivity extends AppCompatActivity implements OnItemCli
 
     @Override
     protected void onDestroy() {
-        Log.e("디스트로이","디스트로이");
+
         super.onDestroy();
         flag=true;
 

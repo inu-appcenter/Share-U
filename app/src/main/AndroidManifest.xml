@@ -14,6 +14,7 @@
         android:roundIcon="@drawable/group326"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:name=".service.MyApplication"
         >
 
 
@@ -71,6 +72,10 @@
             >
         </activity>
 
+        <activity android:name=".activity.ServerFailActivity2"
+            android:screenOrientation="portrait"
+            >
+        </activity>
         <activity android:name=".activity.CategorySearchActivity"
             android:screenOrientation="portrait"
             >
