@@ -1,4 +1,4 @@
-# Share U
+# Share U:purple_heart:
 
 ## 1. 작품 설명
 
