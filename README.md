@@ -1,4 +1,4 @@
-# :purple_heart: Share U
+# Share U :purple_heart:
 ## 1. 작품 설명
 
  - 인천대학교 학생들끼리 과제 및 공부자료를 공유할 수 있는 모바일 앱 입니다.
