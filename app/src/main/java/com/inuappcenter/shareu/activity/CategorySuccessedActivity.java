@@ -107,7 +107,7 @@ public class CategorySuccessedActivity extends AppCompatActivity {
             public void onFailure(Call<List<Document>> call, Throwable t) {
                 Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
                 startActivity(intent);
-                //Log.e("여기다!",t.getCause()+"");
+
             }
         });
 

@@ -54,7 +54,7 @@ public class MainModel {
     //메인 우수자료
     public void setSuperior()
     {
-        Log.e("여기도 오능데","야ㅑㅇ야야옹");
+
         RetrofitService networkService = RetrofitHelper.create();
         networkService.mainTop5ScoreList().enqueue(new Callback<List<SuperiorLecture>>() {
             @Override
@@ -97,7 +97,6 @@ public class MainModel {
             {
 
                 List<Notice> tmp_list = new ArrayList<>();
-                //Log.e("ㅎㅎ",response.body().get(0).getTitle());
                 if(response.isSuccessful())
                 {
                     for(int i=0;i<response.body().size();i++)

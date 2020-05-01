@@ -105,7 +105,7 @@ public class SearchSuccessedActivity extends AppCompatActivity {
             public void onFailure(Call<List<Document>> call, Throwable t) {
                 /*Intent intent = new Intent(getApplicationContext(), ServerFailActivity.class);
                 startActivity(intent);*/
-                Log.e("흠",t.getCause()+"");
+
             }
         });
 

@@ -167,7 +167,7 @@ public class GyoyangFragment extends Fragment  {
                 dataList2 = new ArrayList<>();
                 if (response.isSuccessful()) {
                     String flag = "?";
-                    Log.e("흠",response.body().size()+"");
+
                     for (int i = 0; i < response.body().size(); i++) {
                         if (flag.equals(response.body().get(i).getSubjectInitiality())) {
 

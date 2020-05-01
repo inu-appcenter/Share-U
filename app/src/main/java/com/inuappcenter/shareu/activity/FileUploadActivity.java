@@ -229,7 +229,6 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
 
                             TokenManager tm = TokenManager.getInstance();
                             String token = tm.getToken(getApplicationContext());
-                            //Log.e("시발",token);
                             // 이제 올리기
                             RequestBody titleBody = RequestBody.create(
                                     MediaType.parse("text/plain"),
@@ -286,7 +285,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
 
                                 @Override
                                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    Log.e("흠",t.getCause()+"");
+
                                     Intent intent = new Intent(getApplicationContext(),ServerFailActivity.class);
                                     startActivity(intent);
                                 }
@@ -309,11 +308,11 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
 
                         //View view2 = getLayoutInflater().inflate(R.layout.layout_bottomsheet,null);
                         dialog = new BottomSheetFragement();
-                        dialog.show(getSupportFragmentManager(),"냐아옹");
+                        dialog.show(getSupportFragmentManager(),"go");
                         break;
                     case R.id.img_btn_file_upload3:
                         dialog2 = new BottomSheetFragment2();
-                        dialog2.show(getSupportFragmentManager(),"냐아옹");
+                        dialog2.show(getSupportFragmentManager(),"go");
                         break;
                 }
 
@@ -540,7 +539,7 @@ public class FileUploadActivity extends AppCompatActivity implements  OnItemClic
         super.onPause();
         if(snackbar!=null)
         {
-            Log.e("사라지지렁","사라지지렁");
+
             snackbar.dismiss();
         }
         if(bookLoading.isStart())

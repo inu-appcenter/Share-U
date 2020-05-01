@@ -114,7 +114,7 @@ public class MajorFragment2 extends Fragment{
                 if (response.isSuccessful()) {
                     String flag = "?";
                     for (int i = 0; i < response.body().size(); i++) {
-                        //Log.e("체크 ! ",name+" "+response.body().get(i).first+" "+response.body().get(i).second+" "+response.body().get(i).third);
+
                         if (flag.equals(response.body().get(i).third)) {
                             if (i == response.body().size() - 1) {
                                 dataList.add(new Major(response.body().get(i).first, response.body().get(i).second, response.body().get(i).third, Code.ViewType.MAJOR, R.color.white));
@@ -176,7 +176,7 @@ public class MajorFragment2 extends Fragment{
             public void onFailure(Call<List<Major>> call, Throwable t) {
                 /*Intent intent = new Intent(getActivity(), ServerFailActivity.class);
                 startActivity(intent);*/
-                Log.e("흠",t.getCause()+"");
+
             }
         });
 
@@ -186,7 +186,7 @@ public class MajorFragment2 extends Fragment{
     {
 
         mAlphabetItem2 = new ArrayList<>();
-        Log.e("흠",tv_my_major.getText()+" "+etv_search.getText()+" ");
+
         RetrofitService networkService = RetrofitHelper.create();
         networkService.categorySubject(tv_my_major.getText()+"",etv_search.getText()+"").enqueue(new Callback<List<categoryCulture>>() {
             @Override
@@ -194,11 +194,9 @@ public class MajorFragment2 extends Fragment{
                 dataList2 = new ArrayList<>();
                 if (response.isSuccessful()) {
                     tv_no_search.setVisibility(View.GONE);
-                    //Log.e("시발",response.body().size()+"");
-
                     String flag = "?";
                     for (int i = 0; i < response.body().size(); i++) {
-                        //Log.e("체크 ! ",name+" "+response.body().get(i).getSubjectname()+" "+response.body().get(i).getSubjectInitiality()+" "+response.body().get(i).getProfName());
+
                         if (flag.equals(response.body().get(i).getSubjectInitiality())) {
                             if (i == response.body().size() - 1) {
                                 dataList2.add(new categoryCulture(response.body().get(i).getSubjectname(), response.body().get(i).getSubjectInitiality(), response.body().get(i).getProfName(), Code.ViewType.MAJOR, R.color.white));

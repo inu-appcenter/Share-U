@@ -158,7 +158,7 @@ public class MajorFragment extends Fragment  {
             @Override
             public void onFailure(Call<List<Major>> call, Throwable t) {
                 //Navigator.launchActicity(ServerFailActivity.class);
-                Log.e("흠",t.getCause()+"");
+
             }
         });
 

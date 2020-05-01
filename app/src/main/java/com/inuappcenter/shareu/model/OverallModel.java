@@ -58,7 +58,7 @@ public class OverallModel {
                 if(response.isSuccessful())
                 {
                     List<Notice> tmp_list = new ArrayList<>();
-                    Log.e("냥",response.body().size()+"");
+
                     for(int i=0;i<response.body().size();i++)
                     {
                         tmp_list.add(response.body().get(i));
