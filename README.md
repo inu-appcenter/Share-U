@@ -3,6 +3,8 @@
 ## 1. 작품 설명
 
  - 인천대학교 학생들끼리 과제 및 공부자료를 공유할 수 있는 모바일 앱 입니다.
+ ![shareUgraphicImage](https://user-images.githubusercontent.com/40001772/80809597-f6fcbf00-8bfc-11ea-8fe0-49d9130bf1da.jpg)
+
 
 ## 2. 전체 기능
 [shareU_홍보ppt.pdf](https://github.com/inu-appcenter/Share_U_Android/files/4303171/shareU_.ppt.pdf)
