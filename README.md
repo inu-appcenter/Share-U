@@ -3,6 +3,7 @@
 
  - 인천대학교 학생들끼리 과제 및 공부자료를 공유할 수 있는 모바일 앱 입니다.
  ![shareUgraphicImage](https://user-images.githubusercontent.com/40001772/80809597-f6fcbf00-8bfc-11ea-8fe0-49d9130bf1da.jpg)
+ ![KakaoTalk_20200604_150151043](https://user-images.githubusercontent.com/40001772/83720666-7a825380-a674-11ea-8bec-66b7a0eff3ca.jpg)
 
 
 ## 2. 전체 기능
